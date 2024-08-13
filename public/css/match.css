@@ -1,0 +1,494 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: none;
+}
+
+body {
+    display:flow-root;
+    justify-content: center;
+    align-items: center;
+}
+
+
+li, a {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: #5D3CB8;
+    text-decoration: none;
+    margin-inline: 20px;
+}
+
+
+.cta button {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 9px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: rgb(40, 193, 121, 1);
+    transition: all 0.3s ease 0s;
+    width: 142px;
+    height: 60px;
+}
+
+.cta button:hover {
+    background: rgb(40, 193, 121, 0.8);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.nav__link {
+    list-style: none;
+}
+
+
+.nav__link li {
+    display: inline-block;
+    padding: 0;
+}
+
+.nav__link li a {
+    transition: all 0.3s ease 0s;
+    padding: 0px;
+}
+
+.nav__link li a:hover {
+    color: blueviolet;
+}
+
+/* phones Section for header by yours trully */
+@media (max-width: 1220px) {
+    .nav__link {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 150px;
+        left: 0;
+        background: white;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    .nav__link.active {
+        display: flex; 
+    }
+
+    /* list di sini hambugger punya*/
+    .nav__toggle {
+        position: absolute;
+        top: 25px;
+        right: 100px;
+        display: block; 
+        font-size: 24px; 
+        cursor: pointer;
+        font-size: 75px;
+        z-index: 1001;
+    }
+
+    .nav__toggle .bi-list {
+        display: block; 
+    }
+
+    .nav__toggle .bi-x {
+        display: none; 
+    }
+
+    .nav__link.active + .nav__toggle .bi-list {
+        display: none;
+    }
+
+    .nav__link.active + .nav__toggle .bi-x {
+        display: block; 
+    }
+
+    .nav__link li {
+        text-align: center;
+        padding: 10px 0; 
+    }
+
+    .nav__link li a {
+        padding: 0; 
+        
+    }
+    
+}
+
+@media (max-width: 1220px) {
+    a.cta button {
+        padding: 0;
+        display: none;
+    }
+}
+
+@media (min-width: 1221px) {
+    .nav__toggle {
+        display: none; 
+    }
+}
+
+
+/*////////////////////////////////BODY & HEADER //////////////////////////////////*/
+
+
+.tournament-heading {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2.5em;
+    color: #333;
+}
+ 
+.tournament-bracket {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding-top: 50px;
+}
+
+/*////////////////////////////////MATCH TAB//////////////////////////////////*/
+.scheduletab {
+    overflow: hidden;
+    background-color: #00FF87;
+    border-radius: 20px;
+    width: 90%;
+    margin: 0 auto; /* Center the tab container */
+    display: flex;
+    justify-content: center; /* Center buttons inside the container */
+}
+
+.scheduletab button {
+    background-color: inherit;
+    flex: 1;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.scheduletab button:hover {
+    background-color: #32D086;
+}
+
+.scheduletab button.active {
+    background-color: #32D086;
+}
+
+
+.matchschedule-heading {
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    color: #333;
+}
+
+.match-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.mtabcontent {
+    display: none; /* Hide by default */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    color: #FFF; /* Ensuring text is visible against the background */
+}
+
+/* Show the content of the active tab */
+.mtabcontent.show {
+    display: block;
+}
+
+.matchtab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    background-color: #7A5DCA;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tabm {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    gap: 80px;
+}
+
+.matchcontent {
+    background-color: #7A5DCA;
+    padding: 10px;
+    border-radius: 10px;
+    color: #FFF; /* Ensuring text is visible against the background */
+}
+
+.teamlogo {
+    margin-top: 100px;
+    height: 40vw; /* Adjust the height as a percentage of the viewport width */
+    max-height: 100px; /* Ensure it does not exceed a certain height */
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.teamlogo.left {
+    left: 2vw; /* Adjust to move the logo to the left as a percentage of the viewport width */
+}
+
+.teamlogo.right {
+    right: 2vw; /* Adjust to move the logo to the right as a percentage of the viewport width */
+}
+
+.vs-container {
+    text-align: center;
+    align-items: center;
+    margin-top: 10px; /* Adjust as needed */
+    color: #FFFFFF;
+}
+
+.vs {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-left: 80px; /* Space around the vs text */
+    margin-right: 80px;
+    z-index: 1; /* Ensure it’s above the logos */
+}
+
+.date, time {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+
+.lineup-button {
+    background-color: #00FF87;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px; /* Space above the button */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.lineup-button:hover {
+    background-color: #32D086;
+}
+
+
+  .team-column {
+    display: flex;
+    align-items: center;
+  }
+  
+  .divider {
+    width: 2px;
+    background-color: #fff;
+    height: 100px; /* Adjust height as needed */
+    margin: 0 20px;
+  }
+  
+  .livescore {
+    font-size: 48px;
+    color: #fff;
+  }
+  
+  .players {
+    margin-top: 20px;
+  }
+
+.timer {
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+.finalscore {
+    font-size: 48px;
+    color: #fff;
+}
+  
+/*////////////////////////////////schedule TAB//////////////////////////////////*/
+.schelduleALL {
+    padding: 5%;
+    background-color: rgb(203, 203, 203);
+}
+
+
+.scheduletab {
+    overflow: hidden;
+    background-color: #00FF87;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto; /* Center the tab container */
+    display: flex;
+    justify-content: center; /* Center buttons inside the container */
+}
+
+.scheduletab button {
+    background-color: inherit;
+    flex: 1;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.scheduletab button:hover {
+    background-color: #32D086;
+}
+
+.scheduletab button.active {
+    background-color: #32D086;
+}
+
+/*////////////////////////////////TEAM TAB//////////////////////////////////*/
+.scheduletabcontent {
+    margin: 0;
+    padding: 0;
+}
+
+.teamtab {
+    overflow: hidden;
+    background-color: #7A5DCA;
+    border-radius: 10px;
+    width: 100%;
+    margin: auto; 
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.teamtab button {
+    background-color: inherit;
+    flex: 1;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.teamtab button:hover {
+    background-color: rgb(139, 114, 209);
+}
+
+.teamtab button.active {
+    background-color: rgb(139, 114, 209);
+}
+
+
+.scheduletabcontent table {
+    margin: auto;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 2px;
+}
+
+.scheduletabcontent th {
+    background-color: grey;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px;
+    color: white;
+    margin-top: 2px;
+    margin: auto;
+}
+
+.scheduletabcontent td {
+    background-color: #D9D9D9;
+    color: #7A5DCA;
+    margin: 0.5px;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 2px black ;
+    font-weight: 500;
+}
+
+.scheduletabconten .value {
+    width: 20%;
+    background-color: #000000;
+    color: white;
+}
+
+.matchinfo table {
+    width: 100%; 
+    border-collapse: seperate; 
+    margin: 20px 0; 
+    border-spacing: 10px;
+}
+
+.matchinfo .label {
+    flex: 1;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10px;
+    background-color: #7A5DCA;
+    width: 25%;
+}
+
+.matchinfo .value {
+    flex: 1;
+    text-align: center;
+    color: #7A5DCA;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10px;
+    background-color: #ffffff;
+}

@@ -1,0 +1,356 @@
+
+
+
+.tournament-heading {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2.5em;
+    color: #333;
+}
+ 
+.tournament-bracket {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding-top: 50px;
+}
+
+/*////////////////////////////////KN0CKOUT BOARD//////////////////////////////////*/
+
+.container-tour {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.roundquarter {
+    margin-top: 20px;
+}
+
+.roundsemi {
+    margin-top: 150px;
+}
+
+.roundchampion {
+    margin-top: 220px;
+}
+
+
+.round-details {
+    font-size: 18px;
+    padding-left: 50px;
+    text-align: center;
+    font-family: 'Istok Web', sans-serif;
+    margin-bottom: 10px;
+}
+
+ul.matchup {
+    list-style: none;
+    padding: 100;
+}
+
+ul.matchup li.team {
+    background: #5D3CB8;
+    color: #ffffff;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    width: 200px;
+    border-radius: 20px;
+}
+
+ul.matchup li.team .score {
+    background: #ffffff;
+    color: #5D3CB8;
+    padding: 5px 10px;
+    width: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+ul.matchupchampion li.team {
+    background: #32D086;
+    color: #ffffff;
+    padding: 10px;
+    margin: 5px 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    width: 200px;
+    border-radius: 20px;
+}
+
+ul.matchupchampion li.team .score {
+    background: #ffffff;
+    color: #32D086;
+    padding: 5px 10px;
+    width: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/*////////////////////////////////TABLE TAB//////////////////////////////////*/
+
+.tab-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px; 
+}
+
+.tab {
+    overflow: hidden;
+    background-color: #00FF87;
+    border-radius: 20px;
+    width: 90%;
+    justify-content: center;
+    display: flex;
+}
+
+.tab button {
+    background-color: inherit;
+    flex: 1;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.tab button:hover {
+    background-color: #32D086;
+}
+
+.tab button.active {
+    background-color: #32D086;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.group-table {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.group-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+}
+
+.group-table th, .group-table td {
+    color: #5D3CB8;
+    font-weight: bold;
+    border: 1px solid #ffffff;
+    background-color: #D9D9D9;
+    padding: 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.group-table th {
+    background-color: #5D3CB8;
+    color: #ffffff;
+}
+
+.matchschedule-heading {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 2.5em;
+    color: #333;
+}
+
+
+/*////////////////////////////////MATCH TAB//////////////////////////////////*/
+.scheduletab {
+    overflow: hidden;
+    background-color: #00FF87;
+    border-radius: 20px;
+    width: 90%;
+    margin: 0 auto; /* Center the tab container */
+    display: flex;
+    justify-content: center; /* Center buttons inside the container */
+}
+
+.scheduletab button {
+    background-color: inherit;
+    flex: 1;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.scheduletab button:hover {
+    background-color: #32D086;
+}
+
+.scheduletab button.active {
+    background-color: #32D086;
+}
+
+.matchschedule-heading {
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    color: #333;
+}
+
+.match-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.mtabcontent {
+    display: none; /* Hide by default */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    color: #FFF; /* Ensuring text is visible against the background */
+}
+
+/* Show the content of the active tab */
+.mtabcontent.show {
+    display: block;
+}
+
+.matchtab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; /* Adjust to space the content from the tabs */
+    margin-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #7A5DCA;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tabm {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    gap: 80px;
+}
+
+.matchcontent {
+    background-color: #7A5DCA;
+    padding: 10px;
+    border-radius: 10px;
+    color: #FFF; /* Ensuring text is visible against the background */
+}
+
+.teamlogo {
+    margin-top: 100px;
+    height: 40vw; /* Adjust the height as a percentage of the viewport width */
+    max-height: 100px; /* Ensure it does not exceed a certain height */
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.teamlogo.left {
+    left: 2vw; /* Adjust to move the logo to the left as a percentage of the viewport width */
+}
+
+.teamlogo.right {
+    right: 2vw; /* Adjust to move the logo to the right as a percentage of the viewport width */
+}
+
+.vs-container {
+    text-align: center;
+    align-items: center;
+    margin-top: 10px; /* Adjust as needed */
+    color: #FFFFFF;
+}
+
+.vs {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-left: 80px; /* Space around the vs text */
+    margin-right: 80px;
+    z-index: 1; /* Ensure it’s above the logos */
+}
+
+.date, time {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+
+.lineup-button {
+    background-color: #00FF87;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px; /* Space above the button */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.lineup-button:hover {
+    background-color: #32D086;
+}
+
+
+  .team-column {
+    display: flex;
+    align-items: center;
+  }
+  
+  .divider {
+    width: 2px;
+    background-color: #fff;
+    height: 100px; /* Adjust height as needed */
+    margin: 0 20px;
+  }
+  
+  .livescore {
+    font-size: 48px;
+    color: #fff;
+  }
+  
+  .players {
+    margin-top: 20px;
+  }
+
+.timer {
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+.finalscore {
+    font-size: 48px;
+    color: #fff;
+  }
+  

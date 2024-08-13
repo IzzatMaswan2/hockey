@@ -1,0 +1,466 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+
+
+/* Jumbotron */
+.jumbotron {
+    position: relative;
+    background-image: url("/img/banner.jpeg");
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;                  
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: 100%;
+}
+
+.jumbotron::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.7)
+    );
+    z-index: 1;
+}
+
+.jumbotron .container {
+    position: relative;
+    z-index: 2;
+}
+
+.jumbotron .btn {
+    background-color: #28c179;
+    border: none;
+    outline: none;
+}
+
+.jumbotron .btn:hover {
+    background-color: #38e1c5;
+}
+
+/* Carousel Container */
+.features-carousel {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Carousel Item */
+.carousel-item {
+    position: relative;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.7)
+    );
+    z-index: 1;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    z-index: 2;
+}
+
+.carousel-caption h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.carousel-caption p {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+/* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+/* Specific Carousel Items */
+.carousel-item.feature1 {
+    background-image: url("/img/feature1.jpeg");
+}
+
+.carousel-item.feature2 {
+    background-image: url("/img/feature2.jpg");
+}
+
+.carousel-item.feature3 {
+    background-image: url("/img/feature3.jpg");
+}
+
+/* Mobile Styles for Carousel */
+@media (max-width: 576px) {
+    .carousel-item {
+        height: auto;
+    }
+
+    .carousel-caption h3 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Statistics / Our Achievements Section */
+.achievements {
+    background-color: #f8f9fa; /* Grey background */
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.achievements h2 {
+    color: #5d3cb8;
+}
+
+.achievement-item {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.achievement-item i {
+    font-size: 3rem !important;
+    color: #5d3cb8;
+}
+
+.achievement-item i {
+    font-size: 2rem;
+    color: #5d3cb8;
+}
+
+.achievement-item h4 {
+    margin: 10px 0;
+    color: #333333;
+}
+
+.achievement-item p {
+    color: #666666;
+}
+
+/* Registration Section */
+.registration-section {
+    padding: 0;
+}
+
+.registration-row {
+    display: flex;
+    align-items: stretch;
+}
+
+/* Registration Section */
+.registration-section {
+    padding: 0;
+}
+
+/* Label color */
+.registration-section .form-label {
+    color: #5d3cb8;
+}
+
+/* Form Heading Sizes */
+.registration-section .form-content h2 {
+    font-size: 1.5rem;
+    color: #5d3cb8;
+}
+
+.registration-section .form-content p {
+    font-size: 1.75rem;
+}
+
+/* Button styles in the registration form */
+.registration-section .btn {
+    background-color: #28c179;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.registration-section .btn:hover {
+    background-color: #38e1c5;
+}
+
+.registration-row {
+    display: flex;
+    align-items: stretch;
+}
+
+/* Left Column (Form with Background) */
+.registration-form-container {
+    position: relative;
+    background-image: url("/img/form_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 20px 0 0 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: -1px;
+}
+
+/* Hollow White Background on Form Content */
+.form-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Right Column (Image Background) */
+.registration-image {
+    background-image: url("/img/registration-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    border-radius: 0 20px 20px 0;
+    margin-left: -1px;
+}
+
+/* Overlay with Transparent Image */
+
+/* Mobile Styles Registration */
+@media (max-width: 768px) {
+    .registration-row {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .registration-form-container,
+    .registration-image {
+        border-radius: 0;
+        margin-right: 0;
+        margin-left: 0;
+        height: auto;
+    }
+
+    .registration-image {
+        display: none;
+    }
+
+    .registration-section::before {
+        display: none;
+    }
+}
+
+/* Team Section */
+.team-section {
+    padding: 60px 0;
+    background-image: url("/img/team_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+}
+
+.team-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.7)
+    );
+    z-index: 2;
+}
+
+.team-section .container {
+    position: relative;
+    z-index: 3;
+}
+
+.team-section h2 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.team-member .member-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto 20px;
+    border: 4px solid #ffffff;
+}
+
+.team-member h4 {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.team-member p {
+    color: #5d3cb8;
+}
+
+.team-member .social-icons a {
+    color: #5d3cb8;
+    margin: 0 5px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.team-member .social-icons a:hover {
+    color: #ffffff;
+}
+
+/* Member Photos */
+.member1 .member-photo {
+    background-image: url("/img/coach.jpg");
+}
+
+.member2 .member-photo {
+    background-image: url("/img/assistant.jpg");
+}
+
+.member3 .member-photo {
+    background-image: url("/img/referee.jpg");
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.faq-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #5d3cb8;
+    margin-bottom: 30px;
+}
+
+.faq {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-question {
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.25rem;
+    color: #5d3cb8;
+    background-color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+    color: #38e1c5;
+}
+
+.faq-answer {
+    display: none;
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+    color: #333;
+}
+
+.faq-toggle {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+.faq-item.active .faq-toggle {
+    transform: rotate(45deg);
+}
+
+/* Mobile Styles FAQ */
+@media (max-width: 768px) {
+    .faq-title {
+        font-size: 2rem;
+    }
+
+    .faq-question {
+        font-size: 1.15rem;
+    }
+
+    .faq-answer {
+        font-size: 0.95rem;
+    }
+}
+
+/* Additional homepage-specific styles */
+.highlights ul {
+    padding: 0;
+    list-style: none;
+}
+
+.highlights ul li {
+    margin: 10px 0;
+}
+
+.highlights i {
+    color: #28c179;
+}
