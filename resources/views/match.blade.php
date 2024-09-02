@@ -58,26 +58,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for ($i = 0; $i < 5; $i++)
                     <tr>
-                        <td>JOHN DOE</td>
-                        <td>JOHNY JOHSON</td>
+                        <td>{{ htmlspecialchars($playerCollect['starterA'][$i]) }}</td>
+                        <td>{{ htmlspecialchars($playerCollect['starterB'][$i]) }}</td>
                     </tr>
-                    <tr>
-                        <td>ALICE SMITH</td>
-                        <td>BOB JOHNSON</td>
-                    </tr>
-                    <tr>
-                        <td>CAROL WILLIAMS</td>
-                        <td>DAVE BROWN</td>
-                    </tr>
-                    <tr>
-                        <td>EMMA JONES</td>
-                        <td>FRANK MILLER</td>
-                    </tr>
-                    <tr>
-                        <td>GRACE TAYLOR</td>
-                        <td>HARRY ANDERSON</td>
-                    </tr>
+                    @endfor
                 </tbody>
                 <thead>
                     <tr>
@@ -85,26 +71,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for ($i = 0; $i < 5; $i++)
                     <tr>
-                        <td>JAMES ANDERSON</td>
-                        <td>LINDA MARTIN</td>
+                        <td>{{ htmlspecialchars($playerCollect['reserveA'][$i]) }}</td>
+                        <td>{{ htmlspecialchars($playerCollect['reserveB'][$i]) }}</td>
                     </tr>
-                    <tr>
-                        <td>MICHAEL THOMPSON</td>
-                        <td>BARBARA MOORE</td>
-                    </tr>
-                    <tr>
-                        <td>WILLIAM TAYLOR</td>
-                        <td>SUSAN HARRIS</td>
-                    </tr>
-                    <tr>
-                        <td>ELIZABETH ROBERTS</td>
-                        <td>DAVID CLARK</td>
-                    </tr>
-                    <tr>
-                        <td>RICHARD WALKER</td>
-                        <td>MARY LEWIS</td>
-                    </tr>
+                    @endfor
                 </tbody>
             </table>
         </div>

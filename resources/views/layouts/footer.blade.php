@@ -14,8 +14,8 @@
 </head>
 <body>
 
-<footer class="py-5" style="background-color: #4B006E; width: 100%;">
-    <div class="container" style="background-color: #4B006E; width: 100%;">
+<footer class="py-5" style="background-color: #4B006E; width: 100%; font-size:16px ">
+    <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12 mb-3 d-flex align-items-center">
                 <img class="logo mr-3" src="img/Logo.png" alt="Footer Logo" style="width: 120px; height: 90px;">

@@ -57,6 +57,15 @@
                     </a>
                 </div>
             </div>
+            <div class="row border-top pt-4 mt-4">
+                <div class="col-md-6 text-center text-md-left">
+                    <p style="color: #c0c0c0;">&copy; 2024, Inc. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
+                    <a href="#" class="text-body-secondary text-decoration-none mx-2" style="color: #c0c0c0 !important; font-size:16px;">Privacy Policy</a>
+                    <a href="#" class="text-body-secondary text-decoration-none mx-2" style="color: #c0c0c0 !important; font-size:16px;">Terms & Conditions</a>
+                </div>
+            </div>
         </footer>
 </body>
 </html>

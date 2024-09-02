@@ -59,9 +59,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/tournament">Tournament</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link text-white" href="/group">Group</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/forum">Forum</a>
                     </li>

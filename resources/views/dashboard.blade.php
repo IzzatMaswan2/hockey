@@ -41,7 +41,6 @@
 
     <!-- Navbar -->
     @include('layouts.navbar')
-   
     <!-- Main Content -->
     <div class="container-fluid" style="width: 100%; height: 90%;">
         <div class="row">

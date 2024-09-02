@@ -356,7 +356,7 @@
             const table = document.getElementById(tableId);
             const rows = table.getElementsByTagName("tr");
 
-            for (let i = 1; i < rows.length; i++) {
+            for (let i = 0; i < rows.length; i++) {
                 const cells = rows[i].getElementsByTagName("td");
                 let match = false;
                 for (let j = 0; j < cells.length - 1; j++) {
@@ -375,7 +375,7 @@
             const table = document.getElementById(tableId);
             const rows = table.getElementsByTagName("tr");
 
-            for (let i = 1; i < rows.length; i++) {
+            for (let i = 0; i < rows.length; i++) {
                 const status = rows[i].getAttribute("data-status");
                 rows[i].style.display = (!filter || status === filter) ? "" : "none";
             }
@@ -388,7 +388,7 @@
             const table = document.getElementById(tableId);
             const rows = table.getElementsByTagName("tr");
 
-            for (let i = 1; i < rows.length; i++) {
+            for (let i = 0; i < rows.length; i++) {
                 const cells = rows[i].getElementsByTagName("td");
                 let match = false;
                 for (let j = 0; j < cells.length - 1; j++) {
@@ -407,7 +407,7 @@
             const table = document.getElementById(tableId);
             const rows = table.getElementsByTagName("tr");
 
-            for (let i = 1; i < rows.length; i++) {
+            for (let i = 0; i < rows.length; i++) {
                 const status = rows[i].getAttribute("data-status");
                 rows[i].style.display = (!filter || status === filter) ? "" : "none";
             }

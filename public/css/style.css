@@ -860,7 +860,7 @@ section img {
 
 footer {
     width: 100%;
-    background: linear-gradient(to right, #5D3CB8, #000000);
+    background: linear-gradient(to right, #4B006E, #000000);
     padding: 50px 0 30px;
     font-size: 13px;
     line-height: 20px;
@@ -883,7 +883,7 @@ footer {
 }
 
 .footer-logo {
-    width: 200px;
+    width: 120px;
     background-color: none;
     margin-top: auto;
     margin-bottom: auto;

@@ -37,13 +37,12 @@
             </div>
             <ul class="nav__link">
                 <li><a href="/tournament">Tournament</a></li>
-                <li><a href="/group">Group</a></li>
+                {{-- <li><a href="/group">Group</a></li> --}}
                 <li><a href="/forum">Forum</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
                 <li class="fixture"><a href="/fixture">Fixture</a></li>
             </ul>
-            
         </nav>
             <div class="cta">
                 <button>Fixture</button>

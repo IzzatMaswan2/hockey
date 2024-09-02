@@ -4,27 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateTournamentTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         if (!Schema::hasTable('tournament')) {
             Schema::create('tournament', function (Blueprint $table) {
-                $table->id();
-                $table->timestamps();
+                $table->increments('TournamentID');
+                $table->string('Name', 100);
+                $table->date('StartDate');
+                $table->date('EndDate');
+                $table->string('Location', 100)->nullable();
             });
         }
-
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('tournament');
     }
-};
+}
