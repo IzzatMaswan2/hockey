@@ -56,19 +56,21 @@
 .about-who {
     text-align: left;
     width: 90%;
+    margin-top: 15%;
+    margin-left: 10%;
     justify-content: left;
 }
 
 .about-who h1 {
-    text-align: left;
-    width: 100%;
+    text-align: center;
+    width: 90%;
     color: #28C179;
 }
 
 .underline-about {
     content: " ";
     background-color: #28C179;
-    width: 500px;
+    width: 90%;
     height: 2px;
 }
 
@@ -77,35 +79,15 @@
     text-align: left;
     width: 90%;
     font-weight: 500;
+    font-size: 20px;
 }
 
-
-.rec-one {
-    position: absolute; /* Position relative to .about-column */
-    width: 100px;
-    height: 100px;
-    top: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
-    background-color: #3F2D6F; /* Black square */
-    z-index: -1;
-}
-
-.rec-one::before {
-    content: '';
-    position: absolute;
-    bottom: -700px;
-    left: -420px;
-    width: 470px;
-    height: 750px;
-    background-color: rgb(15, 15, 55, .7); 
-    z-index: -1;
-}
 
 .rec-two {
-    width: 470px;
-    height: 820px;
-    bottom: -100px;
+    width: 95%;
+    height: auto;
     z-index: 2;
+    transform: translate(50%);
 }
 
 .rec-two img {
@@ -113,30 +95,10 @@
     height: 100%;
 }
 
-.rec-three {
-    position: absolute; /* Position relative to .about-column */
-    width: 500px;
-    height: 100px;
-    top: 10px; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
-    background-color: rgb(40, 193, 121, 0.7); /* Black square */
-    z-index: -1;
-}
-
-.rec-three::before {
-    content: '';
-    position: absolute;
-    bottom: -250px;
-    left: 100px;
-    width: 470px;
-    height: 300px;
-    background-color: #28C179; 
-    z-index: -1;
-}
 
 .rec-four {
-    width: 440px;
-    height: 625px;
+    width: 100%;
+    height: auto;
     bottom: -100px;
     z-index: 2;
 }
@@ -147,22 +109,25 @@
 }
 
 .about-offer {
-    text-align: right;
-    width: 100%;
-    justify-content: right;
+    text-align: center;
+    width: 90%;
+    margin-top: 15%;
+    margin-left: 10%;
+    justify-content: left;
 }
 
 .about-offer h1 {
-    text-align: left;
-    width: 100%;
+    text-align: center;
+    width: 90%;
     color: #28C179;
 }
 
 .about-offer p {
     padding: 25px;
-    text-align: right;
-    width: 100%;
+    text-align: left;
+    width: 90%;
     font-weight: 500;
+    font-size: 20px;
 }
 
 .underline-offer {

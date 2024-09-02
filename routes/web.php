@@ -2,17 +2,111 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LiveMatchController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PlayerStatMatchController;
+use App\Http\Controllers\PlayerStatMatchInsertController;
+use App\Http\Controllers\LiveStatMatchController;
+use App\Http\Controllers\MatchTeamController;
+
+use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\PlayerController;
+
+/* Admin Route */
+Route::get('/article', function () {
+    return view('admin.article');
+});
+
+Route::get('/manageuser', function () {
+    return view('admin.manageuser');
+});
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+/*End Admin Route */
+/* Manager Route */
+// Tournament
+Route::post('/tournament/create', [TournamentController::class, 'create'])->name('tournament.create');
+Route::post('/tournament/store', [TournamentController::class, 'store'])->name('tournament.store');
+Route::get('/tournament', function () { return view('tournament');})->name('tournament');
+Route::get('/tournaments-view', [TournamentController::class, 'index'])->name('tournaments.index');
+
+//Formation (Manager)
+
+// Route::get('/team', function () { return view('team');})->name('team');
+Route::get('/team/index', [TeamController::class, 'index'])->name('team.index');
+Route::get('/team', [TeamController::class, 'view'])->name('team.view');
+Route::get('/team', [TeamController::class, 'create'])->name('team.create');
+Route::post('/team', [TeamController::class, 'store'])->name('team.store');
+
+
+//Player (Manager)
+Route::get('/player/create', [PlayerController::class, 'create'])->name('player.create');
+Route::post('/player/store', [PlayerController::class, 'store'])->name('player.store');
+Route::get('/player', function () { return view('player');})->name('player');
+Route::get('/player/index', [PlayerController::class, 'index'])->name('player.index');
+Route::get('/player-view', [PlayerController::class, 'view'])->name('player.view');
+Route::get('/player-view', function () {$players = App\Models\Player::all(); return view('player-view', ['players' => $players]);})->name('player.view');
+Route::get('/players/export', [PlayerController::class, 'exportCsv'])->name('players.export');
+Route::get('/players/import', [PlayerController::class, 'importForm'])->name('players.import.form');
+Route::post('/players/import', [PlayerController::class, 'importCsv'])->name('players.import');
+Route::get('/player/{id}/edit', [PlayerController::class, 'edit'])->name('player.edit');
+Route::post('/player/{id}/update', [PlayerController::class, 'update'])->name('player.update');
+Route::delete('/player/{id}', [PlayerController::class, 'destroy'])->name('player.destroy');
+
+//Manager
+//Dashboard
+Route::get('/manager-dashboard', function () {return view('manager-dashboard');});
+
+// Line-Up
+Route::get('/line-up', function () {return view('line-up');});
+Route::get('/line-up', [TeamController::class, 'showLineUp'])->name('line-up');
+
+/*End Manager Route */
+/* User Route */
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/playerstatmatch', [PlayerStatMatchInsertController::class, 'create'])->name('playerstatmatch.create');
+Route::post('/playerstatmatch', [PlayerStatMatchInsertController::class, 'store'])->name('playerstatmatch.store');
+
+Route::get('/livematch/{matchGroupId}', [LiveStatMatchController::class, 'showLiveMatch'])->name('livematch');
+Route::get('/match/{matchGroupId}' , [MatchTeamController::class, 'showMatchDetails'])->name('matchDetail');
+
+Route::get('/live-matches', [LiveMatchController::class, 'showLiveMatch'])
+    ->name('live-matches');
+
+Route::get('/tournament',  [LiveMatchController::class, 'showLiveMatch'])
+    ->name('live-matches');
+
+Route::get('/livematch', function () {
+    return view('livematch');
+});
 
 Route::get('/', function () {
     return view('Home');
 });
 
-Route::get('/tournament', function () {
-    return view('tournament');
+Route::get('/home', function () {
+    return view('dashboard');
 });
 
-Route::get('/match', function () {
-    return view('match');
+// Route::get('/match', function () {
+//     return view('match');
+// });
+
+Route::get('/livematch', function () {
+    return view('livematch');
 });
 
 Route::get('/group', function () {
@@ -31,17 +125,28 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+// Route::get('/draft', function () {
+//     return view('draft');
+// });
+
+// web.php
 Route::get('/user', function () {
     return view('user');
+})->middleware(['auth','verified'])->name('user');
+
+// Route::get('/login2', function () {
+//     return view('login2');
+// });
+
+// Route::get('/register2', function () {
+//     return view('register2');
+// });
+
+Route::get('/fixture', function () {
+    return view('fixture');
 });
 
-Route::get('/login2', function () {
-    return view('login2');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+/*End User Route */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

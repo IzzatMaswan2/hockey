@@ -13,7 +13,7 @@
         <footer>
             <div class="footer-row">
                 <div class="footer-column">
-                    <img src="img/Logo Latest 1.png" alt="Hoki Arena" class="footer-logo">
+                    <img src="{{asset('img/Logo Latest 1.png')}}" alt="Hoki Arena" class="footer-logo">
                 </div>
                 <div class="footer-column">
                     <h3>Description</h3>

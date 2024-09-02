@@ -1,0 +1,146 @@
+.whatthesigma {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.whatthesigma img {
+    width: 400px;
+}
+
+.whatthesigma .gk,
+.whatthesigma .rd,
+.whatthesigma .ld,
+.whatthesigma .rm,
+.whatthesigma .cm,
+.whatthesigma .lm,
+.whatthesigma .ri,
+.whatthesigma .li,
+.whatthesigma .rf,
+.whatthesigma .cf,
+.whatthesigma .lf {
+    position: absolute;
+    border-radius: 100px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.whatthesigma .gk { top: 8%; left: 28.75%; }
+.whatthesigma .rd { top: 18%; left: 18.5%; }
+.whatthesigma .ld { top: 18%; left: 40%; }
+.whatthesigma .rm { top: 29%; left: 8%; }
+.whatthesigma .cm { top: 29%; left: 28.75%; }
+.whatthesigma .lm { top: 29%; left: 51%; }
+.whatthesigma .ri { top: 41%; left: 18.5%; }
+.whatthesigma .li { top: 41%; left: 40%; }
+.whatthesigma .rf { top: 51.5%; left: 8%; }
+.whatthesigma .cf { top: 51.5%; left: 28.75%; }
+.whatthesigma .lf { top: 51.5%; left: 51%; }
+
+button:hover {
+    background-color: red;
+    color: white;
+    border: 3px solid white;
+    transition: 0.15s;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 5px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+button:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0.1s;
+    text-align: center;
+}
+
+.bg-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    display:none;
+}
+
+.modal-content {
+    margin-left: 400px;
+    margin-right: 400px;
+    height: 300px;
+    width: 10px;
+    background-color: white; /* This is already full opacity */
+    opacity: 1; /* Ensure full opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+}
+
+.close{
+    position: absolute;
+    top:10px;
+    right:14px;
+    font-size: 50px;
+    cursor:pointer;
+}
+
+/* line-up */
+
+.whatthe i{
+    position: absolute;
+    font-size: 70px;
+    
+}
+
+.whatthe .gki{top: 19%; left: 17.5%;}
+.details-gk{top: 10%; left: 20%; position:absolute;font-weight:bold;}
+
+.rdi{top: 24%; left: 10%;}
+.whatthe .details-rd {top: 28.5%; left: 5%; position:absolute;font-weight:bold;}
+
+.ldi{top: 24%; left: 26%;}
+.whatthe .details-ld{top: 25%; left: 27%; position:absolute;font-weight:bold;}
+
+.rmi{top: 30%; left: 5%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+
+.cmi{top: 30%; left: 17.5%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+
+.lmi{top: 30%; left: 31%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+
+.rii{top: 35%; left: 11%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+
+.lii{top: 35%; left: 24.5%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+
+.rfi{top: 40.5%; left: 5%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+
+.cfi{top: 40.5%; left: 17.5%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+
+.lfi{top: 40.5%; left: 31%;}
+.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}

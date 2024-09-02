@@ -1,47 +1,47 @@
-<x-layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <!-- Link to Bootstrap CSS and your custom CSS -->
+    <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tournament.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/loginstyles.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/match.css') }}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="js/faq.js"></script>
+</head>
+<body>
+    @include('components.side-nav')
+    @include('profile.partials.navbar')
     <!-- Jumbotron -->
-    <div class="jumbotron text-white text-center py-5">
+    <div class="jumbotron text-white py-5 my-0">
         <div class="container">
-            <h1 class="display-4">Welcome to the Hockey Tournament!</h1>
-            <p class="lead">Stay on top of the action with the ultimate hockey tournament organizer. Register your
-                team, get real-time updates, and enjoy the game like never before!</p>
-            <a href="{{ route('register') }}" class="btn btn-primary btn-lg">Register Now</a>
+            <span class="welcoming">Welcome to the</span>
+            <h1 class="display-4">Hockey Tournament!</h1>
+            <p class="lead">Experience the thrill of the ultimate hockey tournament organizer! <br class="brspace"> 
+                Register your team effortlessly and receive real-time updates on scores and schedules. <br class="brspace">
+                Stay connected with live game stats and never miss a moment of the action. <br class="brspace">
+                Elevate your game and enjoy a seamless tournament experience like never before. <br class="brspace"><br class="brspace"><br class="brspace">
+                Join us now and make every play count!
+            </p>
+            <a href="{{ route('register') }}" class="btn-home btn-primary" style="border-radius: 20px">Register Now</a>
         </div>
     </div>
-
-    <!-- Carousel for Features Section -->
-    <section class="features-carousel my-0 py-0"> <!-- Adjusted margins and paddings -->
-        <div id="featuresCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active feature1">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3>Exhilarating</h3>
-                        <p>Experience thrilling matches with top teams competing for the championship.</p>
-                    </div>
-                </div>
-                <div class="carousel-item feature2">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3>Instantaneous</h3>
-                        <p>Get real-time updates on scores, schedules, and player statistics.</p>
-                    </div>
-                </div>
-                <div class="carousel-item feature3">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3>Engaging</h3>
-                        <p>Enjoy exclusive forum for after match discussions.</p>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#featuresCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#featuresCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </a>
-        </div>
-    </section>
 
     <!-- Statistics / Our Achievements Section -->
     <section class="achievements bg-light py-5">
@@ -50,28 +50,32 @@
             <div class="row text-center">
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="achievement-item">
-                        <i class="bi bi-people mb-3"></i>
+                        <div class="icon"><i class="bi bi-people mb-3"></i></div>
+                        
                         <h4>User Friendliness</h4>
                         <p>Our app is designed for an intuitive and seamless user experience.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="achievement-item">
-                        <i class="bi bi-star mb-3"></i>
+                        <div class="icon"><i class="bi bi-star mb-3"></i></div>
+                        
                         <h4>Positive Review</h4>
                         <p>Rated highly by users for its functionality and reliability.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="achievement-item">
-                        <i class="bi bi-calendar-check mb-3"></i>
+                        <div class="icon"><i class="bi bi-calendar-check mb-3"></i></div>
+                        
                         <h4>Expert Tournament Organizer</h4>
                         <p>Trusted by experts for organizing and managing tournaments effectively.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="achievement-item">
-                        <i class="bi bi-geo-alt mb-3"></i>
+                        <div class="icon"><i class="bi bi-geo-alt mb-3"></i></div>
+                        
                         <h4>Amazing Venue</h4>
                         <p>Featuring state-of-the-art venues for an unforgettable experience.</p>
                     </div>
@@ -79,17 +83,17 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Registration Section -->
-    <section class="registration-section bg-light py-5">
+    <section class="registration-section bg-dark py-5">
         <div class="container">
             <div class="row">
                 <!-- Left Column (Form with Background) -->
-                <div class="col-md-6 registration-form-container">
+                <div class="registration-form-container">
                     <div class="form-content">
                         <h2>Register Now</h2>
-                        <p>Book a spot for your team!</p>
-                        <form>
+                        <p>Book a spot for your <br> Team Now!</p>
+                        <form class="register-team">
                             <div class="mb-3">
                                 <label for="teamName" class="form-label">Team Name</label>
                                 <input type="text" class="form-control" id="teamName" placeholder="Enter team name">
@@ -103,12 +107,14 @@
                                 <input type="text" class="form-control" id="phone"
                                     placeholder="Enter phone number">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn-regis btn-primary">Submit</button>
                         </form>
                     </div>
+                    <img src="img/goalkeeper.png" alt="goal-keeper">
                 </div>
                 <!-- Right Column (Image Background) -->
-                <div class="col-md-6 registration-image"></div>
+                <div class="col-md-6 registration-image"> </div>
+                
             </div>
         </div>
     </section>
@@ -222,5 +228,6 @@
             </div>
         </div>
     </section>
+    @include('profile.partials.footer')
 
-</x-layout>
+</body>

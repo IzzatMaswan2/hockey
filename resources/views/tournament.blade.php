@@ -1,51 +1,147 @@
-<x-layout>
-            
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <!-- Link to Bootstrap CSS and your custom CSS -->
+    <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tournament.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/loginstyles.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/match.css') }}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="js/faq.js"></script>
+</head>
+<body>
+    @include('components.side-nav')
+    @include('profile.partials.navbar')
     <div class="main-content">
         <h1 class="tournament-heading">TOURNAMENT LEADERBOARD</h1>
     </div>
     <main>
-        <div class="tournament-bracket">
+        <div class="tournament-bracket zoom-in">
             <div class="container-tour">
                     <div class="roundquarter">
-                      <div class="round-details">QUARTERFINALS<br /></div>
-                        <ul class="matchup">
-                            <li class="team team-top">Winner Group A (A)<span class="score">4</span></li>
-                            <li class="team team-bottom">Winner Group B (B)<span class="score">2</span></li>
+                    <div class="round-details">QUARTERFINALS<br /></div>
+                        <ul class="matchup">Quater 1
+                            <li class="team team-top">Winner Group A <span class="score">4</span></li>
+                            <li class="team team-bottom">Winner Group B<span class="score">2</span></li>
                         </ul>
-                        <ul class="matchup">
+                        <div class="match-lines">
+                            <div class="line-one"></div>
+                            <div class="line-two"></div>
+                            <div class="line-one"></div>
+                        </div>
+                        <div class="match-lines5">
+                            <div class="line-one"></div>
+                        </div>
+                        <ul class="matchup">Quater 2
                             <li class="team team-top">Winner Group C (C)<span class="score">1</span></li>
                             <li class="team team-bottom">Winner Group D (D)<span class="score">0</span></li>
                         </ul>
-                        <ul class="matchup">
+                        <div class="match-lines2">
+                            <div class="line-one"></div>
+                            <div class="line-two"></div>
+                            <div class="line-one"></div>
+                        </div>
+                        <div class="match-lines6">
+                            <div class="line-one"></div>
+                        </div>
+                        <ul class="matchup">Quater 3
                             <li class="team team-top">Winner Group E (E)<span class="score">4</span></li>
                             <li class="team team-bottom">Winner Group F (F)<span class="score">2</span></li>
                         </ul>
-                        <ul class="matchup">
+                        <div class="match-lines3">
+                            <div class="line-one"></div>
+                            <div class="line-two"></div>
+                            <div class="line-one"></div>
+                        </div>
+                        <div class="match-lines7">
+                            <div class="line-one"></div>
+                        </div>
+                        <ul class="matchup">Quater 1
                             <li class="team team-top">Winner Group G (G)<span class="score">3</span></li>
                             <li class="team team-bottom">Winner Group H (H)<span class="score">0</span></li>
                         </ul>
+                        <div class="match-lines4">
+                            <div class="line-one"></div>
+                            <div class="line-two"></div>
+                            <div class="line-one"></div>
+                        </div>
+                        <div class="match-lines8">
+                            <div class="line-one"></div>
+                        </div>
                     </div> <!-- END quarter -->
+
 
 
                 <div class="roundsemi">
                     <div class="round-details">SEMIFINAL</div>
-                    <ul class="matchup semifinal">
+                    <ul class="matchup semifinal"> SEMIFINAL 1
                         <li class="team team-top">Group A Winner (A)<span class="score">2</span></li>
+                        <div class="semispace"></div>
                         <li class="team team-bottom">Group B Winner (C)<span class="score">1</span></li>
-                    </ul>
-                    <ul class="matchup semifinal">
+                    </ul><div class="semispace2"></div>
+                    <div class="champ-lines">
+                        <div class="line-one"></div>
+                        <div class="line-two"></div>
+                        <div class="line-one"></div>
+                    </div>
+                    <div class="champ-lines2">
+                        <div class="line-one"></div>
+                    </div>
+                    <ul class="matchup semifinal">SEMIFINAL 2
                         <li class="team team-top">Group A Winner (E)<span class="score">2</span></li>
+                        <div class="semispace3"></div>
                         <li class="team team-bottom">Group B Winner (G)<span class="score">1</span></li>
                     </ul>
+                    <div class="champ-lines3">
+                        <div class="line-one"></div>
+                        <div class="line-two"></div>
+                        <div class="line-one"></div>
+                    </div>
+                    <div class="champ-lines4">
+                        <div class="line-one"></div>
+                    </div>
                 </div> <!-- END semifinal -->
 
                 <div class="roundchampion">
-                    <div class="round-details">CHAMPION</Canvas></div>
+                    <div class="round-details">FINALE</div>
                     <ul class="matchupchampion">
-                        <li class="team team-top">Group A Winner (A)<span class="score">2</span>
+                        <li class="team team-top">Group A Winner (A)<span class="score">2</span></li><div class="champspace"></div>
                         <li class="team team-bottom">Group B Winner (E)<span class="score">1</span></li>
                     </ul>
-                </div> <!-- END CHAMPION -->
+                    <div class="winner-lines">
+                        <div class="line-one"></div>
+                        <div class="line-two"></div>
+                        <div class="line-one"></div>
+                    </div>
+                    <div class="winner-lines2">
+                        <div class="line-one"></div>
+                    </div>
+                
+                </div>
+
+                <div class="champion">
+                    <div class="round-details">CHAMPION</div>
+                    <ul class="winnerchampion">
+                        <li class="team team-top"> <span style="color: red; text-align:center; font-weight:bold;">Winner</span> <br> Group A</li>
+                    </ul>
+                </div>
+                <!-- END CHAMPION -->
                 </div> <!-- END SPLIT TWO -->
             </div> <!-- END CONTAINER -->
 
@@ -506,166 +602,106 @@
         
         <div class="match-container">
             <div id="UPCOMING" class="scheduletabcontent mtabcontent">
-                        <div class="matchtab">
-                            <div class="tabm">
-                                <img src="img/teamAlogo.png" alt="Team A Logo" class="teamlogo left">
-                                <div class="matchcontent">
-                                    <h3>TEAM A</h3>
-                                    <p>COUNTRY</p>
-                                    <p>Rating: 97%</p>
-                                    <a href="/match" class="lineup-button">Lineup</a>
-                                </div>
-                            </div>
-                            
-                            <div class="vs-container">
-                                <div class="vs">vs</div>
-                                <div class="date">Monday</div>
-                                <div class="time">08:00am - 09:00</div>
-                            </div>
-                
-                            
-                            <div class="tabm">
-                                <div class="matchcontent">
-                                    <h3>TEAM B</h3>
-                                    <p>COUNTRY</p>
-                                    <p>Rating: 93%</p>
-                                    <a href="/match" class="lineup-button">Lineup</a>
-                                </div>
-                                <img src="img/teamBlogo.png" alt="Team B Logo" class="teamlogo right">
+                @foreach($upcomingMatchDetail as $upcoming)
+                    <div class="matchtab">
+                        <div class="tabm">
+                            <img src="{{$upcoming['teamA']->logoURL}}" alt="{{$upcoming['teamA']->Name}} Logo" class="teamlogo left">
+                            <div class="matchcontent">
+                                <h3>{{$upcoming['teamA']->Name}}</h3>
+                                <p>{{$upcoming['teamA']->country}}</p>
+                                <p>Rating: 97%</p>
+                                <a href="/match/{{$upcoming['upmatch']->Match_groupID}}" class="lineup-button">Lineup</a>
                             </div>
                         </div>
-                
-                        <div class="matchtab">
-                            <div class="tabm">
-                                <img src="img/teamClogo.png" alt="Team C Logo" class="teamlogo left">
-                                <div class="matchcontent">
-                                    <h3>TEAM C</h3>
-                                    <p>COUNTRY</p>
-                                    <p>Rating: 88%</p>
-                                    <a href="/match" class="lineup-button">Lineup</a>
-                                </div>
+
+                        <div class="vs-container">
+                            <div class="vs">vs</div>
+                            <div class="date">{{$upcoming['upmatch']->Date}}</div>
+                            <div class="time"></div>
+                        </div>
+
+                        <div class="tabm">
+                            <div class="matchcontent">
+                                <h3>{{$upcoming['teamB']->Name}}</h3>
+                                <p>{{$upcoming['teamB']->country}}</p>
+                                <p>Rating: 93%</p>
+                                <a href="/match/{{$upcoming['upmatch']->Match_groupID}}" class="lineup-button">Lineup</a>
                             </div>
-                            
-                            <div class="vs-container">
-                                <div class="vs">vs</div>
-                                <div class="date">Thursday</div>
-                                <div class="time">10:00am - 11:00am</div>
-                            </div>
-                
-                            <div class="tabm">
-                                <div class="matchcontent">
-                                    <h3>TEAM D</h3>
-                                    <p>COUNTRY</p>
-                                    <p>Rating: 83%</p>
-                                    <a href="/match" class="lineup-button">Lineup</a>
-                                </div>
-                                <img src="img/teamDlogo.png" alt="Team D Logo" class="teamlogo right">
-                            </div>
+                            <img src="{{$upcoming['teamB']->logoURL}}" alt="{{$upcoming['teamA']->Name}} Logo" class="teamlogo right">
                         </div>
                     </div>
+                @endforeach
             </div>
+        </div>
 
             <div id="LIVE" class="scheduletabcontent mtabcontent">
-                <div class="matchtab">
-                    <div class="tabm">
-                        <img src="img/teamAlogo.png" alt="Team A Logo" class="teamlogo left">
-                        <div class="matchcontent">
-                            <h3>TEAM A</h3>
-                            <div class="livescore">2</div>
+                @if($liveMatches->isEmpty())
+                    <p>There No Match At the Moment</p>
+                @else
+                    @foreach ($liveMatchDetails as $detail)
+                        <div class="matchtab">
+                            <div class="tabm">
+                                <!-- Display Team A -->
+                                <img src="{{$detail['teamA']->logoURL}}" alt="{{$detail['teamA']->Name}} Logo" class="teamlogo left">
+                                <div class="matchcontent">
+                                    <h3>{{$detail['teamA']->Name}}</h3>
+                                    <!-- Display live score for Team A -->
+                                    <div class="livescore">{{$detail['match']->ScoreA ?? 'N/A'}}</div>
+                                </div>
+                            </div>
+                
+                            <div class="vs-container">
+                                <div class="vs">vs</div>
+                                <div class="timer">48:00 minutes</div> 
+                                <a href="/livematch/{{$detail['match']->Match_groupID}}" class="lineup-button">Live Score</a>
+                            </div>
+                
+                            <div class="tabm">
+                                <div class="matchcontent">
+                                    <!-- Display Team B -->
+                                    <h3>{{$detail['teamB']->Name}}</h3>
+                                    <!-- Display live score for Team B -->
+                                    <div class="livescore">{{$detail['match']->ScoreB ?? 'N/A' }}</div>
+                                </div>
+                                <img src="{{$detail['teamB']->logoURL}}" alt="{{$detail['teamB']->Name}} Logo" class="teamlogo right">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="vs-container">
-                        <div class="vs">vs</div>
-                        <div class="timer">48:00 minutes</div>
-                    </div>
-        
-                    
-                    <div class="tabm">
-                        <div class="matchcontent">
-                            <h3>TEAM B</h3>
-                            <div class="livescore">1</div>
-                        </div>
-                        <img src="img/teamBlogo.png" alt="Team B Logo" class="teamlogo right">
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
             
             <div id="RESULT" class="scheduletabcontent mtabcontent">
-                <div class="matchtab">
-                    <div class="tabm">
-                        <img src="img/teamAlogo.png" alt="Team A Logo" class="teamlogo left">
-                        <div class="matchcontent">
-                            <h3>TEAM A</h3>
-                            <div class="finalscore">2</div>
+                @foreach ($resultMatchDetail as $result)
+                    <div class="matchtab">
+                        <div class="tabm">
+                            <img src="{{$result['teamA']->logoURL}}" alt="{{$result['teamA']->Name}} Logo" class="teamlogo left">
+                            <div class="matchcontent">
+                                <h3>{{$result['teamA']->Name}}</h3>
+                                <div class="finalscore">{{$result['resultmatch']->ScoreA}}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="vs-container">
+                            <div class="vs">vs</div>
+                        </div>
+            
+                        
+                        <div class="tabm">
+                            <div class="matchcontent">
+                                <h3>{{$result['teamB']->Name}}</h3>
+                                <div class="finalscore">{{$result['resultmatch']->ScoreB}}</div>
+                            </div>
+                            <img src="{{$result['teamB']->logoURL}}" alt="{{$result['teamB']->Name}} Logo" class="teamlogo right">
                         </div>
                     </div>
-                    
-                    <div class="vs-container">
-                        <div class="vs">vs</div>
-                    </div>
-        
-                    
-                    <div class="tabm">
-                        <div class="matchcontent">
-                            <h3>TEAM B</h3>
-                            <div class="finalscore">1</div>
-                        </div>
-                        <img src="img/teamBlogo.png" alt="Team B Logo" class="teamlogo right">
-                    </div>
-                </div>
-
-                <div class="matchtab">
-                    <div class="tabm">
-                        <img src="img/teamClogo.png" alt="Team C Logo" class="teamlogo left">
-                        <div class="matchcontent">
-                            <h3>TEAM C</h3>
-                            <div class="finalscore">4</div>
-                        </div>
-                    </div>
-                    
-                    <div class="vs-container">
-                        <div class="vs">vs</div>
-                    </div>
-        
-                    
-                    <div class="tabm">
-                        <div class="matchcontent">
-                            <h3>TEAM D</h3>
-                            <div class="finalscore">2</div>
-                        </div>
-                        <img src="img/teamDlogo.png" alt="Team D Logo" class="teamlogo right">
-                    </div>
-                </div>
-
-                <div class="matchtab">
-                    <div class="tabm">
-                        <img src="img/teamElogo.png" alt="Team E Logo" class="teamlogo left">
-                        <div class="matchcontent">
-                            <h3>TEAM E</h3>
-                            <div class="finalscore">2</div>
-                        </div>
-                    </div>
-                    
-                    <div class="vs-container">
-                        <div class="vs">vs</div>
-                    </div>
-        
-                    
-                    <div class="tabm">
-                        <div class="matchcontent">
-                            <h3>TEAM F</h3>
-                            <div class="finalscore">1</div>
-                        </div>
-                        <img src="img/teamFlogo.png" alt="Team F Logo" class="teamlogo right">
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>
 
     </main>
     <script src="{{ asset('js/tournament.js') }}"></script>
+    @include('profile.partials.footer')
 
-</x-layout>
+</body>
 

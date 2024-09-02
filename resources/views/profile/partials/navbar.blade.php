@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
     <!-- Link to Bootstrap CSS and your custom CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> <!-- Ensure this file has the corrected CSS -->
-    <link rel="stylesheet" href="css/about.css"> <!-- Ensure this file is needed and has no conflicting styles -->
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/tournament.css">
+    <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tournament.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/loginstyles.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/match.css') }}">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -23,9 +25,11 @@
 
     <script src="js/faq.js"></script>
 </head>
+
 <body>
+
     <header>
-        <a href="/"><img class="logo" src="img/Logo Latest 1.png" alt="logo"></a>
+        <a href="/"><img class="logo" src="{{asset('img/Logo Latest 1.png')}}" alt="logo"></a>
         <nav>
             <div class="nav__toggle">
                 <i class="bi bi-list"></i>
@@ -37,10 +41,26 @@
                 <li><a href="/forum">Forum</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
+                <li class="fixture"><a href="/fixture">Fixture</a></li>
             </ul>
+            
         </nav>
-        <a class="cta" href="#"><button>Fixture</button></a>
+            <div class="cta">
+                <button>Fixture</button>
+            </div>
+            @guest
+            <a href="/login" class="login-header">LOGIN</a>
+            @else
+                <div class="logged-user" onclick="openNav()">
+                    <span class="user-name">{{ strtok(Auth::user()->name, ' ') }}</span>
+                <img 
+                src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('img/user-default.png') }}" 
+                alt="User Profile Image" 
+                class="user-image"/>
+                </div>
+            @endguest
     </header>
+
 
     <!-- JavaScript for toggling the navigation menu -->
     <script>
@@ -52,5 +72,13 @@
             });
         });
     </script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        </script>
 </body>
 </html>

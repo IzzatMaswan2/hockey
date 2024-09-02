@@ -1,5 +1,6 @@
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
     box-sizing: border-box;
@@ -9,9 +10,15 @@
 }
 
 body {
-
+    padding: 0;
+    margin: 0;
 }
 
+.container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
 
 li, a {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -22,18 +29,28 @@ li, a {
     margin-inline: 20px;
 }
 
+.user-profile {
+    align-items: center;
+    width: 50px;
+    padding: 20px;
+}
+
+.right-header{
+    position: relative;
+    display: flex;
+}
 
 .cta button {
     color: white;
     font-family: 'Times New Roman', Times, serif;
-    padding: 9px;
+    padding: 0;
     border-radius: 50px;
     border: none;
     cursor: pointer;
     background: rgb(40, 193, 121, 1);
     transition: all 0.3s ease 0s;
     width: 142px;
-    height: 60px;
+    height: 40px;
 }
 
 .cta button:hover {
@@ -42,15 +59,20 @@ li, a {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
+    background-color: transparent;
+    top: 0;
+    left: 0;
     padding: 10px;
     width: 100%;
+    height: 100px;
+    transition: background-color 2s ease;
     z-index: 1000;
 }
 
 .logo {
-    width: 150px;
+    width: 75px;
     height: auto;
     flex-shrink: 0;
     cursor: pointer;
@@ -58,7 +80,40 @@ header {
 
 .nav__link {
     list-style: none;
+    padding: 5px;
 }
+
+.nav__link .fixture  {
+    height: 40px;
+    margin-left: 10px;
+}
+
+.nav__link .fixture a {
+    display: none;
+}
+
+.login-header {
+    height: 50px;
+    color: #000;
+    text-decoration: none;
+    padding: 10px;
+    margin-left: 0px;
+}
+
+.login-header:hover {
+    height: 50px;
+    color: #a117c1;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.register-header {
+    height: 50px;
+    color: #000;
+    text-decoration: none;
+    padding: 10px;
+}
+
 
 
 .nav__link li {
@@ -69,6 +124,7 @@ header {
 .nav__link li a {
     transition: all 0.3s ease 0s;
     padding: 0px;
+    text-decoration: none;
 }
 
 .nav__link li a:hover {
@@ -91,16 +147,16 @@ header {
     }
 
     .nav__link.active {
-        display: flex; 
+        display: flex;
+        transform: translateY(-51px); 
     }
 
-    /* list di sini hambugger punya*/
     .nav__toggle {
         position: absolute;
-        top: 25px;
-        right: 100px;
+        top: 0;
+        right: 50px;
         display: block; 
-        font-size: 24px; 
+        font-size: 20px; 
         cursor: pointer;
         font-size: 75px;
         z-index: 1001;
@@ -116,6 +172,7 @@ header {
 
     .nav__link.active + .nav__toggle .bi-list {
         display: none;
+        transform: translateY(-51px);
     }
 
     .nav__link.active + .nav__toggle .bi-x {
@@ -129,16 +186,44 @@ header {
 
     .nav__link li a {
         padding: 0; 
-        
+        text-decoration: none;
     }
-    
+
+    .nav__link .fixture a {
+        display: block;
+        background-color: green;
+        color: white;
+    }
+
+    .login-header {
+    display: none;
+    height: 50px;
+    color: #000;
+    text-decoration: none;
+    padding: 10px;
+    }
+
+    .register-header {
+        display: none;
+        height: 50px;
+        color: #000;
+        text-decoration: none;
+        padding: 10px;
+    }
 }
 
 @media (max-width: 1220px) {
-    a.cta button {
+    .cta button {
         padding: 0;
         display: none;
     }
+
+    .login-header {
+        height: 50px;
+        color: #000;
+        text-decoration: none;
+        padding: 10px;
+    }    
 }
 
 @media (min-width: 1221px) {
@@ -147,7 +232,103 @@ header {
     }
 }
 
+.logged-user {
+    display: flex; /* Enable Flexbox layout */
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space between name and image */
+    background-color: #5D3CB8; /* Background color of the container */
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px; /* Padding around the content */
+    height: 44px; /* Fixed height of the container */
+    min-width: 142px; /* Minimum width of the container */
+    width: auto; /* Adjust width based on content */
+    cursor: pointer;
+}
 
+.logged-user .user-name {
+    color: white; /* Text color */
+    font-size: 16px; /* Font size */
+    font-weight: bold;
+}
+
+.logged-user .user-image {
+    width: 30px; 
+    height: 30px; 
+    border-radius: 50%; 
+    background-color: white; 
+    object-fit: cover; 
+    border: 2px solid #ccc; 
+}
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 4;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 40px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+.sidenav-user {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 10px; 
+    margin: 0; 
+    width: 100%; 
+}
+
+
+.sidenav-userimage {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    background-color: white;
+    object-fit: cover; 
+    border: 2px solid #ccc; 
+}
+
+
+.sidenav-name {
+    color: white; 
+    font-size: 14px; 
+    margin-top: 25px; 
+    text-align: center;
+    width: 100%;
+}
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
 
 
 body, div {
@@ -186,30 +367,40 @@ body, div {
 
 .text-container {
     position: absolute; 
-    top: 40%;
+    top: 10%;
     left: 5%;
     color: #FFF;
     z-index: 2; 
     text-align: left; 
 }
 
+.text-container img {
+    width: 250px;
+    height: auto;
+}
 
 .main-text {
     width: 100%;
-    height: 76px;
-    font-family: 'Inter', sans-serif; 
-    font-size: 64px;
-    font-style: normal;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 72px;
     font-weight: 900;
-    line-height: normal;
-    margin: 0; 
-    align-content: center;
+    color: #5D3CB8; /* Purple */
+    text-align: center;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+    text-shadow: 0 0 10px rgba(93, 60, 184, 0.7), 0 0 20px rgba(93, 60, 184, 0.5); /* Purple glow */
 }
+
+.main-text:hover {
+    color: #38E1C5; /* Teal */
+    text-shadow: 0 0 20px rgba(56, 225, 197, 0.9), 0 0 40px rgba(56, 225, 197, 0.7); /* Teal glow */
+    transform: scale(1.1);
+}
+
 
 
 .sub-text {
     width: 100%;
-    height: 41px;
+    height: 40px;
     font-family: 'Inter', sans-serif; 
     font-size: 20px;
     font-style: normal;
@@ -220,13 +411,47 @@ body, div {
 
 .contactinfo-row {
     width: 100%;
-    height: 575px;
+    height: auto;
+    background: #5D3CB8;
+    box-sizing: border-box;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.contactinfo-header h1 {
+    font-family:'Times New Roman', Times, serif ;
+    font-size: 60px;
+    font-weight: bold;
+    color: #FFFFFF; 
+    text-align: center;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.contactinfo-header h1:hover {
+    color: #38E1C5; /* Teal */
+    text-shadow: 0 0 15px rgba(56, 225, 197, 0.8), 0 0 30px rgba(56, 225, 197, 0.6); 
+    transform: scale(1.1);
+}
+
+.contactinfo-header p {
+    font-family: Arial, sans-serif; /* Basic font family */
+    font-size: 20px; /* Font size */
+    color: #FFFFFF; /* White text color */
+    margin: 10px 0; /* Space above and below */
+    text-align: center; /* Center-align text */
+    line-height: 1.5; /* Improve readability */
+}
+
+.column-container{
+    width: 100%;
+    height: auto; /* Adjust height based on content */
     background: #5D3CB8;
     box-sizing: border-box;
     padding: 50px;
     display: flex;
 }
-
 
 .column {
     flex-basis: 30%;
@@ -240,6 +465,34 @@ body, div {
     text-align: center;
     object-position: center;
     padding: 20px;
+    border-radius: 25px;
+    
+}
+
+.btn-contactus {
+    padding: 10px;
+    margin: 20px 0;
+    border: white;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-contactus:hover {
+    padding: 10px;
+    margin: 20px 0;
+    border: #ffffff;
+    border-radius: 10px;
+    background-color: rgb(255, 0, 0, 0.7);
+    color: #ffffff;
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 
@@ -262,39 +515,68 @@ body, div {
     margin-right: auto;
 }
 
+/* .info Section */
 .info {
-    margin: 0 0;
-    text-align: center;
-    background-color:#CEC4EA;
-    margin-top: 10px;
+    background-color: #CEC4EA; /* Background color */
+    margin: 10px auto; /* Center align and space out from other elements */
+    padding: 20px; /* Padding for inner spacing */
+    border-radius: 15px; /* Rounded corners for a softer look */
+    text-align: center; /* Center-align text */
 }
 
-
+/* Base style for the heading */
 .info h1 {
-    font-style: normal;
-    font-size: 20px;
-    color: #000;
-    font-weight: 700;
-    line-height: normal;
-    background-color: #CEC4EA;
-    margin-bottom: 100px;
+    font-family: 'Times New Roman', Times, serif; /* Font family changes on hover */
+    font-size: 24px; /* Default font size */
+    color: #000000; /* Default text color */
+    font-weight: 700; /* Bold weight */
+    margin-bottom: 40px; /* Space below the heading */
+    transition: color 0.3s ease, font-size 0.3s ease, font-family 0.3s ease; /* Smooth transitions */
 }
+
+/* Hover style for the heading */
+.info h1:hover {
+    font-size: 25px; /* Slightly larger font size on hover */
+    color: #FFFFFF; /* White text color on hover */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Optional white glow effect */
+}
+
 
 .info p {
-    background-color: #CEC4EA;
+    font-family: Arial, sans-serif; /* Basic font family for body text */
+    font-size: 16px; /* Standard font size for paragraphs */
+    color: #000000; /* Black text color */
+    margin: 0; /* Remove default margin */
+    padding: 10px 0; /* Vertical padding for spacing */
 }
 
+/* .link-info Section */
 .link-info {
-    text-align: center;
-    background-color: #CEC4EA;
-    margin-top: 50px;
+    background-color: #CEC4EA; /* Matching background color */
+    padding: 20px; /* Padding for inner spacing */
+    border-radius: 15px; /* Rounded corners for consistency */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; /* Center-align text */
+    margin-top: 50px; /* Space above the link-info section */
 }
 
 .link-info a {
-    text-align: center;
-    font-size: 16px;
-    background-color: #CEC4EA;
+    font-family: Arial, sans-serif; /* Consistent font family */
+    font-size: 16px; /* Font size for links */
+    color: #5D3CB8; /* Use your primary theme color for links */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 20px; /* Padding for clickable area */
+    border-radius: 5px; /* Rounded corners for buttons */
+    background-color: #FFFFFF; /* White background for contrast */
+    display: inline-block; /* Ensure padding and background apply correctly */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
+
+.link-info a:hover {
+    background-color: #38E1C5; /* Teal background on hover */
+    color: #FFFFFF; /* White text color on hover */
+}
+
 
 .symbol{
     width: 100%;
@@ -316,10 +598,10 @@ body, div {
 .message {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center horizontally */
+    align-items: center; 
     justify-content: center;
     width: 100%;
-    min-height: 100vh; /* Ensure it takes up at least the full viewport height */
+    min-height: 100vh; 
     background: #BEB1E3;
     padding: 20px;
 }
@@ -327,33 +609,33 @@ body, div {
 .text-container2 {
     width: 100%;
     color: #ffffff;
-    text-align: center; /* Center text horizontally */
-    margin-bottom: 20px; /* Space between text and form */
+    text-align: center;
+    margin-bottom: 20px; 
 }
 
 .main-text2 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-    font-size: 32px;
-    font-weight: 600;
+    font-size: 40px;
+    font-weight: 500;
     color: #000;
     margin: 0; 
 }
 
 .sub-text2 {
-    font-family: 'Inter', sans-serif; 
+    font-family: "Cinzel Decorative", serif;
     font-size: 20px;
     font-weight: 600;
     margin: 10px 0 0;
 }
 
 .input-container {
-    display: flex; /* Use flexbox to arrange children side by side */
-    gap: 10px; /* Space between the inputs */
-    justify-content: space-between; /* Distribute space evenly */
+    display: flex; 
+    gap: 10px; 
+    justify-content: space-between;
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
-input[type=text] {
+.input-container input[type=text] {
     flex: 1; /* Allow inputs to grow and fill the container */
     min-width: 0; /* Ensure inputs do not overflow their container */
     max-width: 100%; /* Ensure inputs do not exceed their container */
@@ -444,7 +726,8 @@ input[type=submit]:hover {
 }
 
 .userbanner-row {
-    position: relative; 
+    position: relative;
+    height: 200px; 
 }
 
 .userbanner-row img {
@@ -503,7 +786,7 @@ section img {
     top: 0;
     left: 15%; /* Center the infotab-section by offsetting from left */
     width: 70%;
-    background: rgba(255, 255, 255, 0.8); /* Optional: background to make text more readable */
+    background: rgba(255, 255, 255, 1); /* Optional: background to make text more readable */
     padding: 20px; /* Add padding for spacing */
     box-sizing: border-box; /* Ensure padding is included in width */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
@@ -522,12 +805,12 @@ section img {
 .user-column {
     flex: 1; /* Take up half of the available space */
     text-align: center; /* Center the text */
-    margin-right: 20px; /* Space between columns */
+    margin-top: 50px; 
 }
 
 .user-column img {
     width: 100px; /* Size the profile image */
-    height: auto;
+    height: 100px;
     border-radius: 50%; /* Optional: round the image */
     margin-bottom: 10px; /* Space below the image */
     justify-content: center;
@@ -538,6 +821,7 @@ section img {
 .user-column .user-name {
     display: block; /* Ensure spans are block-level for spacing */
     font-weight: bold;
+
 }
 
 .user-column .user-email {
@@ -547,13 +831,13 @@ section img {
 
 /* Style the profile-info column */
 .profile-info {
-    flex: 2; /* Take up twice as much space as user-column */
+    flex: 1.5; 
+    margin: auto;
 }
 
 .profile-info table {
     width: 100%; /* Full width of the column */
     border-collapse: collapse; /* Merge table borders */
-    margin-top: 10%;
 }
 
 .profile-info th, .profile-info td {
@@ -671,22 +955,27 @@ footer {
 
 @import url('https://fonts.googleapis.com/css?family=Hind:300,400&display=swap');
 
-
-
-
-
+/* Container for the accordion and table */
 .container-activity {
-    margin: 0;
-    padding: 0;
-    width: 45rem;
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Space inside the container */
+    width: 60%; /* Adjust width as needed */
+    max-width: 1200px; /* Optional: max width for large screens */
 }
 
+/* Accordion styling */
 .accordion {
-    border-bottom: 1px solid #e5e5e5;
+    border: 1px solid #e5e5e5; /* Border around the entire accordion */
+    border-radius: 5px; /* Rounded corners */
+    background: #fff; /* Background color */
 }
 
 .accordion-item {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5; /* Border between accordion items */
+}
+
+.accordion-item:last-child {
+    border-bottom: none; /* Remove border from the last item */
 }
 
 .accordion-item button {
@@ -694,77 +983,42 @@ footer {
     display: block;
     text-align: left;
     width: 100%;
-    padding: 0;
-    color: #7288a2;
-    font-size: 1.1em;
-    font-weight: 400;
+    padding: 15px; /* Padding for button */
+    color: #7288a2; /* Text color */
+    font-size: 1.1em; /* Font size */
+    font-weight: 400; /* Font weight */
     border: none;
-    background: none;
+    background: #f9f9f9; /* Background color of the button */
     outline: none;
     cursor: pointer;
 }
 
 .accordion-item button:hover,
 .accordion-item button:focus {
-    color: #03b5d2;
+    color: #03b5d2; /* Text color on hover/focus */
 }
 
 .accordion-item button::after {
     content: '';
     position: absolute;
-    cursor: pointer;
-    color: #03b5d2;
-    border: 1px solid #03b5d2;
-}
-
-.accordion-item .accordion-title {
-    padding: 0;
-}
-
-.accordion-item .icon {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 22px;
-    height: 22px;
-    border: 1px solid;
-    border-radius: 22px;
-}
-
-.accordion-item .icon::before {
-    content: '';
-    position: absolute;
-    top: 9px;
-    left: 5px;
+    top: 50%;
+    right: 15px;
     width: 10px;
-    height: 2px;
-    background: currentColor;
-}
-
-.accordion-item .icon::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 9px;
-    width: 2px;
     height: 10px;
-    background: currentColor;
+    background: transparent;
+    border: 1px solid #03b5d2; /* Arrow color */
+    border-radius: 50%; /* Circle */
+    transform: translateY(-50%) rotate(45deg); /* Rotate to create arrow */
 }
 
-.accordion-item button[aria-expanded='true'] {
-    color: #03b5d2; /* Replaced $blue with hex color */
-}
-
-.accordion-item button[aria-expanded='true'] .icon::after {
-    width: 0;
+.accordion-item button[aria-expanded='true']::after {
+    border-color: transparent; /* Hide arrow when expanded */
 }
 
 .accordion-item button[aria-expanded='true'] + .accordion-content {
     opacity: 1;
-    max-height: 9em;
-    transition: all 200ms linear;
-    will-change: opacity, max-height;
+    max-height: 20em; /* Adjust height as needed */
+    transition: opacity 200ms linear, max-height 200ms linear;
 }
 
 .accordion-content {
@@ -772,55 +1026,65 @@ footer {
     max-height: 0;
     overflow: hidden;
     transition: opacity 200ms linear, max-height 200ms linear;
-    will-change: opacity, max-height;
+    padding: 0 15px; /* Padding inside the content */
 }
 
-.accordion-content p {
-    font-size: 1rem;
-    font-weight: 300;
-    margin: 2em 0;
+/* Table styling */
+.notification-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove double borders */
+    margin: 0; /* Remove margin around table */
 }
 
-
-.scrollbox {
-    background-color: #fff; 
-    border: 2px solid #0f9d58; 
-    border-radius: 8px;
-    padding: 15px; 
-    margin-top: 20px;
-    width: 50%; 
-    height: 200px; 
-    overflow-y: auto; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    margin-right: 15px;
+.notification-table td {
+    border-bottom: 1px solid #ddd; /* Border between rows */
+    padding: 12px; /* Padding inside cells */
 }
 
-.scroll-content {
-    border-bottom: 2px solid black;
+.notification-date {
+    width: 20%; /* Adjust width for date column */
+    font-weight: bold; /* Make date stand out */
 }
 
-.scrollbox::-webkit-scrollbar {
-    width: 12px; 
+.notification-text {
+    width: 80%; /* Adjust width for text column */
 }
 
-.scrollbox::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-    border-radius: 8px; 
-}
-
-.scrollbox::-webkit-scrollbar-thumb {
-    background: #0f9d58; 
-    border-radius: 8px; 
-}
-
-.scrollbox::-webkit-scrollbar-thumb:hover {
-    background: #0b8043; 
+/* Remove border from the last row */
+.notification-table tr:last-child td {
+    border-bottom: none;
 }
 
 
 .scrollbox {
-    scrollbar-width: thin;
-    scrollbar-color: #0f9d58 #f1f1f1; 
+    max-height: 300px; /* Adjust based on your needs */
+    overflow-y: auto;
+    width: 60%;
+    border: 1px solid #ddd; /* Optional: border around the container */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+.notification-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.notification-table td {
+    border-bottom: 1px solid #ddd; /* Optional: border between rows */
+    padding: 8px;
+}
+
+.notification-table td:first-child {
+    width: 30px; /* Adjust width as needed for icons */
+    text-align: center;
+}
+
+.notification-table td:last-child {
+    padding-left: 8px; /* Space between icon and text */
+}
+
+.notification-table tr:last-child td {
+    border-bottom: none; /* Remove bottom border from last row */
 }
 
 /* Responsive Adjustments */
@@ -831,7 +1095,7 @@ footer {
 }
 
 .top-row {
-    margin-top: 100px;
+    margin-top: 30px;
     display: flex;
 }
 
@@ -876,65 +1140,83 @@ footer {
 }
 
 
+/* Container for all forum rows */
 .forum-row {
+    display: flex; /* Align child elements in a row */
+    width: 100%; /* Full width of the parent */
+    gap: 10px; /* Space between content and directory */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Container for image and summary */
+.content-container {
     display: flex; 
-    align-items: flex-start; 
-    gap: 10px; 
-    width: 100%;
+    flex: 0 0 70%; /* 70% width of the parent container */
+    gap: 10px; /* Space between image and summary */
+}
+
+/* Image container styling */
+.forum-img {
+    flex: 1; /* Take up available space */
+    background-color: #f9f9f9; /* Light background for image container */
+    border: 1px solid #ddd; /* Light border around image container */
+    border-radius: 8px; /* Rounded corners for image container */
 }
 
 /* Image styling */
-.forum-img {
-    flex: 0 0 70%; 
-    margin: 0 5px; 
-    width: 100%;
-    min-height: auto;
-    padding: 0;  
-    background-color: #f9f9f9; 
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
-    font-family: 'Arial', sans-serif; 
-    font-size: 16px; 
-    line-height: 1.6; 
-    color: #333; 
-}
-
 .forum-img img {
-    width: 100%; 
-    height: auto;
-    border-radius: 8px;
+    width: 100%; /* Full width of the image container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for image */
+}
+
+/* Summary text styling */
+.summary {
+    flex: 0 0 30%; 
+    background-color: #f9f9f9; /* Semi-transparent background */
+    color: #000000; /* White text color */
+    padding: 10px; /* Padding around text */
+    border-radius: 8px; /* Rounded corners for summary */
+    border: 1px solid #ddd;
+    display: flex; /* Use flexbox for text alignment */
+    flex-direction: column; /* Stack text elements vertically */
+}
+
+/* Full story emphasis */
+.summary span {
+    display: block; /* Block-level element for full story */
+    margin-top: 10px; /* Space above the full story text */
+    font-weight: bold; /* Emphasize full story text */
 }
 
 
+/* Directory button container styling */
 .forum-directory {
-    flex: 1; 
-    font-size: 16px; 
-    width: 100%; 
-    margin: 0 5px; 
-    min-height: auto;
-    padding: 0;  
-    background-color: #ffffff; 
-    border: none; 
-    border-radius: 8px; 
-    font-family: 'Arial', sans-serif; 
-    font-size: 16px; 
-    line-height: 1.6; 
-    color: #ffffff; 
+    flex: 0 0 30%; /* 30% of the parent width */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ddd; /* Light border around button container */
+    border-radius: 8px; /* Rounded corners for button container */
+    padding: 10px; /* Padding inside the container */
 }
 
+/* Button styling */
 .forum-directory button {
-    color: white;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 9px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    background: #5D3CB8;
-    transition: all 0.3s ease 0s;
-    width: 90%;
-    height: 60px;
-    margin: 10px;
-    font-weight: bold;
+    background-color: #5D3CB8; /* Button background color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 50px; /* Rounded buttons */
+    padding: 10px 15px; /* Padding inside buttons */
+    margin: 10px 0; /* Space between buttons */
+    width: 100%; /* Full width of button container */
+    height: 60px; /* Fixed height for buttons */
+    font-family: 'Times New Roman', Times, serif; /* Font family */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.forum-directory button:hover {
+    background-color: #4a2e9d; /* Darker background on hover */
 }
 
 .news-info {
@@ -981,6 +1263,13 @@ footer {
 
 .follow-icon {
     font-size: 20px;
+}
+
+@media (max-width:1250px) {
+    .summary {
+        display: none;
+    }
+    
 }
 
 .selection-header {
@@ -1133,3 +1422,65 @@ footer {
 .scorer {
     font-size: 1.1em;
 }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(125, 125, 125);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #ffffff;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }

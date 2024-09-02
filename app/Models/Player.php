@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Player extends Model
+{
+    use HasFactory;
+
+    protected $table = 'player';
+    protected $primaryKey = 'PlayerID';
+    public $timestamps = false; // Set to true if timestamps are used
+    protected $fillable = ['Name', 'TeamID', 'field_status', 'Position', 'Birthdate', 'Nationality'];
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class, 'TeamID', 'TeamID');
+    }
+
+    public function playerStatMatches()
+    {
+        return $this->hasMany(PlayerStatMatch::class, 'PlayerID', 'PlayerID');
+    }
+}

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -40,7 +43,7 @@ li, a {
 }
 
 header {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
@@ -49,7 +52,7 @@ header {
 }
 
 .logo {
-    width: 150px;
+    width: 75px;
     height: auto;
     flex-shrink: 0;
     cursor: pointer;
@@ -155,8 +158,10 @@ header {
     margin: 20px 0;
     font-size: 2.5em;
     color: #333;
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 700;
 }
- 
+
 .tournament-bracket {
     display: flex;
     justify-content: center;
@@ -263,17 +268,17 @@ header {
 }
 
 .teamlogo.left {
-    left: 2vw; /* Adjust to move the logo to the left as a percentage of the viewport width */
+    left: 2vw; 
 }
 
 .teamlogo.right {
-    right: 2vw; /* Adjust to move the logo to the right as a percentage of the viewport width */
+    right: 2vw; 
 }
 
 .vs-container {
     text-align: center;
     align-items: center;
-    margin-top: 10px; /* Adjust as needed */
+    margin-top: 10px; 
     color: #FFFFFF;
 }
 
@@ -281,9 +286,9 @@ header {
     font-size: 24px;
     font-weight: bold;
     color: #FFFFFF;
-    margin-left: 80px; /* Space around the vs text */
+    margin-left: 80px; 
     margin-right: 80px;
-    z-index: 1; /* Ensure it’s above the logos */
+    z-index: 1; 
 }
 
 .date, time {
@@ -303,7 +308,7 @@ header {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin-top: 10px; /* Space above the button */
+    margin-top: 10px; 
     cursor: pointer;
     border-radius: 5px;
 }
@@ -313,26 +318,26 @@ header {
 }
 
 
-  .team-column {
+.team-column {
     display: flex;
     align-items: center;
-  }
-  
-  .divider {
+}
+
+.divider {
     width: 2px;
     background-color: #fff;
-    height: 100px; /* Adjust height as needed */
+    height: 100px; 
     margin: 0 20px;
-  }
-  
-  .livescore {
+}
+
+.livescore {
     font-size: 48px;
     color: #fff;
-  }
-  
-  .players {
+}
+
+.players {
     margin-top: 20px;
-  }
+}
 
 .timer {
     font-size: 15px;
@@ -343,7 +348,7 @@ header {
     font-size: 48px;
     color: #fff;
 }
-  
+
 /*////////////////////////////////schedule TAB//////////////////////////////////*/
 .schelduleALL {
     padding: 5%;
@@ -385,6 +390,7 @@ header {
 
 /*////////////////////////////////TEAM TAB//////////////////////////////////*/
 .scheduletabcontent {
+    display: none;
     margin: 0;
     padding: 0;
 }
@@ -461,8 +467,13 @@ header {
     color: white;
 }
 
+.matchinfo {
+    justify-content: center;
+    margin-left: 70px;
+}
+
 .matchinfo table {
-    width: 100%; 
+    width: 95%; 
     border-collapse: seperate; 
     margin: 20px 0; 
     border-spacing: 10px;
@@ -491,4 +502,59 @@ header {
     transition: 0.3s;
     border-radius: 10px;
     background-color: #ffffff;
+}
+
+/* live match */
+
+.stat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    overflow: hidden;
+}
+
+/* Table cells */
+.stat-table td {
+    padding: 20px;
+    text-align: left;
+    background-color: white;
+    border-radius: 20px;
+    border-bottom: 1px solid rgb(111, 111, 111);
+}
+
+/* Styling for the first column */
+.stat-table td:first-child {
+    width: 10%;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Styling for the middle column */
+.stat-table td.middle-head {
+    width: 80%;
+    background-color: #D9D9D9;
+    text-align: center; 
+    font-weight: bold;
+}
+
+/* Styling for the third column */
+.stat-table td:last-child {
+    width: 10%;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+/* Table borders and spacing */
+.stat-table td, .stat-table th {
+    border-radius: 0;
+}
+
+/* Hover effect for rows */
+.stat-table tr:hover {
+    background-color: #000000;
 }

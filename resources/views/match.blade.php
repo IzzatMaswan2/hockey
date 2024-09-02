@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
+    @include('components.side-nav')
         @include('profile.partials.navbar')
         
     <div class="main-content">
@@ -17,9 +18,9 @@
 
     <div class="matchtab">
         <div class="tabm">
-            <img src="img/teamAlogo.png" alt="Team A Logo" class="teamlogo left">
+            <img src="{{asset($teamAInfo->logoURL)}}" alt="{{$teamAInfo->Name}} Logo" class="teamlogo left">
             <div class="matchcontent">
-                <h3>TEAM A</h3>
+                <h3>{{$teamAInfo->Name}}</h3>
                 <div class="finalscore">2</div>
             </div>
         </div>
@@ -31,10 +32,10 @@
         
         <div class="tabm">
             <div class="matchcontent">
-                <h3>TEAM B</h3>
+                <h3>{{$teamBInfo->Name}}</h3>
                 <div class="finalscore">1</div>
             </div>
-            <img src="img/teamBlogo.png" alt="Team B Logo" class="teamlogo right">
+            <img src="{{asset($teamBInfo->logoURL)}}" alt="{{$teamBInfo->Name}}Logo" class="teamlogo right">
         </div>
     </div>
 
@@ -47,8 +48,8 @@
 
         <div id="LINEUP" class="scheduletabcontent">
             <div class="teamtab">
-                <button >TEAM A</button>
-                <button >TEAM B</button>
+                <button >{{$teamAInfo->Name}}</button>
+                <button >{{$teamBInfo->Name}}</button>
             </div>
             <table>
                 <thead>
@@ -115,23 +116,23 @@
                 <tbody>
                     <tr>
                         <td class="label">VENUE</td>
-                        <td class="value">FIELD A, HILLPARK, SELANGOR</td>
+                        <td class="value">{{$matchDetail->Venue}}</td>
                     </tr>
                     <tr>
                         <td class="label">DATE & TIME</td>
-                        <td class="value">MONDAY (09:00 - 10:00)</td>
+                        <td class="value">{{$matchDetail->Date}}</td>
                     </tr>
                     <tr>
                         <td class="label">EVENT NAME</td>
-                        <td class="value">LIGA HOKI TOURNAMENT</td>
+                        <td class="value">{{$TournamentName->Name}}</td>
                     </tr>
                     <tr>
                         <td class="label">SCORING JUDGE</td>
-                        <td class="value">FRANK MILLER</td>
+                        <td class="value">{{$ScoringJudgeID->Name}}</td>
                     </tr>
                     <tr>
                         <td class="label">TIMING JUDGE</td>
-                        <td class="value">HARRY ANDERSON</td>
+                        <td class="value">{{$TimingJudgeID->Name}}</td>
                     </tr>
                 </tbody>
             </table>
