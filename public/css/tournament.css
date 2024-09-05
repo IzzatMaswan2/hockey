@@ -16,7 +16,6 @@
     margin: 20px;
     padding-top: 50px;
     position: relative;
-    overflow: hidden;
 }
 
 /*////////////////////////////////KN0CKOUT BOARD//////////////////////////////////*/
@@ -67,13 +66,13 @@
 .match-lines {
     position: absolute;
     top: 51%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(-40%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 50px; /* Adjust based on your needs */
+    width: 50px; 
     z-index: -1;
 }
 
@@ -86,22 +85,22 @@
 
 .match-lines .line-two {
     background-color: black;
-    height: 100px; /* Adjust based on the spacing of matchups */
+    height: 100px; 
     width: 3px;
-    margin: 0 0; /* Adjust spacing between lines */
+    margin: 0 0; 
     z-index: -1;
 }
 
 .match-lines2 {
     position: absolute;
     top: 50%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(-15%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 50px; /* Adjust based on your needs */
+    width: 50px; 
     z-index: -1;
 }
 
@@ -114,22 +113,22 @@
 
 .match-lines2 .line-two {
     background-color: black;
-    height: 100px; /* Adjust based on the spacing of matchups */
+    height: 100px; 
     width: 3px;
-    margin: 0 0; /* Adjust spacing between lines */
+    margin: 0 0; 
     z-index: -1;
 }
 
 .match-lines3 {
     position: absolute;
     top: 51%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(8%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 50px; /* Adjust based on your needs */
+    width: 50px; 
     z-index: -1;
 }
 
@@ -142,22 +141,22 @@
 
 .match-lines3 .line-two {
     background-color: black;
-    height: 100px; /* Adjust based on the spacing of matchups */
+    height: 100px; 
     width: 3px;
-    margin: 0 0; /* Adjust spacing between lines */
+    margin: 0 0; 
     z-index: -1;
 }
 
 .match-lines4 {
     position: absolute;
     top: 51%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(32%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 50px; /* Adjust based on your needs */
+    width: 50px; 
     z-index: -1;
 }
 
@@ -171,23 +170,23 @@
 
 .match-lines4 .line-two {
     background-color: black;
-    height: 100px; /* Adjust based on the spacing of matchups */
+    height: 100px; 
     width: 3px;
-    margin: 0 0; /* Adjust spacing between lines */
+    margin: 0 0; 
     z-index: -1;
 }
 
 .match-lines5 {
     position: absolute;
     top: 16%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(-65%);
     transform: translateX(39%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 120px; /* Adjust based on your needs */
+    width: 120px; 
     z-index: -1;
 }
 
@@ -201,14 +200,14 @@
 .match-lines6 {
     position: absolute;
     top: 40%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(-65%);
     transform: translateX(39%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 120px; /* Adjust based on your needs */
+    width: 120px; 
     z-index: -1;
 }
 
@@ -222,14 +221,14 @@
 .match-lines7 {
     position: absolute;
     top: 64%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(-65%);
     transform: translateX(39%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 120px; /* Adjust based on your needs */
+    width: 120px; 
     z-index: -1;
 }
 
@@ -243,14 +242,14 @@
 .match-lines8 {
     position: absolute;
     top: 88%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(-65%);
     transform: translateX(39%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 120px; /* Adjust based on your needs */
+    width: 120px; 
     z-index: -1;
 }
 
@@ -265,13 +264,13 @@
 .champ-lines {
     position: absolute;
     top: -8.5%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(20%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 50px; /* Adjust based on your needs */
+    width: 50px; 
     z-index: -1;
 }
 
@@ -284,22 +283,22 @@
 
 .champ-lines .line-two {
     background-color: black;
-    height: 235px; /* Adjust based on the spacing of matchups */
+    height: 235px; 
     width: 3px;
-    margin: 0 0; /* Adjust spacing between lines */
+    margin: 0 0; 
     z-index: -1;
 }
 
 .champ-lines2 {
     position: absolute;
     top: 16%;
-    left: 120%; /* Adjust based on your needs */
+    left: 120%; 
     transform: translateY(8%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 100px; /* Adjust based on your needs */
+    width: 100px; 
     z-index: -1;
 }
 
@@ -313,13 +312,13 @@
 .champ-lines3 {
     position: absolute;
     top: 42%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(20%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 50px; /* Adjust based on your needs */
+    width: 50px; 
     z-index: -1;
 }
 
@@ -332,22 +331,22 @@
 
 .champ-lines3 .line-two {
     background-color: black;
-    height: 235px; /* Adjust based on the spacing of matchups */
+    height: 235px; 
     width: 3px;
-    margin: 0 0; /* Adjust spacing between lines */
+    margin: 0 0; 
     z-index: -1;
 }
 
 .champ-lines4 {
     position: absolute;
     top: 66%;
-    left: 120%; /* Adjust based on your needs */
+    left: 120%; 
     transform: translateY(8%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 100px; /* Adjust based on your needs */
+    width: 100px; 
     z-index: -1;
 }
 
@@ -361,13 +360,13 @@
 .winner-lines {
     position: absolute;
     top: -10%;
-    left: 100%; /* Adjust based on your needs */
+    left: 100%; 
     transform: translateY(20%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 50px; /* Adjust based on your needs */
+    width: 50px; 
     z-index: -1;
 }
 
@@ -380,22 +379,22 @@
 
 .winner-lines .line-two {
     background-color: black;
-    height: 470px; /* Adjust based on the spacing of matchups */
+    height: 470px; 
     width: 3px;
-    margin: 0 0; /* Adjust spacing between lines */
+    margin: 0 0; 
     z-index: -1;
 }
 
 .winner-lines2 {
     position: absolute;
     top: 32%;
-    left: 120%; /* Adjust based on your needs */
+    left: 120%; 
     transform: translateY(8%);
     display: flex;
     flex-direction: column;
     align-items:flex-end;
     height: 100%;
-    width: 100px; /* Adjust based on your needs */
+    width: 100px; 
     z-index: -1;
 }
 
@@ -496,6 +495,8 @@ ul.winnerchampion li.team .score {
         display: flex;
         width: 100%;
         justify-content: space-evenly;
+        overflow-x: auto;
+        overflow-y: hidden; 
     }
     
     .roundquarter {
@@ -538,13 +539,13 @@ ul.winnerchampion li.team .score {
     .match-lines {
         position: absolute;
         top: 52%;
-        left: 100%; /* Adjust based on your needs */
+        left: 100%; 
         transform: translateY(-40%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 20px; /* Adjust based on your needs */
+        width: 20px; 
         z-index: -1;
     }
     
@@ -557,22 +558,22 @@ ul.winnerchampion li.team .score {
     
     .match-lines .line-two {
         background-color: black;
-        height: 75px; /* Adjust based on the spacing of matchups */
+        height: 75px; 
         width: 3px;
-        margin: 0 0; /* Adjust spacing between lines */
+        margin: 0 0; 
         z-index: -1;
     }
     
     .match-lines2 {
         position: absolute;
         top: 54%;
-        left: 100%; /* Adjust based on your needs */
+        left: 100%; 
         transform: translateY(-18%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 20px; /* Adjust based on your needs */
+        width: 20px; 
         z-index: -1;
     }
     
@@ -585,22 +586,22 @@ ul.winnerchampion li.team .score {
     
     .match-lines2 .line-two {
         background-color: black;
-        height: 75px; /* Adjust based on the spacing of matchups */
+        height: 75px; 
         width: 3px;
-        margin: 0 0; /* Adjust spacing between lines */
+        margin: 0 0; 
         z-index: -1;
     }
     
     .match-lines3 {
         position: absolute;
         top: 57.5%;
-        left: 100%; /* Adjust based on your needs */
+        left: 100%; 
         transform: translateY(2%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 20px; /* Adjust based on your needs */
+        width: 20px; 
         z-index: -1;
     }
     
@@ -613,22 +614,22 @@ ul.winnerchampion li.team .score {
     
     .match-lines3 .line-two {
         background-color: black;
-        height: 75px; /* Adjust based on the spacing of matchups */
+        height: 75px; 
         width: 3px;
-        margin: 0 0; /* Adjust spacing between lines */
+        margin: 0 0; 
         z-index: -1;
     }
     
     .match-lines4 {
         position: absolute;
         top: 60%;
-        left: 100%; /* Adjust based on your needs */
+        left: 100%; 
         transform: translateY(23%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 20px; /* Adjust based on your needs */
+        width: 20px; 
         z-index: -1;
     }
     
@@ -642,16 +643,16 @@ ul.winnerchampion li.team .score {
     
     .match-lines4 .line-two {
         background-color: black;
-        height: 75px; /* Adjust based on the spacing of matchups */
+        height: 75px; 
         width: 3px;
-        margin: 0 0; /* Adjust spacing between lines */
+        margin: 0 0; 
         z-index: -1;
     }
     
     .match-lines5 {
         position: absolute;
         top: 18%;
-        left: 88%; /* Adjust based on your needs */
+        left: 88%; 
         transform: translateY(-65%);
         transform: translateX(39%);
         display: flex;
@@ -672,14 +673,14 @@ ul.winnerchampion li.team .score {
     .match-lines6 {
         position: absolute;
         top: 41%;
-        left: 88%; /* Adjust based on your needs */
+        left: 88%; 
         transform: translateY(-65%);
         transform: translateX(39%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 120px; /* Adjust based on your needs */
+        width: 120px; 
         z-index: -1;
     }
     
@@ -693,14 +694,14 @@ ul.winnerchampion li.team .score {
     .match-lines7 {
         position: absolute;
         top: 65%;
-        left: 88%; /* Adjust based on your needs */
+        left: 88%; 
         transform: translateY(-65%);
         transform: translateX(39%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 120px; /* Adjust based on your needs */
+        width: 120px; 
         z-index: -1;
     }
     
@@ -714,14 +715,14 @@ ul.winnerchampion li.team .score {
     .match-lines8 {
         position: absolute;
         top: 89%;
-        left: 88%; /* Adjust based on your needs */
+        left: 88%; 
         transform: translateY(-65%);
         transform: translateX(39%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 120px; /* Adjust based on your needs */
+        width: 120px; 
         z-index: -1;
     }
     
@@ -755,22 +756,22 @@ ul.winnerchampion li.team .score {
     
     .champ-lines .line-two {
         background-color: black;
-        height: 170px; /* Adjust based on the spacing of matchups */
+        height: 170px; 
         width: 3px;
-        margin: 0 0; /* Adjust spacing between lines */
+        margin: 0 0; 
         z-index: -1;
     }
     
     .champ-lines2 {
         position: absolute;
         top: 18%;
-        left: 108%; /* Adjust based on your needs */
+        left: 108%; 
         transform: translateY(8%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 100px; /* Adjust based on your needs */
+        width: 100px; 
         z-index: -1;
     }
     
@@ -784,13 +785,13 @@ ul.winnerchampion li.team .score {
     .champ-lines3 {
         position: absolute;
         top: 42%;
-        left: 100%; /* Adjust based on your needs */
+        left: 100%; 
         transform: translateY(20%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 20px; /* Adjust based on your needs */
+        width: 20px; 
         z-index: -1;
     }
     
@@ -803,22 +804,22 @@ ul.winnerchampion li.team .score {
     
     .champ-lines3 .line-two {
         background-color: black;
-        height: 170px; /* Adjust based on the spacing of matchups */
+        height: 170px; 
         width: 3px;
-        margin: 0 0; /* Adjust spacing between lines */
+        margin: 0 0; 
         z-index: -1;
     }
     
     .champ-lines4 {
         position: absolute;
         top: 66%;
-        left: 108%; /* Adjust based on your needs */
+        left: 108%; 
         transform: translateY(8%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 100px; /* Adjust based on your needs */
+        width: 100px; 
         z-index: -1;
     }
     
@@ -832,13 +833,13 @@ ul.winnerchampion li.team .score {
     .winner-lines {
         position: absolute;
         top: -10%;
-        left: 100%; /* Adjust based on your needs */
+        left: 100%; 
         transform: translateY(20%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 20px; /* Adjust based on your needs */
+        width: 20px; 
         z-index: -1;
     }
     
@@ -851,22 +852,22 @@ ul.winnerchampion li.team .score {
     
     .winner-lines .line-two {
         background-color: black;
-        height: 325px; /* Adjust based on the spacing of matchups */
+        height: 325px; 
         width: 3px;
-        margin: 0 0; /* Adjust spacing between lines */
+        margin: 0 0; 
         z-index: -1;
     }
     
     .winner-lines2 {
         position: absolute;
         top: 35%;
-        left: 108%; /* Adjust based on your needs */
+        left: 108%; 
         transform: translateY(8%);
         display: flex;
         flex-direction: column;
         align-items:flex-end;
         height: 100%;
-        width: 100px; /* Adjust based on your needs */
+        width: 100px; 
         z-index: -1;
     }
     
@@ -965,6 +966,485 @@ ul.winnerchampion li.team .score {
     }
 }
 
+@media (max-width:875px) {
+    .container-tour {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        overflow-x: auto;
+        overflow-y: hidden; 
+    }
+    
+    .roundquarter {
+        margin-top: 0%;
+        position: relative;
+    }
+    
+    .roundsemi {
+        margin-top: 4%;
+        position: relative;
+    }
+    
+    .semispace {
+        height: 80px;
+    }
+    
+    .semispace2 {
+        height: 40px;
+    }
+    
+    .semispace3 {
+        height: 75px;
+    }
+    
+    .roundchampion {
+        margin-top: 100px;
+        position: relative;
+    }
+    
+    .champion {
+        margin-top: 225px;
+        position: relative;
+    }
+    
+    
+    .champspace {
+        height: 195px;
+    }
+    
+    .match-lines {
+        position: absolute;
+        top: 54.5%;
+        left: 95%; 
+        transform: translateY(-40%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 15px; 
+        z-index: -1;
+    }
+    
+    .match-lines .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .match-lines .line-two {
+        background-color: black;
+        height: 43px; 
+        width: 3px;
+        margin: 0 0;
+        z-index: -1;
+    }
+    
+    .match-lines2 {
+        position: absolute;
+        top: 56%;
+        left: 95%; 
+        transform: translateY(-18%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 15px; 
+        z-index: -1;
+    }
+    
+    .match-lines2 .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .match-lines2 .line-two {
+        background-color: black;
+        height: 43px; 
+        width: 3px;
+        margin: 0 0; 
+        z-index: -1;
+    }
+    
+    .match-lines3 {
+        position: absolute;
+        top: 59%;
+        left: 95%;
+        transform: translateY(2%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 15px; 
+        z-index: -1;
+    }
+    
+    .match-lines3 .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .match-lines3 .line-two {
+        background-color: black;
+        height: 43px; 
+        width: 3px;
+        margin: 0 0; 
+        z-index: -1;
+    }
+    
+    .match-lines4 {
+        position: absolute;
+        top: 62%;
+        left: 95%; 
+        transform: translateY(23%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 15px; 
+        z-index: -1;
+    }
+    
+    .match-lines4 .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    
+    .match-lines4 .line-two {
+        background-color: black;
+        height: 43px;
+        width: 3px;
+        margin: 0 0; 
+        z-index: -1;
+    }
+    
+    .match-lines5 {
+        position: absolute;
+        top: 18%;
+        left: 78%; 
+        transform: translateY(-65%);
+        transform: translateX(39%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 120px; 
+        z-index: -1;
+    }
+    
+    .match-lines5 .line-one {
+        background-color: black;
+        height: 4px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .match-lines6 {
+        position: absolute;
+        top: 42.5%;
+        left: 78%; 
+        transform: translateY(-65%);
+        transform: translateX(39%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 120px; 
+        z-index: -1;
+    }
+    
+    .match-lines6 .line-one {
+        background-color: black;
+        height: 4px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .match-lines7 {
+        position: absolute;
+        top: 65%;
+        left: 78%; 
+        transform: translateY(-65%);
+        transform: translateX(39%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 120px;
+        z-index: -1;
+    }
+    
+    .match-lines7 .line-one {
+        background-color: black;
+        height: 4px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .match-lines8 {
+        position: absolute;
+        top: 89%;
+        left: 78%; 
+        transform: translateY(-65%);
+        transform: translateX(39%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 120px; 
+        z-index: -1;
+    }
+    
+    
+    .match-lines8 .line-one {
+        background-color: black;
+        height: 4px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .champ-lines {
+        position: absolute;
+        top: -9%;
+        left: 95%; 
+        transform: translateY(24%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 20px; 
+        z-index: -1;
+    }
+    
+    .champ-lines .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .champ-lines .line-two {
+        background-color: black;
+        height: 125px; 
+        width: 3px;
+        margin: 0 0; 
+        z-index: -1;
+    }
+    
+    .champ-lines2 {
+        position: absolute;
+        top: 18%;
+        left: 104.5%; 
+        transform: translateY(8%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 100px; 
+        z-index: -1;
+    }
+    
+    .champ-lines2 .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .champ-lines3 {
+        position: absolute;
+        top: 44%;
+        left: 95%; 
+        transform: translateY(20%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 20px; 
+        z-index: -1;
+    }
+    
+    .champ-lines3 .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .champ-lines3 .line-two {
+        background-color: black;
+        height: 125px; 
+        width: 3px;
+        margin: 0 0; 
+        z-index: -1;
+    }
+    
+    .champ-lines4 {
+        position: absolute;
+        top: 68%;
+        left: 104.5%; 
+        transform: translateY(8%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 100px; 
+        z-index: -1;
+    }
+    
+    .champ-lines4 .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .winner-lines {
+        position: absolute;
+        top: -9%;
+        left: 99%; 
+        transform: translateY(20%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 20px; 
+        z-index: -1;
+    }
+    
+    .winner-lines .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    
+    .winner-lines .line-two {
+        background-color: black;
+        height: 245px; 
+        width: 3px;
+        margin: 0 0; 
+        z-index: -1;
+    }
+    
+    .winner-lines2 {
+        position: absolute;
+        top: 35%;
+        left: 108%; 
+        transform: translateY(8%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-end;
+        height: 100%;
+        width: 100px; 
+        z-index: -1;
+    }
+    
+    .winner-lines2 .line-one {
+        background-color: black;
+        height: 3px;
+        width: 100%;
+        z-index: -1;
+    }
+    .round-details {
+        font-size: 18px;
+        padding-left: 50px;
+        text-align: center;
+        font-family: 'Istok Web', sans-serif;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    .matchup {
+        justify-content: center;
+        text-align: center;
+        font-size: 14px;
+    }
+    
+    ul.matchup {
+        list-style: none;
+        padding: 100;
+        font-weight: bold;
+
+    }
+    
+    ul.matchup li.team {
+        background: #5D3CB8;
+        color: #ffffff;
+        align-items: center;
+        padding: 5px;
+        margin: 5px 0;
+        font-family: 'Roboto Condensed', sans-serif;
+        display: flex;
+        justify-content: space-evenly;
+        width: 150px;
+        border-radius: 20px;
+        font-size: 10px;
+    }
+    
+    ul.matchup li.team .score {
+        background: #ffffff;
+        color: #5D3CB8;
+        padding: 5px 10px;
+        width: 30px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    ul.matchupchampion li.team {
+        background: #5D3CB8;
+        color: #ffffff;
+        align-items: center;
+        padding: 5px;
+        margin: 5px 0;
+        font-family: 'Roboto Condensed', sans-serif;
+        display: flex;
+        justify-content: space-evenly;
+        width: 150px;
+        border-radius: 20px;
+        font-size: 10px;
+    }
+    
+    ul.matchupchampion li.team .score {
+        background: #ffffff;
+        color: #5D3CB8;
+        padding: 5px 10px;
+        width: 30px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    ul.winnerchampion li.team {
+        background: #32D086;
+        color: #ffffff;
+        padding: 5px;
+        margin: 5px 0;
+        font-family: 'Roboto Condensed', sans-serif;
+        display: flex;
+        justify-content: space-evenly;
+        width: 150px;
+        border-radius: 20px;
+        font-size: 10px;
+    }
+    
+    ul.winnerchampion li.team .score {
+        background: rgba(255, 255, 255, 0.5);
+        color: #ffffff;
+        padding: 5px 10px;
+        width: 30px;
+        border-radius: 10px;
+        text-align: center;
+    }
+} 
+
 
 /*////////////////////////////////TABLE TAB//////////////////////////////////*/
 
@@ -973,10 +1453,11 @@ ul.winnerchampion li.team .score {
     justify-content: center;
     align-items: center;
     margin-top: 150px; 
+    
 }
 
 .tab {
-    overflow: hidden;
+    overflow: auto;
     background-color: #00FF87;
     border-radius: 20px;
     width: 90%;
@@ -1048,9 +1529,10 @@ ul.winnerchampion li.team .score {
 }
 
 
+
 /*////////////////////////////////MATCH TAB//////////////////////////////////*/
 .scheduletab {
-    overflow: hidden;
+    overflow: auto;
     background-color: #00FF87;
     border-radius: 20px;
     width: 90%;
@@ -1213,16 +1695,16 @@ ul.winnerchampion li.team .score {
     background-color: #fff;
     height: 100px; /* Adjust height as needed */
     margin: 0 20px;
-  }
-  
-  .livescore {
+}
+
+.livescore {
     font-size: 48px;
     color: #fff;
-  }
-  
-  .players {
+}
+
+.players {
     margin-top: 20px;
-  }
+}
 
 .timer {
     font-size: 15px;
@@ -1232,5 +1714,316 @@ ul.winnerchampion li.team .score {
 .finalscore {
     font-size: 48px;
     color: #fff;
-  }
-  
+}
+
+@media (max-width:975px) {
+    .matchschedule-heading {
+        text-align: center;
+        margin-top: 200px;
+        margin-bottom: 50px;
+        font-size: 2em;
+        color: #333;
+    }
+    
+    .match-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+    
+    .mtabcontent {
+        display: none; /* Hide by default */
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        color: #FFF; /* Ensuring text is visible against the background */
+    }
+    
+    /* Show the content of the active tab */
+    .mtabcontent.show {
+        display: block;
+    }
+    
+    .matchtab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 25px;
+        background-color: #7A5DCA;
+        border-radius: 10px;
+        position: relative;
+    }
+    
+    .tabm {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .matchcontent {
+        background-color: #7A5DCA;
+        padding: 10px;
+        border-radius: 10px;
+        color: #FFF;
+    }
+    
+    .matchcontent h3 {
+        font-size: 25px;
+    }
+
+    .matchcontent p {
+        text-transform: uppercase;
+        font-size: 15px;
+    }
+    
+    .teamlogo {
+        margin-top: 100px;
+        height: 10vw; 
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .teamlogo.left {
+        left: 2vw; 
+    }
+    
+    .teamlogo.right {
+        right: 2vw; 
+    }
+    
+    .vs-container {
+        text-align: center;
+        align-items: center;
+        margin-top: 10px; 
+        color: #FFFFFF;
+    }
+    
+    .vs {
+        font-size: 24px;
+        font-weight: bold;
+        color: #FFFFFF;
+        margin-left: 40px; /* Space around the vs text */
+        margin-right: 40px;
+        z-index: 1; /* Ensure it’s above the logos */
+    }
+    
+    .date, time {
+        font-size: 12px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+    
+    
+    .lineup-button {
+        background-color: #00FF87;
+        border: none;
+        color: white;
+        font-weight: 300;
+        padding: 10px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-top: 10px; /* Space above the button */
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    .lineup-button:hover {
+        background-color: #32D086;
+    }
+    
+    .team-column {
+        display: flex;
+        align-items: center;
+    }
+    
+    .divider {
+        width: 2px;
+        background-color: #fff;
+        height: 100px; /* Adjust height as needed */
+        margin: 0 20px;
+    }
+    
+    .livescore {
+        font-size: 36px;
+        color: #fff;
+    }
+    
+    .players {
+        margin-top: 15px;
+    }
+    
+    .timer {
+        font-size: 12px;
+        color: #FFFFFF;
+    }
+    
+    .finalscore {
+        font-size: 36px;
+        color: #fff;
+    }
+}
+
+@media (max-width:730px) {
+    .matchschedule-heading {
+        text-align: center;
+        margin-top: 200px;
+        margin-bottom: 50px;
+        font-size: 1.5em;
+        color: #333;
+    }
+    
+    .match-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+    
+    .mtabcontent {
+        display: none; /* Hide by default */
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 10px;
+        color: #FFF; /* Ensuring text is visible against the background */
+    }
+    
+    /* Show the content of the active tab */
+    .mtabcontent.show {
+        display: block;
+    }
+    
+    .matchtab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #7A5DCA;
+        border-radius: 10px;
+        position: relative;
+    }
+    
+    .tabm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        text-align: center;
+        width: fit-content;
+        max-height: fit-content;
+        flex: 1;
+        gap: 0;
+    }
+    
+    .matchcontent {
+        background-color: #7A5DCA;
+        padding: 10px;
+        border-radius: 10px;
+        color: #FFF;
+    }
+    
+    .matchcontent h3 {
+        font-size: 25px;
+    }
+
+    .matchcontent p {
+        text-transform: uppercase;
+        font-size: 15px;
+    }
+    
+    .teamlogo {
+        margin: 10px;
+        width: 75px;
+        height: auto;
+        position: relative;
+        transform: translateY(0);
+    }
+    
+    .teamlogo.left {
+        left: 0vw; 
+    }
+    
+    .teamlogo.right {
+        right: 0vw; 
+    }
+    
+    .vs-container {
+        text-align: center;
+        align-items: center;
+        margin-top: 10px; 
+        color: #FFFFFF;
+    }
+    
+    .vs {
+        font-size: 24px;
+        font-weight: bold;
+        color: #FFFFFF;
+        margin-left: 40px; /* Space around the vs text */
+        margin-right: 40px;
+        z-index: 1; /* Ensure it’s above the logos */
+    }
+    
+    .date, time {
+        font-size: 12px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+    
+    
+    .lineup-button {
+        background-color: #00FF87;
+        border: none;
+        color: white;
+        font-weight: 300;
+        padding: 10px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-top: 10px; /* Space above the button */
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    .lineup-button:hover {
+        background-color: #32D086;
+    }
+    
+    .team-column {
+        display: flex;
+        align-items: center;
+    }
+    
+    .divider {
+        width: 2px;
+        background-color: #fff;
+        height: 100px; /* Adjust height as needed */
+        margin: 0 20px;
+    }
+    
+    .livescore {
+        font-size: 36px;
+        color: #fff;
+    }
+    
+    .players {
+        margin-top: 15px;
+    }
+    
+    .timer {
+        font-size: 12px;
+        color: #FFFFFF;
+    }
+    
+    .finalscore {
+        font-size: 36px;
+        color: #fff;
+    }
+}

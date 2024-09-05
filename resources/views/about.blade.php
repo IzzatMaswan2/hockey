@@ -65,7 +65,6 @@
         <section>
             <div class="about-row">
                 <div class="about-column">
-                    <div class="rec-three"></div>
                     <div class="rec-four">
                         <img src="img/about-who2.png" alt="offer">
                     </div>
@@ -84,6 +83,28 @@
                         Experience the TechSolutions Inc. difference and let us help transform your business with technology.
                         </p>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container-about">
+                <img src="img/about-who3.png" alt="Hoki" id="whowe">
+                <div class="textblock-about1">
+                    <h4>Who We Are?</h4>
+                    <p>
+                        Hoki Arena is a premier venue for Hoki tournaments, dedicated to showcasing top teams and players globally. Our mission is to offer a world-class platform for both enthusiasts and professionals, promoting unity, teamwork, and excellence. With state-of-the-art facilities and experienced staff, we ensure flawless execution of events and memorable experiences for all participants.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container-about">
+                <img src="img/about-who4.png" alt="Hoki" id="offer">
+                <div class="textblock-about2">
+                    <h4>What We offer?</h4>
+                    <p>
+                        Hoki Arena offers top-tier Hoki tournaments, featuring world-class facilities and a commitment to delivering exceptional events. We provide a platform for elite teams and players to showcase their skills, foster teamwork, and enjoy a memorable experience in a premier sports environment.
+                    </p>
                 </div>
             </div>
         </section>

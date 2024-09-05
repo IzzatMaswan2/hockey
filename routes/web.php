@@ -11,6 +11,11 @@ use App\Http\Controllers\MatchTeamController;
 
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ArticleController;
+
+Route::get('/contact', [MessageController::class, 'showForm']);
+
 
 /* Admin Route */
 Route::get('/article', function () {
@@ -113,9 +118,12 @@ Route::get('/group', function () {
     return view('group');
 });
 
-Route::get('/forum', function () {
-    return view('forum');
-});
+// Route::get('/forum', function () {
+//     return view('forum');
+// });
+
+Route::get('/forum', [ArticleController::class, 'latestPublished']);
+
 
 Route::get('/about', function () {
     return view('about');
@@ -124,6 +132,8 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+
+Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
 
 // Route::get('/draft', function () {
 //     return view('draft');
@@ -147,6 +157,26 @@ Route::get('/fixture', function () {
 });
 
 /*End User Route */
+
+// login controller 
+
+// Admin Dashboard
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified', 'role:1'])->name('dashboard');
+
+// // Manager Dashboard
+// Route::get('/manager-dashboard', function () {
+//     return view('manager-dashboard');
+// })->middleware(['auth', 'role:2']);
+
+// // User Homepage
+// Route::get('/', function () {
+//     return view('home'); 
+// });
+
+// end login 
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

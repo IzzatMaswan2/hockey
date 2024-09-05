@@ -32,7 +32,7 @@
     </div>
     <div class="last-update">3 minute Ago</div>
     <div class="forum-row">
-        <div class="forum-title">Young Tigers lose all their matches in Australian-tower</div>
+        <div class="forum-title">{{$latestArticle->title}}</div>
         <div class="directory-title">Most Read Today</div>
     </div>
     <div class="forumdivide-line"></div>
@@ -42,11 +42,9 @@
                 <img src="img/news.jpg" alt="news">
             </div>
             <div class="summary">
-                The Young Tigers' recent tour of Australia ended in a series of crushing defeats, 
-                leaving the national youth hockey team reeling. With a string of losses to the Australian junior squad, 
-                including a heavy 5-1 thrashing in their final match, questions arise about their readiness for the upcoming Sultan of Johor Cup. 
-                As they prepare to face top international teams, will the Young Tigers bounce back or continue their struggle?<br>
-                <span>Discover the full story behind their challenging tour Down Under.</span>
+                {{$latestArticle->summary}}
+                <br>
+                <a href="#content">Discover the full story behind their challenging tour Down Under.</a>
             </div>
         </div>
         <div class="forum-directory">
@@ -57,24 +55,10 @@
         </div>
     </div>
     
-    <div class="date-news">August 12, 2024</div>
-    <div class="news-info">
+    <div class="date-news">{{$latestArticle->date_news}}</div>
+    <div class="news-info" id="content">
         <p>
-            KUALA LUMPUR: The national youth hockey team, known as the Young Tigers, recently embarked on a playing tour in Australia, 
-            where they faced a tough series of matches against the Australian junior team. 
-            Unfortunately for the Young Tigers, the tour ended in disappointment as they lost all four of their friendly matches.
-        </p><br>
-        <p>
-            In their time in Brisbane, the Malaysian side struggled against their Australian counterparts. 
-            The first three matches saw the Young Tigers defeated with scores of 4-2, 5-2, and 2-0. 
-            The trend continued with a final heavy loss of 5-1 in their most recent game.
-        </p><br>
-        <p>
-            Led by coach I. Vickneswaran, the Young Tigers encountered formidable opponents and were unable to secure any victories. 
-            The results of these matches raise concerns about their readiness for the upcoming Sultan of Johor Cup, scheduled to take place from October 19-26. 
-            This prestigious tournament will feature teams from Australia, India, Britain, Japan, and New Zealand.</p><br>
-        
-        <p> Despite the challenges faced during the tour, the Young Tigers will need to regroup and address their shortcomings in preparation for the Sultan of Johor Cup.
+            {!! $latestArticle->content !!}
         </p>
     </div>
 

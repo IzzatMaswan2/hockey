@@ -25,25 +25,8 @@
 
     <header>
         <a href="/"><img class="logo" src="{{asset('img/Logo Latest 1.png')}}" alt="logo"></a>
-        <nav>
-            <div class="nav__toggle">
-                <i class="bi bi-list"></i>
-                <i class="bi bi-x"></i> 
-            </div>
-            <ul class="nav__link">
-                <li><a href="/tournament">Tournament</a></li>
-                {{-- <li><a href="/group">Group</a></li> --}}
-                <li><a href="/forum">Forum</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li class="fixture"><a href="/fixture">Fixture</a></li>
-            </ul>
-        </nav>
-            <div class="cta">
-                <button>Fixture</button>
-            </div>
             @guest
-            <a href="/login" class="login-header">LOGIN</a>
+            <div class="logged-user" onclick="openNav()">
             @else
                 <div class="logged-user" onclick="openNav()">
                     <span class="user-name">{{ strtok(Auth::user()->name, ' ') }}</span>
@@ -68,10 +51,10 @@
     </script>
     <script>
         function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav2").style.width = "250px";
         }
         function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("mySidenav2").style.width = "0";
         }
         </script>
 </body>

@@ -101,13 +101,14 @@
             <h1 class="main-text2">DROP US A MESSAGE</h1>
         </div>
         <div class="message-container">
-        <form action="action_page.php">
+        <form action="{{ route('contact.store') }}">
+            @csrf
             <div class="input-container">
-                <input type="text" id="phone" name="name" placeholder="NAME">
-                <input type="text" id="phone" name="phone" placeholder="PHONE NUMBER">
-                <input type="text" id="email" name="email" placeholder="E-MAIL">
+                <input type="text" id="name" name="name" placeholder="NAME" required>
+                <input type="text" id="phone" name="phone" placeholder="PHONE NUMBER" required>
+                <input type="text" id="email" name="email" placeholder="E-MAIL" required>
             </div>
-            <textarea id="subject" name="subject" placeholder="Message" style="height:200px"></textarea>
+            <textarea id="subject" name="subject" placeholder="Message" style="height:200px" required></textarea>
             <input type="submit" value="Submit">
         </form>
         </div>
