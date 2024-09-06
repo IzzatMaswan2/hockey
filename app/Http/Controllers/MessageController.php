@@ -13,7 +13,6 @@ class MessageController extends Controller
         return view('contact');
     }
 
-    // Handle form submission
     public function store(Request $request)
     {
         // Validate the request
