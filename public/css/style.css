@@ -258,7 +258,7 @@ header {
     border-radius: 25px; /* Rounded corners */
     padding: 10px; /* Padding around the content */
     height: 44px; /* Fixed height of the container */
-    min-width: 142px; /* Minimum width of the container */
+    min-width: fit-content; 
     width: auto; /* Adjust width based on content */
     cursor: pointer;
 }
@@ -276,8 +276,23 @@ header {
     background-color: white; 
     object-fit: cover; 
     border: 2px solid #ccc; 
+    margin-left: 10px ;
 }
 
+.logged-user2 {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.logged-user2 .user-image {
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    background-color: white; 
+    object-fit: cover; 
+    border: 2px solid #ccc; 
+}
 
 .sidenav {
     height: 100%;
@@ -290,6 +305,7 @@ header {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 10px;
+    z-index: 3;
 }
 
 .sidenav a, button.dropdown-btn {
@@ -304,6 +320,7 @@ header {
     text-align: left;
     cursor: pointer;
     outline: none;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .sidenav a:hover, .dropdown-btn:hover {
@@ -354,12 +371,76 @@ header {
     padding-left: 36px !important;
 }
 
+.header-width {
+    display: none;
+}
+
+#lap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    width: 100%;
+    height: 100px;
+    transition: background-color 2s ease;
+    z-index: 2;
+}
+
+#mob-header {
+    display: none;
+}
+
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
 
+@media (max-width:1220px) {
+    #lap-header {
+        display: none;
+    }
+
+    .header-width1 {
+        display: none;
+    }
+
+    #mob-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        width: 100%;
+        height: 100px;
+        transition: background-color 2s ease;
+        z-index: 2;
+    }
+
+    .logged-user {
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+        background-color: #5D3CB8; 
+        border-radius: 10px; 
+        padding: 10px; 
+        height: auto; 
+        min-width: fit-content; 
+        width: auto; 
+        cursor: pointer;
+        color: white;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .logged-user i {
+        margin-right: 10px;
+    }
+}
 
 body, div {
     margin: 0;
@@ -497,6 +578,131 @@ body, div {
     padding: 20px;
     border-radius: 25px;
     
+}
+
+@media (max-width:915px) {
+    .contactinfo-row {
+        width: 100%;
+        height: auto;
+        background: #5D3CB8;
+        box-sizing: border-box;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contactinfo-header h1 {
+        font-family:'Times New Roman', Times, serif ;
+        font-size: 50px;
+        font-weight: bold;
+        color: #FFFFFF; 
+        text-align: center;
+        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+    }
+    
+    .contactinfo-header h1:hover {
+        color: #38E1C5; /* Teal */
+        text-shadow: 0 0 15px rgba(56, 225, 197, 0.8), 0 0 30px rgba(56, 225, 197, 0.6); 
+        transform: scale(1.1);
+    }
+    
+    .contactinfo-header p {
+        font-family: Arial, sans-serif; /* Basic font family */
+        font-size: 20px; /* Font size */
+        color: #FFFFFF; /* White text color */
+        margin: 10px 0; /* Space above and below */
+        text-align: center; /* Center-align text */
+        line-height: 1.5; /* Improve readability */
+    }
+    
+    .column-container{
+        width: 100%;
+        height: auto; 
+        background: #5D3CB8;
+        box-sizing: border-box;
+        padding: 5px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    
+    .column {
+        flex-basis: 30%;
+        margin: auto; 
+        background: rgba(255, 255, 255, 0.7); 
+        box-sizing: border-box; 
+        display: inline-block;
+        flex-shrink: 0;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        object-position: center;
+        padding: 20px;
+        border-radius: 25px;
+    }
+}
+
+@media (max-width:600px) {
+    .contactinfo-row {
+        width: 100%;
+        height: auto;
+        background: #5D3CB8;
+        box-sizing: border-box;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contactinfo-header h1 {
+        font-family:'Times New Roman', Times, serif ;
+        font-size: 60px;
+        font-weight: bold;
+        color: #FFFFFF; 
+        text-align: center;
+        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+    }
+    
+    .contactinfo-header h1:hover {
+        color: #38E1C5; /* Teal */
+        text-shadow: 0 0 15px rgba(56, 225, 197, 0.8), 0 0 30px rgba(56, 225, 197, 0.6); 
+        transform: scale(1.1);
+    }
+    
+    .contactinfo-header p {
+        font-family: Arial, sans-serif; /* Basic font family */
+        font-size: 20px; /* Font size */
+        color: #FFFFFF; /* White text color */
+        margin: 10px 0; /* Space above and below */
+        text-align: center; /* Center-align text */
+        line-height: 1.5; /* Improve readability */
+    }
+    
+    .column-container{
+        width: 100%;
+        height: auto; /* Adjust height based on content */
+        background: #5D3CB8;
+        box-sizing: border-box;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .column {
+        flex-basis: 30%;
+        margin: auto; 
+        background: rgba(255, 255, 255, 0.7); 
+        box-sizing: border-box; 
+        display: inline-block;
+        flex-shrink: 0;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        object-position: center;
+        padding: 20px;
+        border-radius: 25px;
+        
+    }
 }
 
 .btn-contactus {
@@ -1233,7 +1439,7 @@ footer {
     border-radius: 8px;
     padding: 10px;
     top: 0; 
-    z-index: 3; 
+    z-index: 1; 
     overflow-y: auto;
 }
 

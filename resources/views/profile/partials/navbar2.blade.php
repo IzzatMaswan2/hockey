@@ -49,13 +49,13 @@
             });
         });
     </script>
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav2").style.width = "250px";
-        }
-        function closeNav() {
-            document.getElementById("mySidenav2").style.width = "0";
-        }
-        </script>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav2").style.width = "250px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav2").style.width = "0";
+    }
+    </script>
 </body>
 </html>

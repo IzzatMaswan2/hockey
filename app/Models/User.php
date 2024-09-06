@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'teamName',
+        'Img_User',
         'country',
         'password',
         'user_roleID',

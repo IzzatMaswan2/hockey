@@ -22,41 +22,76 @@
 </head>
 
 <body>
-
     <header>
-        <a href="/"><img class="logo" src="{{asset('img/Logo Latest 1.png')}}" alt="logo"></a>
-        <nav>
-            <div class="nav__toggle">
-                <i class="bi bi-list"></i>
-                <i class="bi bi-x"></i> 
-            </div>
-            <ul class="nav__link">
-                <li><a href="/tournament">Tournament</a></li>
-                {{-- <li><a href="/group">Group</a></li> --}}
-                <li><a href="/forum">Forum</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li class="fixture"><a href="/fixture">Fixture</a></li>
-            </ul>
-        </nav>
+        <!-- Desktop Header -->
+        <div class="header-width1" id="lap-header">
+            <a href="/"><img class="logo" src="{{ asset('img/Logo Latest 1.png') }}" alt="logo"></a>
+            <nav>
+                <div class="nav__toggle">
+                    <i class="bi bi-list"></i>
+                    <i class="bi bi-x"></i>
+                </div>
+                <ul class="nav__link">
+                    <li><a href="/tournament">Tournament</a></li>
+                    <li><a href="/forum">Forum</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li class="fixture"><a href="/fixture">Fixture</a></li>
+                </ul>
+            </nav>
             <div class="cta">
                 <button>Fixture</button>
             </div>
             @guest
             <a href="/login" class="login-header">LOGIN</a>
             @else
-                <div class="logged-user" onclick="openNav()">
-                    <span class="user-name">{{ strtok(Auth::user()->name, ' ') }}</span>
+            <div class="logged-user" onclick="openNav('lap')">
+                <span class="user-name">{{ strtok(Auth::user()->name, ' ') }}</span>
                 <img 
-                src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('img/user-default.png') }}" 
-                alt="User Profile Image" 
-                class="user-image"/>
-                </div>
+                    src="{{ Auth::user()->Img_User ? asset('img/' . Auth::user()->Img_User) : asset('img/user-default.png') }}" 
+                    alt="User Profile Image" 
+                    class="user-image"/>
+            </div>
             @endguest
+        </div>
+    
+        <!-- Mobile Header -->
+        <div class="header-width" id="mob-header">
+            <a href="/"><img class="logo" src="{{ asset('img/Logo Latest 1.png') }}" alt="logo"></a>
+            @guest
+            <div class="logged-user" onclick="openNav('mob')">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Login
+            </div>
+            @else
+            <div class="logged-user2" onclick="openNav('mob')">
+                <img 
+                    src="{{ Auth::user()->Img_User ? asset('img/' . Auth::user()->Img_User) : asset('img/user-default.png') }}" 
+                    alt="User Profile Image" 
+                    class="user-image"/>
+            </div>
+            @endguest
+        </div>
     </header>
+    
+    <script>
+        function openNav(headerType) {
+            if (headerType === 'lap') {
+                document.getElementById("mySidenav").style.width = "250px";
+            } else if (headerType === 'mob') {
+                document.getElementById("mySidenav2").style.width = "250px";
+            }
+        }
+    
+        function closeNav(headerType) {
+            if (headerType === 'lap') {
+                document.getElementById("mySidenav").style.width = "0";
+            } else if (headerType === 'mob') {
+                document.getElementById("mySidenav2").style.width = "0";
+            }
+        }
+    </script>
 
-
-    <!-- JavaScript for toggling the navigation menu -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const toggleButton = document.querySelector('.nav__toggle');
@@ -66,13 +101,5 @@
             });
         });
     </script>
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-        </script>
 </body>
 </html>
