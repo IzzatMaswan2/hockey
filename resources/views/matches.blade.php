@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>Manager Match Center</title>
     <!-- Meta, CSS, and JavaScript links as before -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
