@@ -34,7 +34,7 @@
                     <div class="text-container">
                         <h1 class="main-text">Contact us</h1>
                         <p class="sub-text">Need help with something? Feel free to ask</p>
-                        <button class="btn-contactus">Contact Us</button>
+                        <button onclick="scrollToSection('message')" class="btn-contactus">Contact Us</button>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                                 <p>1234 Arena Lane, Rink City, </p>
                                 <p> HC 56789</p>
                             </div>
-                            <div class="link-info" >
+                            <div class="link-info"> 
                                 <a href="#mail">VISIT US </a>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
             </div>
         </section>
     </div>
-    <div class="message">
+    <div class="message" id="message">
         <div class="text-container2">
             <p class="sub-text2">HAVE QUESTION?</p>
             <h1 class="main-text2">DROP US A MESSAGE</h1>
@@ -113,5 +113,13 @@
         </form>
         </div>
     </div>
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
     @include('profile.partials.footer')
 </body>

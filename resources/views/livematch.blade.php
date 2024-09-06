@@ -7,8 +7,8 @@
     <!-- Link to Bootstrap CSS and your custom CSS -->
     <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('css/tournament.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/match.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tournament.css') }}"> 
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -23,14 +23,14 @@
     <script src="js/faq.js"></script>
 </head>
 
-<body> 
+<body>
     @include('components.side-nav')
     @include('profile.partials.navbar')
     <div class="main-content">
         <h1 class="tournament-heading">MATCH CENTER</h1>
     </div>
 
-
+<div class="match-container">
     <div class="matchtab">
         <div class="tabm">
             <img src="{{asset($liveMatchDetails['teamA']->logoURL)}}" alt="{{$liveMatchDetails['teamA']->Name}}Logo" class="teamlogo left">
@@ -53,7 +53,7 @@
             <img src="{{asset($liveMatchDetails['teamB']->logoURL)}}" alt="{{$liveMatchDetails['teamB']->Name}}Logo" class="teamlogo right">
         </div>
     </div>
-
+</div>
 
     <div class="schelduleALL">
         <div class="scheduletab">

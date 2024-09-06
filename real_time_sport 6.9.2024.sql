@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 02, 2024 at 08:07 AM
+-- Generation Time: Sep 06, 2024 at 02:39 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -30,7 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `articles` (
   `article_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `img` varchar(255) NOT NULL,
   `content` text NOT NULL,
+  `summary` text NOT NULL,
+  `date_news` date NOT NULL,
   `author_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -114,36 +117,6 @@ CREATE TABLE `group` (
   `Description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `group`
---
-
-INSERT INTO `group` (`GroupID`, `TournamentID`, `Name`, `Description`) VALUES
-(1, 1, 'Group A', 'This is Group A in Tournament 1'),
-(2, 1, 'Group B', 'This is Group B in Tournament 1'),
-(3, 1, 'Group C', 'This is Group C in Tournament 2'),
-(4, 1, 'Group D', 'This is Group D in Tournament 2'),
-(5, 1, 'Group E', 'This is Group E in Tournament 3'),
-(6, 1, 'Group F', 'This is Group F in Tournament 3'),
-(7, 1, 'Group G', 'This is Group G in Tournament 1'),
-(8, 1, 'Group H', 'This is Group H in Tournament 1'),
-(9, 2, 'Group A', 'This is Group A in Tournament 2'),
-(10, 2, 'Group B', 'This is Group B in Tournament 2'),
-(11, 2, 'Group C', 'This is Group C in Tournament 2'),
-(12, 2, 'Group D', 'This is Group D in Tournament 2'),
-(13, 2, 'Group E', 'This is Group E in Tournament 2'),
-(14, 2, 'Group F', 'This is Group F in Tournament 2'),
-(15, 2, 'Group G', 'This is Group G in Tournament 2'),
-(16, 2, 'Group H', 'This is Group H in Tournament 2'),
-(17, 3, 'Group A', 'This is Group A in Tournament 3'),
-(18, 3, 'Group B', 'This is Group B in Tournament 3'),
-(19, 3, 'Group C', 'This is Group C in Tournament 3'),
-(20, 3, 'Group D', 'This is Group D in Tournament 3'),
-(21, 3, 'Group E', 'This is Group E in Tournament 3'),
-(22, 3, 'Group F', 'This is Group F in Tournament 3'),
-(23, 3, 'Group G', 'This is Group G in Tournament 3'),
-(24, 3, 'Group H', 'This is Group H in Tournament 3');
-
 -- --------------------------------------------------------
 
 --
@@ -191,18 +164,6 @@ CREATE TABLE `judge` (
   `Role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `judge`
---
-
-INSERT INTO `judge` (`JudgeID`, `Name`, `Role`) VALUES
-(1, 'John Doe', 'Scoring Judge'),
-(2, 'Jane Smith', 'Timing Judge'),
-(3, 'Michael Brown', 'Scoring Judge'),
-(4, 'Emily Davis', 'Timing Judge'),
-(5, 'Robert Wilson', 'Scoring Judge'),
-(6, 'Linda Taylor', 'Timing Judge');
-
 -- --------------------------------------------------------
 
 --
@@ -237,18 +198,6 @@ CREATE TABLE `match_group` (
   `TimingJudgeID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `match_group`
---
-
-INSERT INTO `match_group` (`Match_groupID`, `TournamentID`, `TeamAID`, `TeamBID`, `GroupID`, `match_status`, `Date`, `Category`, `ScoreA`, `ScoreB`, `Venue`, `ScoringJudgeID`, `TimingJudgeID`) VALUES
-(1, 1, 1, 2, 1, 1, '2024-04-05 15:00:00', 'Group Stage', 2, 1, 'FIELD A, STADIUM KUALA LUMPUR', 1, 2),
-(2, 1, 3, 4, 2, 1, '2024-04-06 17:00:00', 'Group Stage', 1, 2, 'FIELD B, STADIUM KUALA LUMPUR', 1, 2),
-(3, 2, 5, 6, 3, 0, '2024-05-12 16:00:00', 'Group Stage', 3, 1, 'FIELD C, CITY STADIUM PENANG', 1, 2),
-(4, 2, 1, 2, 4, 0, '2024-05-13 18:00:00', 'Group Stage', 0, 0, 'FIELD D, CITY STADIUM PENANG', 1, 2),
-(5, 3, 3, 4, 5, 0, '2024-06-20 14:00:00', 'Group Stage', 4, 2, 'FIELD E, JOHOR BAHRU SPORTS COMPLEX', 1, 2),
-(6, 3, 5, 6, 6, 2, '2024-06-21 16:00:00', 'Group Stage', 2, 3, 'FIELD F, JOHOR BAHRU SPORTS COMPLEX', 1, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -274,25 +223,6 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(13, '0001_01_01_000001_create_cache_table', 1),
-(14, '0001_01_01_000002_create_jobs_table', 1),
-(15, '2014_10_12_000000_create_users_table', 1),
-(16, '2024_08_20_111023_create_personal_access_tokens_table', 1),
-(17, '2024_08_23_030521_create_team_table', 1),
-(18, '2024_08_23_030533_create_group_table', 1),
-(19, '2024_08_23_030543_create_judge_table', 1),
-(20, '2024_08_23_030553_create_match_group_table', 1),
-(21, '2024_08_23_030603_create_player_table', 1),
-(22, '2024_08_23_030613_create_playerstatmatch_table', 1),
-(23, '2024_08_23_030623_create_stat_table', 1),
-(24, '2024_08_23_030631_create_tournament_table', 1),
-(25, '2024_08_27_061400_create_sessions_table', 2);
 
 -- --------------------------------------------------------
 
@@ -329,27 +259,6 @@ CREATE TABLE `player` (
   `Nationality` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `player`
---
-
-INSERT INTO `player` (`PlayerID`, `Name`, `TeamID`, `field_status`, `Position`, `Birthdate`, `Nationality`) VALUES
-(1, 'Alice Johnson', 1, 1, 'Forward', '1995-02-15', 'Malaysian'),
-(2, 'Bob Lee', 1, 1, 'Defender', '1994-11-22', 'Malaysian'),
-(3, 'Charlie Kim', 2, 1, 'Goalkeeper', '1996-06-30', 'Malaysian'),
-(4, 'Diana Wong', 3, 0, 'Forward', '1993-04-10', 'Thai'),
-(5, 'Eric Tan', 4, 0, 'Midfielder', '1992-08-05', 'Thai'),
-(6, 'Fiona Liu', 5, 0, 'Defender', '1995-12-20', 'Japanese'),
-(7, 'George Wang', 6, 0, 'Forward', '1997-09-12', 'Japanese'),
-(8, 'Arif Zakaria', 1, 1, 'Forward', '1995-02-18', 'Malaysian'),
-(9, 'Siti Aishah', 1, 1, 'Defender', '1997-11-05', 'Malaysian'),
-(10, 'Ali Hassan', 1, 2, 'Midfielder', '1996-03-25', 'Malaysian'),
-(11, 'Rizal Ahmad', 1, 2, 'Goalkeeper', '1994-08-22', 'Malaysian'),
-(12, 'Nina Abdul', 2, 1, 'Forward', '1993-09-15', 'Malaysian'),
-(13, 'Hafiz Omar', 2, 1, 'Defender', '1995-12-04', 'Malaysian'),
-(14, 'Laila Ismail', 2, 1, 'Midfielder', '1994-07-30', 'Malaysian'),
-(15, 'Zainal Abidin', 2, 1, 'Goalkeeper', '1992-11-11', 'Malaysian');
-
 -- --------------------------------------------------------
 
 --
@@ -366,26 +275,6 @@ CREATE TABLE `playerstatmatch` (
   `Score` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `playerstatmatch`
---
-
-INSERT INTO `playerstatmatch` (`PlayerStatMatchID`, `PlayerID`, `Match_groupID`, `Time`, `StatID`, `Reason`, `Score`) VALUES
-(1, 1, 1, '00:15:00', 1, NULL, 1),
-(2, 2, 1, '00:30:00', 3, NULL, 1),
-(3, 3, 2, '00:45:00', 3, NULL, 1),
-(4, 4, 2, '00:10:00', 4, 'Foul', 1),
-(5, 5, 4, '00:20:00', 5, NULL, 1),
-(6, 6, 5, '00:35:00', 6, 'Misconduct', 1),
-(7, 7, 6, '00:40:00', 6, NULL, 1),
-(8, 1, 1, '00:15:00', 1, NULL, 1),
-(9, 2, 1, '00:30:00', 2, NULL, 1),
-(10, 8, 1, '00:45:00', 3, NULL, 1),
-(11, 9, 1, '00:10:00', 4, 'Foul', 1),
-(12, 13, 1, '00:20:00', 5, NULL, 1),
-(13, 14, 1, '00:35:00', 6, 'Misconduct', 1),
-(14, 15, 1, '00:40:00', 1, NULL, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -397,15 +286,6 @@ CREATE TABLE `ply_field` (
   `name` varchar(50) NOT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ply_field`
---
-
-INSERT INTO `ply_field` (`ply_fieldID`, `name`, `description`) VALUES
-(0, 'member', 'member of team. '),
-(1, 'Starting', 'Represents primary or starting participants in an event or match.'),
-(2, 'Reserve', 'Represents backup or reserve participants who might take the place of starters if needed.');
 
 -- --------------------------------------------------------
 
@@ -422,13 +302,6 @@ CREATE TABLE `sessions` (
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('KhoxXAL9NuuROuq9yJbZVoMsb5e4LUpLhvhGe3fw', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoic0lmTVdpeDA1YXN3c1FnZ1ZSdE9RMFAyVFRqSmtFMTlhd0xVcXBubSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1725263560);
-
 -- --------------------------------------------------------
 
 --
@@ -440,18 +313,6 @@ CREATE TABLE `stat` (
   `Type` varchar(20) NOT NULL,
   `Description` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `stat`
---
-
-INSERT INTO `stat` (`StatID`, `Type`, `Description`) VALUES
-(1, 'Goal', 'Field Goal'),
-(2, 'Goal', 'Penalty Goal'),
-(3, 'Goal', 'Corner Goal'),
-(4, 'Card', 'Green Card'),
-(5, 'Card', 'Yellow Card'),
-(6, 'Card', 'Red Card');
 
 -- --------------------------------------------------------
 
@@ -468,18 +329,6 @@ CREATE TABLE `team` (
   `CoachName` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `team`
---
-
-INSERT INTO `team` (`TeamID`, `Name`, `country`, `LogoURL`, `Description`, `CoachName`) VALUES
-(1, 'Tropical Titans', 'Malaysia', 'img/teamAlogo.png', 'A top team from Malaysia', 'John Doe'),
-(2, 'Malayan Mavericks', 'Malaysia', 'img/teamBlogo.png', 'Another strong team from Malaysia', 'Jane Smith'),
-(3, 'Chiang Mai Chameleons', 'Thailand', 'img/teamClogo.png', 'A leading team from Thailand', 'David Brown'),
-(4, 'Phuket Phantoms', 'Thailand', 'img/teamDlogo.png', 'A competitive team from Thailand', 'Emily White'),
-(5, 'Sakura Spirits', 'Japan', 'img/teamElogo.png', 'A powerful team from Japan', 'Michael Green'),
-(6, 'J-Phoenix', 'Japan', 'img/teamFlogo.png', 'A promising team from Japan', 'Sarah Black');
-
 -- --------------------------------------------------------
 
 --
@@ -494,15 +343,6 @@ CREATE TABLE `tournament` (
   `Location` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tournament`
---
-
-INSERT INTO `tournament` (`TournamentID`, `Name`, `StartDate`, `EndDate`, `Location`) VALUES
-(1, 'MALAYSIA OPEN 2024', '2024-03-01', '2024-03-15', 'STADIUM NEGARA, KUALA LUMPUR'),
-(2, 'PENANG CUP 2024', '2024-07-01', '2024-07-20', 'CITY STADIUM, PENANG'),
-(3, 'JOHOR INVITATIONAL 2024', '2024-09-10', '2024-09-25', 'JOHOR BAHRU SPORTS COMPLEX, JOHOR');
-
 -- --------------------------------------------------------
 
 --
@@ -512,6 +352,7 @@ INSERT INTO `tournament` (`TournamentID`, `Name`, `StartDate`, `EndDate`, `Locat
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_roleID` int(11) NOT NULL DEFAULT '3',
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `teamName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -523,12 +364,17 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `users`
+-- Table structure for table `user_roles`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `teamName`, `country`, `Img_User`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'WAN MUHAMAD IZZAT BIN WAN ABU OSMAN', 'test@gmail.com', NULL, 'TEST TEAM', 'Malaysia', '', '$2y$12$sQzGEs7tiBYASWg9XQsFiu2rBB80yLRsrCilVRjtoT0nHrtW1.ts.', NULL, '2024-08-26 23:53:04', '2024-08-26 23:53:04');
+CREATE TABLE `user_roles` (
+  `roles_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -697,6 +543,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  ADD PRIMARY KEY (`roles_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -728,7 +580,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `group`
 --
 ALTER TABLE `group`
-  MODIFY `GroupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `GroupID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -740,7 +592,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `judge`
 --
 ALTER TABLE `judge`
-  MODIFY `JudgeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `JudgeID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `languages`
@@ -752,7 +604,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `match_group`
 --
 ALTER TABLE `match_group`
-  MODIFY `Match_groupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Match_groupID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -764,7 +616,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -776,43 +628,49 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `PlayerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `PlayerID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `playerstatmatch`
 --
 ALTER TABLE `playerstatmatch`
-  MODIFY `PlayerStatMatchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `PlayerStatMatchID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ply_field`
 --
 ALTER TABLE `ply_field`
-  MODIFY `ply_fieldID` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ply_fieldID` int(1) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stat`
 --
 ALTER TABLE `stat`
-  MODIFY `StatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `StatID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `TeamID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `TeamID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tournament`
 --
 ALTER TABLE `tournament`
-  MODIFY `TournamentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `TournamentID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  MODIFY `roles_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
