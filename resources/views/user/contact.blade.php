@@ -74,7 +74,7 @@
                             </div>
                             <div class="info">
                                 <h1> OUR LOCATION </h1>
-                                <p style="word-warp: break-word;">{{$contact ->location}}</p>
+                                <p style="word-warp: break-word; line-height: 1.2rem;">{{$contact ->location}}</p>
                             </div>
                             <div class="link-info"> 
                                 <a href="#mail">VISIT US </a>
