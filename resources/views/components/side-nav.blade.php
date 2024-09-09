@@ -50,7 +50,7 @@
             <span class="sidenav-name">{{ Auth::user()->name }}</span>
         </div>
         <br>
-        <button class="dropdown-btn">User
+        <button class="dropdown-btn" style="margin-left: 16px;">User
             <i class="bi bi-caret-down-fill"></i>
         </button>
         <div class="dropdown-container">

@@ -18,12 +18,11 @@ class MessageController extends Controller
         // Validate the request
         $validated = $request->validate([
             'name' => 'required|string|max:50',
-            'phone' => 'required|string|max:12',
+            'phone' => 'required|string|max:20',
             'email' => 'required|email|max:50',
             'subject' => 'required|string',
         ]);
 
-        // Create a new message record
         Message::create([
             'name' => $validated['name'],
             'phone_number' => $validated['phone'],

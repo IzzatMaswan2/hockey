@@ -54,8 +54,13 @@
                         </div>
                         <div class="info">
                             <h1> OUR NUMBER </h1>
-                            <p>+60 12-3456789</p>
-                            <p>+60 19-8765432</p>
+                            @if($phones->isNotEmpty())
+                                @foreach($phones as $phone)
+                                    <p>{{ $phone }}</p>
+                                @endforeach
+                            @else
+                                <p>No phone numbers available.</p>
+                            @endif
                         </div>
                         <div class="link-info" >
                             <a href="#mail">CALL US</a>
@@ -69,8 +74,7 @@
                             </div>
                             <div class="info">
                                 <h1> OUR LOCATION </h1>
-                                <p>1234 Arena Lane, Rink City, </p>
-                                <p> HC 56789</p>
+                                <p style="word-warp: break-word;">{{$contact ->location}}</p>
                             </div>
                             <div class="link-info"> 
                                 <a href="#mail">VISIT US </a>
@@ -84,8 +88,13 @@
                         </div>
                         <div class="info">
                             <h1> OUR E-MAIL </h1>
-                            <p>arenahoki@gmail.com</p>
-                            <p>sturtsy@hoki.com</p>
+                            @if($emails->isNotEmpty())
+                                @foreach($emails as $email)
+                                    <p>{{ $email }}</p>
+                                @endforeach
+                            @else
+                                <p>No email addresses available.</p>
+                            @endif
                         </div>
                         <div class="link-info" >
                             <a href="#mail">E-MAIL US</a>
@@ -101,14 +110,14 @@
             <h1 class="main-text2">DROP US A MESSAGE</h1>
         </div>
         <div class="message-container">
-        <form action="{{ route('contact.store') }}">
+        <form action="{{ route('contact.store') }}" method="POST">
             @csrf
             <div class="input-container">
-                <input type="text" id="name" name="name" placeholder="NAME" required>
-                <input type="text" id="phone" name="phone" placeholder="PHONE NUMBER" required>
-                <input type="text" id="email" name="email" placeholder="E-MAIL" required>
+                <input type="text" id="name" name="name" placeholder="NAME" value="{{ old('name') }}" required>
+                <input type="text" id="phone" name="phone" placeholder="PHONE NUMBER" value="{{ old('phone') }}" required>
+                <input type="email" id="email" name="email" placeholder="E-MAIL" value="{{ old('email') }}" required>
             </div>
-            <textarea id="subject" name="subject" placeholder="Message" style="height:200px" required></textarea>
+            <textarea id="subject" name="subject" placeholder="Message" style="height:200px" required>{{ old('subject') }}</textarea>
             <input type="submit" value="Submit">
         </form>
         </div>

@@ -8,7 +8,7 @@ use App\Http\Controllers\PlayerStatMatchController;
 use App\Http\Controllers\PlayerStatMatchInsertController;
 use App\Http\Controllers\LiveStatMatchController;
 use App\Http\Controllers\MatchTeamController;
-
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\MessageController;
@@ -26,11 +26,25 @@ Route::get('/manageuser', function () {
     return view('admin.manageuser');
 });
 
+Route::get('/managematch', function () {
+    return view('admin.managematch');
+});
+
+// Route::get('/adminpage', function () {
+//     return view('admin.page');
+// });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::post('/contacts', [ContactController::class, 'store']);
+Route::get('/contacts/{id}', [ContactController::class, 'show']);
+
+
+Route::get('/adminpage', [ContactController::class, 'showContactInfo2'])->name('contact.show');
+Route::post('/admin/contact/update', [ContactController::class, 'updateContactInfo'])->name('contact.update');
 
 /*End Admin Route */
 /* Manager Route */
@@ -133,6 +147,9 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/contact',  [ContactController::class, 'showcontactinfo'])
+    ->name('showcontactinfo');
+
 Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
 
 // Route::get('/draft', function () {
@@ -176,6 +193,8 @@ Route::get('/fixture', function () {
 // });
 
 // end login 
+
+
 
 
 Route::middleware('auth')->group(function () {

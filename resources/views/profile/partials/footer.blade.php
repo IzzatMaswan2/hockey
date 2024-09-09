@@ -57,6 +57,52 @@
                     </a>
                 </div>
             </div>
+            <div class="footer-row2">
+                <div class="footer-desc">
+                    <img src="{{asset('img/Logo Latest 1.png')}}" alt="Hoki Arena" class="footer-logo">
+                    <h3>Description</h3>
+                </div>
+                <div class="linkinfo">
+                    <div class="footer-column">
+                        <h3>Usefull Link</h3>
+                        <a href="#">Home</a><br>
+                        <a href="#">Tournament</a><br>
+                        <a href="#">Group</a><br>
+                        <a href="#">Forum</a><br>
+                        <a href="#">About</a><br>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contact Info</h3>
+                            <a href="call.php" class="contact-link">
+                                <i class="bi bi-telephone-fill" style="margin-right: 5px"> </i> 01x-xxxxxx
+                            </a><br>
+                            <a href="mail.php" class="contact-link">
+                                <i class="bi bi-envelope-fill" style="margin-right: 5px"> </i> E-mail
+                            </a><br>
+                            <a href="location.php" class="contact-link">
+                                <i class="bi bi-geo-alt-fill" style="margin-right: 5px"> </i> Address
+                            </a><br>
+                    </div>
+                </div>
+                <div class="sociallink">
+                    <h3>Social Network</h3>
+                    <a href="facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="instagram">
+                    <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="twiter">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="youtube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                    <a href="tiktok">
+                        <i class="bi bi-tiktok"></i>
+                    </a>
+                </div>
+            </div>
             <div class="row border-top pt-4 mt-4">
                 <div class="col-md-6 text-center text-md-left">
                     <p style="color: #c0c0c0;">&copy; 2024, Inc. All rights reserved.</p>

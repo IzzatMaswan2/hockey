@@ -871,7 +871,8 @@ body, div {
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
-.input-container input[type=text] {
+.input-container input[type=text],
+.input-container input[type=email] {
     flex: 1; /* Allow inputs to grow and fill the container */
     min-width: 0; /* Ensure inputs do not overflow their container */
     max-width: 100%; /* Ensure inputs do not exceed their container */
@@ -1100,7 +1101,6 @@ footer {
     padding: 50px 0 30px;
     font-size: 13px;
     line-height: 20px;
-    display: none;/* temperory */
 }
 
 .footer-row {
@@ -1111,6 +1111,10 @@ footer {
     align-items: flex-start;
     justify-content: space-between;
     background-color: none;
+}
+
+.footer-row2 {
+    display: none;
 }
 
 .footer-column {
@@ -1158,6 +1162,99 @@ footer {
     line-height: normal;
     background-color: none;
 }
+
+
+
+@media (max-width:605px) {
+    footer {
+        width: 100%;
+        background: linear-gradient(to right, #4B006E, #000000);
+        padding: 20px 0 30px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+    
+    .footer-row {
+        display: none;
+    }
+
+    .footer-row2 {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        background-color: none; 
+        color: #fff; 
+    }
+    
+    .footer-desc {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .footer-logo {
+        width: 120px;
+        margin-right: 20px; 
+    }
+    
+    .footer-desc h3 {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    
+    .linkinfo {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        gap: 20px;
+        overflow: auto;
+    }
+    
+    .footer-column {
+        width: 48%; 
+        min-width: 175px;
+    }
+    
+    .footer-column h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 5px;
+    }
+    
+    .footer-column a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Styling for social links */
+    .sociallink {
+        display: flex;
+        justify-content: space-around; 
+    }
+    
+    .sociallink h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    .sociallink a {
+        color: #fff;
+        font-size: 1rem;
+        margin-right: 15px; /* Space between icons */
+        text-decoration: none;
+    }
+    
+    .sociallink a:hover {
+        color: #007bff; /* Change color on hover */
+    }
+}
+
+
 .container-reset {
     display: relative;
     width: 50%;

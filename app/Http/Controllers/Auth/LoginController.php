@@ -8,15 +8,20 @@
 
 // class LoginController extends Controller
 // {
+//     const ROLE_ADMIN = 1;
+//     const ROLE_MANAGER = 2;
+
 //     protected function authenticated(Request $request, $user)
 //     {
-//         if ($user->user_roleID == 1) {
-//             return redirect()->route('dashboard');
-//         } elseif ($user->user_roleID == 2) {
-//             return redirect('/manager-dashboard');
-//         } else {
-//             return redirect('/');
+//         switch ($user->user_roleID) {
+//             case self::ROLE_ADMIN:
+//                 return redirect()->route('dashboard');
+//             case self::ROLE_MANAGER:
+//                 return redirect('/manager-dashboard');
+//             default:
+//                 return redirect('/')->with('error', 'Unknown role');
 //         }
 //     }
 // }
+
 

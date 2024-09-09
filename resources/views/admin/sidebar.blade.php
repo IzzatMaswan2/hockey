@@ -80,10 +80,13 @@
                     <a class="nav-link" href="#">EVENTS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{('manageuser')}}">MANAGE USERS</a>
+                    <a class="nav-link" href="{{('/manageuser')}}">MANAGE USERS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{('managematch')}}">MANAGE MATCH</a>
+                    <a class="nav-link" href="{{('/managematch')}}">MANAGE MATCH</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{('/adminpage')}}">MANAGE PAGES</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">SCOREBOARD</a>
