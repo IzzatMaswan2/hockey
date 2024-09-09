@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="min-height:500px;">
         <!-- Select Event Dropdown -->
         <div class="mb-3">
             <label for="eventSelect" class="form-label">Event:</label>

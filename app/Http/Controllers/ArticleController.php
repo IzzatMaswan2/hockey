@@ -34,7 +34,7 @@ class ArticleController extends Controller
             return response()->json(['message' => 'No published articles found.'], 404);
         }
 
-        return view('forum', [
+        return view('user.forum', [
             'latestArticle' => $latestArticle
         ]);
     }

@@ -113,7 +113,7 @@ Route::get('/livematch', function () {
 });
 
 Route::get('/', function () {
-    return view('Home');
+    return view('user.Home');
 });
 
 Route::get('/home', function () {
@@ -125,11 +125,11 @@ Route::get('/home', function () {
 // });
 
 Route::get('/livematch', function () {
-    return view('livematch');
+    return view('user.livematch');
 });
 
 Route::get('/group', function () {
-    return view('group');
+    return view('user.group');
 });
 
 // Route::get('/forum', function () {
@@ -140,11 +140,11 @@ Route::get('/forum', [ArticleController::class, 'latestPublished']);
 
 
 Route::get('/about', function () {
-    return view('about');
+    return view('user.about');
 });
 
 Route::get('/contact', function () {
-    return view('contact');
+    return view('user.contact');
 });
 
 Route::get('/contact',  [ContactController::class, 'showcontactinfo'])
@@ -158,7 +158,7 @@ Route::post('/contact', [MessageController::class, 'store'])->name('contact.stor
 
 // web.php
 Route::get('/user', function () {
-    return view('user');
+    return view('user.user');
 })->middleware(['auth','verified'])->name('user');
 
 // Route::get('/login2', function () {

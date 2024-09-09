@@ -38,7 +38,7 @@ class ContactController extends Controller
         $emailinfo = $contactemail ->pluck('email');
         $phoneinfo = $contactphone ->pluck('phone_number');
         
-        return view('/contact', [
+        return view('user.contact', [
             'contact' => $contactinfo,
             'phones' => $phoneinfo,
             'emails' => $emailinfo

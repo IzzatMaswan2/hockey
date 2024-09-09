@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Center</title>
     <link rel="stylesheet" href="{{ asset('css/match.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tournament.css') }}"> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
@@ -16,29 +17,30 @@
         <h1 class="tournament-heading">MATCH CENTER</h1>
     </div>
 
-
-    <div class="matchtab">
-        <div class="tabm">
-            <img src="{{asset($teamAInfo->logoURL)}}" alt="{{$teamAInfo->Name}} Logo" class="teamlogo left">
-            <div class="matchcontent">
-                <h3>{{$teamAInfo->Name}}</h3>
-                <div class="finalscore">2</div>
+    <div class="match-container">
+        <div class="matchtab">
+            <div class="tabm">
+                <img src="{{asset($teamAInfo->logoURL)}}" alt="{{$teamAInfo->Name}} Logo" class="teamlogo left">
+                <div class="matchcontent">
+                    <h3>{{$teamAInfo->Name}}</h3>
+                    <div class="finalscore">2</div>
+                </div>
             </div>
-        </div>
-        
-        <div class="vs-container">
-            <div class="vs">vs</div>
-        </div>
-
-        
-        <div class="tabm">
-            <div class="matchcontent">
-                <h3>{{$teamBInfo->Name}}</h3>
-                <div class="finalscore">1</div>
+            
+            <div class="vs-container">
+                <div class="vs">vs</div>
             </div>
-            <img src="{{asset($teamBInfo->logoURL)}}" alt="{{$teamBInfo->Name}}Logo" class="teamlogo right">
+            
+            <div class="tabm">
+                <div class="matchcontent">
+                    <h3>{{$teamBInfo->Name}}</h3>
+                    <div class="finalscore">1</div>
+                </div>
+                <img src="{{asset($teamBInfo->logoURL)}}" alt="{{$teamBInfo->Name}}Logo" class="teamlogo right">
+            </div>
         </div>
     </div>
+
 
 
     <div class="schelduleALL">

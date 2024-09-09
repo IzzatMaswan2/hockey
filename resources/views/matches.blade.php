@@ -22,7 +22,7 @@
         }
 
          /* Table border styling */
-         table, th, td {
+        table, th, td {
             border: 1px solid #007bff; /* Change the color to suit your design */
             border-collapse: collapse;
         }

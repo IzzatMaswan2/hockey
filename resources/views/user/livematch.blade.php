@@ -43,7 +43,6 @@
         <div class="vs-container">
             <div class="vs">vs</div>
         </div>
-
         
         <div class="tabm">
             <div class="matchcontent">

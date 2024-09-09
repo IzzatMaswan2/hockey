@@ -76,7 +76,7 @@ class LiveStatMatchController extends Controller
         $TournamentName = Tournament::select('Name') -> where('TournamentID', $TourID)->first();
 
         // Return view with data
-        return view('livematch', [
+        return view('user.livematch', [
             'match' => $match,
             'stats' => $stats,
             'teamAPlayers' => $teamAPlayers,

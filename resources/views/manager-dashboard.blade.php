@@ -41,9 +41,11 @@
 
                     <div>
                         <h2 style="color:#7A5DCA;"><i class="fa-solid fa-hockey-puck"></i> Manage Teams</h2>
-                        <p>Effortlessly manage team details by adding or updating team
-information. Enter the team's name, coach, roster, and other 
-relevant details.</p>
+                        <p>
+                            Effortlessly manage team details by adding or updating team
+                            information. Enter the team's name, coach, roster, and other 
+                            relevant details.
+                        </p>
                     </div>
                 </div>
             </div>

@@ -17,18 +17,15 @@
     @include('admin.sidebar')
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="min-height: 500px;">
         <div class="row">
             <h1>Contact Management</h1>
         </div>
-
         @if (session('success'))
             <p class="success-message">{{ session('success') }}</p>
         @endif
-
         <form action="{{ route('contact.update') }}" method="POST">
             @csrf
-
             <div>
                 <label for="location">Location:</label>
                 <input type="text" id="location" name="location" value="{{ old('location', $contact->location) }}">
@@ -36,7 +33,6 @@
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
-
             <div class="phone-numbers">
                 <label>Phone Numbers:</label>
                 @foreach ($phones as $phone_id => $phone)
@@ -47,7 +43,6 @@
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
-
             <div class="emails">
                 <label>Emails:</label>
                 @foreach ($emails as $email_id => $email)
@@ -58,7 +53,6 @@
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
-
             <button type="submit">Update</button>
         </form>
     </div>

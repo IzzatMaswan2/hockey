@@ -235,7 +235,6 @@
             <div class="col-3" style="background-color: #929292; width: 20%;">
                 @include('layouts.sidebar')
             </div>
-              
             <div class="col" style="width: 60%;">
                 <div class="container">
                     <div class="row">

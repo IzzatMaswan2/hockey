@@ -17,7 +17,7 @@ class LiveMatchController extends Controller
 
         
         if ($liveMatches->isEmpty()) {
-            return view('tournament', ['message' => 'No live matches found']);
+            return view('user.tournament', ['message' => 'No live matches found']);
         }
 
         $liveMatchDetails = [];
@@ -72,7 +72,7 @@ class LiveMatchController extends Controller
             
         }
 
-        return view('tournament', [
+        return view('user.tournament', [
             'liveMatchDetails' => $liveMatchDetails, 
             'liveMatches' => $liveMatches, 
             'upcomingMatchDetail' => $upcomingMatchDetail,
