@@ -16,21 +16,24 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\FormationController;
 
 
 Route::get('/contact', [MessageController::class, 'showForm']);
 /* Admin Route */
-//ARTICLE
-Route::get('/article', [ArticleController::class, 'create'])->name('admin.article.create');
-Route::post('/article', [ArticleController::class, 'store'])->name('admin.article.store');
-Route::get('/article/{id}', [ArticleController::class, 'show'])->name('admin.article.show');
-// Route::get('/forum', function () {
-//     $latestArticle = \App\Models\Article::latest()->first();
-//     if ($latestArticle) {
-//         return redirect()->route('admin.article.show', $latestArticle->id);
-//     }
-//     return redirect()->route('admin.article.create')->with('info', 'No articles available.');
-// });
+Route::get('/article', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/article', [ArticleController::class, 'store'])->name('article.store');
+
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+
+
+Route::get('/forum', function () {
+    $latestArticle = \App\Models\Article::latest()->first();
+    if ($latestArticle) {
+        return redirect()->route('article.show', $latestArticle->id);
+    }
+    return redirect()->route('article.create')->with('info', 'No articles available.');
+});
 
 Route::get('/manageuser', function () {
     return view('admin.manageuser');
@@ -91,10 +94,10 @@ Route::get('/tournaments-view', [TournamentController::class, 'index'])->name('t
 //Formation (Manager)
 
 // Route::get('/team', function () { return view('team');})->name('team');
-Route::get('/team/index', [TeamController::class, 'index'])->name('team.index');
-Route::get('/team', [TeamController::class, 'view'])->name('team.view');
-Route::get('/team', [TeamController::class, 'create'])->name('team.create');
-Route::post('/team', [TeamController::class, 'store'])->name('team.store');
+Route::get('/formation/index', [FormationController::class, 'index'])->name('formation.index');
+Route::get('/formation', [FormationController::class, 'view'])->name('formation.view');
+Route::get('/formation', [FormationController::class, 'create'])->name('formation.create');
+Route::post('/formation', [FormationController::class, 'store'])->name('formation.store');
 
 
 //Player (Manager)
@@ -115,9 +118,10 @@ Route::delete('/player/{id}', [PlayerController::class, 'destroy'])->name('playe
 //Dashboard
 Route::get('/manager-dashboard', [PlayerController::class, 'dashboard']);
 
-// Line-Up
+// Line-Up (Manager)
 Route::get('/line-up', function () {return view('line-up');});
-Route::get('/line-up', [TeamController::class, 'showLineUp'])->name('line-up');
+Route::get('/line-up', [FormationController::class, 'showLineUp'])->name('line-up');
+
 
 /*End Manager Route */
 /* User Route */
@@ -160,7 +164,9 @@ Route::get('/group', function () {
     return view('user.group');
 });
 
-Route::get('/forum', [ArticleController::class, 'latestPublished']);
+Route::get('/forum', function () {
+    return view('forum');
+});
 
 Route::get('/about', function () {
     return view('user.about');
