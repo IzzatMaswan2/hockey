@@ -113,7 +113,7 @@ Route::delete('/player/{id}', [PlayerController::class, 'destroy'])->name('playe
 
 //Manager
 //Dashboard
-Route::get('/manager-dashboard', function () {return view('manager-dashboard');});
+Route::get('/manager-dashboard', [PlayerController::class, 'dashboard']);
 
 // Line-Up
 Route::get('/line-up', function () {return view('line-up');});

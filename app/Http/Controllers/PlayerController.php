@@ -70,19 +70,18 @@ class PlayerController extends Controller
     {
         // Fetch all team from the database
         $player = Player::all();
-
+        
         // Pass the data to the view
         return view('player.index', compact('player'));
     }
 
     public function view()
-{
+    {
     // Fetch all teams from the database
     $players = Player::all();
-
     // Pass the data to the view
     return view('player-view', compact('players'));
-}
+    }
 
 
 
@@ -169,7 +168,6 @@ class PlayerController extends Controller
         // Set header offset if your CSV file has a header
         $reader->setHeaderOffset(0);
 
-        // Iterate through the CSV records
         foreach ($reader->getRecords() as $record) {
             // Validate each record
             $validator = Validator::make($record, [
@@ -186,7 +184,7 @@ class PlayerController extends Controller
 
             // Process the valid record
             Player::updateOrCreate(
-                ['id' => $record['ID']], // Assuming 'ID' is used to match existing records
+                ['id' => $record['ID']], 
                 [
                     'fullName' => $record['Full Name'],
                     'contact' => $record['Contact'],
@@ -195,22 +193,12 @@ class PlayerController extends Controller
                 ]
             );
         }
-
-        // Redirect with success message
         return redirect()->route('players.view')->with('success', 'Players imported successfully.');
     }
     public function dashboard()
     {
-        // Count the number of players
         $totalPlayers = Player::count();
-
-        
-        // Calculate total wins and total losses
-        
-        // Fetch all players for the table
         $players = Player::all();
-    
-        // Return the view with all necessary data
         return view('manager-dashboard', compact('totalPlayers','players'));
     }
 }
