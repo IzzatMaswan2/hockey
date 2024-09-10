@@ -55,7 +55,6 @@ class MatchTeamController extends Controller
 
         $TournamentName = Tournament::select('Name') -> where('TournamentID', $TourID)->first();
 
-
         return view('user.match', [
             'teamAInfo' => $teamAInfo,
             'teamBInfo' => $teamBInfo,

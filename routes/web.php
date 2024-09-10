@@ -13,6 +13,8 @@ use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\FixtureController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/contact', [MessageController::class, 'showForm']);
 
@@ -34,6 +36,16 @@ Route::get('/managematch', function () {
 //     return view('admin.page');
 // });
 
+//Dashboard Admin
+// Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Route::get('/dashboard', [GoalController::class, 'index']);
+
+Route::get('/fixtures', [FixtureController::class, 'index'])->name('fixture.index');
+Route::get('/matches', function () {
+    return view('matches');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -119,10 +131,6 @@ Route::get('/home', function () {
     return view('dashboard');
 });
 
-// Route::get('/match', function () {
-//     return view('match');
-// });
-
 Route::get('/livematch', function () {
     return view('user.livematch');
 });
@@ -130,10 +138,6 @@ Route::get('/livematch', function () {
 Route::get('/group', function () {
     return view('user.group');
 });
-
-// Route::get('/forum', function () {
-//     return view('forum');
-// });
 
 Route::get('/forum', [ArticleController::class, 'latestPublished']);
 
@@ -151,22 +155,10 @@ Route::get('/contact',  [ContactController::class, 'showcontactinfo'])
 
 Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
 
-// Route::get('/draft', function () {
-//     return view('draft');
-// });
-
 // web.php
 Route::get('/user', function () {
     return view('user.user');
 })->middleware(['auth','verified'])->name('user');
-
-// Route::get('/login2', function () {
-//     return view('login2');
-// });
-
-// Route::get('/register2', function () {
-//     return view('register2');
-// });
 
 Route::get('/fixture', function () {
     return view('fixture');
