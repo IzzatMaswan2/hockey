@@ -199,7 +199,6 @@
                                                 {{$team->team_id}}
                                             </td>
                                             <td>{{$team->points}}</td>
-                                            
                                         </tr>
                                         @endforeach
                                     </tbody>
