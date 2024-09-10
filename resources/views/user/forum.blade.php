@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
+    <title>Navbar</title>
     <!-- Link to Bootstrap CSS and your custom CSS -->
     <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/style1.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tournament.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/loginstyles.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/match.css') }}">
 
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,47 +24,51 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="js/faq.js"></script>
+    <script src="{{ asset('js/faq.js') }}"></script>
 </head>
 <body>
-    @include('components.side-nav')
-    @include('profile.partials.navbar')
+@include('components.side-nav')
+@include('profile.partials.navbar')
     <div class="top-row">
         <div class="box-forum"></div>
-        <div class="forum-header">
+        <div class="forum-header fw-bold">
             Latest News
         </div>
     </div>
-    <div class="last-update">3 minute Ago</div>
+    <div class="last-update">{{ $article->created_at->diffForHumans() }}</div>
     <div class="forum-row">
-        <div class="forum-title">{{$latestArticle->title}}</div>
-        <div class="directory-title">Most Read Today</div>
+        <div class="forum-title"> {{ $article->title }}</div>
+        <div class="directory-title">Other Recent News</div>
     </div>
     <div class="forumdivide-line"></div>
     <div class="forum-row">
         <div class="content-container">
             <div class="forum-img">
-                <img src="img/news.jpg" alt="news">
+            <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" style="height:500px;width:650px;">
+
             </div>
             <div class="summary">
-                {{$latestArticle->summary}}
-                <br>
-                <a href="#content">Discover the full story behind their challenging tour Down Under.</a>
+            {{ $article->summary }}</span>
             </div>
         </div>
+
         <div class="forum-directory">
-            <button>July Hockey News</button>
-            <button>August Hockey News</button>
-            <button>2024 Tournament Hockey News</button>
-            <button>World Hockey News</button>
+            @forelse($recentArticles as $recentArticle)
+                <button onclick="window.location.href='{{ route('article.show', $recentArticle->id) }}'">
+                    {{ $recentArticle->title }}
+                </button>
+                @empty
+                <p>No recent articles available.</p>
+            @endforelse
         </div>
+
     </div>
     
-    <div class="date-news">{{$latestArticle->date_news}}</div>
-    <div class="news-info" id="content">
-        <p>
-            {!! $latestArticle->content !!}
-        </p>
+    <div class="date-news">{{ $article->created_at->format('F j, Y') }}</div>
+    <div class="news-info">
+        <h5>{{ $article->place }}</h5>
+        
+        <p>{{ $article->content }}</p>
     </div>
 
     <div class="follow-list">Follow List</div>
@@ -69,7 +78,10 @@
         <i class="bi bi-twitter"></i>
         <i class="bi bi-youtube"></i>
     </div>
+    <br>
+    <br>
+    <br>
     
-    @include('profile.partials.footer')
+    @include('layouts.footer')
     
 </body>
