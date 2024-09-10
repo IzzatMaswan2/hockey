@@ -22,23 +22,24 @@
 .whatthesigma .lf {
     position: absolute;
     border-radius: 100px;
-    font-size: 18px;
+    font-size: 13px;
     font-weight: bold;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
 }
-.whatthesigma .gk { top: 8%; left: 28.75%; }
-.whatthesigma .rd { top: 18%; left: 18.5%; }
-.whatthesigma .ld { top: 18%; left: 40%; }
-.whatthesigma .rm { top: 29%; left: 8%; }
-.whatthesigma .cm { top: 29%; left: 28.75%; }
-.whatthesigma .lm { top: 29%; left: 51%; }
-.whatthesigma .ri { top: 41%; left: 18.5%; }
-.whatthesigma .li { top: 41%; left: 40%; }
-.whatthesigma .rf { top: 51.5%; left: 8%; }
-.whatthesigma .cf { top: 51.5%; left: 28.75%; }
-.whatthesigma .lf { top: 51.5%; left: 51%; }
+.whatthesigma .gk { top: 13%; left: 28.75%; }
+.whatthesigma .rd { top: 28%; left: 18.5%; }
+.whatthesigma .ld { top: 28%; left: 40%; }
+.whatthesigma .rm { top: 52%; left: 8%; }
+.whatthesigma .cm { top: 52%; left: 28.75%; }
+.whatthesigma .lm { top: 52%; left: 51%; }
+.whatthesigma .ri { top: 67%; left: 18.5%; }
+.whatthesigma .li { top: 67%; left: 40%; }
+.whatthesigma .rf { top: 82%; left: 8%; }
+.whatthesigma .cf { top: 82%; left: 28.75%; }
+.whatthesigma .lf { top: 82%; left: 51%; }
+
 
 button:hover {
     background-color: red;
@@ -69,9 +70,9 @@ button:hover .tooltip {
     text-align: center;
 }
 
-.bg-modal {
+.bg-modal,.bg-modal2 {
     width: 100%;
-    height: 100%;
+    height: 1020px;
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
     position: absolute;
     top: 0;
@@ -80,23 +81,28 @@ button:hover .tooltip {
     align-items: center;
     margin: 0;
     padding: 0;
-    display:none;
+    display: none;
+    z-index: 1; /* Ensure it's below the modal-content */
 }
 
-.modal-content {
+.modal-content, .modal-content2 {
     margin-left: 400px;
     margin-right: 400px;
+    margin-bottom:400px;
     height: 300px;
-    width: 10px;
+    width: 500px; /* Adjust this to fit your content */
     background-color: white; /* This is already full opacity */
     opacity: 1; /* Ensure full opacity */
     display: flex;
     justify-content: center;
     align-items: center;
-    position:relative;
+    position: relative;
+    padding: 20px; /* Optional: Add some padding */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
 }
 
-.close{
+
+.close, .close2{
     position: absolute;
     top:10px;
     right:14px;
@@ -104,43 +110,315 @@ button:hover .tooltip {
     cursor:pointer;
 }
 
-/* line-up */
+/*------------------------------------------------*/
 
+
+/* line-up */    
 .whatthe i{
     position: absolute;
-    font-size: 70px;
-    
+    font-size: 50px;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
-.whatthe .gki{top: 19%; left: 17.5%;}
-.details-gk{top: 10%; left: 20%; position:absolute;font-weight:bold;}
+.gki {
+    top: 20%; /* 28% - 5% */
+    left: 23%;
+}
+.details-gk {
+    position: absolute;
+    top: 26.5%; /* 32.5% - 5% */
+    left: 20%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-gk {
+    position: absolute;
+    top: 22.5%; /* 29.5% - 5% */
+    left: 24.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.rdi{top: 24%; left: 10%;}
-.whatthe .details-rd {top: 28.5%; left: 5%; position:absolute;font-weight:bold;}
+.rdi {
+    top: 28.5%; /* 33.5% - 5% */
+    left: 14%;
+}
+.details-rd {
+    position: absolute;
+    top: 35%; /* 38% - 5% */
+    left: 10%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-rd {
+    position: absolute;
+    top: 30%; /* 35% - 5% */
+    left: 15.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.ldi{top: 24%; left: 26%;}
-.whatthe .details-ld{top: 25%; left: 27%; position:absolute;font-weight:bold;}
+.ldi {
+    top: 28.5%; /* 33.5% - 5% */
+    left: 32%;
+}
+.details-ld {
+    position: absolute;
+    top: 35%; /* 38% - 5% */
+    left: 30%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-ld {
+    position: absolute;
+    top: 30%; /* 35% - 5% */
+    left: 33.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.rmi{top: 30%; left: 5%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.rmi {
+    top: 43%; /* 42% - 5% */
+    left: 6.5%;
+}
+.details-rm {
+    position: absolute;
+    top:49.5%; /* 46.5% - 5% */
+    left: 4.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-rm {
+    position: absolute;
+    top: 45%; /* 43.5% - 5% */
+    left: 8%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.cmi{top: 30%; left: 17.5%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.cmi {
+    top: 43%; /* 42% - 5% */
+    left: 23%;
+}
+.details-cm {
+    position: absolute;
+    top:49.5%; /* 46.5% - 5% */
+    left: 22%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-cm {
+    position: absolute;
+    top: 45%; /* 43.5% - 5% */
+    left: 24.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.lmi{top: 30%; left: 31%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.lmi {
+    top: 43%; /* 42% - 5% */
+    left: 39.5%;
+}
+.details-lm {
+    position: absolute;
+    top:49.5%; /* 46.5% - 5% */
+    left: 37.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-lm {
+    position: absolute;
+    top: 45%; /* 43.5% - 5% */
+    left: 41%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.rii{top: 35%; left: 11%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.rii {
+    top: 55%; /* 51% - 5% */
+    left: 14%;
+}
+.details-ri {
+    position: absolute;
+    top: 60.5%; /* 56% - 5% */
+    left: 10%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-ri {
+    position: absolute;
+    top: 57%; /* 52.5% - 5% */
+    left: 15.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.lii{top: 35%; left: 24.5%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.lii {
+    top: 55%; /* 51% - 5% */
+    left: 32%;
+}
+.details-li {
+    position: absolute;
+    top: 60.5%; /* 56% - 5% */
+    left: 30%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-li {
+    position: absolute;
+    top: 57%; /* 52.5% - 5% */
+    left: 33.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.rfi{top: 40.5%; left: 5%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.rfi {
+    top: 68%; /* 60% - 5% */
+    left: 6.5%;
+}
+.details-rf {
+    position: absolute;
+    top: 60.5%; /* 65.5% - 5% */
+    left: 4.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-rf {
+    position: absolute;
+    top: 57%; /* 62% - 5% */
+    left: 8%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.cfi{top: 40.5%; left: 17.5%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.cfi {
+    top: 68%; /* 60% - 5% */
+    left: 23%;
+}
+.details-cf {
+    position: absolute;
+    top: 60.5%; /* 65.5% - 5% */
+    left: 20%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-cf {
+    position: absolute;
+    top: 57%; /* 62% - 5% */
+    left: 24.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
 
-.lfi{top: 40.5%; left: 31%;}
-.whatthe .details-gk{top: 23%; left: 13%; position:absolute;font-weight:bold;}
+.lfi {
+    top: 68%; /* 60% - 5% */
+    left: 39.5%;
+}
+.details-lf {
+    position: absolute;
+    top: 60.5%; /* 65.5% - 5% */
+    left: 37.5%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+}
+.jn-lf {
+    position: absolute;
+    top: 57%; /* 62% - 5% */
+    left: 41%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: -1.2px 0 black, 0 1.2px black, 1.2px 0 black, 0 -1.2px black;
+}
+
+
+
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+
+    font-size: 16px;
+}
+
+.tab-btn:hover {
+    background-color: #5D3CB8;
+    padding: 10px 20px;
+
+   
+
+}
+
+.tab-btn.active {
+    background-color: #5D3CB8;
+    color: white;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+.color-picker-container {
+    display: flex;
+    gap: 20px; /* Space between the two color picker sections */
+}
+
+.color-picker-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and input */
+}
