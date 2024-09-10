@@ -11,10 +11,12 @@ use League\Csv\Reader;
 
 
 class PlayerController extends Controller
+
 {
      //-----------------------------------------------------------------------------------------edit-------------------
 
 
+     
     public function edit($id)
     {
         // Find the player by ID
@@ -29,6 +31,7 @@ class PlayerController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'fullName' => 'required|string|max:255',
+            'displayName' => 'required|string|max:255',
             'contact' => 'required|string|max:255',
             'jerseyNumber' => 'required|integer',
             'position' => 'required|string|max:255',
@@ -70,18 +73,19 @@ class PlayerController extends Controller
     {
         // Fetch all team from the database
         $player = Player::all();
-        
+
         // Pass the data to the view
         return view('player.index', compact('player'));
     }
 
     public function view()
-    {
+{
     // Fetch all teams from the database
     $players = Player::all();
+
     // Pass the data to the view
     return view('player-view', compact('players'));
-    }
+}
 
 
 
@@ -90,6 +94,7 @@ class PlayerController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'fullName' => 'required|string|max:255', 
+            'displayName' => 'required|string|max:255',
             'contact' => 'required|string|max:255', 
             'jerseyNumber' => 'required|integer|max:255', 
             'position' => 'required|string|max:255',  
@@ -117,7 +122,7 @@ class PlayerController extends Controller
             "Content-Disposition" => "attachment; filename=\"$fileName\"",
         ];
 
-        $columns = ['ID', 'Full Name', 'Contact', 'Jersey Number', 'Position'];
+        $columns = ['ID', 'Full Name', 'Display Name', 'Contact', 'Jersey Number', 'Position'];
 
         $callback = function() use ($players, $columns) {
             $file = fopen('php://output', 'w');
@@ -127,6 +132,7 @@ class PlayerController extends Controller
                 $row = [
                     $player->id,
                     $player->fullName,
+                    $player->displayName,
                     $player->contact,
                     $player->jerseyNumber,
                     $player->position,
@@ -168,11 +174,13 @@ class PlayerController extends Controller
         // Set header offset if your CSV file has a header
         $reader->setHeaderOffset(0);
 
+        // Iterate through the CSV records
         foreach ($reader->getRecords() as $record) {
             // Validate each record
             $validator = Validator::make($record, [
                 'ID' => 'required|integer',
                 'Full Name' => 'required|string',
+                'Display Name' => 'required|string',
                 'Contact' => 'required|string',
                 'Jersey Number' => 'required|integer',
                 'Position' => 'required|string',
@@ -184,21 +192,35 @@ class PlayerController extends Controller
 
             // Process the valid record
             Player::updateOrCreate(
-                ['id' => $record['ID']], 
+                ['id' => $record['ID']], // Assuming 'ID' is used to match existing records
                 [
                     'fullName' => $record['Full Name'],
+                    'displayName' => $record['Display Name'],
                     'contact' => $record['Contact'],
                     'jerseyNumber' => $record['Jersey Number'],
                     'position' => $record['Position'],
                 ]
             );
         }
+
+        // Redirect with success message
         return redirect()->route('players.view')->with('success', 'Players imported successfully.');
     }
     public function dashboard()
     {
+        // Count the number of players
         $totalPlayers = Player::count();
+
+        
+        // Calculate total wins and total losses
+        
+        // Fetch all players for the table
         $players = Player::all();
+    
+        // Return the view with all necessary data
         return view('manager-dashboard', compact('totalPlayers','players'));
     }
+    
+    
+
 }
