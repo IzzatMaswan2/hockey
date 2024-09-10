@@ -1,21 +1,17 @@
 <?php
 
+// app/Http/Controllers/ArticleController.php
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
-use App\Models\Article; 
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    public function index()
-    {
-        $articles = Article::all(); 
-        return view('forum', compact('articles'));
-    }
-
     public function create()
     {
-        return view('admin.article');
+        return view('article');
     }
 
     public function store(Request $request)
@@ -42,28 +38,16 @@ class ArticleController extends Controller
             'summary' => $request->input('summary'),
             'content' => $request->input('content'),
         ]);
-        return redirect()->route('admin.article.create')->with('success', 'Article created successfully!');
+
+        return redirect()->route('article.create')->with('success', 'Article created successfully!');
     }
+
+
     public function show($id)
-    {
-        $article = Article::findOrFail($id);
-        $recentArticles = Article::latest()->take(5)->get();
-        
-        return view('forum', compact('article', 'recentArticles'));
-    }
-    public function latestPublished()
-    {
-        $latestArticle = Article::where('status', 'published')
-            ->latest('date_news') 
-            ->first(); 
-            
-
-        if (!$latestArticle) {
-            return response()->json(['message' => 'No published articles found.'], 404);
-        }
-
-        return view('user.forum', [
-            'latestArticle' => $latestArticle
-        ]);
-    }
+{
+    $article = Article::findOrFail($id);
+    $recentArticles = Article::latest()->take(5)->get();
+    
+    return view('forum', compact('article', 'recentArticles'));
+}
 }
