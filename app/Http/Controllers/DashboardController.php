@@ -39,7 +39,6 @@ class DashboardController extends Controller
 
         $group = Group::all();
 
-    
         return view('dashboard', compact('total_player', 'teamsCount', 'managersCount', 'goalsScored', 'penaltyCorner','totalRedCards', 'totalYellowCards', 'totalGreenCards', 'wins', 'losses', 'draws','group'));
     }
     
