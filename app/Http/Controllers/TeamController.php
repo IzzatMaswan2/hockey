@@ -41,7 +41,7 @@ class TeamController extends Controller
     {
 
         // Fetch all teams from the database
-        $teams = Team::all();
+        $formations = Team::all();
 
         // Pass the data to the view
         return view('team', compact('teams'));
@@ -50,9 +50,9 @@ class TeamController extends Controller
     public function showLineUp()
     {
         // Fetch all teams from the database
-        $teams = Team::all();
+        $formations = Team::all();
 
         // Pass the teams data to the 'line-up' view
-        return view('line-up', compact('teams'));
+        return view('line-up', compact('formations'));
     }
 }
