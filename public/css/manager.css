@@ -6,7 +6,6 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Container for centering and styling main content */
 .container {
     max-width: 800px;
     margin: 50px auto;
@@ -16,7 +15,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header styles */
 .header {
     background-color: #333;
     color: #f1f1f1;
@@ -76,21 +74,21 @@ body {
     background-color: none; 
 }
 
-/* Styling for dropdown options */
+
 .dropdown-option {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 20px; 
     background-color: #fff;
-    margin-left: 10px; /* Space between label and dropdown */
-    flex: 1; /* Makes dropdown fill available space */
+    margin-left: 10px; 
+    flex: 1;
 }
 
 .dropdown-option option {
-    text-align: center; /* Center text in dropdown options */
+    text-align: center; 
 }
 
-/* Status match dropdown styling */
+
 .status-match {
     display: flex;
     align-items: center;
@@ -101,13 +99,13 @@ body {
     text-align: center;
 }
 
-/* Styling for status dropdown */
+
 .status-match select {
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 20px; /* Rounded corners */
+    border-radius: 20px;
     background-color: #fff;
-    flex: 1; /* Makes dropdown fill available space */
+    flex: 1; 
 }
 
 .score-stated {
@@ -153,9 +151,9 @@ body {
 
 .score-container {
     display: flex;
-    align-items: center; /* Center align items vertically */
-    gap: 10px; /* Space between score and input */
-    width: 100%; /* Full width of parent container */
+    align-items: center; 
+    gap: 10px; 
+    width: 100%; 
 }
 
 .score-A, .score-B {
@@ -164,15 +162,15 @@ body {
 }
 
 .score-form {
-    flex: 1; /* Allow form to take remaining space */
+    flex: 1;
 }
 
 .score-input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100%; /* Full width of the parent container */
-    margin-top: 10px; /* Space above input field */
+    width: 100%; 
+    margin-top: 10px; 
 }
 
 .scoring-player {
@@ -183,10 +181,9 @@ body {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100%; /* Full width of the parent container */
+    width: 100%; 
 }
 
-/* Update button styling */
 .update-btn {
     display: absolute;
     bottom: 0;
@@ -205,14 +202,13 @@ body {
     background-color: #0056b3;
 }
 
-/* Team ranking section styling */
 .Team-Ranking {
     display: flex;
     align-items: center;
-    margin-right: 20px; /* Space between team ranking and other elements */
+    margin-right: 20px;
 }
 
-/* Group dropdown styling */
+
 .group-dropdown,
 .team-dropdown {
     padding: 8px;
@@ -313,14 +309,11 @@ button:hover {
     cursor: pointer;
 }
 
-
 #main {
     transition: margin-left 0.3s; /* Smooth transition for content adjustment */
     margin-left: 0; /* Start with no margin */
 }
 
-
-/* Media query for small screens */
 @media screen and (max-height: 450px) {
     .sidenav-manager {
         padding-top: 15px;
@@ -330,4 +323,3 @@ button:hover {
         font-size: 18px;
     }
 }
-        
