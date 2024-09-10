@@ -19,12 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'role',
         'email',
+        'role',
         'teamName',
-        'Img_User',
         'country',
         'password',
+        
     ];
 
     /**
@@ -46,4 +46,3 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
-
