@@ -3,104 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/loginstyles.css">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{{ asset('css/loginstyles.css') }}">
+    <link href='https://unpkg.com/boxicons/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        body {
+            background: url('/img/logreg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
-    @include('components.side-nav')
-    @include('profile.partials.navbar')
-    <div class="login-bg">
-        <div class="regis-wrapper">
-            
-            <div class="form-box register">
-                <div class="logores-row">
-                    <img src="{{asset('img/Logo Latest 1.png')}}" alt="HokiArenaLogo">
-                </div>
-                <h2>REGISTRATION</h2>
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
-
-                    <!-- First Row: Name and Email -->
-                    <div class="row">
-                        <div class="input-box">
-                            <span class="icon"><i class="bi bi-person"></i></span>
-                            <x-text-input id="regis-name" class="regis-name" type="text" name="name" :value="old('name')" required autocomplete="name" placeholder="Name" />
-                            <x-input-error :messages="$errors->get('name')" />
-                        </div>
-                        <div class="input-box">
-                            <span class="icon"><i class="bi bi-envelope"></i></span>
-                            <x-text-input id="email" class="regis-email" type="email" name="email" :value="old('email')" required autocomplete="email" placeholder="Email"/>
-                            <x-input-error :messages="$errors->get('email')" />
-                        </div>
-                    </div>
-            
-                    <!-- Second Row: Team Name and Country -->
-                    <div class="row">
-                        <div class="input-box">
-                            <span class="icon"><i class="bi bi-people"></i></span>
-                            <x-text-input id="teamName" class="regis-team" type="text" name="teamName" :value="old('teamName')" required autocomplete="teamName" placeholder="Team Name" />
-                            <x-input-error :messages="$errors->get('teamName')" />
-                        </div>
-                        <div class="input-box">
-                            <span class="icon"><i class="bi bi-geo-alt"></i></span>
-                            <x-select
-                                id="country"
-                                name="country"
-                                :value="old('country')"
-                                required
-                                autocomplete="country"
-                                class="regis-country"
-                            >
-                                <option value="" disabled selected hidden>Select a country</option>
-                                <option value="Malaysia" {{ old('country') == 'Malaysia' ? 'selected' : '' }}>Malaysia</option>
-                                <option value="USA" {{ old('country') == 'USA' ? 'selected' : '' }}>United States</option>
-                                <option value="Canada" {{ old('country') == 'Canada' ? 'selected' : '' }}>Canada</option>
-                                <option value="Mexico" {{ old('country') == 'Mexico' ? 'selected' : '' }}>Mexico</option>
-                            </x-select>
-                            <x-input-error :messages="$errors->get('country')" />
-                        </div>
-                    </div>
-            
-                    <!-- Third Row: Password -->
-                    <div class="row">
-                        <div class="input-box">
-                            <span class="icon"><i class="bi bi-lock"></i></span>
-                            <x-text-input id="password" class="regis-password" type="password" name="password" required autocomplete="new-password" placeholder="Password" />
-                            <x-input-error :messages="$errors->get('password')" />
-                        </div>
-                    </div>
-            
-                    <!-- Fourth Row: Confirm Password -->
-                    <div class="row">
-                        <div class="input-box">
-                            <span class="icon"><i id="confirm-icon" class="bi bi-check2-circle"></i></span>
-                            <x-text-input id="password_confirmation" class="regis-password-confirm" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password" />
-                            <x-input-error :messages="$errors->get('password_confirmation')" />
-                        </div>
-                    </div>
-            
-                    <!-- Fifth Row: Already Have an Account -->
-                    <div class="row">
-                        <div class="flex items-center justify-center w-full mt-4">
-                            <a class="login-register" href="{{ route('login') }}">
-                                {{ __('Already have an Account?') }}
-                            </a>
-                        </div>
-                    </div>
-            
-                    <!-- Sixth Row: Register Button -->
-                    <div class="row">
-                        <div class="flex items-center justify-center w-full mt-4">
-                            <x-primary-button class="btn">
-                                {{ __('Register') }}
-                            </x-primary-button>
-                        </div>
-                    </div>
-                </form>
+    <div class="register-container">
+        <div class="form-box">
+            <div class="logo">
+                <img src="{{ asset('img/Logo Latest 1.png') }}" alt="HokiArenaLogo" style="height:90px;">
             </div>
-            
-        </div>    
-    </div>
-    @include('profile.partials.footer')
-</body>
+            <h2 class="form-title" style="color: white;font-weight:bold;">REGISTRATION</h2>
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
+                <!-- Name -->
+                <div class="input-group">
+                    <label for="name">
+                        <i class='bx bx-user' style="color: white;font-weight:bold;"></i> Name
+                    </label>
+                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
+                    <x-input-error :messages="$errors->get('name')" class="error" />
+                </div>
+
+                <!-- Email Address -->
+                <div class="input-group">
+                    <label for="email">
+                        <i class='bx bx-envelope' style="color: white;font-weight:bold;"></i> Email Address
+                    </label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username">
+                    <x-input-error :messages="$errors->get('email')" class="error" />
+                </div>
+
+                <!-- Role -->
+                <div class="input-group">
+                    <label for="role">
+                        <i class='bx bx-user-circle' style="color: white;font-weight:bold;"></i> Role
+                    </label>
+                    <select id="role" name="role" required autocomplete="role" onchange="toggleFields()">
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Player">Player</option>
+                    </select>
+                    <x-input-error :messages="$errors->get('role')" class="error" />
+                </div>
+
+                <!-- Team Name and Country -->
+                <div id="team-fields" class="input-group" style="display: none;">
+                    <label for="teamName">
+                        <i class='bx bx-trophy' style="color: white;font-weight:bold;"></i> Team Name
+                    </label>
+                    <input id="teamName" type="text" name="teamName" value="{{ old('teamName') }}" autofocus autocomplete="teamName">
+                    <x-input-error :messages="$errors->get('teamName')" class="error" />
+                </div>
+
+                <div id="country-fields" class="input-group" style="display: none;">
+                    <label for="country">
+                        <i class='bx bx-globe' style="color: white;font-weight:bold;"></i> Country
+                    </label>
+                    <input id="country" type="text" name="country" value="{{ old('country') }}" autofocus autocomplete="country">
+                    <x-input-error :messages="$errors->get('country')" class="error" />
+                </div>
+
+                <!-- Password -->
+                <div class="input-group">
+                    <label for="password">
+                        <i class='bx bx-lock' style="color: white;font-weight:bold;"></i> Password
+                    </label>
+                    <input id="password" type="password" name="password" required autocomplete="new-password">
+                    <x-input-error :messages="$errors->get('password')" class="error" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="input-group">
+                    <label for="password_confirmation">
+                        <i class='bx bx-lock-alt' style="color: white;font-weight:bold;"></i> Confirm Password
+                    </label>
+                    <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
+                    <x-input-error :messages="$errors->get('password_confirmation')" class="error" />
+                </div>
+
+                <div class="form-actions">
+                    <a href="{{ route('login') }}" style="color:white;font-size:12px">Already have an Account?</a>
+                </div>
+ 
+                <div class="row">
+                    <div class="flex items-center justify-center w-full mt-4" style="color:white;font-weight:bold">
+                        <x-primary-button class="btn">
+                            {{ __('Register') }}
+                        </x-primary-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleFields() {
+            const role = document.getElementById('role').value;
+            const teamFields = document.getElementById('team-fields');
+            const countryFields = document.getElementById('country-fields');
+            
+            if (role === 'Admin') {
+                teamFields.style.display = 'none';
+                countryFields.style.display = 'none';
+            } else {
+                teamFields.style.display = 'block';
+                countryFields.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
