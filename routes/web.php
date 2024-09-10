@@ -21,16 +21,16 @@ use App\Http\Controllers\RegisteredUserController;
 Route::get('/contact', [MessageController::class, 'showForm']);
 /* Admin Route */
 //ARTICLE
-Route::get('/article', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article', [ArticleController::class, 'store'])->name('article.store');
-Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
-Route::get('/forum', function () {
-    $latestArticle = \App\Models\Article::latest()->first();
-    if ($latestArticle) {
-        return redirect()->route('article.show', $latestArticle->id);
-    }
-    return redirect()->route('article.create')->with('info', 'No articles available.');
-});
+Route::get('/article', [ArticleController::class, 'create'])->name('admin.article.create');
+Route::post('/article', [ArticleController::class, 'store'])->name('admin.article.store');
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('admin.article.show');
+// Route::get('/forum', function () {
+//     $latestArticle = \App\Models\Article::latest()->first();
+//     if ($latestArticle) {
+//         return redirect()->route('admin.article.show', $latestArticle->id);
+//     }
+//     return redirect()->route('admin.article.create')->with('info', 'No articles available.');
+// });
 
 Route::get('/manageuser', function () {
     return view('admin.manageuser');
@@ -42,7 +42,7 @@ Route::get('/managematch', function () {
 
 //Dashboard Admin
 // Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Route::get('/dashboard', [GoalController::class, 'index']);
 
@@ -51,9 +51,9 @@ Route::get('/matches', function () {
     return view('matches');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::post('/contacts', [ContactController::class, 'store']);
 Route::get('/contacts/{id}', [ContactController::class, 'show']);

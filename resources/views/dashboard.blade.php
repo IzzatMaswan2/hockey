@@ -294,8 +294,6 @@
                             Date: August 10, 2024<br>
                             Venue: National Arena, City
                         </p>
-
-                        
                     </div>
                 </div>
             </div>

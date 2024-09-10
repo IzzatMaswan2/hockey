@@ -15,7 +15,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('article');
+        return view('admin.article');
     }
 
     public function store(Request $request)
@@ -42,7 +42,7 @@ class ArticleController extends Controller
             'summary' => $request->input('summary'),
             'content' => $request->input('content'),
         ]);
-        return redirect()->route('article.create')->with('success', 'Article created successfully!');
+        return redirect()->route('admin.article.create')->with('success', 'Article created successfully!');
     }
     public function show($id)
     {

@@ -24,13 +24,12 @@ class TeamController extends Controller
         // Find the selected player
         $player = Player::find($validatedData['player_id']);
 
-        // Create a new Team record
         Team::create([
             'fullName' => $player->fullName,
             'contact' => $player->contact,
             'jerseyNumber' => $player->jerseyNumber,
             'position' => $player->position,
-            'formationPosition' => $validatedData['formationPosition'], // Add this line
+            'formationPosition' => $validatedData['formationPosition'], 
         ]);
 
         $players = Player::all();
