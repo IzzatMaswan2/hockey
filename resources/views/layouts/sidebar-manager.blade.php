@@ -70,7 +70,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/team">
+            <a class="nav-link" href="/formation">
                 <i class="fa-solid fa-user-check"></i> Formation
             </a>
         </li>
