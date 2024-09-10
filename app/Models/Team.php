@@ -10,8 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 class Team extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    // Specify the table associated with the model if not the plural form of the model name
     protected $table = 'teams'; // Use the name of your existing table
 
     // Specify the primary key if it's not the default 'id'
@@ -23,15 +21,11 @@ class Team extends Model
     // Specify the fillable attributes
     protected $fillable = [
         'Name', 
-        'fullName',
         'contact',
         'country',
         'LogoURL', 
         'Description', 
         'CoachName',
-        'jerseyNumber',
-        'position',
-        'formationPosition',
         'total_player'
     ]; 
     // Adjust the fillable attributes based on your table columns

@@ -9,7 +9,7 @@ class Tournament extends Model
 {
     use HasFactory;
 
-    protected $table = 'tournament';
+    protected $table = 'tournaments';
     protected $primaryKey = 'TournamentID';
     public $timestamps = false; // Set to true if timestamps are used
     protected $fillable = ['Name', 'StartDate', 'EndDate', 'Location'];

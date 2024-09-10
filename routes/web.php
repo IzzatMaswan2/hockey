@@ -17,6 +17,7 @@ use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisteredUserController;
 
+
 Route::get('/contact', [MessageController::class, 'showForm']);
 
 

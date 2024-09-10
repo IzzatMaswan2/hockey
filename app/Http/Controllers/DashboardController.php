@@ -14,8 +14,8 @@ class DashboardController extends Controller
 {
     public function index()
     {        
-        // Sum the total number of players across all teams
-        $total_player = Team::sum('total_player');   
+        
+        $total_player = Team::sum('total_player');
         
         // Count the number of teams
         $teamsCount = Team::count();

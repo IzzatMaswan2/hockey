@@ -9,7 +9,7 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $table = 'player';
+    protected $table = 'players';
     protected $primaryKey = 'PlayerID';
     public $timestamps = false; // Set to true if timestamps are used
     protected $fillable = [
