@@ -15,6 +15,16 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+
+    public function listUsers(): View
+    {
+        
+         // Fetch users with the role of 'Manager'
+         $users = User::where('role', 'Manager')->get();
+    
+         // Return the view and pass the users data
+         return view('admin.manageuser', ['users' => $users]);
+    }
     /**
      * Display the registration view.
      */
@@ -29,27 +39,39 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'teamName' => ['required', 'string', 'max:255', 'unique:'.User::class ],
-            'country'=>['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    // Add validation rules
+    $rules = [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'role' => ['required', 'string', 'max:255'],
+        'teamName' => ['nullable', 'string', 'max:255'], // Team Name should be nullable
+        'country' => ['nullable', 'string', 'max:255'],  // Country should be nullable
+    ];
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'teamName' => $request->teamName,
-            'country'=> $request->country,
-            'password' => Hash::make($request->password),
-        ]);
+    // Validate the request
+    $request->validate($rules);
 
-        event(new Registered($user));
+    // Create a new user
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'teamName' => $request->role !== 'Admin' ? $request->teamName : null,
+        'country' => $request->role !== 'Admin' ? $request->country : null,
+        'role' => $request->role,
+        'password' => Hash::make($request->password),
+    ]);
 
-        Auth::login($user);
+    // Fire the Registered event
+    event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+    // Log the user in
+    Auth::login($user);
+
+    // Redirect to home
+    return redirect(RouteServiceProvider::HOME);
+}
+
+
 }

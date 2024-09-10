@@ -10,9 +10,10 @@ class Tournament extends Model
     use HasFactory;
 
     protected $table = 'tournaments';
-    protected $primaryKey = 'TournamentID';
-    public $timestamps = false; // Set to true if timestamps are used
-    protected $fillable = ['Name', 'StartDate', 'EndDate', 'Location'];
+
+    protected $fillable = ['id','name','no_team','no_group','category','start_date','end_date','start_time','end_time','venue_id'];
+
+
 
     public function groups()
     {

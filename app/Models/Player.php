@@ -34,8 +34,8 @@ class Player extends Model
         return $this->hasMany(PlayerStatMatch::class, 'PlayerID', 'PlayerID');
     }
 
-    public function teams()
+    public function formations()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Formation::class);
     }
 }
