@@ -10,11 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="{{ asset('css/formation.css') }}" rel="stylesheet">
 </head>
 
 <body>
-    @include('layouts.navbar')
+    @include('profile.partials.navbar')
 
     <div class="container-fluid" style="height: 90%; padding: 0;">
         <div class="row">
@@ -75,7 +74,7 @@
                         <tbody>
                             @foreach($players as $player)
                             <tr>
-                                <td>{{ $player->fullName ?? $player->Name }}</td>
+                                <td>{{ $player->fullName }}</td>
                                 <td>{{ $player->jerseyNumber }}</td>
                                 <td>{{ $player->wins ?? 0 }}</td>
                                 <td>{{ $player->losses ?? 0 }}</td>
