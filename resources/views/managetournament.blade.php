@@ -47,6 +47,7 @@
         }
         .category-buttons .btn {
             width: 200px;
+            padding: 5px 0px 5px 0px;
             background-color: #39e75f;
             color: black;
             border: 1px solid #39e75f;
@@ -117,7 +118,7 @@
             <div class="col-10">
                 <div class="container my-5">
                     <div class="section">
-                        <h4 style="color:#7A5DCA;font-weight:bold;">CREATE NEW TOURNAMENT</h4>
+                        <h2 style="color:#7A5DCA;font-weight:bold;">CREATE NEW TOURNAMENT</h2>
                         <form method="POST" action="{{ route('managetournament.store') }}">
                             @csrf
                             <div class="row g-3">
@@ -169,13 +170,53 @@
 
                                 <!-- Hidden category input field -->
                                 <input type="hidden" id="category" name="category">
-                            </div>
+                            </div><br><br>
 
-                            <div class="mt-3">
-                                <button type="submit" class="btn btn-primary">Create Event</button>
-                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+    <button type="submit" class="btn btn-primary" style="font-size:22px;background-color:#62096e;color:white;font-weight:bold;border:1px solid #62096e">
+        Create Tournament
+    </button>
+</div>
+
                         </form>
+                        <br><hr style="margin: 0 120px;">
+<br>
+<br>
+                        <div class="section">
+                        <h2 style="color:#7A5DCA;font-weight:bold;">TOURNAMENTS LIST</h2>
+                        <div class="table-container">
+                            <table class="table table-striped">
+                                <thead style="border:1px black solid">
+                                    <tr style="border:1px black solid">
+                                        <th>Name</th>
+                                        <th>Teams</th>
+                                        <th>Groups</th>
+                                        <th>Category</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Venue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($tournaments as $tournament)
+                                        <tr>
+                                            <td>{{ $tournament->name }}</td>
+                                            <td>{{ $tournament->no_team }}</td>
+                                            <td>{{ $tournament->no_group }}</td>
+                                            <td>{{ $tournament->category }}</td>
+                                            <td>{{ $tournament->start_date }}</td>
+                                            <td>{{ $tournament->end_date }}</td>
+                                            <td>{{ $tournament->venue_id }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    </div>
+
+                     <!-- Tournaments Table Section -->
+                     
                 </div>
             </div>
         </div>
