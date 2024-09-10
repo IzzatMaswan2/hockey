@@ -19,8 +19,6 @@ use App\Http\Controllers\RegisteredUserController;
 
 
 Route::get('/contact', [MessageController::class, 'showForm']);
-
-
 /* Admin Route */
 //ARTICLE
 Route::get('/article', [ArticleController::class, 'create'])->name('article.create');
@@ -140,10 +138,8 @@ Route::get('/match/{matchGroupId}' , [MatchTeamController::class, 'showMatchDeta
 
 Route::get('/live-matches', [LiveMatchController::class, 'showLiveMatch'])
     ->name('live-matches');
-
 Route::get('/tournament',  [LiveMatchController::class, 'showLiveMatch'])
     ->name('live-matches');
-
 Route::get('/livematch', function () {
     return view('livematch');
 });
@@ -166,7 +162,6 @@ Route::get('/group', function () {
 
 Route::get('/forum', [ArticleController::class, 'latestPublished']);
 
-
 Route::get('/about', function () {
     return view('user.about');
 });
@@ -180,7 +175,6 @@ Route::get('/contact',  [ContactController::class, 'showcontactinfo'])
 
 Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
 
-// web.php
 Route::get('/user', function () {
     return view('user.user');
 })->middleware(['auth','verified'])->name('user');
@@ -188,30 +182,6 @@ Route::get('/user', function () {
 Route::get('/fixture', function () {
     return view('fixture');
 });
-
-/*End User Route */
-
-// login controller 
-
-// Admin Dashboard
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified', 'role:1'])->name('dashboard');
-
-// // Manager Dashboard
-// Route::get('/manager-dashboard', function () {
-//     return view('manager-dashboard');
-// })->middleware(['auth', 'role:2']);
-
-// // User Homepage
-// Route::get('/', function () {
-//     return view('home'); 
-// });
-
-// end login 
-
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
