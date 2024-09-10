@@ -13,15 +13,43 @@ class ArticleController extends Controller
         return view('forum', compact('articles'));
     }
 
-    public function show($id)
+    public function create()
     {
-        $article = Article::find($id);
-        
-        if (!$article) {
-            return abort(404);
+        return view('article');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'place' => 'required|string|max:10000',
+            'summary' => 'required|string|max:10000000',
+            'content' => 'required|string',
+        ]);
+
+        // Handle the file upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
         }
 
-        return response()->json($article);
+        // Create a new article
+        Article::create([
+            'title' => $request->input('title'),
+            'image' => $imagePath,
+            'place' => $request->input('place'),
+            'summary' => $request->input('summary'),
+            'content' => $request->input('content'),
+        ]);
+        return redirect()->route('article.create')->with('success', 'Article created successfully!');
+    }
+    public function show($id)
+    {
+        $article = Article::findOrFail($id);
+        $recentArticles = Article::latest()->take(5)->get();
+        
+        return view('forum', compact('article', 'recentArticles'));
     }
     public function latestPublished()
     {

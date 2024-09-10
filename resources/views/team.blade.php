@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Team</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -55,6 +54,7 @@
                     {{ session('success') }}
                 </div>
             @endif
+
             <form id="teamForm" action="{{ route('team.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -69,7 +69,9 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <input type="hidden" id="formationPosition" name="formationPosition" value="">
+
                 <button type="submit" class="btn btn-primary" style="background-color:#5D3CB8;font-weight:bold;color:white;border:#5D3CB8 1px solid;">Add Player to Team</button>
             </form>
         </div>

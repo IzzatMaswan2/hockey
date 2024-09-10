@@ -18,7 +18,6 @@ class Goal extends Model
         'scored_goals',
         'penalty_corner',
         'goal_time'
-                
         ];
 
 }

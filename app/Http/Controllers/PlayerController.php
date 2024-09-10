@@ -199,4 +199,18 @@ class PlayerController extends Controller
         // Redirect with success message
         return redirect()->route('players.view')->with('success', 'Players imported successfully.');
     }
+    public function dashboard()
+    {
+        // Count the number of players
+        $totalPlayers = Player::count();
+
+        
+        // Calculate total wins and total losses
+        
+        // Fetch all players for the table
+        $players = Player::all();
+    
+        // Return the view with all necessary data
+        return view('manager-dashboard', compact('totalPlayers','players'));
+    }
 }

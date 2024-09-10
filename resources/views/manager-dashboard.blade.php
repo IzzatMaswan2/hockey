@@ -2,19 +2,18 @@
 <html lang="en">
 
 <head>
-    <title>Manager Dashboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/771de58f02.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-    @include('layouts.navbar')
+    @include('profile.partials.navbar')
 
     <div class="container-fluid" style="height: 90%; padding: 0;">
         <div class="row">
@@ -25,28 +24,64 @@
             <div class="col-9 mt-5">
                 <!-- Welcome Message -->
                 <div class="text-center mb-4">
-                    <h1 style="color:#280137; font-weight:bold;">WELCOME TO YOUR DASHBOARD</h1>
+                    <h1 style="color:#280137; font-weight:bold;">Welcome, manager {{ Auth::user()->name }}!</h1>
                 </div>
-                <br>
-                <br>
-                <!-- Content Sections -->
-                <div class="container text-center">
-                    <div class="mb-4">
-                        <h2 style="color:#7A5DCA;"><i  class="fas fa-users"></i> Manage Players</h2>
-                        <p>Easily add new players to the database by entering their details. 
-                        ill in the player's information.</p>
-                    </div>
-                    <br>
-                    <br>
 
-                    <div>
-                        <h2 style="color:#7A5DCA;"><i class="fa-solid fa-hockey-puck"></i> Manage Teams</h2>
-                        <p>
-                            Effortlessly manage team details by adding or updating team
-                            information. Enter the team's name, coach, roster, and other 
-                            relevant details.
-                        </p>
+                <!-- Dashboard Stats -->
+                <div class="row mb-4">
+                    <!-- Box 1: Total Players -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-white bg-primary">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Total Players</h5>
+                                <p class="card-text">{{ $totalPlayers ?? 0 }}</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Box 2: Wins -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-white bg-success">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Total Wins</h5>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Box 3: Losses -->
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-white bg-danger">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Total Losses</h5>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Players Table -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Player Name</th>
+                                <th>Jersey Number</th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($players as $player)
+                            <tr>
+                                <td>{{ $player->fullName }}</td>
+                                <td>{{ $player->jerseyNumber }}</td>
+                                <td>{{ $player->wins ?? 0 }}</td>
+                                <td>{{ $player->losses ?? 0 }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -33,7 +33,6 @@ class FixtureController extends Controller
         // Redirect with success message
         return redirect()->route('fixture')->with('success', 'Fixture created successfully!');
     }
-
     public function index()
     {
         // Fetch all fixtures from the database

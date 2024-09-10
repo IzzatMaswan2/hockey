@@ -12,7 +12,17 @@ class Player extends Model
     protected $table = 'player';
     protected $primaryKey = 'PlayerID';
     public $timestamps = false; // Set to true if timestamps are used
-    protected $fillable = ['Name', 'TeamID', 'field_status', 'Position', 'Birthdate', 'Nationality'];
+    protected $fillable = [
+        'Name',
+        'fullName',
+        'contact',
+        'jerseyNumber', 
+        'TeamID', 
+        'field_status', 
+        'Position', 
+        'Birthdate', 
+        'Nationality'
+    ];
 
     public function team()
     {
@@ -22,5 +32,10 @@ class Player extends Model
     public function playerStatMatches()
     {
         return $this->hasMany(PlayerStatMatch::class, 'PlayerID', 'PlayerID');
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
     }
 }

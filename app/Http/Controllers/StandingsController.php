@@ -53,6 +53,5 @@ class StandingsController extends Controller
         // Pass the group data to the view
         return view('standings.show', compact('group'));
     }
-   
 }
 

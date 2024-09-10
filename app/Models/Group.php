@@ -12,7 +12,22 @@ class Group extends Model
     protected $table = 'group';
     protected $primaryKey = 'GroupID';
     public $timestamps = false; // Set to true if timestamps are used
-    protected $fillable = ['TournamentID', 'Name', 'Description'];
+    protected $fillable = [
+        'TournamentID', 
+        'Name', 
+        'group_id',
+        'team_id', 
+        'played',
+        'wins',
+        'draws',
+        'loses',
+        'gf',
+        'ga',
+        'gd',
+        'points',
+        'so_bonus',
+        'Description'
+    ];
 
     public function tournament()
     {
@@ -22,5 +37,26 @@ class Group extends Model
     public function matchGroups()
     {
         return $this->hasMany(MatchGroup::class, 'GroupID', 'GroupID');
+    }
+
+    public function fixtures()
+    {
+        return $this->hasMany(Fixture::class, 'group_id');
+    }
+
+    public function tournaments()
+    {
+        return $this->belongsTo(Tournament::class);
+    }
+
+    // Define the relationship with Team
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+        public function teams()
+    {
+        return $this->belongsToMany(Team::class);
     }
 }
