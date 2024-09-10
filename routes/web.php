@@ -15,13 +15,22 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RegisteredUserController;
 
 Route::get('/contact', [MessageController::class, 'showForm']);
 
 
 /* Admin Route */
-Route::get('/article', function () {
-    return view('admin.article');
+//ARTICLE
+Route::get('/article', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/article', [ArticleController::class, 'store'])->name('article.store');
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+Route::get('/forum', function () {
+    $latestArticle = \App\Models\Article::latest()->first();
+    if ($latestArticle) {
+        return redirect()->route('article.show', $latestArticle->id);
+    }
+    return redirect()->route('article.create')->with('info', 'No articles available.');
 });
 
 Route::get('/manageuser', function () {
@@ -31,10 +40,6 @@ Route::get('/manageuser', function () {
 Route::get('/managematch', function () {
     return view('admin.managematch');
 });
-
-// Route::get('/adminpage', function () {
-//     return view('admin.page');
-// });
 
 //Dashboard Admin
 // Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -59,6 +64,25 @@ Route::post('/admin/contact/update', [ContactController::class, 'updateContactIn
 
 /*End Admin Route */
 /* Manager Route */
+// Route to show the registration form
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->name('register');
+// Route to handle the registration request
+Route::post('/register', [RegisteredUserController::class, 'store']);
+Route::get('/manageuser', [RegisteredUserController::class, 'listUsers'])->name('admin.manageuser');
+Route::get('/manager/{id}/players', [PlayerController::class, 'getManagerPlayers']);
+
+//MANAGE TOURNAMENT
+Route::get('/managetournament', function () {
+    return view('managetournament');
+});
+// Route to display the tournament creation form
+Route::get('/managetournament', [TournamentController::class, 'create'])->name('managetournament');
+// Route to store a new tournament
+Route::post('/managetournament', [TournamentController::class, 'store'])->name('managetournament.store');
+// Route to show details of a specific tournament
+Route::get('/managetournament/{id}', [TournamentController::class, 'show'])->name('managetournament.show');
+
 // Tournament
 Route::post('/tournament/create', [TournamentController::class, 'create'])->name('tournament.create');
 Route::post('/tournament/store', [TournamentController::class, 'store'])->name('tournament.store');
