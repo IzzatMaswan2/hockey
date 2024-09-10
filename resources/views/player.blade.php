@@ -26,6 +26,14 @@
             </div>
 
             <div class="form-group">
+                <label for="displayName">Display Name: </label>
+                <input type="text" class="form-control @error('displayName') is-invalid @enderror" id="displayName" name="displayName" value="{{ old('displayName') }}" required>
+                @error('displayName')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label for="contact">Contact Number: </label>
                 <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" value="{{ old('contact') }}" required>
                 @error('contact')
