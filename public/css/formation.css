@@ -333,7 +333,7 @@ button:hover .tooltip {
 }
 .details-rf {
     position: absolute;
-    top: 60.5%; /* 65.5% - 5% */
+    top: 74.5%; /* 65.5% - 5% */
     left: 4.5%;
     font-weight: bold;
     text-align: center;
@@ -342,7 +342,7 @@ button:hover .tooltip {
 }
 .jn-rf {
     position: absolute;
-    top: 57%; /* 62% - 5% */
+    top: 70%; /* 62% - 5% */
     left: 8%;
     font-weight: bold;
     text-align: center;
@@ -379,7 +379,7 @@ button:hover .tooltip {
 }
 .details-lf {
     position: absolute;
-    top: 60.5%; /* 65.5% - 5% */
+    top: 74.5%; /* 65.5% - 5% */
     left: 37.5%;
     font-weight: bold;
     text-align: center;
@@ -388,7 +388,7 @@ button:hover .tooltip {
 }
 .jn-lf {
     position: absolute;
-    top: 57%; /* 62% - 5% */
+    top: 70%; /* 62% - 5% */
     left: 41%;
     font-weight: bold;
     text-align: center;
