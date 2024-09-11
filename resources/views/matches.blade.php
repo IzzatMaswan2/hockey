@@ -89,7 +89,7 @@
 <body>
     @include('layouts.navbar')
 
-    <div class="container-fluid" style="height: 90%; padding: 0;">
+    <div class="container-fluid" style="height: 90%;">
         <div class="row">
             <div class="col-2" style="background-color: #929292; width: 20%;">
                 @include('layouts.sidebar')
