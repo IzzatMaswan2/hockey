@@ -182,7 +182,7 @@
                         <br><hr style="margin: 0 120px;">
 <br>
 <br>
-                        <div class="section">
+<div class="section">
                         <h2 style="color:#7A5DCA;font-weight:bold;">TOURNAMENTS LIST</h2>
                         <div class="table-container">
                             <table class="table table-striped">
@@ -195,6 +195,7 @@
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Venue</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -207,7 +208,73 @@
                                             <td>{{ $tournament->start_date }}</td>
                                             <td>{{ $tournament->end_date }}</td>
                                             <td>{{ $tournament->venue_id }}</td>
+                                            <td>
+                                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $tournament->id }}">Edit</button>
+                                                <form action="{{ route('managetournament.destroy', $tournament->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
+
+                                        <!-- Edit Modal -->
+                                        <!-- Edit Modal -->
+<div class="modal fade" id="editModal{{ $tournament->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $tournament->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel{{ $tournament->id }}">Edit Tournament</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('managetournament.update', $tournament->id) }}">
+                    @csrf
+                    @method('POST')
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Event Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $tournament->name }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="no_team" class="form-label">Participating Teams</label>
+                        <input type="number" class="form-control" id="no_team" name="no_team" value="{{ $tournament->no_team }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="no_group" class="form-label">Group Number</label>
+                        <input type="number" class="form-control" id="no_group" name="no_group" value="{{ $tournament->no_group }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="category" name="category" value="{{ $tournament->category }}" required>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" value="{{ $tournament->start_date }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="end_date" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" value="{{ $tournament->end_date }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="start_time" class="form-label">Start Time</label>
+                        <input type="time" class="form-control" id="start_time" name="start_time" value="{{ $tournament->start_time }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="end_time" class="form-label">End Time</label>
+                        <input type="time" class="form-control" id="end_time" name="end_time" value="{{ $tournament->end_time }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="venue_id" class="form-label">Venue ID</label>
+                        <input type="text" class="form-control" id="venue_id" name="venue_id" value="{{ $tournament->venue_id }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Tournament</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
                                     @endforeach
                                 </tbody>
                             </table>
@@ -232,6 +299,8 @@
             document.getElementById('category').value = button.innerText;
         }
     </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 @include ('layouts.footer')
 </html>
