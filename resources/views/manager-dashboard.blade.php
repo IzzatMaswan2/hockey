@@ -13,11 +13,11 @@
 </head>
 
 <body>
-    @include('profile.partials.navbar')
+    @include('layouts.navbar')
 
     <div class="container-fluid" style="height: 90%; padding: 0;">
         <div class="row">
-            <div class="col-3" style="background-color: #D3D3D3;">
+            <div class="col-3" style="background-color: #D3D3D3; ">
                 @include('layouts.sidebar-manager')
             </div>
 
@@ -74,7 +74,7 @@
                         <tbody>
                             @foreach($players as $player)
                             <tr>
-                                <td>{{ $player->fullName }}</td>
+                                <td>{{ $player->fullName ?? $player->Name }}</td>
                                 <td>{{ $player->jerseyNumber }}</td>
                                 <td>{{ $player->wins ?? 0 }}</td>
                                 <td>{{ $player->losses ?? 0 }}</td>

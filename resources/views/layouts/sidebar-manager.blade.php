@@ -14,6 +14,7 @@
             padding: 0px; /* Add padding around the sidebar */
             height: 100vh; /* Full height */
             color:#595959;
+            margin-top: 10px;
         }
 
         .nav-item {
