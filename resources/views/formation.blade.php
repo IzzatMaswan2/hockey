@@ -79,8 +79,25 @@
 
             <!-- Change Player Tab -->
             <div id="changePlayerTab" class="tab-content">
-                <!-- Similar structure as Select Player Tab -->
-            </div>
+    <form id="changePlayerForm" action="{{ route('formation.store') }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="changePlayer" style="color:white;font-weight:bold;">Change Player: </label>
+            <select class="form-control @error('player_id') is-invalid @enderror" id="changePlayer" name="player_id" required>
+                <option value="">Select a player</option>
+                @foreach($players as $player)
+                    <option value="{{ $player->id }}">{{ $player->fullName }} ({{ $player->jerseyNumber }})</option>
+                @endforeach
+            </select>
+            @error('player_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <input type="hidden" id="changeFormationPosition" name="formationPosition" value="">
+        <button type="submit" class="btn btn-primary" style="background-color:#5D3CB8;font-weight:bold;color:white;border:#5D3CB8 1px solid;">Change Player in Formation</button>
+    </form>
+</div>
+
         </div>
     </div>
 
@@ -89,70 +106,73 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Initialize a set to keep track of selected players
-        var selectedPlayers = new Set();
+        
+// Initialize a set to keep track of selected players
+var selectedPlayers = new Set();
 
-        // Function to update the player dropdown based on selected players
-        function updatePlayerDropdown() {
-            var playerSelect = document.getElementById('player');
-            var options = playerSelect.querySelectorAll('option');
-            
-            options.forEach(function(option) {
-                if (selectedPlayers.has(option.value)) {
-                    option.style.display = 'none';
-                } else {
-                    option.style.display = 'block';
-                }
-            });
+// Function to update the player dropdown based on selected players
+function updatePlayerDropdown() {
+    var playerSelect = document.getElementById('player');
+    var options = playerSelect.querySelectorAll('option');
+    
+    options.forEach(function(option) {
+        if (selectedPlayers.has(option.value)) {
+            option.style.display = 'none';
+        } else {
+            option.style.display = 'block';
         }
+    });
+}
 
-        // Add event listeners to each formation button to show the modal, set the formation position, and update player dropdown
-        document.querySelectorAll('.whatthesigma button').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var position = this.getAttribute('data-position');
-                document.getElementById('formationPosition').value = position;
-                document.querySelector('.bg-modal').style.display = 'flex'; // Show modal
-            });
-        });
+// Add event listeners to each formation button to show the modal, set the formation position, and update player dropdown
+document.querySelectorAll('.whatthesigma button').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var position = this.getAttribute('data-position');
+        document.getElementById('formationPosition').value = position;
+        document.getElementById('changeFormationPosition').value = position; // For change player tab
+        document.querySelector('.bg-modal').style.display = 'flex'; // Show modal
+    });
+});
 
-        // Close the modal when the close button is clicked
-        document.querySelector('.close').addEventListener('click', function() {
-            document.querySelector('.bg-modal').style.display = 'none'; // Hide the modal
-        });
+// Close the modal when the close button is clicked
+document.querySelector('.close').addEventListener('click', function() {
+    document.querySelector('.bg-modal').style.display = 'none'; // Hide the modal
+});
 
-        // Update the player dropdown and track the selected player
-        document.getElementById('player').addEventListener('change', function() {
-            var selectedValue = this.value;
-            if (selectedValue) {
-                selectedPlayers.add(selectedValue);
-                updatePlayerDropdown();
-            }
-        });
+// Update the player dropdown and track the selected player
+document.getElementById('player').addEventListener('change', function() {
+    var selectedValue = this.value;
+    if (selectedValue) {
+        selectedPlayers.add(selectedValue);
+        updatePlayerDropdown();
+    }
+});
 
-        // Function to handle switching between tabs
-        function openTab(event, tabName) {
-            // Hide all tab content
-            var i, tabContent, tabButtons;
-            tabContent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
-            }
+// Handle switching between tabs
+function openTab(event, tabName) {
+    // Hide all tab content
+    var i, tabContent, tabButtons;
+    tabContent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+    }
 
-            // Remove active class from all tab buttons
-            tabButtons = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].className = tabButtons[i].className.replace(" active", "");
-            }
+    // Remove active class from all tab buttons
+    tabButtons = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+    }
 
-            // Show the current tab and add the active class to the button
-            document.getElementById(tabName).style.display = "block";
-            event.currentTarget.className += " active";
-        }
+    // Show the current tab and add the active class to the button
+    document.getElementById(tabName).style.display = "block";
+    event.currentTarget.className += " active";
+}
 
-        // By default, open the first tab
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("selectPlayerTab").style.display = "block";
-        });
+// By default, open the first tab
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("selectPlayerTab").style.display = "block";
+});
+
     </script>
     
 </body>
