@@ -78,15 +78,12 @@ Route::get('/manageuser', [RegisteredUserController::class, 'listUsers'])->name(
 Route::get('/manager/{id}/players', [PlayerController::class, 'getManagerPlayers']);
 
 //MANAGE TOURNAMENT
-Route::get('/managetournament', function () {
-    return view('managetournament');
-});
-// Route to display the tournament creation form
+Route::get('/managetournament', function () {return view('managetournament');});
 Route::get('/managetournament', [TournamentController::class, 'create'])->name('managetournament');
-// Route to store a new tournament
 Route::post('/managetournament', [TournamentController::class, 'store'])->name('managetournament.store');
-// Route to show details of a specific tournament
 Route::get('/managetournament/{id}', [TournamentController::class, 'show'])->name('managetournament.show');
+Route::post('/managetournament/{id}', [TournamentController::class, 'update'])->name('managetournament.update');
+Route::delete('/managetournament/{id}', [TournamentController::class, 'destroy'])->name('managetournament.destroy');
 
 // Tournament
 Route::post('/tournament/create', [TournamentController::class, 'create'])->name('tournament.create');
@@ -114,10 +111,9 @@ Route::get('/player/index', [PlayerController::class, 'index'])->name('player.in
 Route::get('/player-view', [PlayerController::class, 'view'])->name('player.view');
 Route::get('/player-view', function () {$players = App\Models\Player::all(); return view('player-view', ['players' => $players]);})->name('player.view');
 Route::get('/players/export', [PlayerController::class, 'exportCsv'])->name('players.export');
-Route::get('/players/import', [PlayerController::class, 'importForm'])->name('players.import.form');
 Route::post('/players/import', [PlayerController::class, 'importCsv'])->name('players.import');
 Route::get('/player/{id}/edit', [PlayerController::class, 'edit'])->name('player.edit');
-Route::post('/player/{id}/update', [PlayerController::class, 'update'])->name('player.update');
+Route::put('/player/{id}', [PlayerController::class, 'update'])->name('player.update');
 Route::delete('/player/{id}', [PlayerController::class, 'destroy'])->name('player.destroy');
 
 //Manager
