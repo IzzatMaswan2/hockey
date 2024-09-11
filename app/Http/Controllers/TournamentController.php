@@ -51,4 +51,40 @@ class TournamentController extends Controller
         // Return the tournament details view with the specific tournament data
         return view('managetournament', compact('tournaments')); // corrected variable name
     }
+
+    public function update(Request $request, $id)
+{
+    
+    // Find the tournament by ID
+    $tournament = Tournament::findOrFail($id);
+
+   $tournament->name = $request->name;
+   $tournament->no_team = $request->no_team;
+   $tournament->no_group = $request->no_group;
+   $tournament->category = $request->category;
+   $tournament->start_date = $request->start_date;
+   $tournament->end_date = $request->end_date;
+   $tournament->start_time = $request->start_time;
+   $tournament->end_time = $request->end_time;
+   $tournament->venue_id = $request->venue_id;
+
+
+   $tournament->save();
+    
+
+    // Redirect back to the tournament list view with a success message
+    return redirect()->route('managetournament')->with('success', 'Tournament updated successfully');
+}
+
+
+    // Method to delete a tournament
+    public function destroy($id)
+    {
+        // Find the tournament by ID and delete it
+        $tournament = Tournament::findOrFail($id);
+        $tournament->delete();
+
+        // Redirect back to the tournament list view with a success message
+        return redirect()->route('managetournament')->with('success', 'Tournament deleted successfully');
+    }
 }
