@@ -66,14 +66,11 @@
 
     <div class="follow-list">Follow List</div>
     <div class="underline-follow"> </div>
-    <div class="follow-icon">
+    <div class="follow-icon" style="margin-bottom: 50px;">
         <i class="bi bi-facebook"></i>
         <i class="bi bi-twitter"></i>
         <i class="bi bi-youtube"></i>
     </div>
-    <br>
-    <br>
-    <br>
     
     @include('profile.partials.footer')
 </body>

@@ -11,7 +11,7 @@ class ArticleController extends Controller
 {
     public function create()
     {
-        return view('article');
+        return view('admin.article');
     }
 
     public function store(Request $request)
@@ -41,8 +41,6 @@ class ArticleController extends Controller
 
         return redirect()->route('article.create')->with('success', 'Article created successfully!');
     }
-
-
     public function show($id)
 {
     $article = Article::findOrFail($id);

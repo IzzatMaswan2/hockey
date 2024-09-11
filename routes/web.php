@@ -22,7 +22,7 @@ use App\Http\Controllers\FormationController;
 Route::get('/contact', [MessageController::class, 'showForm']);
 /* Admin Route */
 Route::get('/article', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article', [ArticleController::class, 'store'])->name('article.store');
+Route::post('/article', [ArticleController::class, 'store'])->name('articles.store');
 
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
 
