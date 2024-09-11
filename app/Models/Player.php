@@ -17,16 +17,16 @@ class Player extends Model
         'fullName',
         'contact',
         'jerseyNumber', 
-        'TeamID', 
+        'teamID', 
         'field_status', 
-        'Position', 
-        'Birthdate', 
+        'position', 
+        'birthdate', 
         'Nationality'
     ];
 
     public function team()
     {
-        return $this->belongsTo(Team::class, 'TeamID', 'TeamID');
+        return $this->belongsTo(Team::class, 'teamID', 'teamID');
     }
 
     public function playerStatMatches()

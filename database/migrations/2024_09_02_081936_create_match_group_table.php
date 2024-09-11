@@ -25,8 +25,8 @@ class CreateMatchGroupTable extends Migration
                 $table->unsignedInteger('TimingJudgeID')->nullable();
     
                 $table->foreign('GroupID')->references('GroupID')->on('group')->onDelete('set null');
-                $table->foreign('TeamAID')->references('TeamID')->on('team');
-                $table->foreign('TeamBID')->references('TeamID')->on('team');
+                $table->foreign('TeamAID')->references('teamID')->on('team');
+                $table->foreign('TeamBID')->references('teamID')->on('team');
                 $table->foreign('ScoringJudgeID')->references('JudgeID')->on('judge')->onDelete('set null');
                 $table->foreign('TimingJudgeID')->references('JudgeID')->on('judge')->onDelete('set null');
             });

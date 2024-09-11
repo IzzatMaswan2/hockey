@@ -48,6 +48,6 @@ class ArticleController extends Controller
     $article = Article::findOrFail($id);
     $recentArticles = Article::latest()->take(5)->get();
     
-    return view('forum', compact('article', 'recentArticles'));
+    return view('user.forum', compact('article', 'recentArticles'));
 }
 }

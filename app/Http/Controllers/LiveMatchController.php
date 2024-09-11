@@ -28,8 +28,8 @@ class LiveMatchController extends Controller
             $teamA = $upmatch->TeamAID;
             $teamB = $upmatch->TeamBID;
 
-            $teamAInfo = Team::select('Name', 'logoURL', 'country')->where('TeamID', $teamA)->first();
-            $teamBInfo = Team::select('Name', 'logoURL', 'country')->where('TeamID', $teamB)->first();
+            $teamAInfo = Team::select('Name', 'logoURL', 'country')->where('teamID', $teamA)->first();
+            $teamBInfo = Team::select('Name', 'logoURL', 'country')->where('teamID', $teamB)->first();
 
             $upcomingMatchDetail[] = [
                 'teamA' => $teamAInfo,
@@ -44,8 +44,8 @@ class LiveMatchController extends Controller
             $teamA = $resultmatch->TeamAID;
             $teamB = $resultmatch->TeamBID;
 
-            $teamAInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamA)->first();
-            $teamBInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamB)->first();
+            $teamAInfo = Team::select('Name', 'logoURL')->where('teamID', $teamA)->first();
+            $teamBInfo = Team::select('Name', 'logoURL')->where('teamID', $teamB)->first();
 
             $resultMatchDetail[] = [
                 'teamA' => $teamAInfo,
@@ -59,8 +59,8 @@ class LiveMatchController extends Controller
             $teamB = $match->TeamBID;
 
             // Fetch team information
-            $teamAInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamA)->first();
-            $teamBInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamB)->first();
+            $teamAInfo = Team::select('Name', 'logoURL')->where('teamID', $teamA)->first();
+            $teamBInfo = Team::select('Name', 'logoURL')->where('teamID', $teamB)->first();
 
             // Append match details to the array
             $liveMatchDetails[] = [

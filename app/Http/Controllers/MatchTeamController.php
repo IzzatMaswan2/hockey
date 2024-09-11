@@ -18,16 +18,16 @@ class MatchTeamController extends Controller
         $teamAID = $matchDetail->TeamAID;
         $teamBID = $matchDetail->TeamBID;
 
-        $teamAInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamAID)->first();
-        $teamBInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamBID)->first();
+        $teamAInfo = Team::select('Name', 'logoURL')->where('teamID', $teamAID)->first();
+        $teamBInfo = Team::select('Name', 'logoURL')->where('teamID', $teamBID)->first();
 
-        $teamAPlayers = Player::where('TeamID', $teamAID)->get();
+        $teamAPlayers = Player::where('teamID', $teamAID)->get();
         $startingA = $teamAPlayers->where('field_status', 1)->take(5);
         $reserveA = $teamAPlayers->where('field_status', 2)->take(5);
         $nameStartingA = $startingA->pluck('Name');
         $nameReserveA = $reserveA->pluck('Name');
 
-        $teamBPlayers = Player::where('TeamID', $teamBID)->get();
+        $teamBPlayers = Player::where('teamID', $teamBID)->get();
         $startingB = $teamBPlayers->where('field_status', 1)->take(5);
         $reserveB = $teamBPlayers->where('field_status', 2)->take(5);
         $nameStartingB = $startingB->pluck('Name');

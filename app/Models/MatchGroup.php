@@ -32,12 +32,12 @@ class MatchGroup extends Model
 
     public function teamA()
     {
-        return $this->belongsTo(Team::class, 'TeamAID', 'TeamID');
+        return $this->belongsTo(Team::class, 'TeamAID', 'teamID');
     }
 
     public function teamB()
     {
-        return $this->belongsTo(Team::class, 'TeamBID', 'TeamID');
+        return $this->belongsTo(Team::class, 'TeamBID', 'teamID');
     }
 
     public function group()

@@ -10,7 +10,7 @@ class CreateTeamTable extends Migration
     {
         if (!Schema::hasTable('team')) {
             Schema::create('team', function (Blueprint $table) {
-                $table->increments('TeamID');
+                $table->increments('teamID');
                 $table->string('Name', 100);
                 $table->string('country', 50);
                 $table->string('LogoURL', 255)->nullable();

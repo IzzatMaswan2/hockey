@@ -26,7 +26,6 @@ Route::post('/article', [ArticleController::class, 'store'])->name('article.stor
 
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
 
-
 Route::get('/forum', function () {
     $latestArticle = \App\Models\Article::latest()->first();
     if ($latestArticle) {
@@ -54,6 +53,10 @@ Route::get('/matches', function () {
     return view('matches');
 });
 
+
+Route::get('/home', function () {
+    return view('dashboard');
+});
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -152,9 +155,6 @@ Route::get('/', function () {
     return view('user.Home');
 });
 
-Route::get('/home', function () {
-    return view('dashboard');
-});
 
 Route::get('/livematch', function () {
     return view('user.livematch');
@@ -164,9 +164,9 @@ Route::get('/group', function () {
     return view('user.group');
 });
 
-Route::get('/forum', function () {
-    return view('forum');
-});
+// Route::get('/forum', function () {
+//     return view('forum');
+// });
 
 Route::get('/about', function () {
     return view('user.about');

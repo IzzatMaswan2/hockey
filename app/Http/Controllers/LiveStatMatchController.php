@@ -33,13 +33,13 @@ class LiveStatMatchController extends Controller
         $teamBID = $match->TeamBID;
 
         // Filter players by Team A and Team B
-        $teamAPlayers = $allPlayers->filter(fn($player) => $player->TeamID == $teamAID);
+        $teamAPlayers = $allPlayers->filter(fn($player) => $player->teamID == $teamAID);
         $startingA = $teamAPlayers->where('field_status', 1)->take(5);
         $reserveA = $teamAPlayers->where('field_status', 2)->take(5);
         $nameStartingA = $startingA->pluck('Name');
         $nameReserveA = $reserveA->pluck('Name');
 
-        $teamBPlayers = $allPlayers->filter(fn($player) => $player->TeamID == $teamBID);
+        $teamBPlayers = $allPlayers->filter(fn($player) => $player->teamID == $teamBID);
         $startingB = $teamBPlayers->where('field_status', 1)->take(5);
         $reserveB = $teamBPlayers->where('field_status', 2)->take(5);
         $nameStartingB = $startingB->pluck('Name');
@@ -51,8 +51,8 @@ class LiveStatMatchController extends Controller
         $reserveB = array_pad($nameReserveB->toArray(), 5, '-');
         
         // Retrieve team information
-        $teamAInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamAID)->first();
-        $teamBInfo = Team::select('Name', 'logoURL')->where('TeamID', $teamBID)->first();
+        $teamAInfo = Team::select('Name', 'logoURL')->where('teamID', $teamAID)->first();
+        $teamBInfo = Team::select('Name', 'logoURL')->where('teamID', $teamBID)->first();
 
         // Prepare live match details
         $liveMatchDetails = [
