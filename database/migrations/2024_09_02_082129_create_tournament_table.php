@@ -12,8 +12,8 @@ class CreateTournamentTable extends Migration
             Schema::create('tournament', function (Blueprint $table) {
                 $table->increments('TournamentID');
                 $table->string('Name', 100);
-                $table->date('StartDate');
-                $table->date('EndDate');
+                $table->date('start_date');
+                $table->date('end_date');
                 $table->string('Location', 100)->nullable();
             });
         }

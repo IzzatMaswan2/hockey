@@ -86,7 +86,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/tournament" style="color: #fff;">
+            <a class="nav-link" href="/managetournament" style="color: #fff;">
                 <i class="fas fa-calendar-alt"></i> Event
             </a>
         </li>
@@ -98,6 +98,11 @@
         <li class="nav-item">
             <a class="nav-link" href="http://127.0.0.1:8000/matches" style="color: #fff;">
                 <i class="fas fa-futbol"></i> Manage Match
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/adminpage" style="color: #fff;">
+                <i class="fas fa-pages"></i> Manage Pages
             </a>
         </li>
         <li class="nav-item">
