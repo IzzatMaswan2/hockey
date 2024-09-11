@@ -165,7 +165,7 @@
                          {{ $formations->where('formationPosition', 'Goalkeeper')->first()->jerseyNumber ?? ' ' }}
                         </div>
                         <div class="details-gk">
-                         {{ $formations->where('formationPosition', 'Goalkeeper')->first()->displayName ?? ' ' }}
+                         {{ $formations->where('formationPosition', 'Goalkeeper')->first()->Name ?? ' ' }}
                         </div>
 
                     </div>  
@@ -176,7 +176,7 @@
                               {{ $formations->where('formationPosition', 'Right Defender')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rd">
-                              {{ $formations->where('formationPosition', 'Right Defender')->first()->displayName ?? ' ' }} 
+                              {{ $formations->where('formationPosition', 'Right Defender')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -186,7 +186,7 @@
                              {{ $formations->where('formationPosition', 'Left Defender')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-ld">
-                             {{ $formations->where('formationPosition', 'Left Defender')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Left Defender')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -196,7 +196,7 @@
                              {{ $formations->where('formationPosition', 'Right Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rm">
-                             {{ $formations->where('formationPosition', 'Right Midfielder')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Right Midfielder')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -206,7 +206,7 @@
                              {{ $formations->where('formationPosition', 'Center Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-cm">
-                             {{ $formations->where('formationPosition', 'Center Midfielder')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Center Midfielder')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -216,7 +216,7 @@
                              {{ $formations->where('formationPosition', 'Left Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-lm">
-                             {{ $formations->where('formationPosition', 'Left Midfielder')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Left Midfielder')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -226,7 +226,7 @@
                              {{ $formations->where('formationPosition', 'Right Inner')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-ri">
-                             {{ $formations->where('formationPosition', 'Right Inner')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Right Inner')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -236,7 +236,7 @@
                              {{ $formations->where('formationPosition', 'Left Inner')->first()->jerseyNumber?? ' ' }} 
                         </div>
                         <div class="details-li">
-                             {{ $formations->where('formationPosition', 'Left Inner')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Left Inner')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -246,7 +246,7 @@
                              {{ $formations->where('formationPosition', 'Right Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rf">
-                             {{ $formations->where('formationPosition', 'Right Forward')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Right Forward')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -256,7 +256,7 @@
                              {{ $formations->where('formationPosition', 'Center Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-cf">
-                             {{ $formations->where('formationPosition', 'Center Forward')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Center Forward')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
@@ -266,7 +266,7 @@
                              {{ $formations->where('formationPosition', 'Left Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-lf">
-                             {{ $formations->where('formationPosition', 'Left Forward')->first()->displayName ?? ' ' }} 
+                             {{ $formations->where('formationPosition', 'Left Forward')->first()->Name ?? ' ' }} 
                         </div>
 
                 </div>

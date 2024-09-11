@@ -32,7 +32,7 @@ class FormationController extends Controller
         // Create a new formation record
         Formation::create([
             'fullName' => $player->fullName,
-            'displayName' => $player->displayName,
+            'Name' => $player->Name,
             'contact' => $player->contact,
             'jerseyNumber' => $player->jerseyNumber,
             'position' => $player->position,
@@ -96,7 +96,7 @@ public function update(Request $request, $id)
     // Update the formation record with new player data
     $formation->update([
         'fullName' => $player->fullName,
-        'displayName' => $player->displayName,
+        'Name' => $player->Name,
         'contact' => $player->contact,
         'jerseyNumber' => $player->jerseyNumber,
         'position' => $player->position,

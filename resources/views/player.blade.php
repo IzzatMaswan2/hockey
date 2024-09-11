@@ -26,9 +26,9 @@
             </div>
 
             <div class="form-group">
-                <label for="displayName">Display Name: </label>
-                <input type="text" class="form-control @error('displayName') is-invalid @enderror" id="displayName" name="displayName" value="{{ old('displayName') }}" required>
-                @error('displayName')
+                <label for="Name">Display Name: </label>
+                <input type="text" class="form-control @error('Name') is-invalid @enderror" id="Name" name="Name" value="{{ old('Name') }}" required>
+                @error('Name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -58,13 +58,24 @@
                     <option value="Midfielder">Midfielder</option>
                     <option value="Inner">Inner</option>
                     <option value="Forward">Forward</option>
-
                 </select>
                 @error('position')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
+            <div class="form-group">
+                <label for="field_status">Field Status: </label>
+                <select class="form-control @error('field_status') is-invalid @enderror" id="field_status" name="field_status" required>
+                    <option value="" disabled selected>Select a position</option>
+                    <option value="0">Member</option>
+                    <option value="1">Starting</option>
+                    <option value="2">Reserve</option>
+                </select>
+                @error('field_status')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-primary" style="background-color:#5D3CB8;font-weight:bold;color:white;border: #5D3CB8 1px solid;">Add Player</button>
         </form>
     </div>

@@ -14,31 +14,28 @@ class PlayerController extends Controller
 
 {
      //-----------------------------------------------------------------------------------------edit-------------------
-
-
-     
-    public function edit($id)
+    public function edit($PlayerID)
     {
         // Find the player by ID
-        $player = Player::findOrFail($id);
+        $player = Player::findOrFail($PlayerID);
 
         // Return the edit view with the player data
         return view('player.edit', compact('player'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $PlayerID)
     {
         // Validate the request data
         $validatedData = $request->validate([
             'fullName' => 'required|string|max:255',
-            'displayName' => 'required|string|max:255',
+            'Name' => 'required|string|max:255',
             'contact' => 'required|string|max:255',
             'jerseyNumber' => 'required|integer',
             'position' => 'required|string|max:255',
         ]);
 
         // Find the player by ID and update their data
-        $player = Player::findOrFail($id);
+        $player = Player::findOrFail($PlayerID);
         $player->update($validatedData);
 
         // Redirect with success message
@@ -49,10 +46,10 @@ class PlayerController extends Controller
      //-----------------------------------------------------------------------------------------delete-------------------
 
 
-    public function destroy($id)
+    public function destroy($PlayerID)
     {
         // Find the player by ID and delete the record
-        $player = Player::findOrFail($id);
+        $player = Player::findOrFail($PlayerID);
         $player->delete();
 
         // Redirect with success message
@@ -79,38 +76,30 @@ class PlayerController extends Controller
     }
 
     public function view()
-{
+    {
     // Fetch all teams from the database
     $players = Player::all();
-
     // Pass the data to the view
     return view('player-view', compact('players'));
-}
-
-
-
+    }
     public function store(Request $request)
     {
         // Validate the request data
         $validatedData = $request->validate([
             'fullName' => 'required|string|max:255', 
-            'displayName' => 'required|string|max:255',
+            'Name' => 'required|string|max:255',
             'contact' => 'required|string|max:255', 
             'jerseyNumber' => 'required|integer|max:255', 
             'position' => 'required|string|max:255',  
+            'field_status' => 'required|int|max:1',
         ]);
-
         // Create a new Fixture record
         Player::create($validatedData);
-
         // Redirect with success message
         return redirect()->route('player.view')->with('success', 'Player added successfully.');
-
     }
 
  //-----------------------------------------------------------------------------------------export-------------------
-
-
 
     public function exportCsv()
     {
@@ -130,9 +119,9 @@ class PlayerController extends Controller
 
             foreach ($players as $player) {
                 $row = [
-                    $player->id,
+                    $player->PlayerID,
                     $player->fullName,
-                    $player->displayName,
+                    $player->Name,
                     $player->contact,
                     $player->jerseyNumber,
                     $player->position,
@@ -185,33 +174,27 @@ class PlayerController extends Controller
                 'Jersey Number' => 'required|integer',
                 'Position' => 'required|string',
             ]);
-
             if ($validator->fails()) {
                 return redirect()->back()->with('error', 'Invalid CSV format')->withInput();
             }
-
             // Process the valid record
             Player::updateOrCreate(
                 ['id' => $record['ID']], // Assuming 'ID' is used to match existing records
                 [
                     'fullName' => $record['Full Name'],
-                    'displayName' => $record['Display Name'],
+                    'Name' => $record['Display Name'],
                     'contact' => $record['Contact'],
                     'jerseyNumber' => $record['Jersey Number'],
                     'position' => $record['Position'],
                 ]
             );
         }
-
-        // Redirect with success message
         return redirect()->route('players.view')->with('success', 'Players imported successfully.');
     }
     public function dashboard()
     {
         // Count the number of players
         $totalPlayers = Player::count();
-
-        
         // Calculate total wins and total losses
         
         // Fetch all players for the table
@@ -220,7 +203,4 @@ class PlayerController extends Controller
         // Return the view with all necessary data
         return view('manager-dashboard', compact('totalPlayers','players'));
     }
-    
-    
-
 }

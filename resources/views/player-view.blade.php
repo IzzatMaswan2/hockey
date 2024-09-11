@@ -39,7 +39,7 @@
                 <table class="table table-striped mt-3">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>NO</th>
                             <th>Full Name</th>
                             <th>Contact Number</th>
                             <th>Jersey Number</th>
@@ -47,24 +47,24 @@
                         </tr>
                     </thead>
                     <tbody>
-    @foreach($players as $player)
-        <tr>
-            <td>{{ $player->id }}</td>
-            <td>{{ $player->fullName }}</td>
-            <td>{{ $player->contact }}</td>
-            <td>{{ $player->jerseyNumber }}</td>
-            <td>{{ $player->position }}</td>
-            <td>
-                <a href="{{ route('player.edit', $player->id) }}" class="btn btn-warning btn-sm" style="border:#00CF00 1px solid;background-color:#00CF00;color:white;font-weight:bold">Edit</a>
-                <form action="{{ route('player.destroy', $player->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm " style="border:red 1px solid;background-color:red;color:white;font-weight:bold" onclick="return confirm('Are you sure you want to delete this player?');">Delete</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-</tbody>
+                        @foreach($players as $index => $player)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $player->fullName ?? $player->Name }}</td>
+                                <td>{{ $player->contact }}</td>
+                                <td>{{ $player->jerseyNumber }}</td>
+                                <td>{{ $player->position }}</td>
+                                <td>
+                                    <a href="{{ route('player.edit', $player->PlayerID) }}" class="btn btn-warning btn-sm" style="border:#00CF00 1px solid;background-color:#00CF00;color:white;font-weight:bold">Edit</a>
+                                    <form action="{{ route('player.destroy', $player->PlayerID) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm " style="border:red 1px solid;background-color:red;color:white;font-weight:bold" onclick="return confirm('Are you sure you want to delete this player?');">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
