@@ -102,6 +102,9 @@ Route::get('/formation', [FormationController::class, 'view'])->name('formation.
 Route::get('/formation', [FormationController::class, 'create'])->name('formation.create');
 Route::post('/formation', [FormationController::class, 'store'])->name('formation.store');
 
+Route::get('/formation/{id}/edit', [FormationController::class, 'edit'])->name('formation.edit');
+Route::post('/formation/{id}', [FormationController::class, 'update'])->name('formation.update');
+
 
 //Player (Manager)
 Route::get('/player/create', [PlayerController::class, 'create'])->name('player.create');
