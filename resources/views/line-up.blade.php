@@ -157,15 +157,13 @@
 
                 
                 <div class="whatthe">
-                   
-
                     <div class="gki text-center">
                         <i class='bx bxs-t-shirt gki'></i>
                         <div class="jn-gk">
-                         {{ $formations->where('formationPosition', 'Goalkeeper')->first()->jerseyNumber ?? ' ' }}
+                            {{ $formations->where('formationPosition', 'Goalkeeper')->first()->jerseyNumber ?? ' ' }}
                         </div>
                         <div class="details-gk">
-                         {{ $formations->where('formationPosition', 'Goalkeeper')->first()->Name ?? ' ' }}
+                            {{ $formations->where('formationPosition', 'Goalkeeper')->first()->Name ?? ' ' }}
                         </div>
 
                     </div>  
@@ -173,100 +171,100 @@
                     <div class="rdi text-center">
                         <i class='bx bxs-t-shirt rdi'></i>
                         <div class="jn-rd">
-                              {{ $formations->where('formationPosition', 'Right Defender')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Defender')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rd">
-                              {{ $formations->where('formationPosition', 'Right Defender')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Defender')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="ldi text-center">
                         <i class='bx bxs-t-shirt ldi'></i>
                         <div class="jn-ld">
-                             {{ $formations->where('formationPosition', 'Left Defender')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Defender')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-ld">
-                             {{ $formations->where('formationPosition', 'Left Defender')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Defender')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="rmi text-center">
                         <i class='bx bxs-t-shirt rmi'></i>
                         <div class="jn-rm">
-                             {{ $formations->where('formationPosition', 'Right Midfielder')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rm">
-                             {{ $formations->where('formationPosition', 'Right Midfielder')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Midfielder')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="cmi text-center">
                         <i class='bx bxs-t-shirt cmi'></i>
                         <div class="jn-cm">
-                             {{ $formations->where('formationPosition', 'Center Midfielder')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Center Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-cm">
-                             {{ $formations->where('formationPosition', 'Center Midfielder')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Center Midfielder')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="lmi text-center">
                         <i class='bx bxs-t-shirt lmi'></i>
                         <div class="jn-lm">
-                             {{ $formations->where('formationPosition', 'Left Midfielder')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-lm">
-                             {{ $formations->where('formationPosition', 'Left Midfielder')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Midfielder')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="rii text-center">
                         <i class='bx bxs-t-shirt rii'></i>
                         <div class="jn-ri">
-                             {{ $formations->where('formationPosition', 'Right Inner')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Inner')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-ri">
-                             {{ $formations->where('formationPosition', 'Right Inner')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Inner')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="lii text-center">
                         <i class='bx bxs-t-shirt lii'></i>
                         <div class="jn-li">
-                             {{ $formations->where('formationPosition', 'Left Inner')->first()->jerseyNumber?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Inner')->first()->jerseyNumber?? ' ' }} 
                         </div>
                         <div class="details-li">
-                             {{ $formations->where('formationPosition', 'Left Inner')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Inner')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="rfi text-center">
                         <i class='bx bxs-t-shirt rfi'></i>
                         <div class="jn-rf">
-                             {{ $formations->where('formationPosition', 'Right Forward')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rf">
-                             {{ $formations->where('formationPosition', 'Right Forward')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Right Forward')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="cfi text-center">
                         <i class='bx bxs-t-shirt cfi'></i>
                         <div class="jn-cf">
-                             {{ $formations->where('formationPosition', 'Center Forward')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Center Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-cf">
-                             {{ $formations->where('formationPosition', 'Center Forward')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Center Forward')->first()->Name ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="lfi text-center">
                         <i class='bx bxs-t-shirt lfi'></i>
                         <div class="jn-lf">
-                             {{ $formations->where('formationPosition', 'Left Forward')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-lf">
-                             {{ $formations->where('formationPosition', 'Left Forward')->first()->Name ?? ' ' }} 
+                            {{ $formations->where('formationPosition', 'Left Forward')->first()->Name ?? ' ' }} 
                         </div>
 
                 </div>

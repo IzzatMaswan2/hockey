@@ -65,7 +65,7 @@
                         <select class="form-control @error('player_id') is-invalid @enderror" id="player" name="player_id" required>
                             <option value="">Select a player</option>
                             @foreach($players as $player)
-                                <option value="{{ $player->id }}">{{ $player->fullName }} ({{ $player->jerseyNumber }})</option>
+                                <option value="{{ $player->id }}">{{ $player->fullName ?? $player->Name }} ({{ $player->jerseyNumber }})</option>
                             @endforeach
                         </select>
                         @error('player_id')

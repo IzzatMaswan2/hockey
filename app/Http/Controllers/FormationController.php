@@ -78,8 +78,6 @@ class FormationController extends Controller
         // Return the view with the formation and players data
         return view('formation', compact('formations', 'players'));
     }
-    
-    
 
 public function update(Request $request, $id)
 {
@@ -91,6 +89,7 @@ public function update(Request $request, $id)
 
     // Find the selected player and formation
     $player = Player::find($validatedData['player_id']);
+    dd($player);
     $formation = Formation::find($id);
 
     // Update the formation record with new player data

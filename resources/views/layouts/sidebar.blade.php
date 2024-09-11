@@ -76,17 +76,17 @@
 <body>
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/dashboard" style="color: #fff;">
+            <a class="nav-link active" aria-current="page" href="/dashboard" style="color: #fff;">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: #fff;">
+            <a class="nav-link" href="/article" style="color: #fff;">
                 <i class="fas fa-newspaper"></i> Article
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: #fff;">
+            <a class="nav-link" href="/tournament" style="color: #fff;">
                 <i class="fas fa-calendar-alt"></i> Event
             </a>
         </li>
