@@ -20,29 +20,44 @@ class FormationController extends Controller
     public function store(Request $request)
     {
         // Validate the request data
-       
         $validatedData = $request->validate([
             'player_id' => 'required|exists:players,id',
-            'formationPosition' => 'required|string|max:255', // Add this line
+            'formationPosition' => 'required|string|max:255',
         ]);
-
+    
+        // Check if a player already exists in the selected formation position
+        $existingFormation = Formation::where('formationPosition', $validatedData['formationPosition'])->first();
+    
         // Find the selected player
         $player = Player::find($validatedData['player_id']);
-
-        // Create a new formation record
-        Formation::create([
-            'fullName' => $player->fullName,
-            'Name' => $player->Name,
-            'contact' => $player->contact,
-            'jerseyNumber' => $player->jerseyNumber,
-            'position' => $player->position,
-            'formationPosition' => $validatedData['formationPosition'], // Add this line
-        ]);
-
+    
+        if ($existingFormation) {
+            // Update existing formation with the new player data
+            $existingFormation->update([
+                'fullName' => $player->fullName,
+                'displayName' => $player->displayName,
+                'contact' => $player->contact,
+                'jerseyNumber' => $player->jerseyNumber,
+                'position' => $player->position,
+                'formationPosition' => $validatedData['formationPosition'],
+            ]);
+        } else {
+            // Create a new formation record
+            Formation::create([
+                'fullName' => $player->fullName,
+                'displayName' => $player->displayName,
+                'contact' => $player->contact,
+                'jerseyNumber' => $player->jerseyNumber,
+                'position' => $player->position,
+                'formationPosition' => $validatedData['formationPosition'],
+            ]);
+        }
+    
         $players = Player::all();
-
-        return view('formation', compact('players'))->with('success', 'Player updated successfully.');    
+    
+        return view('formation', compact('players'))->with('success', 'Player added/updated successfully.');
     }
+    
 
     public function view()
     {
@@ -95,7 +110,7 @@ public function update(Request $request, $id)
     // Update the formation record with new player data
     $formation->update([
         'fullName' => $player->fullName,
-        'Name' => $player->Name,
+        'displayName' => $player->displayName,
         'contact' => $player->contact,
         'jerseyNumber' => $player->jerseyNumber,
         'position' => $player->position,
