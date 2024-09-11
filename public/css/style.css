@@ -1500,9 +1500,9 @@ footer {
 
 /* Image styling */
 .forum-img img {
-    width: 100%; /* Full width of the image container */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners for image */
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
 }
 
 /* Summary text styling */
@@ -1515,6 +1515,7 @@ footer {
     border: 1px solid #ddd;
     display: flex; /* Use flexbox for text alignment */
     flex-direction: column; /* Stack text elements vertically */
+    word-break: normal;
 }
 
 /* Full story emphasis */
