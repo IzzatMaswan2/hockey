@@ -64,7 +64,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::post('/contacts', [ContactController::class, 'store']);
 Route::get('/contacts/{id}', [ContactController::class, 'show']);
 
-Route::get('/adminpage', [ContactController::class, 'showContactInfo2'])->name('contact.show');
+Route::get('/adminmanagepage', [ContactController::class, 'showContactInfo2'])->name('contact.show');
 Route::post('/admin/contact/update', [ContactController::class, 'updateContactInfo'])->name('contact.update');
 
 /*End Admin Route */

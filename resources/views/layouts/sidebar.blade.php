@@ -101,7 +101,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/adminpage" style="color: #fff;">
+            <a class="nav-link" href="/adminmanagepage" style="color: #fff;">
                 <i class="fas fa-pages"></i> Manage Pages
             </a>
         </li>
