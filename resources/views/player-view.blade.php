@@ -15,26 +15,21 @@
 
 <body>
     @include('layouts.navbar')
-
     <div class="container-fluid" style="height: 90%; padding: 0;">
         <div class="row">
             <div class="col-3" style="background-color: #D3D3D3;">
                 @include('layouts.sidebar-manager')
             </div>
-
             <div class="col-9 mt-5">
                 <div class="d-flex justify-content-between align-items-center">
                     <h1 class="text-center"style="color:#5D3CB8;font-weight:bold;">Add Players</h1>
                     @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <a href="{{ url('player') }}" class="btn btn-primary" style="background-color:#5D3CB8;font-weight:bold;color:white;border: #5D3CB8 1px solid; ">Add Player</a>
-
                     <a href="{{ route('players.export') }}" class="btn btn-success" style="background-color:#5D3CB8;font-weight:bold;color:white;border:#5D3CB8 1px solid;">Export CSV</a>
-
-                    
                 </div>
                 <table class="table table-striped mt-3">
                     <thead>
@@ -47,24 +42,24 @@
                         </tr>
                     </thead>
                     <tbody>
-    @foreach($players as $player)
-        <tr>
-            <td>{{ $player->id }}</td>
-            <td>{{ $player->fullName }}</td>
-            <td>{{ $player->contact }}</td>
-            <td>{{ $player->jerseyNumber }}</td>
-            <td>{{ $player->position }}</td>
-            <td>
-                <a href="{{ route('player.edit', $player->id) }}" class="btn btn-warning btn-sm" style="border:#00CF00 1px solid;background-color:#00CF00;color:white;font-weight:bold">Edit</a>
-                <form action="{{ route('player.destroy', $player->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm " style="border:red 1px solid;background-color:red;color:white;font-weight:bold" onclick="return confirm('Are you sure you want to delete this player?');">Delete</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-</tbody>
+                        @foreach($players as $player)
+                            <tr>
+                                <td>{{ $player->id }}</td>
+                                <td>{{ $player->fullName }}</td>
+                                <td>{{ $player->contact }}</td>
+                                <td>{{ $player->jerseyNumber }}</td>
+                                <td>{{ $player->position }}</td>
+                                <td>
+                                    <a href="{{ route('player.edit', $player->id) }}" class="btn btn-warning btn-sm" style="border:#00CF00 1px solid;background-color:#00CF00;color:white;font-weight:bold">Edit</a>
+                                    <form action="{{ route('player.destroy', $player->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm " style="border:red 1px solid;background-color:red;color:white;font-weight:bold" onclick="return confirm('Are you sure you want to delete this player?');">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
