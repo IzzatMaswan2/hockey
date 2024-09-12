@@ -20,11 +20,11 @@
                 </div>
                 <div class="footer-column">
                     <h3>Usefull Link</h3>
-                    <a href="#">Home</a><br>
-                    <a href="#">Tournament</a><br>
-                    <a href="#">Group</a><br>
-                    <a href="#">Forum</a><br>
-                    <a href="#">About</a><br>
+                    <a href="/">Home</a><br>
+                    <a href="/tournament">Tournament</a><br>
+                    <a href="/group">Group</a><br>
+                    <a href="/forum">Forum</a><br>
+                    <a href="/about">About</a><br>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
@@ -65,11 +65,11 @@
                 <div class="linkinfo">
                     <div class="footer-column">
                         <h3>Usefull Link</h3>
-                        <a href="#">Home</a><br>
-                        <a href="#">Tournament</a><br>
-                        <a href="#">Group</a><br>
-                        <a href="#">Forum</a><br>
-                        <a href="#">About</a><br>
+                        <a href="/">Home</a><br>
+                        <a href="/tournament">Tournament</a><br>
+                        <a href="/group">Group</a><br>
+                        <a href="/forum">Forum</a><br>
+                        <a href="/about">About</a><br>
                     </div>
                     <div class="footer-column">
                         <h3>Contact Info</h3>

@@ -24,11 +24,11 @@
             <div class="col-md-2 col-sm-6 mb-3">
                 <h5 class="text-white"><strong>Useful Links</strong></h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-decoration-none" style="color: #FFFFFF;">Home</a></li>
-                    <li><a href="#" class="text-decoration-none" style="color: #FFFFFF;">Tournament</a></li>
-                    <li><a href="#" class="text-decoration-none" style="color: #FFFFFF;">Group</a></li>
-                    <li><a href="#" class="text-decoration-none" style="color: #FFFFFF;">Forum</a></li>
-                    <li><a href="#" class="text-decoration-none" style="color: #FFFFFF;">About</a></li>
+                    <li><a href="/" class="text-decoration-none" style="color: #FFFFFF;">Home</a></li>
+                    <li><a href="/tournament" class="text-decoration-none" style="color: #FFFFFF;">Tournament</a></li>
+                    <li><a href="/group" class="text-decoration-none" style="color: #FFFFFF;">Group</a></li>
+                    <li><a href="/forum" class="text-decoration-none" style="color: #FFFFFF;">Forum</a></li>
+                    <li><a href="/about" class="text-decoration-none" style="color: #FFFFFF;">About</a></li>
                 </ul>
             </div>
             <div class="col-md-2 col-sm-6 mb-3">

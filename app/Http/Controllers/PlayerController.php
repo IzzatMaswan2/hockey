@@ -15,7 +15,7 @@ class PlayerController extends Controller
 {
      //-----------------------------------------------------------------------------------------edit-------------------
 
-     public function edit($id)
+    public function edit($id)
 {
     $player = Player::findOrFail($id);
     return view('player.edit', compact('player'));

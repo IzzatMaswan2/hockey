@@ -20,10 +20,10 @@ class RegisteredUserController extends Controller
     {
         
          // Fetch users with the role of 'Manager'
-         $users = User::where('role', 'Manager')->get();
+        $users = User::where('role', 'Manager')->get();
     
          // Return the view and pass the users data
-         return view('admin.manageuser', ['users' => $users]);
+        return view('admin.manageuser', ['users' => $users]);
     }
     /**
      * Display the registration view.

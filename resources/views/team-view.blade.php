@@ -171,17 +171,13 @@ button:hover {
 
 </style>
 </head>
-<body>
-
-
+    <body>
     @include('layouts.navbar')
-
     <div class="container-fluid" style="height: 90%; padding: 0;">
         <div class="row">
             <div class="col-3" style="background-color: #D3D3D3;">
                 @include('layouts.sidebar-manager')
             </div>
-
             <div class="col-9 mt-5">
                 <div class="d-flex justify-content-between align-items-center">
                     <h1 class="text-center" style="color:#5D3CB8;font-weight:bold;">Formation</h1>
@@ -212,12 +208,11 @@ button:hover {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    </body>
 @include('layouts.footer')
 <div class="bg-modal">
         <div class="modal-content">
             
         </div>
-
     </div>
 </html>
