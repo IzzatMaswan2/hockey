@@ -54,13 +54,9 @@
                         </div>
                         <div class="info">
                             <h1> OUR NUMBER </h1>
-                            @if($phones->isNotEmpty())
                                 @foreach($phones as $phone)
                                     <p>{{ $phone }}</p>
                                 @endforeach
-                            @else
-                                <p>No phone numbers available.</p>
-                            @endif
                         </div>
                         <div class="link-info" >
                             <a href="#mail">CALL US</a>
@@ -88,13 +84,9 @@
                         </div>
                         <div class="info">
                             <h1> OUR E-MAIL </h1>
-                            @if($emails->isNotEmpty())
                                 @foreach($emails as $email)
                                     <p>{{ $email }}</p>
                                 @endforeach
-                            @else
-                                <p>No email addresses available.</p>
-                            @endif
                         </div>
                         <div class="link-info" >
                             <a href="#mail">E-MAIL US</a>

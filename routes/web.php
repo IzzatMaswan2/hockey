@@ -17,7 +17,7 @@ use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\FormationController;
-
+use App\Http\Controllers\PageController;
 
 Route::get('/contact', [MessageController::class, 'showForm']);
 /* Admin Route */
@@ -61,11 +61,17 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::post('/contacts', [ContactController::class, 'store']);
-Route::get('/contacts/{id}', [ContactController::class, 'show']);
+Route::post('/contacts', [PageController::class, 'storeContact']);
+Route::get('/contacts/{id}', [PageController::class, 'showContact']);
 
-Route::get('/adminmanagepage', [ContactController::class, 'showContactInfo2'])->name('contact.show');
-Route::post('/admin/contact/update', [ContactController::class, 'updateContactInfo'])->name('contact.update');
+// web.php
+Route::get('/adminmanagepage', [PageController::class, 'showpage'])->name('show.page');
+Route::get('about/edit', [PageController::class, 'editAbout'])->name('about.edit');
+Route::post('home/update', [PageController::class, 'updateHome'])->name('home.update');
+Route::post('achievement/update', [PageController::class, 'updateAchivement'])->name('achievements.update');
+Route::post('meet/update', [PageController::class, 'updateMeet'])->name('meetTeams.update');
+Route::post('about/update', [PageController::class, 'updateAbout'])->name('about.update');
+Route::post('/admin/contact/update', [PageController::class, 'updateContactInfo'])->name('contact.update');
 
 /*End Admin Route */
 /* Manager Route */
@@ -154,7 +160,6 @@ Route::get('/', function () {
     return view('user.Home');
 });
 
-
 Route::get('/livematch', function () {
     return view('user.livematch');
 });
@@ -175,7 +180,7 @@ Route::get('/contact', function () {
     return view('user.contact');
 });
 
-Route::get('/contact',  [ContactController::class, 'showcontactinfo'])
+Route::get('/contact',  [PageController::class, 'showcontactinfo'])
     ->name('showcontactinfo');
 
 Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
