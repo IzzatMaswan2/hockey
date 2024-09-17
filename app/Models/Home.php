@@ -21,7 +21,7 @@ class Home extends Model
     // Define the relationship with Achivement
     public function achivements()
     {
-        return $this->hasMany(Achivement::class, 'home_id', 'home_id');
+        return $this->hasMany(Achievement::class, 'home_id', 'home_id');
     }
 
     // Define the relationship with MeetTeam

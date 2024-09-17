@@ -45,6 +45,91 @@
             flex: 1 1 calc(25% - 20px); /* Adjust based on how many you want per row */
             box-sizing: border-box;
         }
+        .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: #474e5d;
+        padding-top: 50px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80% !important; 
+        }
+
+        /* Style the horizontal ruler */
+        hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+        }
+        
+        /* The Close Button (x) */
+        .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #f44336;
+        cursor: pointer;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+        }
+
+        button:hover {
+        opacity:1;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+        .cancelbtn, .signupbtn {
+            width: 100%;
+        }
+        }
+
+        .row-faq {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .add-question-button {
+            border-radius: 15px;
+            width: 150px;
+            background-color: #59f436
+        }
+
+        .add-question-button:hover {
+            border-radius: 15px;
+            width: 150px;
+            background-color: #59f43698
+        }
+
+        .form-control {
+            height: fit-content;
+        }
+
+
     </style>
     @include('admin.navbar')
     @include('admin.sidebar')
@@ -233,12 +318,63 @@
         </div>
 
         <div id="FAQ" class="tabcontent">
-            <div class="row">
+            <div class="row-faq">
                 <h1>FAQ Management</h1>
+                <button onclick="document.getElementById('id01').style.display='block'" class="add-question-button">Add Question</button>
             </div>
             @if (session('success'))
                 <p class="success-message">{{ session('success') }}</p>
             @endif
+        
+            <!-- Form to update existing FAQs -->
+            <form action="{{ route('faq.update') }}" method="POST">
+                @csrf
+                @method('PUT')
+        
+                @foreach ($faqs as $faq)
+                    <div class="faq-item mb-3">
+                        <input type="hidden" name="faq_ids[]" value="{{ $faq->id }}">
+                        <div class="mb-3">
+                            <label for="question_{{ $faq->id }}" class="form-label">Question:</label>
+                            <input type="text" id="question_{{ $faq->id }}" name="questions[]" class="form-control" value="{{ old('questions.' . $loop->index, $faq->question) }}">
+                            @error('questions.' . $loop->index)
+                                <div class="error-message">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="answer_{{ $faq->id }}" class="form-label">Answer:</label>
+                            <textarea id="answer_{{ $faq->id }}" name="answers[]" class="form-control" style="height: 150px;">{{ old('answers.' . $loop->index, $faq->answer) }}</textarea>
+                            @error('answers.' . $loop->index)
+                                <div class="error-message">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                @endforeach
+        
+                <button type="submit" class="btn btn-primary">Update FAQs</button>
+            </form> <br>
+
+            <div class="modal" id="id01">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <form action="{{ route('faqs.store') }}" method="POST" class="modal-content">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="question" class="form-label">Question:</label>
+                        <input type="text" id="question" name="question" class="form-control" required>
+                        @error('question')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="answer" class="form-label">Answer:</label>
+                        <textarea id="answer" name="answer" class="form-control" required></textarea>
+                        @error('answer')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add FAQ</button>
+                </form>
+            </div>
         </div>
 
         <div id="About" class="tabcontent">
@@ -319,6 +455,14 @@
             </form>
         </div>
     </div>
+    <script>
+        var modal = document.getElementById('id01');
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        }
+    </script>
     <script>
         function openPage(pageName, elmnt, color) {
             var i, tabcontent, tablinks;

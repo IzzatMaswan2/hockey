@@ -17,12 +17,13 @@ use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\FormationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 
 Route::get('/contact', [MessageController::class, 'showForm']);
 /* Admin Route */
 Route::get('/article', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article', [ArticleController::class, 'store'])->name('article.store');
+Route::post('/article', [ArticleController::class, 'store'])->name('articles.store');
 
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
 
@@ -65,14 +66,16 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::post('/contacts', [PageController::class, 'storeContact']);
 Route::get('/contacts/{id}', [PageController::class, 'showContact']);
 
-// web.php
+// admin manage page fo user 
 Route::get('/adminmanagepage', [PageController::class, 'showpage'])->name('show.page');
 Route::get('about/edit', [PageController::class, 'editAbout'])->name('about.edit');
+Route::post('faqs', [PageController::class, 'FAQstore'])->name('faqs.store');
 Route::post('home/update', [PageController::class, 'updateHome'])->name('home.update');
 Route::post('achievement/update', [PageController::class, 'updateAchivement'])->name('achievements.update');
 Route::post('meet/update', [PageController::class, 'updateMeet'])->name('meetTeams.update');
 Route::post('about/update', [PageController::class, 'updateAbout'])->name('about.update');
 Route::post('/admin/contact/update', [PageController::class, 'updateContactInfo'])->name('contact.update');
+Route::post('faqs/update', [PageController::class, 'FAQupdate'])->name('faq.update');
 
 /*End Admin Route */
 /* Manager Route */
@@ -135,9 +138,6 @@ Route::get('/line-up', [FormationController::class, 'showLineUp'])->name('line-u
 /*End Manager Route */
 /* User Route */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/test', function () {
     return view('test');
@@ -157,9 +157,7 @@ Route::get('/livematch', function () {
     return view('livematch');
 });
 
-Route::get('/', function () {
-    return view('user.Home');
-});
+Route::get('/', [HomeController::class, 'Home'])->name('user.Home');
 
 Route::get('/livematch', function () {
     return view('user.livematch');

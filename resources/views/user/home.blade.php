@@ -18,8 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script src="js/faq.js"></script>
+    <script src="{{ asset('js/faq.js') }}"></script>
 </head>
 <body>
     @include('components.side-nav')
@@ -120,110 +119,62 @@
         <div class="container">
             <h2 class="text-center mb-4">Meet Our Team</h2>
             <div class="row text-center">
-                <!-- Team Member 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="team-member member1">
-                        <div class="member-photo"></div>
-                        <h4>John Doe</h4>
-                        <p>Head Coach</p>
-                        <div class="social-icons">
-                            <a href="#"><i class="bi bi-facebook"></i></a>
-                            <a href="#"><i class="bi bi-twitter"></i></a>
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                @forelse ($homeArr['meet'] as $meet)
+                    <div class="col-md-4 mb-4">
+                        <div class="team-member">
+                            <div class="member-photo" style="background-image: url('{{ $meet->img }}');"></div>
+                            <h4>{{ $meet->name }}</h4>
+                            <p>{{ $meet->position }}</p>
+                            <div class="social-icons">
+                                @if($meet->icon_link1)
+                                    <a href="{{ $meet->link1 ?? '#' }}" target="_blank"><i class="{{ $meet->icon_link1 }}"></i></a>
+                                @endif
+                                @if($meet->icon_link2)
+                                    <a href="{{ $meet->link2 ?? '#' }}" target="_blank"><i class="{{ $meet->icon_link2 }}"></i></a>
+                                @endif
+                                @if($meet->icon_link3)
+                                    <a href="{{ $meet->link3 ?? '#' }}" target="_blank"><i class="{{ $meet->icon_link3 }}"></i></a>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Team Member 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="team-member member2">
-                        <div class="member-photo"></div>
-                        <h4>Jane Smith</h4>
-                        <p>Assistant Coach</p>
-                        <div class="social-icons">
-                            <a href="#"><i class="bi bi-facebook"></i></a>
-                            <a href="#"><i class="bi bi-twitter"></i></a>
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Team Member 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="team-member member3">
-                        <div class="member-photo"></div>
-                        <h4>Sam Wilson</h4>
-                        <p>Team Manager</p>
-                        <div class="social-icons">
-                            <a href="#"><i class="bi bi-facebook"></i></a>
-                            <a href="#"><i class="bi bi-twitter"></i></a>
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                    <p>No team members found.</p>
+                @endforelse
             </div>
         </div>
     </section>
-
-
 
     <!-- FAQ Section -->
     <section class="faq-section">
         <div class="container">
             <h2 class="faq-title">Frequently Asked Questions</h2>
             <div class="faq">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>What is the registration process?</h3>
-                        <span class="faq-toggle">+</span>
+                @foreach ($faqs as $faq)
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>{{ $faq->question }}</h3>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>{{ $faq->answer }}</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>The registration process is simple. Just click on the 'Register Now' button, fill in your
-                            details, and submit the form. You'll receive a confirmation email with further instructions.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>How can I contact support?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>You can contact support through our 'Contact' page. Fill out the contact form or reach us
-                            directly at support@example.com.</p>
-                    </div>
-                </div>
-                <!-- Add more FAQ items as needed -->
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>What are the requirements for registering a team?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Include any specific criteria or documents needed.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>How can I view fixtures and schedules?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Explain where users can find fixtures and how to navigate the schedule.
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Are there any fees associated with registration or participation?</h3>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Detail any costs involved and payment methods accepted.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    });
+    </script>
     @include('profile.partials.footer')
 
 </body>

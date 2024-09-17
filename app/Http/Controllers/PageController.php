@@ -10,6 +10,7 @@ use App\Models\ContactPhoneNumber;
 use App\Models\Achievement;
 use App\Models\Home;
 use App\Models\MeetTeam;
+use App\Models\Faq;
 
 class PageController extends Controller
 {
@@ -38,6 +39,7 @@ class PageController extends Controller
         // about section
         $about = About::where('about_id', 1)->first();
 
+        // home section 
         $home = Home::where('home_id', 1)->first();
         $homeAchievement = Achievement::where('home_id', 1)->take(4)->get(); 
         $homeMeet = MeetTeam::where('home_id', 1)->take(4)->get(); 
@@ -48,12 +50,15 @@ class PageController extends Controller
             'meet' => $homeMeet ,
         ]; 
 
+        $faqs = Faq::all();
+
         // dd($homeArr['Achievement']);
 
         return view('admin.page', [
             'contactArr' => $contactArr,
             'about' => $about,
-            'homeArr' => $homeArr
+            'homeArr' => $homeArr,
+            'faqs' => $faqs
         ]);
     }
 
@@ -277,6 +282,38 @@ class PageController extends Controller
             }
         }
         return redirect()->route('show.page')->with('success', 'Contact information updated successfully!');
+    }
+
+    // FAQs
+    public function FAQstore(Request $request)
+    {
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
+        ]);
+
+        Faq::create([
+            'question' => $request->input('question'),
+            'answer' => $request->input('answer'),
+        ]);
+
+        return redirect()->route('show.page')->with('success', 'FAQ added successfully.');
+    }
+
+    // Update an existing FAQ
+    public function FAQupdate(Request $request, Faq $faq)
+    {
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
+        ]);
+
+        $faq->update([
+            'question' => $request->input('question'),
+            'answer' => $request->input('answer'),
+        ]);
+
+        return redirect()->route('show.page')->with('success', 'FAQ updated successfully.');
     }
 
 }
