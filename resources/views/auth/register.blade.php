@@ -13,6 +13,12 @@
             background-size: cover;
             font-family: Arial, sans-serif;
         }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -22,105 +28,125 @@
                 <img src="{{ asset('img/Logo Latest 1.png') }}" alt="HokiArenaLogo" style="height:90px;">
             </div>
             <h2 class="form-title" style="color: white;font-weight:bold;">REGISTRATION</h2>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" id="registrationForm">
                 @csrf
 
-                <!-- Name -->
-                <div class="input-group">
-                    <label for="name">
-                        <i class='bx bx-user' style="color: white;font-weight:bold;"></i> Name
-                    </label>
-                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
-                    <x-input-error :messages="$errors->get('name')" class="error" />
-                </div>
+                <!-- Hidden Role (Automatically set to Manager) -->
+                <input type="hidden" name="role" value="Manager">
 
-                <!-- Email Address -->
-                <div class="input-group">
-                    <label for="email">
-                        <i class='bx bx-envelope' style="color: white;font-weight:bold;"></i> Email Address
-                    </label>
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username">
-                    <x-input-error :messages="$errors->get('email')" class="error" />
-                </div>
+                <!-- Personal Information Section -->
+                <div class="form-section active" id="personalInfo">
+                    <div class="input-group">
+                        <label for="fullName">
+                            <i class='bx bx-user' style="color: white;font-weight:bold;"></i> Name
+                        </label>
+                        <input id="fullName" type="text" name="fullName" value="{{ old('fullName') }}" required autofocus autocomplete="fullName">
+                        <x-input-error :messages="$errors->get('fullName')" class="error" />
+                    </div>
 
-                <!-- Role -->
-                <div class="input-group">
-                    <label for="role">
-                        <i class='bx bx-user-circle' style="color: white;font-weight:bold;"></i> Role
-                    </label>
-                    <select id="role" name="role" required autocomplete="role" onchange="toggleFields()">
-                        <option value="" disabled selected>Select Role</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Manager">Manager</option>
-                        <option value="Player">Player</option>
-                    </select>
-                    <x-input-error :messages="$errors->get('role')" class="error" />
-                </div>
+                    <div class="input-group">
+                        <label for="occupation">
+                        <i class='bx bxs-phone-call'style="color: white;font-weight:bold;"></i> Occupation:
+                        </label>
+                        <input id="occupation" type="text" name="occupation" value="{{ old('occupation') }}" required autocomplete="occupation">
+                        <x-input-error :messages="$errors->get('occupation')" class="error" />
+                    </div>
+                    <div class="input-group">
+                                    <label for="tournament_id">
+                                        <i class='bx bx-trophy' style="color: #7A5DCA;font-weight:bold;"></i> Tournament: &nbsp;&nbsp;
+                                    </label>
+                                    <select id="tournament_id" name="tournament_id">
+                                                                    <option value="" disabled selected>Select a tournament</option>
+                                                                    @foreach ($tournaments as $tournament)
+                                                                        <option value="{{ $tournament->id }}">{{ $tournament->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                    <x-input-error :messages="$errors->get('tournament_id')" class="error" />
+                                </div>
 
-                <!-- Team Name and Country -->
-                <div id="team-fields" class="input-group" style="display: none;">
-                    <label for="teamName">
-                        <i class='bx bx-trophy' style="color: white;font-weight:bold;"></i> Team Name
-                    </label>
-                    <input id="teamName" type="text" name="teamName" value="{{ old('teamName') }}" autofocus autocomplete="teamName">
-                    <x-input-error :messages="$errors->get('teamName')" class="error" />
-                </div>
+                    <div class="input-group">
+                        <label for="teamName">
+                            <i class='bx bxs-flag-alt' style="color: white;font-weight:bold;"></i> Team Name:
+                        </label>
+                        <input id="teamName" type="text" name="teamName" value="{{ old('teamName') }}" required autocomplete="teamName">
+                        <x-input-error :messages="$errors->get('teamName')" class="error" />
+                    </div>
 
-                <div id="country-fields" class="input-group" style="display: none;">
-                    <label for="country">
-                        <i class='bx bx-globe' style="color: white;font-weight:bold;"></i> Country
-                    </label>
-                    <input id="country" type="text" name="country" value="{{ old('country') }}" autofocus autocomplete="country">
-                    <x-input-error :messages="$errors->get('country')" class="error" />
-                </div>
+                    <div class="input-group">
+                        <label for="address">
+                            <i class='bx bx-home' style="color: white;font-weight:bold;"></i> Address:
+                        </label>
+                        <input id="address" type="text" name="address" value="{{ old('address') }}" required autocomplete="address">
+                        <x-input-error :messages="$errors->get('address')" class="error" />
+                    </div>
 
-                <!-- Password -->
-                <div class="input-group">
-                    <label for="password">
-                        <i class='bx bx-lock' style="color: white;font-weight:bold;"></i> Password
-                    </label>
-                    <input id="password" type="password" name="password" required autocomplete="new-password">
-                    <x-input-error :messages="$errors->get('password')" class="error" />
-                </div>
+                    <div class="input-group">
+                        <label for="country">
+                            <i class='bx bx-globe' style="color: white;font-weight:bold;"></i> Country:
+                        </label>
+                        <input id="country" type="text" name="country" value="{{ old('country') }}" required autocomplete="country">
+                        <x-input-error :messages="$errors->get('country')" class="error" />
+                    </div>
 
-                <!-- Confirm Password -->
-                <div class="input-group">
-                    <label for="password_confirmation">
-                        <i class='bx bx-lock-alt' style="color: white;font-weight:bold;"></i> Confirm Password
-                    </label>
-                    <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="error" />
-                </div>
-
-                <div class="form-actions">
-                    <a href="{{ route('login') }}" style="color:white;font-size:12px">Already have an Account?</a>
-                </div>
- 
-                <div class="row">
-                    <div class="flex items-center justify-center w-full mt-4" style="color:white;font-weight:bold">
-                        <x-primary-button class="btn">
-                            {{ __('Register') }}
-                        </x-primary-button>
+                    <div class="form-actions">
+                        <button type="button" class="next-button" onclick="showNextSection()">Next</button>
                     </div>
                 </div>
+
+<!-- Email and Password Section -->
+<div class="form-section" id="emailPassword">
+    <div class="input-group">
+        <label for="email">
+            <i class='bx bx-envelope' style="color: white;font-weight:bold;"></i> Email Address
+        </label>
+        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username">
+        <x-input-error :messages="$errors->get('email')" class="error" />
+    </div>
+
+    <div class="input-group">
+        <label for="password">
+            <i class='bx bx-lock' style="color: white;font-weight:bold;"></i> Password
+        </label>
+        <input id="password" type="password" name="password" required autocomplete="new-password">
+        <x-input-error :messages="$errors->get('password')" class="error" />
+    </div>
+
+    <div class="input-group">
+        <label for="password_confirmation">
+            <i class='bx bx-lock-alt' style="color: white;font-weight:bold;"></i> Confirm Password
+        </label>
+        <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
+        <x-input-error :messages="$errors->get('password_confirmation')" class="error" />
+    </div>
+
+    <div class="form-actions">
+        <button type="button" class="back-button" onclick="showPreviousSection()">Back</button>
+        <a href="{{ route('login') }}" style="color:white;font-size:12px">Already have an Account?</a>
+    </div>
+
+    <div class="row">
+        <div class="flex items-center justify-center w-full mt-4" style="color:white;font-weight:bold">
+            <x-primary-button class="btn">
+                {{ __('Register') }}
+            </x-primary-button>
+        </div>
+    </div>
+</div>
+
             </form>
         </div>
     </div>
 
     <script>
-        function toggleFields() {
-            const role = document.getElementById('role').value;
-            const teamFields = document.getElementById('team-fields');
-            const countryFields = document.getElementById('country-fields');
-            
-            if (role === 'Admin') {
-                teamFields.style.display = 'none';
-                countryFields.style.display = 'none';
-            } else {
-                teamFields.style.display = 'block';
-                countryFields.style.display = 'block';
-            }
+        function showNextSection() {
+            document.getElementById('personalInfo').classList.remove('active');
+            document.getElementById('emailPassword').classList.add('active');
         }
+
+        function showPreviousSection() {
+    document.getElementById('emailPassword').classList.remove('active');
+    document.getElementById('personalInfo').classList.add('active');
+}
     </script>
 </body>
 </html>

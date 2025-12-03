@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Player;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\Validator;
@@ -13,203 +15,156 @@ use League\Csv\Reader;
 class PlayerController extends Controller
 
 {
-     //-----------------------------------------------------------------------------------------edit-------------------
 
-    public function edit($id)
+
+    public function showLineUp()
 {
-    $player = Player::findOrFail($id);
-    return view('player.edit', compact('player'));
+    // Get the logged-in manager
+    $manager = Auth::user(); // Assuming the manager is logged in
+
+    // Fetch players that belong to the same team as the manager
+    $players = Player::where('teamID', $manager->teamID)->get();
+
+    // Pass the filtered players data to the 'line-up' view
+    return view('line-up', compact('players'));
 }
 
-
-    public function update(Request $request, $id)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'fullName' => 'required|string|max:255',
-            'contact' => 'required|string|max:255',
-            'jerseyNumber' => 'required|integer',
-            'position' => 'required|string|max:255',
-        ]);
-    
-        // Find the player by ID and update their data
-        $player = Player::findOrFail($id);
-        $player->update($validatedData);
-    
-        // Redirect with success message
-        return redirect()->route('player.view')->with('success', 'Player updated successfully.');
-    }
-    
-
-     //-----------------------------------------------------------------------------------------delete-------------------
-
-
-    public function destroy($id)
-    {
-        // Find the player by ID and delete the record
-        $player = Player::findOrFail($id);
-        $player->delete();
-
-        // Redirect with success message
-        return redirect()->route('player.view')->with('success', 'Player deleted successfully.');
-    }
-
-
-     //-----------------------------------------------------------------------------------------insert data------------------
-
-
-    public function create()
-    {
-        // Return the view with the form
-        return view('player');
-    }
-
-    public function index()
-    {
-        // Fetch all team from the database
-        $player = Player::all();
-
-        // Pass the data to the view
-        return view('player.index', compact('player'));
-    }
-
-    public function view()
+public function view()
 {
-    // Fetch all teams from the database
-    $players = Player::all();
+    // Get the logged-in manager
+    $manager = Auth::user(); // Assuming the manager is logged in
 
-    // Pass the data to the view
-    return view('player-view', compact('players'));
+    // Fetch players that belong to the same team as the manager
+    $players = Player::where('teamID', $manager->teamID)->get();
+
+    // Pass the filtered players data to the 'formation' view
+    return view('formation', compact('players'));
 }
+    //Player Store is inside RegisteredUserController :3
+  
+    //-------------------------------------------------------------------------MANAGER DASHBOAR
 
 
-
-    public function store(Request $request)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'fullName' => 'required|string|max:255', 
-            'displayName' => 'required|string|max:255',
-            'contact' => 'required|string|max:255', 
-            'jerseyNumber' => 'required|integer|max:255', 
-            'position' => 'required|string|max:255',  
-        ]);
-
-        // Create a new Fixture record
-        Player::create($validatedData);
-
-        // Redirect with success message
-        return redirect()->route('player.view')->with('success', 'Player added successfully.');
-
-    }
-
- //-----------------------------------------------------------------------------------------export-------------------
-
-
-
-    public function exportCsv()
-    {
-        $fileName = 'players.csv';
-        $players = Player::all();
-
-        $headers = [
-            "Content-Type" => "text/csv",
-            "Content-Disposition" => "attachment; filename=\"$fileName\"",
-        ];
-
-        $columns = ['ID', 'Full Name', 'Display Name', 'Contact', 'Jersey Number', 'Position'];
-
-        $callback = function() use ($players, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-
-            foreach ($players as $player) {
-                $row = [
-                    $player->id,
-                    $player->fullName,
-                    $player->displayName,
-                    $player->contact,
-                    $player->jerseyNumber,
-                    $player->position,
-                ];
-
-                fputcsv($file, $row);
-            }
-
-            fclose($file);
-        };
-
-        return response()->stream($callback, 200, $headers);
-    }
-
-
-
-    //--------------------------------------------------------------( NOT WORKING :( )---import-------------------
-
-    public function importCsv(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'csvFile' => 'required|file|mimes:csv,txt',
-        ]);
-
-        // Get the uploaded file
-        $file = $request->file('csvFile');
-        $csvData = file_get_contents($file->getRealPath());
-
-        // Create CSV Reader instance
-        $reader = Reader::createFromString($csvData);
-
-        // Set header offset if your CSV file has a header
-        $reader->setHeaderOffset(0);
-
-        // Iterate through the CSV records
-        foreach ($reader->getRecords() as $record) {
-            // Validate each record
-            $validator = Validator::make($record, [
-                'ID' => 'required|integer',
-                'Full Name' => 'required|string',
-                'Display Name' => 'required|string',
-                'Contact' => 'required|string',
-                'Jersey Number' => 'required|integer',
-                'Position' => 'required|string',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->with('error', 'Invalid CSV format')->withInput();
-            }
-
-            // Process the valid record
-            Player::updateOrCreate(
-                ['id' => $record['ID']], // Assuming 'ID' is used to match existing records
-                [
-                    'fullName' => $record['Full Name'],
-                    'displayName' => $record['Display Name'],
-                    'contact' => $record['Contact'],
-                    'jerseyNumber' => $record['Jersey Number'],
-                    'position' => $record['Position'],
-                ]
-            );
-        }
-
-        // Redirect with success message
-        return redirect()->route('players.view')->with('success', 'Players imported successfully.');
-    }
     public function dashboard()
     {
-        // Count the number of players
-        $totalPlayers = Player::count();
-
-        
-        // Calculate total wins and total losses
-        
-        // Fetch all players for the table
-        $players = Player::all();
+        // Get the authenticated manager
+        $manager = Auth::user();
     
-        // Return the view with all necessary data
-        return view('manager-dashboard', compact('totalPlayers','players'));
+        // Ensure the user is a manager
+        if ($manager->role !== 'Manager') {
+            return redirect()->back()->with('error', 'Only managers can access the dashboard.');
+        }
+    
+        // Fetch all players registered by this manager
+        $managerPlayers = User::where('role', 'Player')->where('manager_id', $manager->id)->get();
+    
+        // Fetch all players under the same team ID as the manager
+        $teamPlayers = User::where('role', 'Player')->where('teamID', $manager->teamID)->get();
+    
+        // Get the manager's team and the tournaments the team has joined
+        $team = $manager->team; // assuming there's a `team` relationship in User model
+        $teamTournaments = $team->tournaments; // assuming the `tournaments` relationship is defined in the Team model
+    
+        // Return view with all necessary data
+        return view('manager-dashboard', [
+            'managerPlayers' => $managerPlayers,
+            'teamPlayers' => $teamPlayers,
+            'teamTournaments' => $teamTournaments,
+        ]);
+    }
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+public function dashboardPlayer()
+{
+    // Get the authenticated player
+    $user = Auth::user();
+    $team = $user->team; // Assuming there's a `team` relationship in User model
+
+    // Check if the team exists
+    if ($team) {
+        $teamTournaments = $team->tournaments; // Assuming the `tournaments` relationship is defined in the Team model
+
+        // Get the team details
+        $teamDetails = [
+            'name' => $team->name,
+            'logo' => $team->LogoURL ? asset('storage/' . $team->LogoURL) : null, // Generate full logo URL
+            'manager_name' => optional($team->manager)->name, // Assuming there's a relationship to get manager's name
+        ];
+    } else {
+        // Handle case when team does not exist
+        $teamDetails = [
+            'name' => 'N/A',
+            'logo' => null,
+            'manager_name' => 'N/A',
+        ];
+        $teamTournaments = collect(); // Empty collection if no team
+    }
+
+    // Return view with all necessary data
+    return view('player-dashboard', [
+        'teamTournaments' => $teamTournaments,
+        'teamDetails' => $teamDetails, // Pass team details to the view
+    ]);
+}
+
+    
+    //---------------------------------------------------------------------------------------formation
+
+    /**
+     * Store a newly selected player and assign them a formation position.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'player_id' => 'required|exists:players,id',
+            'formationPosition' => 'required|string',
+        ]);
+
+        // Find the player
+        $player = Player::findOrFail($request->input('player_id'));
+
+        // Update the player's formation position
+        $player->formationPosition = $request->input('formationPosition');
+        $player->save();
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Player added to the formation successfully!');
+    }
+
+    /**
+     * Change an existing player's formation position.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function change(Request $request)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'player_id' => 'required|exists:players,id',
+            'formationPosition' => 'required|string',
+        ]);
+    
+        // Find the player with the current formation position and set it to null
+        $existingPlayer = Player::where('formationPosition', $request->input('formationPosition'))->first();
+        if ($existingPlayer) {
+            $existingPlayer->formationPosition = null;
+            $existingPlayer->save();
+        }
+    
+        // Find the new player and update their formation position
+        $player = Player::findOrFail($request->input('player_id'));
+        $player->formationPosition = $request->input('formationPosition');
+        $player->save();
+    
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Player position updated successfully!');
     }
     
-    
-
 }
+

@@ -13,7 +13,7 @@
         
             protected $fillable = [
                 'fullName',
-                'Name',
+                'displayName',
                 'contact',
                 'jerseyNumber',
                 'position',

@@ -9,39 +9,150 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="{{ asset('css/formation.css') }}" rel="stylesheet">
 </head>
-<body>
-
+<body style="background-color: #f4f7f6;">
+    <!-- Navbar -->
     @include('layouts.navbar')
 
-    <div class="container-fluid" style="height: 90%; padding: 0;">
+    <!-- Main Layout -->
+    <div class="container-fluid" style="width: 100%; height: 100%;">
         <div class="row">
-            <div class="col-3" style="background-color: #D3D3D3;">
+            <!-- Sidebar -->
+            <div class="col-2" style="background-color: #e4e4e4; height: 100vh;">
                 @include('layouts.sidebar-manager')
             </div>
 
-            <div class="col-9 mt-5">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="text-center" style="color:#5D3CB8;font-weight:bold;">Formation</h1>
+            <!-- Main Content -->
+            <div class="col-10" >
+                <div class="container mt-4">
+                <h1 class="" style="color:#5D3CB8;font-weight:bold;">Line-Up</h1>
                     @if(session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
                 </div>
-                <div class="whatthesigma">
-                    <img src="img/hockey_.jpg" alt="Hockey Field">
-                    <button class="gk" data-position="Goalkeeper">GK<span class="tooltip">Goalkeeper</span></button>
-                    <button class="rd" data-position="Right Defender">RD<span class="tooltip">Right Defender</span></button>
-                    <button class="ld" data-position="Left Defender">LD<span class="tooltip">Left Defender</span></button>
-                    <button class="rm" data-position="Right Midfielder">RM<span class="tooltip">Right Midfielder</span></button>
-                    <button class="cm" data-position="Center Midfielder">CM<span class="tooltip">Center Midfielder</span></button>
-                    <button class="lm" data-position="Left Midfielder">LM<span class="tooltip">Left Midfielder</span></button>
-                    <button class="ri" data-position="Right Inner">RI<span class="tooltip">Right Inner</span></button>
-                    <button class="li" data-position="Left Inner">LI<span class="tooltip">Left Inner</span></button>
-                    <button class="rf" data-position="Right Forward">RF<span class="tooltip">Right Forward</span></button>
-                    <button class="cf" data-position="Center Forward">CF<span class="tooltip">Center Forward</span></button>
-                    <button class="lf" data-position="Left Forward">LF<span class="tooltip">Left Forward</span></button>
+                <div class="row">
+                    <div class="col-7">
+                        <div class="whatthesigma" style="padding-bottom:20px">
+                            <img src="img/hockey.jpg" class="img-fluid" alt="Hockey Field" style="max-width: 100%; border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1);">
+                            <button class="gk" data-position="Goalkeeper">GK<span class="tooltip">Goal Keeper</span></button>
+                            <button class="rd" data-position="Right Defender">RD<span class="tooltip">Right Defender</span></button>
+                            <button class="ld" data-position="Left Defender">LD<span class="tooltip">Left Defender</span></button>
+                            <button class="rm" data-position="Right Midfielder">RM<span class="tooltip">Right Midfielder</span></button>
+                            <button class="cm" data-position="Center Midfielder">CM<span class="tooltip">Center Midfielder</span></button>
+                            <button class="lm" data-position="Left Midfielder">LM<span class="tooltip">Left Midfielder</span></button>
+                            <button class="ri" data-position="Right Inner">RI<span class="tooltip">Right Inner</span></button>
+                            <button class="li" data-position="Left Inner">LI<span class="tooltip">Left Inner</span></button>
+                            <button class="rf" data-position="Right Forward">RF<span class="tooltip">Right Forward</span></button>
+                            <button class="cf" data-position="Center Forward">CF<span class="tooltip">Center Forward</span></button>
+                            <button class="lf" data-position="Left Forward">LF<span class="tooltip">Left Forward</span></button>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <table class="table table-bordered text-center" style="padding:2px;">
+                            <thead>
+                                <tr>
+                                    <th style="background-color:purple;color:white;">Position</th>
+                                    <th style="background-color:purple;color:white;">Side</th>
+                                    <th style="background-color:purple;color:white">Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Goal Keeper -->
+                                @php
+                                    $gk = $players->where('formationPosition', 'Goalkeeper')->first();
+                                @endphp
+                                <tr>
+                                    <td style="background-color:#CEADDB;">Goal Keeper</td>
+                                    <td colspan="2">{{ $gk ? $gk->name : 'None' }}</td> <!-- Remove "None" and merge -->
+                                </tr>
+
+                                <!-- Defender Row -->
+                                <tr>
+                                    <td rowspan="2">Defender</td>
+                                    @php
+                                        $rd = $players->where('formationPosition', 'Right Defender')->first();
+                                    @endphp
+                                    <td style="background-color:#CEADDB;">Right</td>
+                                    <td style="background-color:#CEADDB;">{{ $rd ? $rd->name : 'None' }}</td>
+                                </tr>
+                                <tr>
+                                    @php
+                                        $ld = $players->where('formationPosition', 'Left Defender')->first();
+                                    @endphp
+                                    <td>Left</td>
+                                    <td>{{ $ld ? $ld->name : 'None' }}</td>
+                                </tr>
+
+                                <!-- Midfielder Row -->
+                                <tr>
+                                    <td rowspan="3" style="background-color:#CEADDB;">Midfielder</td>
+                                    @php
+                                        $rm = $players->where('formationPosition', 'Right Midfielder')->first();
+                                    @endphp
+                                    <td style="background-color:#CEADDB;">Right</td>
+                                    <td style="background-color:#CEADDB;">{{ $rm ? $rm->name : 'None' }}</td>
+                                </tr>
+                                <tr>
+                                    @php
+                                        $cm = $players->where('formationPosition', 'Center Midfielder')->first();
+                                    @endphp
+                                    <td>Center</td>
+                                    <td>{{ $cm ? $cm->name : 'None' }}</td>
+                                </tr>
+                                <tr>
+                                    @php
+                                        $lm = $players->where('formationPosition', 'Left Midfielder')->first();
+                                    @endphp
+                                    <td style="background-color:#CEADDB;">Left</td>
+                                    <td style="background-color:#CEADDB;">{{ $lm ? $lm->name : 'None' }}</td>
+                                </tr>
+
+                                <!-- Inner Row -->
+                                <tr>
+                                    <td rowspan="2">Inner</td>
+                                    @php
+                                        $ri = $players->where('formationPosition', 'Right Inner')->first();
+                                    @endphp
+                                    <td>Right</td>
+                                    <td>{{ $ri ? $ri->name : 'None' }}</td>
+                                </tr>
+                                <tr>
+                                    @php
+                                        $li = $players->where('formationPosition', 'Left Inner')->first();
+                                    @endphp
+                                    <td style="background-color:#CEADDB;">Left</td>
+                                    <td style="background-color:#CEADDB;">{{ $li ? $li->name : 'None' }}</td>
+                                </tr>
+
+                                <!-- Forward Row -->
+                                <tr>
+                                    <td rowspan="3" style="background-color:#CEADDB;">Forward</td>
+                                    @php
+                                        $rf = $players->where('formationPosition', 'Right Forward')->first();
+                                    @endphp
+                                    <td>Right</td>
+                                    <td>{{ $rf ? $rf->name : 'None' }}</td>
+                                </tr>
+                                <tr>
+                                    @php
+                                        $cf = $players->where('formationPosition', 'Center Forward')->first();
+                                    @endphp
+                                    <td style="background-color:#CEADDB;">Center</td>
+                                    <td style="background-color:#CEADDB;">{{ $cf ? $cf->name : 'None' }}</td>
+                                </tr>
+                                <tr>
+                                    @php
+                                        $lf = $players->where('formationPosition', 'Left Forward')->first();
+                                    @endphp
+                                    <td>Left</td>
+                                    <td>{{ $lf ? $lf->name : 'None' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -58,14 +169,14 @@
             </div>
 
             <div id="selectPlayerTab" class="tab-content active">
-                <form id="formationForm" action="{{ route('formation.store') }}" method="POST">
+                <form id="formationForm" action="{{ route('player.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="player" style="color:white;font-weight:bold;">Select Player: </label>
                         <select class="form-control @error('player_id') is-invalid @enderror" id="player" name="player_id" required>
                             <option value="">Select a player</option>
                             @foreach($players as $player)
-                                <option value="{{ $player->id }}">{{ $player->fullName ?? $player->Name }} ({{ $player->jerseyNumber }})</option>
+                                <option value="{{ $player->id }}">{{ $player->name }} ({{ $player->jerseyNumber }})</option>
                             @endforeach
                         </select>
                         @error('player_id')
@@ -79,14 +190,14 @@
 
             <!-- Change Player Tab -->
             <div id="changePlayerTab" class="tab-content">
-    <form id="changePlayerForm" action="{{ route('formation.store') }}" method="POST">
+    <form id="changePlayerForm" action="{{ route('player.change') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="changePlayer" style="color:white;font-weight:bold;">Change Player: </label>
             <select class="form-control @error('player_id') is-invalid @enderror" id="changePlayer" name="player_id" required>
                 <option value="">Select a player</option>
                 @foreach($players as $player)
-                    <option value="{{ $player->id }}">{{ $player->fullName }} ({{ $player->jerseyNumber }})</option>
+                    <option value="{{ $player->id }}">{{ $player->name }} ({{ $player->jerseyNumber }})</option>
                 @endforeach
             </select>
             @error('player_id')

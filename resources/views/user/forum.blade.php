@@ -38,7 +38,7 @@
     <div class="forum-row">
         <div class="content-container">
             <div class="forum-img">
-                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" >
+                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}">
             </div>
             <div class="summary">
                 {{ $article->summary }}
@@ -74,3 +74,4 @@
     
     @include('profile.partials.footer')
 </body>
+</html>

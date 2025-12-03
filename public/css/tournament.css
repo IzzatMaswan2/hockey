@@ -1489,8 +1489,9 @@ ul.winnerchampion li.team .score {
 
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    padding: 6px 0px;
     border-top: none;
+    width: 90%;
 }
 
 .group-table {
@@ -1501,7 +1502,8 @@ ul.winnerchampion li.team .score {
 .group-table table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 5px;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .group-table th, .group-table td {
@@ -1533,7 +1535,7 @@ ul.winnerchampion li.team .score {
 /*////////////////////////////////MATCH TAB//////////////////////////////////*/
 .scheduletab {
     overflow: auto;
-    background-color: #00FF87;
+    background-color: #4ccb90;
     border-radius: 20px;
     width: 90%;
     margin: 0 auto; /* Center the tab container */
@@ -1556,11 +1558,11 @@ ul.winnerchampion li.team .score {
 }
 
 .scheduletab button:hover {
-    background-color: #32D086;
+    background-color: #30ad73;
 }
 
 .scheduletab button.active {
-    background-color: #32D086;
+    background-color: #30ad73;
 }
 
 .matchschedule-heading {
@@ -1589,6 +1591,7 @@ ul.winnerchampion li.team .score {
 /* Show the content of the active tab */
 .mtabcontent.show {
     display: block;
+    background-color: #ffffff;
 }
 
 .matchtab {
@@ -1619,7 +1622,19 @@ ul.winnerchampion li.team .score {
     padding: 10px;
     border-radius: 10px;
     color: #FFF;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
+.matchcontent h3 {
+    font-size: 24px; /* adjust as needed */
+    line-height: 1.2;
+    white-space: normal; 
+    overflow: visible;
+}
+
 
 .matchcontent p {
     text-transform: uppercase;
@@ -1647,6 +1662,7 @@ ul.winnerchampion li.team .score {
     align-items: center;
     margin-top: 10px; /* Adjust as needed */
     color: #FFFFFF;
+   
 }
 
 .vs {
@@ -1666,7 +1682,7 @@ ul.winnerchampion li.team .score {
 
 
 .lineup-button {
-    background-color: #00FF87;
+    background-color: #3cb37b;
     border: none;
     color: white;
     font-weight: bold;
@@ -1678,6 +1694,7 @@ ul.winnerchampion li.team .score {
     margin-top: 10px; /* Space above the button */
     cursor: pointer;
     border-radius: 5px;
+    
 }
 
 .lineup-button:hover {
@@ -1770,10 +1787,14 @@ ul.winnerchampion li.team .score {
         padding: 10px;
         border-radius: 10px;
         color: #FFF;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     
-    .matchcontent h3 {
-        font-size: 25px;
+    .matchcontent h5 {
+        font-size: 20px;
     }
 
     .matchcontent p {
@@ -1927,6 +1948,10 @@ ul.winnerchampion li.team .score {
         padding: 10px;
         border-radius: 10px;
         color: #FFF;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     
     .matchcontent h3 {

@@ -20,11 +20,19 @@
             @csrf
             <div class="form-group">
                 <label for="fullName">Full Name: </label>
-                <input type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" name="fullName" value="{{ old('fullName', $player->fullName) }}" required>
+                <input type="text" class="form-control @error('fullName') is-invalid @enderror" id="fullName" name="fullName" value="{{ old('fullName', $player->name) }}" required>
                 @error('fullName')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="form-group">
+    <label for="displayName">Display Name: </label>
+    <input type="text" class="form-control @error('displayName') is-invalid @enderror" id="displayName" name="displayName" value="{{ old('displayName', $player->displayName) }}" required>
+    @error('displayName')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
 
             <div class="form-group">
                 <label for="contact">Contact Number: </label>

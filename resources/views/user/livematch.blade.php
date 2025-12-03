@@ -61,8 +61,6 @@
             <button class="scheduletablinks" onclick="openScheduleGroup(event, 'MATCH INFO')">MATCH INFO</button>
         </div>
 
-        
-
         <div id="LINEUP" class="scheduletabcontent">
             <div class="teamtab">
                 <button>{{$liveMatchDetails['teamA']->Name}}</button>
@@ -75,7 +73,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for ($i = 0; $i < 5; $i++)
+                    @for ($i = 0; $i < 11; $i++)
                     <tr>
                         <td>{{ htmlspecialchars($liveMatchDetails['starterA'][$i]) }}</td>
                         <td>{{ htmlspecialchars($liveMatchDetails['starterB'][$i]) }}</td>
@@ -97,7 +95,6 @@
                 </tbody>
             </table>
         </div>
-        
 
         <div id="STAT" class="scheduletabcontent">
             <table class="stat-table">
@@ -129,7 +126,6 @@
                             'Red Card' => 0
                         ];
         
-                        // Iterate through stats and accumulate values
                         foreach ($stats as $stat) {
                             $statName = '';
         
@@ -143,9 +139,9 @@
                             }
         
                             if ($statName) {
-                                if ($teamAPlayers->contains('PlayerID', $stat->PlayerID)) {
+                                if ($teamAPlayers->contains('id', $stat->PlayerID)) {
                                     $statsTeamA[$statName] += $stat->Score;
-                                } elseif ($teamBPlayers->contains('PlayerID', $stat->PlayerID)) {
+                                } elseif ($teamBPlayers->contains('id', $stat->PlayerID)) {
                                     $statsTeamB[$statName] += $stat->Score;
                                 }
                             }
@@ -179,15 +175,15 @@
                     </tr>
                     <tr>
                         <td class="label">EVENT NAME</td>
-                        <td class="value">{{$TournamentName->Name}}</td>
+                        <td class="value">{{$TournamentName->name}}</td>
                     </tr>
                     <tr>
-                        <td class="label">SCORING JUDGE</td>
-                        <td class="value">{{$ScoringJudgeID->Name}}</td>
+                        <td class="label">SCORING REFEREE</td>
+                        <td class="value">{{$ScoringRefereeID->Name}}</td>
                     </tr>
                     <tr>
-                        <td class="label">TIMING JUDGE</td>
-                        <td class="value">{{$TimingJudgeID->Name}}</td>
+                        <td class="label">TIMING REFEREE</td>
+                        <td class="value">{{$TimingRefereeID->Name}}</td>
                     </tr>
                 </tbody>
             </table>

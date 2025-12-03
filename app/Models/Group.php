@@ -9,36 +9,31 @@ class Group extends Model
 {
     use HasFactory;
 
+    // Define the table associated with the model
     protected $table = 'group';
-    protected $primaryKey = 'GroupID';
-    public $timestamps = false; // Set to true if timestamps are used
+
+    public $timestamps = false;
+
+
+    // Define the fillable attributes
     protected $fillable = [
-        'TournamentID', 
-        'Name', 
-        'group_id',
-        'team_id', 
-        'played',
-        'wins',
-        'draws',
-        'loses',
-        'gf',
-        'ga',
-        'gd',
-        'points',
-        'so_bonus',
-        'Description'
+            'tournament_id', 
+            'groupcreateID',
+            'teamID', 
+            'category_id',
+            'played',
+            'wins',
+            'draws',
+            'loses',
+            'gf',
+            'ga',
+            'gd',
+            'points',
+            'so_bonus'
+         // Add other fields as necessary
     ];
 
-    public function tournament()
-    {
-        return $this->belongsTo(Tournament::class, 'TournamentID', 'TournamentID');
-    }
-
-    public function matchGroups()
-    {
-        return $this->hasMany(MatchGroup::class, 'GroupID', 'GroupID');
-    }
-
+    // Define the relationship with the Fixture model
     public function fixtures()
     {
         return $this->hasMany(Fixture::class, 'group_id');
@@ -52,11 +47,19 @@ class Group extends Model
     // Define the relationship with Team
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class, 'teamID');
     }
 
-        public function teams()
+    public function groupcreate()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsTo(GroupCreate::class, 'groupcreateID', 'GroupID');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(TournamentCategory::class, 'category_id');
+    }
+    
+
+    
 }

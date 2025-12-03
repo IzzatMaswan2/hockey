@@ -9,14 +9,19 @@
                 src="{{ Auth::user()->Img_User ? asset('img/' . Auth::user()->Img_User) : asset('img/user-default.png') }}" 
                 alt="User Profile Image" 
                 class="sidenav-userimage"/> 
-            <span class="sidenav-name">{{ Auth::user()->name }}</span>
+            <span class="sidenav-name">{{ Auth::user()->fullName }}</span>
         </div>
         <br>
-        <a href="/user">Profile</a>
-        <a href="javascript:void(0)" onclick="navigateAndOpenTab('Notification')">Notification</a>
-        <a href="javascript:void(0)" onclick="navigateAndOpenTab('ResetPassword')">Reset Password</a>
-        <a href="javascript:void(0)" onclick="navigateAndOpenTab('Setting')">Setting</a>
-        <a href="javascript:void(0)" onclick="navigateAndOpenTab('Activity')">Activity</a>
+        @if(Auth::user()->role == 'Manager')
+            <a href="/manager-dashboard">Manager Dashboard</a>
+        @endif
+        @if(Auth::user()->role == 'Player')
+            <a href="/player-dashboard">Player Dashboard</a>
+        @endif
+        @if(Auth::user()->role == 'Admin')
+            <a href="/dashboard">Admin Dashboard</a>
+        @endif
+        <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
         <form method="POST" action="{{ route('logout') }}" id="logout-form">
             @csrf
             <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
@@ -39,7 +44,7 @@
         <a href="/forum">Forum</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
-        <a href="/fixture" class="sidefixture">Fixture</a>
+        <a href="/fixture/tournamentlist" class="sidefixture">Fixture</a>
     @else
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav('mob')">&times;</a>
         <div class="sidenav-user">
@@ -47,24 +52,18 @@
                 src="{{ Auth::user()->Img_User ? asset('img/' . Auth::user()->Img_User) : asset('img/user-default.png') }}"  
                 alt="User Profile Image" 
                 class="sidenav-userimage"/> 
-            <span class="sidenav-name">{{ Auth::user()->name }}</span>
+            <span class="sidenav-name">{{ Auth::user()->fullName }}</span>
         </div>
         <br>
-        <button class="dropdown-btn" style="margin-left: 16px;">User
-            <i class="bi bi-caret-down-fill"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="/user">Profile</a>
-            <a href="javascript:void(0)" onclick="navigateAndOpenTab('Notification')">Notification</a>
-            <a href="javascript:void(0)" onclick="navigateAndOpenTab('ResetPassword')">Reset Password</a>
-            <a href="javascript:void(0)" onclick="navigateAndOpenTab('Setting')">Setting</a>
-            <a href="javascript:void(0)" onclick="navigateAndOpenTab('Activity')">Activity</a>
-        </div>
-        <a href="/tournament">Tournament</a>
+        @if(Auth::user()->role == 'Manager')
+            <a href="/manager-dashboard">Manager Page</a>
+        @endif
+        <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
+        <a href="/tournamentlist">Tournament</a>
         <a href="/forum">Forum</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
-        <a href="/fixture" class="sidefixture">Fixture</a>
+        <a href="/fixture/tournamentlist" class="sidefixture">Fixture</a>
         <form method="POST" action="{{ route('logout') }}" id="logout-form">
             @csrf
             <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>

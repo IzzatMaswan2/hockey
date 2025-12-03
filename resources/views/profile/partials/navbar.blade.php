@@ -32,21 +32,21 @@
                     <i class="bi bi-x"></i>
                 </div>
                 <ul class="nav__link">
-                    <li><a href="/tournament">Tournament</a></li>
+                    <li><a href="/tournamentlist">Tournament</a></li>
                     <li><a href="/forum">Forum</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
-                    <li class="fixture"><a href="/fixture">Fixture</a></li>
+                    <li class="fixture"><a href=" /fixture/tournamentlist">Fixture</a></li>
                 </ul>
             </nav>
             <div class="cta">
-                <button>Fixture</button>
+                <button onclick="window.location.href='/fixture/tournamentlist'">Fixture</button>
             </div>
             @guest
             <a href="/login" class="login-header">LOGIN</a>
             @else
             <div class="logged-user" onclick="openNav('lap')">
-                <span class="user-name">{{ strtok(Auth::user()->name, ' ') }}</span>
+                <span class="user-name">{{ strtok(Auth::user()->fullName, ' ') }}</span>
                 <img 
                     src="{{ Auth::user()->Img_User ? asset('img/' . Auth::user()->Img_User) : asset('img/user-default.png') }}" 
                     alt="User Profile Image" 

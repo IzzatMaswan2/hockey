@@ -27,10 +27,9 @@ class HomeController extends Controller
 
         $faqs = Faq::all();
 
-        return view('user.Home', [
+        return view('user.home', [
             'homeArr' => $homeArr,
             'faqs' => $faqs
         ]);
     }
 }
-

@@ -10,19 +10,28 @@ class Player extends Model
     use HasFactory;
 
     protected $table = 'players';
-    protected $primaryKey = 'PlayerID';
+    protected $primaryKey = 'id';
     public $timestamps = false; // Set to true if timestamps are used
     protected $fillable = [
-        'Name',
-        'fullName',
+        'user_id',        // Foreign key referencing the users table
+        'name',
+        'displayName',
         'contact',
-        'jerseyNumber', 
-        'teamID', 
-        'field_status', 
-        'position', 
-        'birthdate', 
-        'Nationality'
+        'jerseyNumber',
+        'position',
+        'formationPosition',
+        'dob',
+        'field_status',
+        'email',
+        'teamID',
+        'manager_id',
+
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function team()
     {

@@ -23,7 +23,7 @@
                 <img src="{{asset($teamAInfo->logoURL)}}" alt="{{$teamAInfo->Name}} Logo" class="teamlogo left">
                 <div class="matchcontent">
                     <h3>{{$teamAInfo->Name}}</h3>
-                    <div class="finalscore">2</div>
+                    <div class="finalscore">0</div>
                 </div>
             </div>
             
@@ -34,7 +34,7 @@
             <div class="tabm">
                 <div class="matchcontent">
                     <h3>{{$teamBInfo->Name}}</h3>
-                    <div class="finalscore">1</div>
+                    <div class="finalscore">0</div>
                 </div>
                 <img src="{{asset($teamBInfo->logoURL)}}" alt="{{$teamBInfo->Name}}Logo" class="teamlogo right">
             </div>
@@ -61,7 +61,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for ($i = 0; $i < 5; $i++)
+                    @for ($i = 0; $i < 11; $i++)
                     <tr>
                         <td>{{ htmlspecialchars($playerCollect['starterA'][$i]) }}</td>
                         <td>{{ htmlspecialchars($playerCollect['starterB'][$i]) }}</td>
@@ -102,12 +102,12 @@
                         <td class="value">{{$TournamentName->Name}}</td>
                     </tr>
                     <tr>
-                        <td class="label">SCORING JUDGE</td>
-                        <td class="value">{{$ScoringJudgeID->Name}}</td>
+                        <td class="label">SCORING REFEREE</td>
+                        <td class="value">{{$ScoringRefereeID->Name}}</td>
                     </tr>
                     <tr>
-                        <td class="label">TIMING JUDGE</td>
-                        <td class="value">{{$TimingJudgeID->Name}}</td>
+                        <td class="label">TIMING REFEREE</td>
+                        <td class="value">{{$TimingRefereeID->Name}}</td>
                     </tr>
                 </tbody>
             </table>

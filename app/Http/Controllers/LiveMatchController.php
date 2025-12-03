@@ -72,7 +72,7 @@ class LiveMatchController extends Controller
             
         }
 
-        return view('user.tournament', [
+        return view('tournament-detail', [
             'liveMatchDetails' => $liveMatchDetails, 
             'liveMatches' => $liveMatches, 
             'upcomingMatchDetail' => $upcomingMatchDetail,

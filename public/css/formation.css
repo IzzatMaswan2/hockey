@@ -70,66 +70,45 @@ button:hover .tooltip {
     text-align: center;
 }
 
+.bg-modal, .bg-modal2 {
+    width: 100%;
+    height: 1020px;
+    background: url('/img/logreg.jpg') no-repeat center center fixed;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    display: none;
+    z-index: 1; /* Ensure it's below the modal-content */
+}
 
-    /* Style for the modal backdrop and centering */
-    .bg-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.869); /* Semi-transparent black backdrop */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
+.modal-content, .modal-content2 {
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom:400px;
+    background: url('/img/waaa.png') repeat center center fixed;
+    height: 300px;
+    width: 500px; /* Adjust this to fit your content */
+    opacity: 1; /* Ensure full opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px; /* Optional: Add some padding */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
 
-    .modal-content {
-        width: 50%;
-        max-width: 600px;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        position: relative;
-        z-index: 1001;
-        background-image: url('/img/logreg.jpg'); /* Add your background image here */
-    background-size: cover; /* Ensures the image covers the entire modal */
-    background-position: center; /* Centers the background image */
-    }
 
-    .modal-content .close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-        font-size: 24px;
-    }
-
-    .modal-content .close i {
-        color: white;
-    }
-
-    /* Optional: Add fade-in transition for smooth appearance */
-    .bg-modal.show {
-        animation: fadeIn 0.3s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    /* Add some padding to the page to ensure footer content isn't immediately visible when the modal opens */
-    body {
-        padding-bottom: 60px;
-    }
-
+.close, .close2{
+    position: absolute;
+    top:10px;
+    right:14px;
+    font-size: 50px;
+    cursor:pointer;
+}
 
 /*------------------------------------------------*/
 
@@ -142,13 +121,13 @@ button:hover .tooltip {
 }
 
 .gki {
-    top: 20%; /* 28% - 5% */
-    left: 23%;
+    top: 17%;
+    left: 20.2%;
 }
 .details-gk {
     position: absolute;
-    top: 26.5%; /* 32.5% - 5% */
-    left: 20%;
+    top: 23%;
+    left: 18%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -158,8 +137,8 @@ button:hover .tooltip {
 }
 .jn-gk {
     position: absolute;
-    top: 22.5%; /* 29.5% - 5% */
-    left: 24.5%;
+    top: 19%;
+    left: 21.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -167,12 +146,12 @@ button:hover .tooltip {
 }
 
 .rdi {
-    top: 28.5%; /* 33.5% - 5% */
-    left: 14%;
+    top: 26.5%; /* 33.5% - 5% */
+    left: 13%;
 }
 .details-rd {
     position: absolute;
-    top: 35%; /* 38% - 5% */
+    top: 32.5%; /* 38% - 5% */
     left: 10%;
     font-weight: bold;
     text-align: center;
@@ -181,8 +160,8 @@ button:hover .tooltip {
 }
 .jn-rd {
     position: absolute;
-    top: 30%; /* 35% - 5% */
-    left: 15.5%;
+    top: 28.5%; /* 35% - 5% */
+    left: 14.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -190,13 +169,13 @@ button:hover .tooltip {
 }
 
 .ldi {
-    top: 28.5%; /* 33.5% - 5% */
-    left: 32%;
+    top: 26.5%; /* 33.5% - 5% */
+    left: 28%;
 }
 .details-ld {
     position: absolute;
-    top: 35%; /* 38% - 5% */
-    left: 30%;
+    top: 32.5%; /* 38% - 5% */
+    left: 26%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -204,8 +183,8 @@ button:hover .tooltip {
 }
 .jn-ld {
     position: absolute;
-    top: 30%; /* 35% - 5% */
-    left: 33.5%;
+    top: 28.5%; /* 35% - 5% */
+    left: 29.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -213,12 +192,12 @@ button:hover .tooltip {
 }
 
 .rmi {
-    top: 43%; /* 42% - 5% */
+    top: 36.5%; /* 42% - 5% */
     left: 6.5%;
 }
 .details-rm {
     position: absolute;
-    top:49.5%; /* 46.5% - 5% */
+    top:42.5%; /* 46.5% - 5% */
     left: 4.5%;
     font-weight: bold;
     text-align: center;
@@ -227,7 +206,7 @@ button:hover .tooltip {
 }
 .jn-rm {
     position: absolute;
-    top: 45%; /* 43.5% - 5% */
+    top: 38.3%; /* 43.5% - 5% */
     left: 8%;
     font-weight: bold;
     text-align: center;
@@ -236,13 +215,13 @@ button:hover .tooltip {
 }
 
 .cmi {
-    top: 43%; /* 42% - 5% */
-    left: 23%;
+    top: 36.5%; /* 42% - 5% */
+    left: 20.2%;
 }
 .details-cm {
     position: absolute;
-    top:49.5%; /* 46.5% - 5% */
-    left: 22%;
+    top:42.5%; /* 46.5% - 5% */
+    left: 18%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -250,8 +229,8 @@ button:hover .tooltip {
 }
 .jn-cm {
     position: absolute;
-    top: 45%; /* 43.5% - 5% */
-    left: 24.5%;
+    top: 38.3%; /* 43.5% - 5% */
+    left: 21.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -259,13 +238,13 @@ button:hover .tooltip {
 }
 
 .lmi {
-    top: 43%; /* 42% - 5% */
-    left: 39.5%;
+    top: 36.5%; /* 42% - 5% */
+    left: 35%;
 }
 .details-lm {
     position: absolute;
-    top:49.5%; /* 46.5% - 5% */
-    left: 37.5%;
+    top:42.5%; /* 46.5% - 5% */
+    left: 34%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -273,8 +252,8 @@ button:hover .tooltip {
 }
 .jn-lm {
     position: absolute;
-    top: 45%; /* 43.5% - 5% */
-    left: 41%;
+    top: 38.8%; /* 43.5% - 5% */
+    left: 36.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -282,12 +261,12 @@ button:hover .tooltip {
 }
 
 .rii {
-    top: 55%; /* 51% - 5% */
-    left: 14%;
+    top: 47%; /* 51% - 5% */
+    left: 13%;
 }
 .details-ri {
     position: absolute;
-    top: 60.5%; /* 56% - 5% */
+    top: 53%; /* 56% - 5% */
     left: 10%;
     font-weight: bold;
     text-align: center;
@@ -296,8 +275,8 @@ button:hover .tooltip {
 }
 .jn-ri {
     position: absolute;
-    top: 57%; /* 52.5% - 5% */
-    left: 15.5%;
+    top: 49%; /* 52.5% - 5% */
+    left: 14.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -305,13 +284,13 @@ button:hover .tooltip {
 }
 
 .lii {
-    top: 55%; /* 51% - 5% */
-    left: 32%;
+    top: 47%; /* 51% - 5% */
+    left: 28%;
 }
 .details-li {
     position: absolute;
-    top: 60.5%; /* 56% - 5% */
-    left: 30%;
+    top: 53%; /* 56% - 5% */
+    left: 26%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -319,8 +298,8 @@ button:hover .tooltip {
 }
 .jn-li {
     position: absolute;
-    top: 57%; /* 52.5% - 5% */
-    left: 33.5%;
+    top: 49%; /* 52.5% - 5% */
+    left: 29.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -328,12 +307,12 @@ button:hover .tooltip {
 }
 
 .rfi {
-    top: 68%; /* 60% - 5% */
+    top: 57%; /* 60% - 5% */
     left: 6.5%;
 }
 .details-rf {
     position: absolute;
-    top: 74.5%; /* 65.5% - 5% */
+    top: 63%; /* 65.5% - 5% */
     left: 4.5%;
     font-weight: bold;
     text-align: center;
@@ -342,7 +321,7 @@ button:hover .tooltip {
 }
 .jn-rf {
     position: absolute;
-    top: 70%; /* 62% - 5% */
+    top: 59%; /* 62% - 5% */
     left: 8%;
     font-weight: bold;
     text-align: center;
@@ -351,13 +330,13 @@ button:hover .tooltip {
 }
 
 .cfi {
-    top: 68%; /* 60% - 5% */
-    left: 23%;
+    top: 57%; /* 60% - 5% */
+    left: 20.2%;
 }
 .details-cf {
     position: absolute;
-    top: 74.5%; /* 65.5% - 5% */
-    left: 20%;
+    top: 63%; /* 65.5% - 5% */
+    left: 18%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -365,8 +344,8 @@ button:hover .tooltip {
 }
 .jn-cf {
     position: absolute;
-    top: 70%; /* 62% - 5% */
-    left: 24.5%;
+    top: 59%; /* 62% - 5% */
+    left: 21.5%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -374,13 +353,13 @@ button:hover .tooltip {
 }
 
 .lfi {
-    top: 68%; /* 60% - 5% */
-    left: 39.5%;
+    top: 57%; /* 60% - 5% */
+    left: 35%;
 }
 .details-lf {
     position: absolute;
-    top: 74.5%; /* 65.5% - 5% */
-    left: 37.5%;
+    top: 63%; /* 65.5% - 5% */
+    left: 34%;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -388,8 +367,8 @@ button:hover .tooltip {
 }
 .jn-lf {
     position: absolute;
-    top: 70%; /* 62% - 5% */
-    left: 41%;
+    top: 59%; /* 62% - 5% */
+    left: 36.5%;
     font-weight: bold;
     text-align: center;
     color: white;

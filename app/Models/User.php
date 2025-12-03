@@ -18,12 +18,22 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'fullName',
+        'displayName',
         'email',
         'role',
-        'teamName',
+        'occupation',
+        'teamID',
+        'address',
         'country',
+        'contact',
+        'jerseyNumber',
+        'field_status',
+        'position',
+        'dob',
+        'tournament_id',
         'password',
+        'manager_id',
         
     ];
 
@@ -45,4 +55,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function team()
+{
+    return $this->belongsTo(Team::class, 'teamID');
+}
+
+public function player()
+{
+    return $this->hasOne(Player::class, 'user_id', 'id'); // Assuming 'user_id' links User to Player
+}
+
 }

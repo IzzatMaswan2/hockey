@@ -34,7 +34,7 @@ class FormationController extends Controller
         if ($existingFormation) {
             // Update existing formation with the new player data
             $existingFormation->update([
-                'fullName' => $player->fullName,
+                'fullName' => $player->name,
                 'displayName' => $player->displayName,
                 'contact' => $player->contact,
                 'jerseyNumber' => $player->jerseyNumber,
@@ -44,7 +44,7 @@ class FormationController extends Controller
         } else {
             // Create a new formation record
             Formation::create([
-                'fullName' => $player->fullName,
+                'fullName' => $player->name,
                 'displayName' => $player->displayName,
                 'contact' => $player->contact,
                 'jerseyNumber' => $player->jerseyNumber,
@@ -109,7 +109,7 @@ public function update(Request $request, $id)
 
     // Update the formation record with new player data
     $formation->update([
-        'fullName' => $player->fullName,
+        'fullName' => $player->name,
         'displayName' => $player->displayName,
         'contact' => $player->contact,
         'jerseyNumber' => $player->jerseyNumber,

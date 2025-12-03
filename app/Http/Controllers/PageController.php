@@ -11,6 +11,7 @@ use App\Models\Achievement;
 use App\Models\Home;
 use App\Models\MeetTeam;
 use App\Models\Faq;
+use App\Models\Footer;
 
 class PageController extends Controller
 {
@@ -52,18 +53,21 @@ class PageController extends Controller
 
         $faqs = Faq::all();
 
-        // dd($homeArr['Achievement']);
+        $footer = Footer::where('footer_id', 1)->first();
+
+        // dd($footer);
 
         return view('admin.page', [
             'contactArr' => $contactArr,
             'about' => $about,
             'homeArr' => $homeArr,
-            'faqs' => $faqs
+            'faqs' => $faqs,
+            'footer'=> $footer
         ]);
     }
 
     // Home area 
-    public function updateHome(Request $request, $id)
+    public function updateHome(Request $request)
     {
         $request->validate([
             'banner_s_header' => 'required|string|max:50',
@@ -71,7 +75,7 @@ class PageController extends Controller
             'banner_paragraph' => 'required|string',
         ]);
 
-        $home = Home::findOrFail($id);
+        $home = Home::findOrFail(1);
         $home->banner_s_header = $request->input('banner_s_header');
         $home->banner_b_header = $request->input('banner_b_header');
         $home->banner_paragraph = $request->input('banner_paragraph');
@@ -81,30 +85,29 @@ class PageController extends Controller
     }
 
     // Update Achivement
-    public function updateAchievements(Request $request)
+    public function updateAchivement(Request $request)
     {
-        // Validate the request
         $request->validate([
-            'achievements.*.achievement_id' => 'required|integer|exists:achievement,achievement_id',
-            'achievements.*.title' => 'required|string|max:255',
-            'achievements.*.description' => 'required|string|max:255',
-            'achievements.*.icon' => 'required|string|max:255',
-            'achievements.*.home_id' => 'required|integer|exists:home,home_id',
+            'achievement.*.achievement_id' => 'required|integer|exists:achievements,achievement_id',
+            'achievement.*.title' => 'required|string|max:255',
+            'achievement.*.description' => 'required|string|max:255',
+            'achievement.*.icon' => 'required|string|max:255',
         ]);
 
-        // Loop through each achievement and update
         foreach ($request->input('achievements') as $achievementData) {
             $achievement = Achievement::findOrFail($achievementData['achievement_id']);
+
             $achievement->title = $achievementData['title'];
             $achievement->description = $achievementData['description'];
             $achievement->icon = $achievementData['icon'];
-            $achievement->home_id = $achievementData['home_id'];
+
             $achievement->save();
         }
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Achievements updated successfully!');
     }
+
 
     // Update Meet Team
     public function updateMeetTeam(Request $request)
@@ -114,7 +117,7 @@ class PageController extends Controller
             'meet_id.*' => 'required|integer|exists:meet_team,meet_id',
             'name.*' => 'required|string|max:100',
             'position.*' => 'required|string|max:100',
-            'img.*' => 'required|string|max:100',
+            'img.*' => 'nullable|image|max:2048', 
             'link1.*' => 'nullable|string|max:100',
             'link2.*' => 'nullable|string|max:100',
             'link3.*' => 'nullable|string|max:100',
@@ -129,7 +132,14 @@ class PageController extends Controller
             $meetTeam = MeetTeam::findOrFail($id);
             $meetTeam->name = $request->input('name')[$index];
             $meetTeam->position = $request->input('position')[$index];
-            $meetTeam->img = $request->input('img')[$index];
+
+            // Check if a new image was uploaded
+            if ($request->hasFile('img.' . $index)) {
+                // Handle the file upload
+                $imagePath = $request->file('img.' . $index)->store('images', 'public');
+                $meetTeam->img = $imagePath; // Store the new image path
+            }
+
             $meetTeam->link1 = $request->input('link1')[$index];
             $meetTeam->link2 = $request->input('link2')[$index];
             $meetTeam->link3 = $request->input('link3')[$index];
@@ -137,6 +147,8 @@ class PageController extends Controller
             $meetTeam->icon_link2 = $request->input('icon_link2')[$index];
             $meetTeam->icon_link3 = $request->input('icon_link3')[$index];
             $meetTeam->home_id = $request->input('home_id');
+
+            // Save the updated model
             $meetTeam->save();
         }
 
@@ -301,19 +313,72 @@ class PageController extends Controller
     }
 
     // Update an existing FAQ
-    public function FAQupdate(Request $request, Faq $faq)
+    public function FAQupdate(Request $request)
     {
         $request->validate([
-            'question' => 'required|string|max:255',
-            'answer' => 'required|string',
+            'faq_ids.*' => 'required|integer|exists:faqs,id',
+            'questions.*' => 'required|string|max:255',
+            'answers.*' => 'required|string',
         ]);
 
-        $faq->update([
-            'question' => $request->input('question'),
-            'answer' => $request->input('answer'),
+        // Loop through each FAQ and update
+        foreach ($request->input('faq_ids') as $index => $faqId) {
+            $faq = Faq::findOrFail($faqId);
+            $faq->update([
+                'question' => $request->input('questions')[$index],
+                'answer' => $request->input('answers')[$index],
+            ]);
+        }
+
+        return redirect()->route('show.page')->with('success', 'FAQs updated successfully.');
+    }
+
+
+    public function footerupdate(Request $request)
+    {
+        // Validate the request input
+        $request->validate([
+            'tagline' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
+            'address' => 'nullable|string',
+            'privacy' => 'nullable|string',
+            'term' => 'nullable|string',
+            'logo' => 'nullable|string|max:255',
         ]);
 
-        return redirect()->route('show.page')->with('success', 'FAQ updated successfully.');
+        // Retrieve the existing footer or create a new instance
+        $footer = Footer::firstOrNew(['footer_id' => 1]); // Assumes you have one record with ID 1
+
+        // Update footer data conditionally
+        $data = [
+            'tagline' => $request->input('tagline'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+            'address' => $request->input('address'),
+            'privacy' => $request->input('privacy'),
+            'term' => $request->input('term'),
+        ];
+
+        // Only set the 'logo' if a new value is provided
+        if ($request->has('logo')) {
+            $data['logo'] = $request->input('logo');
+        }
+
+        // Update the footer with the data
+        $footer->fill($data);
+        $footer->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Footer updated successfully.');
+    }
+
+    public function FAQdestroy($id)
+    {
+        $faq = Faq::findOrFail($id);
+        $faq->delete();
+
+        return redirect()->back()->with('success', 'FAQ deleted successfully.');
     }
 
 }

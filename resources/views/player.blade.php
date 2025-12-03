@@ -26,9 +26,9 @@
             </div>
 
             <div class="form-group">
-                <label for="Name">Display Name: </label>
-                <input type="text" class="form-control @error('Name') is-invalid @enderror" id="Name" name="Name" value="{{ old('Name') }}" required>
-                @error('Name')
+                <label for="displayName">Display Name: </label>
+                <input type="text" class="form-control @error('displayName') is-invalid @enderror" id="displayName" name="displayName" value="{{ old('displayName') }}" required>
+                @error('displayName')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -64,18 +64,30 @@
                 @enderror
             </div>
 
+            <!-- New Date of Birth Field -->
             <div class="form-group">
-                <label for="field_status">Field Status: </label>
+                <label for="dob">Date of Birth: </label>
+                <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') }}" required>
+                @error('dob')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- New Status Field -->
+            <div class="form-group">
+                <label for="field_status">Status: </label>
                 <select class="form-control @error('field_status') is-invalid @enderror" id="field_status" name="field_status" required>
-                    <option value="" disabled selected>Select a position</option>
-                    <option value="0">Member</option>
-                    <option value="1">Starting</option>
-                    <option value="2">Reserve</option>
+                    <option value="" disabled selected>Select status</option>
+                    <option value="Active">Active</option>
+                    <option value="Injured">Subtitude</option>
+                    <option value="Retired">Bench</option>
+                    
                 </select>
                 @error('field_status')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
             <button type="submit" class="btn btn-primary" style="background-color:#5D3CB8;font-weight:bold;color:white;border: #5D3CB8 1px solid;">Add Player</button>
         </form>
     </div>

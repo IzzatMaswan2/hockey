@@ -16,6 +16,7 @@ class Article extends Model
         'place',
         'summary',
         'content',
+        
     ];
 }
 

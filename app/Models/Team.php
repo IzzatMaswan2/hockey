@@ -10,25 +10,25 @@ use Laravel\Sanctum\HasApiTokens;
 class Team extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table = 'teams'; // Use the name of your existing table
-
-    // Specify the primary key if it's not the default 'id'
-    protected $primaryKey = 'teamID'; // Adjust if your primary key is different
-
-    // If the table does not use timestamps, set this to false
-    public $timestamps = false; // Set to false if your table does not have created_at and updated_at columns
-
-    // Specify the fillable attributes
+    protected $table = 'teams'; 
+    protected $primaryKey = 'teamID';
     protected $fillable = [
-        'Name', 
-        'contact',
+        'name',
         'country',
-        'LogoURL', 
-        'Description', 
-        'CoachName',
+        'manager_name',
+        'manager_id',
+        'LogoURL',
+        'Description',
         'total_player',
-    ]; 
-    // Adjust the fillable attributes based on your table columns
+        ];
+    
+        // Define relationship to the User (Manager)
+        public function manager()
+        {
+            return $this->belongsTo(User::class, 'manager_id');
+        }
+    
+    
 
     public function players()
     {
@@ -44,4 +44,23 @@ class Team extends Model
     {
         return $this->hasMany(MatchGroup::class, 'TeamBID', 'teamID');
     }
+
+    public function tournament()
+{
+    return $this->belongsTo(Tournament::class, 'tournament_id');
 }
+
+public function competitions()
+{
+    return $this->hasMany(Competition::class, 'teamID','team_id'); // Adjust according to your foreign key
+}
+
+
+public function tournaments()
+{
+    return $this->hasManyThrough(Tournament::class, Competition::class, 'team_id', 'id', 'teamID', 'tournament_id');
+}
+
+
+}
+

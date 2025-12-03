@@ -7,7 +7,7 @@ use App\Models\MatchGroup;
 use App\Models\PlayerStatMatch;
 use App\Models\Player;
 use App\Models\Team;   
-use App\Models\Judge;   
+use App\Models\Referee;   
 use App\Models\Tournament;
 use Illuminate\Cache\RateLimiting\Limit;
 
@@ -26,27 +26,26 @@ class LiveStatMatchController extends Controller
         $stats = PlayerStatMatch::where('Match_groupID', $matchGroupId)->get();
 
         // Retrieve all players and index by PlayerID
-        $allPlayers = Player::all()->keyBy('PlayerID');
+        $allPlayers = Player::all()->keyBy('id');
 
         // Retrieve Team IDs
         $teamAID = $match->TeamAID;
         $teamBID = $match->TeamBID;
 
-        // Filter players by Team A and Team B
         $teamAPlayers = $allPlayers->filter(fn($player) => $player->teamID == $teamAID);
-        $startingA = $teamAPlayers->where('field_status', 1)->take(5);
-        $reserveA = $teamAPlayers->where('field_status', 2)->take(5);
-        $nameStartingA = $startingA->pluck('Name');
-        $nameReserveA = $reserveA->pluck('Name');
+        $startingA = $teamAPlayers->where('field_status', 'Active')->take(11);
+        $reserveA = $teamAPlayers->where('field_status', 'Bench')->take(5);
+        $nameStartingA = $startingA->pluck('displayName');
+        $nameReserveA = $reserveA->pluck('displayName');
 
         $teamBPlayers = $allPlayers->filter(fn($player) => $player->teamID == $teamBID);
-        $startingB = $teamBPlayers->where('field_status', 1)->take(5);
-        $reserveB = $teamBPlayers->where('field_status', 2)->take(5);
-        $nameStartingB = $startingB->pluck('Name');
-        $nameReserveB = $reserveB->pluck('Name');
+        $startingB = $teamBPlayers->where('field_status', 'Active')->take(11);
+        $reserveB = $teamBPlayers->where('field_status', 'Bench')->take(5);
+        $nameStartingB = $startingB->pluck('displayName');
+        $nameReserveB = $reserveB->pluck('displayName');
 
-        $startingA = array_pad($nameStartingA->toArray(), 5, '-');
-        $startingB = array_pad($nameStartingB->toArray(), 5, '-');
+        $startingA = array_pad($nameStartingA->toArray(), 11, '-');
+        $startingB = array_pad($nameStartingB->toArray(), 11, '-');
         $reserveA = array_pad($nameReserveA->toArray(), 5, '-');
         $reserveB = array_pad($nameReserveB->toArray(), 5, '-');
         
@@ -54,7 +53,7 @@ class LiveStatMatchController extends Controller
         $teamAInfo = Team::select('Name', 'logoURL')->where('teamID', $teamAID)->first();
         $teamBInfo = Team::select('Name', 'logoURL')->where('teamID', $teamBID)->first();
 
-        // Prepare live match details
+        
         $liveMatchDetails = [
             'teamA' => $teamAInfo,
             'starterA'=>$startingA,
@@ -65,15 +64,17 @@ class LiveStatMatchController extends Controller
             'match' => $match
         ];
 
-        $SJudgeID = $match -> ScoringJudgeID;
-        $TJudgeID = $match -> TimingJudgeID;
+        $SRefereeID = $match -> ScoringRefereeID;
+        $TRefereeID = $match -> TimingRefereeID;
 
-        $ScoringJudgeID = Judge::select('Name')->where('JudgeID', $SJudgeID)->first();
-        $TimingJudgeID = Judge::select('Name')->where('JudgeID', $TJudgeID)->first();
+        $ScoringRefereeID = Referee::select('Name')->where('id', $SRefereeID)->first();
+        $TimingRefereeID = Referee::select('Name')->where('id', $TRefereeID)->first();
 
         $TourID = $match -> TournamentID;
 
-        $TournamentName = Tournament::select('Name') -> where('TournamentID', $TourID)->first();
+        $TournamentName = Tournament::select('name') -> where('id', $TourID)->first();
+
+        // dd($teamAPlayers, $teamBPlayers);
 
         // Return view with data
         return view('user.livematch', [
@@ -82,8 +83,8 @@ class LiveStatMatchController extends Controller
             'teamAPlayers' => $teamAPlayers,
             'teamBPlayers' => $teamBPlayers,
             'liveMatchDetails' => $liveMatchDetails,
-            'ScoringJudgeID' => $ScoringJudgeID,
-            'TimingJudgeID' => $TimingJudgeID,
+            'ScoringRefereeID' => $ScoringRefereeID,
+            'TimingRefereeID' => $TimingRefereeID,
             'TournamentName' => $TournamentName
         ]);
     }

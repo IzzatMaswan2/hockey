@@ -21,8 +21,8 @@ body {
     width: 100%;
 }
 
-li, a {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+.nav__link, li, a {
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
     font-weight: 400;
     font-size: 24px;
     color: #5D3CB8;

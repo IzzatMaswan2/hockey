@@ -1,98 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar Example</title>
+<header>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
+</header>
 
-    <style>
-        .nav {
-            background-color: #D3D3D3; /* Background color for the sidebar */
-            padding: 0px; /* Add padding around the sidebar */
-            height: 100vh; /* Full height */
-            color:#595959;
-            margin-top: 10px;
+<style>
+    .sidebar {
+        width: 250px !important;
+        background-color: pink;
+        color: #fff;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 50px;
+    }
+
+    .sidebar ul li {
+        padding: 10px 15px;
+        margin-bottom: 50px;
+    }
+
+    .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 50px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .content {
+        margin-left: 250px; /* Match the sidebar width */
+        padding: 20px;
+    }
+
+    .nav-link {
+        color: pink;
+    }
+
+    /* Hide sidebar on small screens */
+    @media (max-width: 768px) {
+        .sidebar {
+            transform: translateX(-100%);
         }
 
-        .nav-item {
-            margin-bottom: 15px; /* Space between each item */
-            color:#595959;
+        .sidebar.show {
+            transform: translateX(0);
         }
+    }
 
-        .nav-link {
-            font-weight: 600; /* Make the text bold */
-            padding: 10px 15px; /* Add padding for better spacing */
-            border-radius: 5px; /* Rounded corners */
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
-            color:#595959;
-        }
+    /* Ensure content area adjusts to sidebar */
+    .content {
+        margin-left: 250px;
+        padding: 20px;
+        transition: margin-left 0.3s ease;
+    }
 
-        .nav-link.active {
-            background-color: #595959; /* Background color for active link */
-            color: #fff; /* Active link text color */
+    /* Adjust content margin on small screens */
+    @media (max-width: 768px) {
+        .content {
+            margin-left: 0;
         }
-
-        .nav-link:hover {
-            background-color: #595959; /* Hover effect */
-            color: #fff; /* Change text color on hover */
-        }
-
-        .dropdown-menu {
-            background-color: #D3D3D3; /* Background color for dropdown */
-            border: none; /* Remove border */
-        }
-
-        .dropdown-item {
-            color: #fff; /* Text color for dropdown items */
-            font-weight: 600; /* Make the text bold */
-            padding: 10px 15px; /* Add padding for better spacing */
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
-        }
-
-        .dropdown-item:hover {
-            background-color: #595959; /* Hover effect for dropdown items */
-            color: #fff; /* Change text color on hover */
-        }
-    </style>
-</head>
+    }
+</style>
 <body>
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="/manager-dashboard">
-                <i class="fa-solid fa-chalkboard"></i> Dashboard
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/player-view">
-                <i class="fa-solid fa-user-check"></i> Manage Player
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/formation">
-                <i class="fa-solid fa-user-check"></i> Formation
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/line-up">
-                <i class="fa-solid fa-user-check"></i> Line-Up
-            </a>
-        </li>
-    </ul>
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a id="dashboard-link" class="nav-link active" aria-current="page" href="/manager-dashboard" style="color: #fff;">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+    </li>
+    <li class="nav-item">
+        <a id="players-link" class="nav-link" href="/manageplayer" style="color: #fff;">
+            <i class="fas fa-newspaper"></i> Manage Players
+        </a>
+    </li>
+    {{-- <li class="nav-item">
+        <a id="formations-link" class="nav-link" href="/formation" style="color: #fff;">
+            <i class="fas fa-calendar-alt"></i> Manage Formations
+        </a>
+    </li> --}}
+    <li class="nav-item">
+        <a id="matchscore-link" class="nav-link" href="/match-score" style="color: #fff;">
+            <i class="fas fa-calendar-alt"></i> Manage Match
+        </a>
+    </li>
+    {{-- <li class="nav-item">
+        <a id="lineup-link" class="nav-link" href="/line-up" style="color: #fff;">
+            <i class="fas fa-calendar-alt"></i> Line - Up
+        </a>
+    </li> --}}
+</ul>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentLocation = location.href;
-            const navLinks = document.querySelectorAll('.nav-link');
+<script>
+       // Function to set active link on page load
+function setActiveLink() {
+    const currentPath = window.location.pathname;
 
-            navLinks.forEach(link => {
-                if (link.href === currentLocation) {
-                    link.classList.add('active');
-                }
-            });
-        });
+    // Remove active class from all links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+
+    // Add active class to the correct link based on the current path
+    if (currentPath.includes('manager-dashboard')) {
+        document.getElementById('dashboard-link').classList.add('active');
+    } else if (currentPath.includes('manageplayer')) {
+        document.getElementById('players-link').classList.add('active');
+    } else if (currentPath.includes('formation')) {
+        document.getElementById('formations-link').classList.add('active');
+    } else if (currentPath.includes('line-up')) {
+        document.getElementById('lineup-link').classList.add('active');
+    } else if (currentPath.includes('line-up')) {
+        document.getElementById('matchscore-link').classList.add('active');
+    }
+}
+
+// Call the function on page load
+window.onload = setActiveLink;
     </script>
 </body>
-</html>
+

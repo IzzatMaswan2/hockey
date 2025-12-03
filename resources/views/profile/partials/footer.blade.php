@@ -17,25 +17,25 @@
                 </div>
                 <div class="footer-column">
                     <h3>Description</h3>
+                    <p style="width: 80%;">{{$footer->tagline}}</p>
                 </div>
                 <div class="footer-column">
                     <h3>Usefull Link</h3>
                     <a href="/">Home</a><br>
-                    <a href="/tournament">Tournament</a><br>
-                    <a href="/group">Group</a><br>
+                    <a href="/tournamentlist">Tournament</a><br>
                     <a href="/forum">Forum</a><br>
                     <a href="/about">About</a><br>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
-                        <a href="call.php" class="contact-link">
-                            <i class="bi bi-telephone-fill" style="margin-right: 5px"> </i> 01x-xxxxxx
+                        <a class="contact-link">
+                            <i class="bi bi-telephone-fill" style="margin-right: 5px"> </i> {{$footer->phone}}
                         </a><br>
-                        <a href="mail.php" class="contact-link">
-                            <i class="bi bi-envelope-fill" style="margin-right: 5px"> </i> E-mail
+                        <a  class="contact-link">
+                            <i class="bi bi-envelope-fill" style="margin-right: 5px"> </i> {{$footer->email}}
                         </a><br>
-                        <a href="location.php" class="contact-link">
-                            <i class="bi bi-geo-alt-fill" style="margin-right: 5px"> </i> Address
+                        <a class="contact-link">
+                            <i class="bi bi-geo-alt-fill" style="margin-right: 5px"> </i> {{$footer->address}}
                         </a><br>
                 </div>
                 <div class="footer-column">
@@ -60,27 +60,29 @@
             <div class="footer-row2">
                 <div class="footer-desc">
                     <img src="{{asset('img/Logo Latest 1.png')}}" alt="Hoki Arena" class="footer-logo">
-                    <h3>Description</h3>
+                    <div class="desc-column">
+                        <h3>Description</h3><br>
+                        <p style="width: 80%;">{{$footer->tagline}}</p>
+                    </div>
                 </div>
                 <div class="linkinfo">
                     <div class="footer-column">
                         <h3>Usefull Link</h3>
                         <a href="/">Home</a><br>
-                        <a href="/tournament">Tournament</a><br>
-                        <a href="/group">Group</a><br>
+                        <a href="/tournamentlist">Tournament</a><br>
                         <a href="/forum">Forum</a><br>
                         <a href="/about">About</a><br>
                     </div>
                     <div class="footer-column">
                         <h3>Contact Info</h3>
-                            <a href="call.php" class="contact-link">
-                                <i class="bi bi-telephone-fill" style="margin-right: 5px"> </i> 01x-xxxxxx
+                            <a  class="contact-link">
+                                <i class="bi bi-telephone-fill" style="margin-right: 5px"> </i>  {{$footer->phone}}
                             </a><br>
-                            <a href="mail.php" class="contact-link">
-                                <i class="bi bi-envelope-fill" style="margin-right: 5px"> </i> E-mail
+                            <a  class="contact-link">
+                                <i class="bi bi-envelope-fill" style="margin-right: 5px"> </i> {{$footer->email}}
                             </a><br>
-                            <a href="location.php" class="contact-link">
-                                <i class="bi bi-geo-alt-fill" style="margin-right: 5px"> </i> Address
+                            <a  class="contact-link">
+                                <i class="bi bi-geo-alt-fill" style="margin-right: 5px"> </i> {{$footer->address}}
                             </a><br>
                     </div>
                 </div>
@@ -108,10 +110,48 @@
                     <p style="color: #c0c0c0;">&copy; 2024, Inc. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
-                    <a href="#" class="text-body-secondary text-decoration-none mx-2" style="color: #c0c0c0 !important; font-size:16px;">Privacy Policy</a>
-                    <a href="#" class="text-body-secondary text-decoration-none mx-2" style="color: #c0c0c0 !important; font-size:16px;">Terms & Conditions</a>
+                    <a href="#" data-bs-toggle="modal" class="text-body-secondary text-decoration-none mx-2" data-bs-target="#privacyPolicyModal" style="color: #c0c0c0 !important; font-size:16px;">Privacy Policy</a>
+                    <a href="#" data-bs-toggle="modal" class="text-body-secondary text-decoration-none mx-2" data-bs-target="#termModal" style="color: #c0c0c0 !important; font-size:16px;">Terms & Conditions</a>
                 </div>
             </div>
         </footer>
+        <div class="container">
+            <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="privacyPolicyModalLabel">Privacy Policy</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- You can load the privacy policy content here -->
+                            <p style="white-space: pre-wrap; justify-content:left;">{{$footer->privacy}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="modal fade" id="termModal" tabindex="-1" aria-labelledby="termModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="termModalLabel">Terms and Conditions</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- You can load the privacy policy content here -->
+                            <p style="white-space: pre-wrap; justify-content:left;">{{$footer->term}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

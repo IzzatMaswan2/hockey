@@ -75,41 +75,81 @@
 
 <body>
     <ul class="nav flex-column">
+        <!-- Main Dashboard -->
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/dashboard" style="color: #fff;">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
         </li>
+
+        <!-- Content Management -->
+        <li class="nav-item">
+            <a class="nav-link" href="/adminmanagepage" style="color: #fff;">
+                <i class="fa fa-file-text"></i> Manage Pages
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="/article" style="color: #fff;">
-                <i class="fas fa-newspaper"></i> Article
+                <i class="fas fa-newspaper"></i> Manage Articles
+            </a>
+        </li>
+        
+
+        <!-- User & Role Management -->
+        <li class="nav-item">
+            <a class="nav-link" href="/manageadmin" style="color: #fff;">
+                <i class="fas fa-users-cog"></i> Manage Admins
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/manageuser" style="color: #fff;">
+                <i class="fas fa-users-cog"></i> Manage Managers
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/referee" style="color: #fff;">
+                <i class="fas fa-users-cog"></i> Manage Referees
+            </a>
+        </li>
+
+        <!-- Tournament & Venue Management -->
+        <li class="nav-item">
+            <a class="nav-link" href="/managevenue" style="color: #fff;">
+                <i class="fa-solid fa-map-location"></i> Manage Venues
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/managetournament" style="color: #fff;">
-                <i class="fas fa-calendar-alt"></i> Event
+                <i class="fas fa-calendar-alt"></i> Manage Tournaments
             </a>
         </li>
+        
         <li class="nav-item">
-            <a class="nav-link" href="http://127.0.0.1:8000/manager" style="color: #fff;">
-                <i class="fas fa-users-cog"></i> Manage Users
+            <a class="nav-link" href="/manage-group" style="color: #fff;">
+                <i class="fa-solid fa-map-location"></i> Manage Groups
             </a>
         </li>
+
+        <!-- Match & Statistic Management -->
         <li class="nav-item">
-            <a class="nav-link" href="http://127.0.0.1:8000/matches" style="color: #fff;">
+            <a class="nav-link" href="/matches/matches" style="color: #fff;">
                 <i class="fas fa-futbol"></i> Manage Match
             </a>
         </li>
+        <!-- Scoreboard -->
         <li class="nav-item">
-            <a class="nav-link" href="/adminmanagepage" style="color: #fff;">
-                <i class="fas fa-pages"></i> Manage Pages
+            <a class="nav-link" href="/scoreboard/tournamentlist" style="color: #fff;">
+                <i class="fas fa-list-ol"></i> Manage Scoreboard
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: #fff;">
-                <i class="fas fa-list-ol"></i> Scoreboard
+            <a class="nav-link" href="/statistics/tournaments" style="color: #fff;">
+                <i class="fas fa-chart-bar"></i> Manage Statistic
             </a>
         </li>
-</ul>
+
+        
+    </ul>
 </body>
+
 

@@ -35,16 +35,21 @@
         }
     </style>
 </head>
-<body>
-
+<body style="background-color: #f4f7f6;">
+    <!-- Navbar -->
     @include('layouts.navbar')
 
-    <div class="container-fluid" style="height: 90%; padding: 0;">
+    <!-- Main Layout -->
+    <div class="container-fluid" style="width: 100%; height: 100%;">
         <div class="row">
-            <div class="col-3" style="background-color: #D3D3D3;">
+            <!-- Sidebar -->
+            <div class="col-2" style="background-color: #929292; height: 100vh;">
                 @include('layouts.sidebar-manager')
             </div>
-            <div class="col-9 mt-5">
+
+            <!-- Main Content -->
+            <div class="col-10">
+                <div class="container mt-4">
                 <h1 class="" style="color:#5D3CB8;font-weight:bold;">Line-Up</h1>
 
                 <div class="image-table-container">
@@ -62,93 +67,93 @@
                             <tbody>
                                 <!-- Goal Keeper -->
                                 @php
-                                    $gk = $formations->where('formationPosition', 'Goalkeeper')->first();
+                                    $gk = $players->where('formationPosition', 'Goalkeeper')->first();
                                 @endphp
                                 <tr>
                                     <td style="background-color:#CEADDB;">Goal Keeper</td>
-                                    <td colspan="2">{{ $gk ? $gk->fullName : 'None' }}</td> <!-- Remove "None" and merge -->
+                                    <td colspan="2">{{ $gk ? $gk->name : 'None' }}</td> <!-- Remove "None" and merge -->
                                 </tr>
 
                                 <!-- Defender Row -->
                                 <tr>
                                     <td rowspan="2">Defender</td>
                                     @php
-                                        $rd = $formations->where('formationPosition', 'Right Defender')->first();
+                                        $rd = $players->where('formationPosition', 'Right Defender')->first();
                                     @endphp
                                     <td style="background-color:#CEADDB;">Right</td>
-                                    <td style="background-color:#CEADDB;">{{ $rd ? $rd->fullName : 'None' }}</td>
+                                    <td style="background-color:#CEADDB;">{{ $rd ? $rd->name : 'None' }}</td>
                                 </tr>
                                 <tr>
                                     @php
-                                        $ld = $formations->where('formationPosition', 'Left Defender')->first();
+                                        $ld = $players->where('formationPosition', 'Left Defender')->first();
                                     @endphp
                                     <td>Left</td>
-                                    <td>{{ $ld ? $ld->fullName : 'None' }}</td>
+                                    <td>{{ $ld ? $ld->name : 'None' }}</td>
                                 </tr>
 
                                 <!-- Midfielder Row -->
                                 <tr>
                                     <td rowspan="3" style="background-color:#CEADDB;">Midfielder</td>
                                     @php
-                                        $rm = $formations->where('formationPosition', 'Right Midfielder')->first();
+                                        $rm = $players->where('formationPosition', 'Right Midfielder')->first();
                                     @endphp
                                     <td style="background-color:#CEADDB;">Right</td>
-                                    <td style="background-color:#CEADDB;">{{ $rm ? $rm->fullName : 'None' }}</td>
+                                    <td style="background-color:#CEADDB;">{{ $rm ? $rm->name : 'None' }}</td>
                                 </tr>
                                 <tr>
                                     @php
-                                        $cm = $formations->where('formationPosition', 'Center Midfielder')->first();
+                                        $cm = $players->where('formationPosition', 'Center Midfielder')->first();
                                     @endphp
                                     <td>Center</td>
-                                    <td>{{ $cm ? $cm->fullName : 'None' }}</td>
+                                    <td>{{ $cm ? $cm->name : 'None' }}</td>
                                 </tr>
                                 <tr>
                                     @php
-                                        $lm = $formations->where('formationPosition', 'Left Midfielder')->first();
+                                        $lm = $players->where('formationPosition', 'Left Midfielder')->first();
                                     @endphp
                                     <td style="background-color:#CEADDB;">Left</td>
-                                    <td style="background-color:#CEADDB;">{{ $lm ? $lm->fullName : 'None' }}</td>
+                                    <td style="background-color:#CEADDB;">{{ $lm ? $lm->name : 'None' }}</td>
                                 </tr>
 
                                 <!-- Inner Row -->
                                 <tr>
                                     <td rowspan="2">Inner</td>
                                     @php
-                                        $ri = $formations->where('formationPosition', 'Right Inner')->first();
+                                        $ri = $players->where('formationPosition', 'Right Inner')->first();
                                     @endphp
                                     <td>Right</td>
-                                    <td>{{ $ri ? $ri->fullName : 'None' }}</td>
+                                    <td>{{ $ri ? $ri->name : 'None' }}</td>
                                 </tr>
                                 <tr>
                                     @php
-                                        $li = $formations->where('formationPosition', 'Left Inner')->first();
+                                        $li = $players->where('formationPosition', 'Left Inner')->first();
                                     @endphp
                                     <td style="background-color:#CEADDB;">Left</td>
-                                    <td style="background-color:#CEADDB;">{{ $li ? $li->fullName : 'None' }}</td>
+                                    <td style="background-color:#CEADDB;">{{ $li ? $li->name : 'None' }}</td>
                                 </tr>
 
                                 <!-- Forward Row -->
                                 <tr>
                                     <td rowspan="3" style="background-color:#CEADDB;">Forward</td>
                                     @php
-                                        $rf = $formations->where('formationPosition', 'Right Forward')->first();
+                                        $rf = $players->where('formationPosition', 'Right Forward')->first();
                                     @endphp
                                     <td>Right</td>
-                                    <td>{{ $rf ? $rf->fullName : 'None' }}</td>
+                                    <td>{{ $rf ? $rf->name : 'None' }}</td>
                                 </tr>
                                 <tr>
                                     @php
-                                        $cf = $formations->where('formationPosition', 'Center Forward')->first();
+                                        $cf = $players->where('formationPosition', 'Center Forward')->first();
                                     @endphp
                                     <td style="background-color:#CEADDB;">Center</td>
-                                    <td style="background-color:#CEADDB;">{{ $cf ? $cf->fullName : 'None' }}</td>
+                                    <td style="background-color:#CEADDB;">{{ $cf ? $cf->name : 'None' }}</td>
                                 </tr>
                                 <tr>
                                     @php
-                                        $lf = $formations->where('formationPosition', 'Left Forward')->first();
+                                        $lf = $players->where('formationPosition', 'Left Forward')->first();
                                     @endphp
                                     <td>Left</td>
-                                    <td>{{ $lf ? $lf->fullName : 'None' }}</td>
+                                    <td>{{ $lf ? $lf->name : 'None' }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -160,10 +165,10 @@
                     <div class="gki text-center">
                         <i class='bx bxs-t-shirt gki'></i>
                         <div class="jn-gk">
-                            {{ $formations->where('formationPosition', 'Goalkeeper')->first()->jerseyNumber ?? ' ' }}
+                            {{ $players->where('formationPosition', 'Goalkeeper')->first()->jerseyNumber ?? ' ' }}
                         </div>
                         <div class="details-gk">
-                            {{ $formations->where('formationPosition', 'Goalkeeper')->first()->Name ?? ' ' }}
+                            {{ $players->where('formationPosition', 'Goalkeeper')->first()->displayName ?? ' ' }}
                         </div>
 
                     </div>  
@@ -171,100 +176,100 @@
                     <div class="rdi text-center">
                         <i class='bx bxs-t-shirt rdi'></i>
                         <div class="jn-rd">
-                            {{ $formations->where('formationPosition', 'Right Defender')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Defender')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rd">
-                            {{ $formations->where('formationPosition', 'Right Defender')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Defender')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="ldi text-center">
                         <i class='bx bxs-t-shirt ldi'></i>
                         <div class="jn-ld">
-                            {{ $formations->where('formationPosition', 'Left Defender')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Defender')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-ld">
-                            {{ $formations->where('formationPosition', 'Left Defender')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Defender')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="rmi text-center">
                         <i class='bx bxs-t-shirt rmi'></i>
                         <div class="jn-rm">
-                            {{ $formations->where('formationPosition', 'Right Midfielder')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rm">
-                            {{ $formations->where('formationPosition', 'Right Midfielder')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Midfielder')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="cmi text-center">
                         <i class='bx bxs-t-shirt cmi'></i>
                         <div class="jn-cm">
-                            {{ $formations->where('formationPosition', 'Center Midfielder')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Center Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-cm">
-                            {{ $formations->where('formationPosition', 'Center Midfielder')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Center Midfielder')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="lmi text-center">
                         <i class='bx bxs-t-shirt lmi'></i>
                         <div class="jn-lm">
-                            {{ $formations->where('formationPosition', 'Left Midfielder')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Midfielder')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-lm">
-                            {{ $formations->where('formationPosition', 'Left Midfielder')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Midfielder')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="rii text-center">
                         <i class='bx bxs-t-shirt rii'></i>
                         <div class="jn-ri">
-                            {{ $formations->where('formationPosition', 'Right Inner')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Inner')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-ri">
-                            {{ $formations->where('formationPosition', 'Right Inner')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Inner')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="lii text-center">
                         <i class='bx bxs-t-shirt lii'></i>
                         <div class="jn-li">
-                            {{ $formations->where('formationPosition', 'Left Inner')->first()->jerseyNumber?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Inner')->first()->jerseyNumber?? ' ' }} 
                         </div>
                         <div class="details-li">
-                            {{ $formations->where('formationPosition', 'Left Inner')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Inner')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="rfi text-center">
                         <i class='bx bxs-t-shirt rfi'></i>
                         <div class="jn-rf">
-                            {{ $formations->where('formationPosition', 'Right Forward')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-rf">
-                            {{ $formations->where('formationPosition', 'Right Forward')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Right Forward')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="cfi text-center">
                         <i class='bx bxs-t-shirt cfi'></i>
                         <div class="jn-cf">
-                            {{ $formations->where('formationPosition', 'Center Forward')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Center Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-cf">
-                            {{ $formations->where('formationPosition', 'Center Forward')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Center Forward')->first()->displayName ?? ' ' }} 
                         </div>
                     </div> 
 
                     <div class="lfi text-center">
                         <i class='bx bxs-t-shirt lfi'></i>
                         <div class="jn-lf">
-                            {{ $formations->where('formationPosition', 'Left Forward')->first()->jerseyNumber ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Forward')->first()->jerseyNumber ?? ' ' }} 
                         </div>
                         <div class="details-lf">
-                            {{ $formations->where('formationPosition', 'Left Forward')->first()->Name ?? ' ' }} 
+                            {{ $players->where('formationPosition', 'Left Forward')->first()->displayName ?? ' ' }} 
                         </div>
 
                 </div>

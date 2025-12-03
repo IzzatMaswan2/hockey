@@ -59,7 +59,7 @@
                                 @endforeach
                         </div>
                         <div class="link-info" >
-                            <a href="#mail">CALL US</a>
+                        <a href="javascript:void(0);" onclick="copyToClipboard('{{ $phone }}')">Copy Number</a>
                         </div>
                     </div>
                     <div class="column">
@@ -73,7 +73,7 @@
                                 <p style="word-warp: break-word; line-height: 1.2rem;">{{$contact ->location}}</p>
                             </div>
                             <div class="link-info"> 
-                                <a href="#mail">VISIT US </a>
+                            <a href="javascript:void(0);" onclick="openLocation()">Open in Google Maps</a>
                             </div>
                         </div>
                     <div class="column">
@@ -89,7 +89,7 @@
                                 @endforeach
                         </div>
                         <div class="link-info" >
-                            <a href="#mail">E-MAIL US</a>
+                        <a href="javascript:void(0);" onclick="copyToClipboard('{{ $email }}')">Copy Email</a>
                         </div>
                     </div>
                 </div>
@@ -121,6 +121,20 @@
                 element.scrollIntoView({ behavior: 'smooth' });
             }
         }
+
+        // Function to copy text to clipboard
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        alert("Copied to clipboard: " + text);
+    }, function(err) {
+        console.error("Failed to copy text: ", err);
+    });
+}
+
+// Function to open location in Google Maps
+function openLocation() {
+    window.open('https://www.google.com/maps/place/Stadium+Hoki+Tun+Razak,+2,+Persiaran+Tuanku+Syed+Sirajuddin,+Bukit+Tunku,+50480+Kuala+Lumpur,+Wilayah+Persekutuan+Kuala+Lumpur/@3.1701538,101.670949,17z/data=!3m1!4b1!4m6!3m5!1s0x31cc4842c784554b:0xaa536b6dd80c92f!8m2!3d3.1701538!4d101.6735293!16s%2Fg%2F12hml4wzm?entry=ttu&g_ep=EgoyMDI0MTAyMC4xIKXMDSoASAFQAw%3D%3D', '_blank');
+}
     </script>
     @include('profile.partials.footer')
 </body>
