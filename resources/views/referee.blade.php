@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Referee</title>
+    <title>Officer</title>
 </head>
 <body>
 @include('layouts.navbar')
@@ -22,7 +22,7 @@
 
                 <div class="card shadow-sm my-4">
                     <div class="card-header text-white" style="background-color: #4B006E;">
-                        <h5 class="card-title mb-0">Referee Form</h5>
+                        <h5 class="card-title mb-0">Officer Form</h5>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{route('referee.store')}}">
@@ -30,12 +30,12 @@
                             <!-- Referee Section -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="Name" class="form-label">Referee Name</label>
-                                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter Referee Name" required>
+                                    <label for="Name" class="form-label">Officer Name</label>
+                                    <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter Officer Name" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="Role" class="form-label">Referee Role</label>
-                                    <input type="text" class="form-control" id="Role" name="Role" placeholder="Enter Referee Role" required>
+                                    <label for="Role" class="form-label">Officer Role</label>
+                                    <input type="text" class="form-control" id="Role" name="Role" placeholder="Enter Officer Role" required>
                                 </div>
                             </div>
 
@@ -50,16 +50,16 @@
                 <!-- resources/views/referee/index.blade.php -->
                 <div class="card shadow-sm my-4">
                     <div class="card-header text-white" style="background-color: #4B006E;">
-                        <h5 class="card-title mb-0">Referee List</h5>
+                        <h5 class="card-title mb-0">Officer List</h5>
                     </div>
                     <div class="card-body">
-                        <!-- Referee Table -->
+                        <!-- Officer Table -->
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Referee Name</th>
-                                    <th>Referee Role</th>
+                                    <th>Officer Name</th>
+                                    <th>Officer Role</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -73,7 +73,6 @@
                                             <!-- Edit Button (can open a modal for editing) -->
                                             <!-- Edit Button (opens a modal for editing) -->
                                             <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editRefereeModal{{ $referee->id }}">Edit</button>
-
 
                                         </td>
                                     </tr>

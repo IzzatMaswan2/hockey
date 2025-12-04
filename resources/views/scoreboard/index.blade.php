@@ -28,7 +28,7 @@
     <div class="container-fluid" style="height: 90%;">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-2" style="background-color: #929292; width: 20%;">
+            <div class="col-3" style="background-color: #929292; ">
                 @include('layouts.sidebar')
             </div>
 

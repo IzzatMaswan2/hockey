@@ -108,7 +108,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/referee" style="color: #fff;">
-                <i class="fas fa-users-cog"></i> Manage Referees
+                <i class="fas fa-users-cog"></i> Manage Officers
             </a>
         </li>
 
@@ -121,6 +121,18 @@
         <li class="nav-item">
             <a class="nav-link" href="/managetournament" style="color: #fff;">
                 <i class="fas fa-calendar-alt"></i> Manage Tournaments
+            </a>
+        </li>
+
+        {{-- <li class="nav-item">
+            <a class="nav-link" href="/managecategory" style="color: #fff;">
+                <i class="fa-solid fa-tags"></i> Manage Categories
+            </a>
+        </li> --}}
+
+        <li class="nav-item">
+            <a class="nav-link" href="/participants" style="color: #fff;">
+                <i class="fa-solid fa-users"></i> Manage Competitions
             </a>
         </li>
         

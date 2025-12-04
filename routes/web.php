@@ -30,6 +30,7 @@ use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\Statistic\StatisticController;
 use App\Http\Controllers\KnockoutStageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\ParticipantController;
 
 Route::get('/fixtures', [FixtureController::class, 'index'])->name('fixture.index');
 Route::get('/matches', function () {
@@ -377,6 +378,11 @@ Route::post('/matches/auto-create', [MatchesController::class, 'autoCreateMatche
 Route::get('/get-groups-by-tournament/{tournamentId}', [MatchesController::class, 'getGroupsByTournament']);
 Route::get('/get-groups-by-tournament-and-category/{tournament}/{category}', [MatchesController::class, 'getGroupsByTournamentAndCategory']);
 
+Route::resource('participants', ParticipantController::class);
+// Route::delete('/participants/{id}', [ParticipantController::class, 'destroy'])
+//     ->name('participants.destroy');
+Route::put('participants/{id}/archive', [ParticipantController::class, 'archive'])->name('participants.archive');
+Route::put('participants/{id}/unarchive', [ParticipantController::class, 'unarchive'])->name('participants.unarchive');
 
 
 // referee

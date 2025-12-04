@@ -11,9 +11,6 @@ class Competition extends Model
     protected $table = 'competitions';
     protected $fillable = ['id','team_id', 'tournament_id', 'category_id'];
 
-
-
-
     public function tournament()
     {
         return $this->belongsTo(Tournament::class);
@@ -21,6 +18,11 @@ class Competition extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class, 'team_id', 'teamID'); // Ensure these keys match your database
+        return $this->belongsTo(Team::class, 'team_id', 'teamID'); 
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(TournamentCategory::class, 'category_id', 'id');
     }
 }
