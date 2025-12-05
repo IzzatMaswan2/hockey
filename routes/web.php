@@ -31,6 +31,7 @@ use App\Http\Controllers\Statistic\StatisticController;
 use App\Http\Controllers\KnockoutStageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\ParticipantController;
+use App\Http\Controllers\exportTeamPdf;
 
 Route::get('/fixtures', [FixtureController::class, 'index'])->name('fixture.index');
 Route::get('/matches', function () {
@@ -379,10 +380,11 @@ Route::get('/get-groups-by-tournament/{tournamentId}', [MatchesController::class
 Route::get('/get-groups-by-tournament-and-category/{tournament}/{category}', [MatchesController::class, 'getGroupsByTournamentAndCategory']);
 
 Route::resource('participants', ParticipantController::class);
-// Route::delete('/participants/{id}', [ParticipantController::class, 'destroy'])
-//     ->name('participants.destroy');
+Route::get('participants/{id}/view', [ParticipantController::class, 'view'])->name('participants.view');
 Route::put('participants/{id}/archive', [ParticipantController::class, 'archive'])->name('participants.archive');
 Route::put('participants/{id}/unarchive', [ParticipantController::class, 'unarchive'])->name('participants.unarchive');
+Route::get('/export/team/{id}', [exportTeamPdf::class, 'exportTeamPdf'])
+     ->name('pdf.teamlineup');
 
 
 // referee

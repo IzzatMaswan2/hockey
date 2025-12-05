@@ -34,9 +34,9 @@
                 </div>
 
                 <!-- Add Participant Button -->
-                {{-- <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addParticipantModal">
+                <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addParticipantModal">
                     Add Participant
-                </button> --}}
+                </button>
 
                 <!-- Search Bar -->
                 <div class="mb-3">
@@ -80,14 +80,10 @@
                                             <td>{{ $participant->category->name ?? 'N/A' }}</td>
 
                                             <td>
-                                                <button class="btn btn-sm btn-primary btn-view"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#viewParticipantModal"
-                                                    data-team="{{ $participant->team->name }}"
-                                                    data-tournament="{{ $participant->tournament->name }}"
-                                                    data-category="{{ $participant->category->name }}">
+                                                <a href="{{ route('participants.view', $participant->id) }}" 
+                                                    class="btn btn-sm btn-primary">
                                                     View
-                                                </button>
+                                                </a>
 
                                                 <button class="btn btn-sm btn-secondary btn-edit"
                                                     data-bs-toggle="modal"

@@ -26,7 +26,7 @@
 
         nav ul.navbar-nav > li {
             display: inline-block;
-            margin-right: -180px; /* Adjust the value to increase or decrease the gap */
+            margin-right: -180px; 
             margin-left: 280px;
             text-align: center;
         }

@@ -87,11 +87,11 @@ class RegisteredUserController extends Controller
         ]);
 
         // dd($user);
-        // if($team){
-        //     $team->update([
-        //         'manager_id' => $user->id,
-        //     ]);
-        // }
+        if($team){
+            $team->update([
+                'manager_id' => $user->id,
+            ]);
+        }
         
         // Dispatch registered event and log the user in
         event(new Registered($user));
@@ -102,71 +102,77 @@ class RegisteredUserController extends Controller
 
     //------------------------------------------------------------------------------------------ MANAGER
     public function storeManager(Request $request)
-{
-    // Validate the request data
-    $request->validate([
-        'fullName' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'occupation' => ['required', 'string', 'max:255'],
-        'teamName' => ['required', 'string', 'max:255'],
-        'address' => ['required', 'string', 'max:255'],
-        'country' => ['required', 'string', 'max:255'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-        'tournament_id' => ['required', 'exists:tournaments,id'], // Validate tournament_id
-    ]);
-
-    // Convert teamName to uppercase
-    $teamNameUpper = strtoupper($request->teamName);
-
-    // Create or find the team
-    $teamName = Team::where('name', $teamNameUpper)->first();
-    if (!$teamName) {
-        $teamName = Team::create([
-            'name' => $teamNameUpper,
-            'country' => $request->country,
-            'manager_name' => $request->fullName,
-            'manager_id'=> 0,
+    {
+        // Validate the request data
+        $request->validate([
+            'fullName' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'occupation' => ['required', 'string', 'max:255'],
+            'teamName' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'tournament_id' => ['required', 'exists:tournaments,id'], // Validate tournament_id
         ]);
-    }
 
-    // Retrieve the teamID
-    $teamID = $teamName->teamID;
+        // Convert teamName to uppercase
+        $teamNameUpper = strtoupper($request->teamName);
 
-    // Create the user
-    User::create([
-        'fullName' => $request->fullName,
-        'email' => $request->email,
-        'role' => 'Manager',
-        'occupation' => $request->occupation,
-        'teamID' => $teamID,
-        'address' => $request->address,
-        'country' => $request->country,
-        'password' => Hash::make($request->password),
-        'tournament_id' => $request->tournament_id,
-    ]);
+        // Create or find the team
+        $teamName = Team::where('name', $teamNameUpper)->first();
+        if (!$teamName) {
+            $teamName = Team::create([
+                'name' => $teamNameUpper,
+                'country' => $request->country,
+                'manager_name' => $request->fullName,
+                'manager_id'=> 0,
+            ]);
+        }
 
-    // Check if the competition already exists
-    $competitionExists = Competition::where('team_id', $teamID)
-        ->where('tournament_id', $request->tournament_id)
-        ->exists();
+        // Retrieve the teamID
+        $teamID = $teamName->teamID;
 
-    if (!$competitionExists) {
-        // Insert into competitions if it doesn't exist
-        Competition::create([
-            'team_id' => $teamID,
+        // Create the user
+        $user = User::create([
+            'fullName' => $request->fullName,
+            'email' => $request->email,
+            'role' => 'Manager',
+            'occupation' => $request->occupation,
+            'teamID' => $teamID,
+            'address' => $request->address,
+            'country' => $request->country,
+            'password' => Hash::make($request->password),
             'tournament_id' => $request->tournament_id,
         ]);
-    } else {
-        // Optionally, you can return a message indicating the team is already registered for this tournament
-        return redirect()->back()->with('error', 'This team is already registered for the selected tournament.');
+
+        // dd($user);
+
+        $teamName->update([
+            'manager_id' => $user->id
+        ]);
+
+        // Check if the competition already exists
+        $competitionExists = Competition::where('team_id', $teamID)
+            ->where('tournament_id', $request->tournament_id)
+            ->exists();
+
+        if (!$competitionExists) {
+            // Insert into competitions if it doesn't exist
+            Competition::create([
+                'team_id' => $teamID,
+                'tournament_id' => $request->tournament_id,
+            ]);
+        } else {
+            // Optionally, you can return a message indicating the team is already registered for this tournament
+            return redirect()->back()->with('error', 'This team is already registered for the selected tournament.');
+        }
+
+        $users = User::where('role', 'Manager')->get();
+        $tournaments = Tournament::all();
+
+        return view('admin.manageuser', compact('users', 'tournaments'))
+            ->with('success', 'Manager added successfully.');
     }
-
-    $users = User::where('role', 'Manager')->get();
-    $tournaments = Tournament::all();
-
-    return view('admin.manageuser', compact('users', 'tournaments'))
-        ->with('success', 'Manager added successfully.');
-}
     
 
     public function index()
@@ -244,6 +250,8 @@ class RegisteredUserController extends Controller
                 'category_id' => ['nullable', 'exists:tournament_category,id'],
             ]);
 
+        // dd($request->all());
+
             // Convert teamName to uppercase
         $teamNameUpper = strtoupper($request->teamName);
 
@@ -273,6 +281,8 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
+            // dd($user);
+
             Auth::login($user); // Log the user in after registration
 
             $userID = $user->id; // Get the user ID of the newly created user
@@ -281,14 +291,19 @@ class RegisteredUserController extends Controller
             $userID = Auth::user()->id;
         }
 
+        // dd($userID);
+
         // Now handle team registration
         $teamNameUpper = strtoupper($request->teamName);
-        $team = Team::firstOrCreate([
+        $team = Team::updateOrCreate([
             'name' => $teamNameUpper
         ], [
             'manager_name' => Auth::user()->fullName,
             'country' => Auth::user()->country,
+            'manager_id' => $userID,
         ]);
+
+        // dd($team);
 
         // Check if the team is already registered for the tournament
         $competitionExists = Competition::where('team_id', $team->teamID)
@@ -457,11 +472,24 @@ class RegisteredUserController extends Controller
     
     public function indexPlayer()
     {
+        // $managers = User::where('role', 'Manager')->get();
 
-        $teamid = Team::where('manager_name',Auth::user()->fullName)->value('teamID');
-        
+        // foreach ($managers as $manager) {
+        //     if ($manager->teamID) {
+        //         // Update the corresponding team
+        //         Team::where('teamID', $manager->teamID)
+        //             ->update(['manager_id' => $manager->id]);
+        //     }
+        // }
+
+        // dd(Auth::user()->id);
+
+        $teamid = Team::where('manager_id',Auth::user()->id)->value('teamID');
+        // dd($teamid, Auth::user()->fullName);
         $users = User::where('archived', 1)->where('teamid',$teamid)->get();
-        return view('manageplayer', compact('users'));
+        // dd( $users);
+        $player = Player::where('teamID',$teamid)->get();
+        return view('manageplayer', compact('users', 'player'));
     }
 
 

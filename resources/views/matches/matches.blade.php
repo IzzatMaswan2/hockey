@@ -236,13 +236,13 @@
                             <td>{{ $match->groupcreate->Name ?? 'Knockout' }}</td>
                             <td>{{ $match->category->name ?? '-' }}</td>
 
-                            {{-- @if($mytime->toDateString() > $match->date)
+                            @if($mytime->toDateString() > $match->date)
                             <td style="color: green;">Completed</td>
                             @elseif($mytime->toDateString() < $match->date)
                             <td style="color: blue;">Upcoming</td>
                             @else
                             <td style="color: orange;">On-going</td>
-                            @endif --}}
+                            @endif
 
                             <td>
                                 <a href="{{ route('matches.edit', $match->id) }}" class="btn btn-sm btn-update" style="background-color: #50C878;">

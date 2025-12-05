@@ -220,7 +220,7 @@ button[type="submit"]:hover {
         <div id="registerTeamModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Register Your Team 2</h2>
+                <h2>Register Your Team</h2>
                 <form action="{{ route('tournament-details') }}" method="POST">
                     @csrf
                     <input type="hidden" name="tournament_id" value="{{ $tournament->id }}">
@@ -392,12 +392,15 @@ button[type="submit"]:hover {
                         <thead>
                             <tr>
                                 <th style="width:5%">Rank</th>
-                                <th style="width:20%">Team</th>
-                                <th style="width:10%">Played</th>
-                                <th style="width:15%">Win</th>
-                                <th style="width:15%">Draw</th>
-                                <th style="width:15%">Lose</th>
-                                <th style="width:20%">Point</th>
+                                <th >Team</th>
+                                <th >Played</th>
+                                <th >Win</th>
+                                <th >Draw</th>
+                                <th >Lose</th>
+                                <th >Point</th>
+                                <th>GF</th>
+                                <th>GA</th>
+                                <th>GD</th>
                             </tr>
                         </thead>
 
@@ -411,6 +414,9 @@ button[type="submit"]:hover {
                                 <td>{{ $groupteam->draws ?? '0' }}</td>
                                 <td>{{ $groupteam->losses ?? ($groupteam->loses ?? '0') }}</td>
                                 <td>{{ $groupteam->points ?? '0' }}</td>
+                                <td>{{ $groupteam->gf ?? '0' }}</td>
+                                <td>{{ $groupteam->ga ?? '0' }}</td>
+                                <td>{{ $groupteam->gd ?? '0' }}</td>
                             </tr>
                             @endforeach
                         </tbody>

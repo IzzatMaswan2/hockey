@@ -38,23 +38,33 @@ class ParticipantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fullName' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
             'tournament_id' => 'required|exists:tournaments,id',
-            'team_name' => 'nullable|string|max:255',
+            'category_id' => 'nullable|exists:tournament_category,id',
+            'team_id' => 'required|exists:teams,teamID',
         ]);
 
-        User::create([
-            'fullName' => $request->fullName,
-            'email' => $request->email,
-            'role' => 'Participant',
+        // Check if this team is already registered for the tournament (and category if applicable)
+        $existsQuery = Competition::where('team_id', $request->team_id)
+            ->where('tournament_id', $request->tournament_id);
+
+        if ($request->category_id) {
+            $existsQuery->where('category_id', $request->category_id);
+        }
+
+        if ($existsQuery->exists()) {
+            return redirect()->back()->with('error', 'This team is already registered for the selected tournament/category.');
+        }
+
+        // Create the competition entry
+        Competition::create([
+            'team_id' => $request->team_id,
             'tournament_id' => $request->tournament_id,
-            'team_name' => $request->team_name,
-            'password' => bcrypt('password'), // Default password
+            'category_id' => $request->category_id ?? null,
         ]);
 
-        return redirect()->back()->with('success', 'Participant added successfully.');
+        return redirect()->back()->with('success', 'Team successfully registered for the tournament.');
     }
+
 
     // Update participant info
     public function update(Request $request, $id)
@@ -109,5 +119,23 @@ class ParticipantController extends Controller
         $competition->delete();
 
         return redirect()->back()->with('success', 'Participant deleted successfully.');
+    }
+
+    public function view($id)   
+    {
+        $participant = Competition::with([
+            'tournament.venue', 
+            'category', 
+            'team.players'
+        ])->findOrFail($id);
+
+        // Dummy colours for now
+        $teamColors = [
+            'shirt' => 'Red',
+            'short' => 'White',
+            'gk_shirt' => 'Green',
+        ];
+
+        return view('admin.competition.view', compact('participant', 'teamColors'));
     }
 }

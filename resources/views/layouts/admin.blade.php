@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') | Admin Panel</title>
 
+    @vite('resources/css/app.css')
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,7 +24,7 @@
 <body style="background-color: #f4f7f6;">
 
     <!-- Navbar -->
-    @include('layouts.navbar')
+    @include('layouts.navbartailwind')
 
     <div class="container-fluid">
         <div class="row">

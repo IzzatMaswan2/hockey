@@ -6,10 +6,15 @@
     <title>{{ $title ?? 'Admin Dashboard' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    @vite('resources/css/app.css')
+    {{-- <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script> --}}
     @stack('head')
 </head>
 <body>
-    @include('layouts.navbar')
+    <div class="tw-slot">
+        @include('layouts.navbar')
+    </div>
+    
 
     <div class="container-fluid">
         <div class="row">
@@ -20,8 +25,12 @@
 
             <!-- Main Content -->
             <div class="col-10">
-                {{ $slot }}
+                <div class="tw-slot tw-p-6 tw-bg-gray-100">
+                    {{ $slot }}
+                </div>
             </div>
+
+
         </div>
     </div>
 
