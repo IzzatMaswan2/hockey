@@ -3,41 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Admin Dashboard' }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
-    @vite('resources/css/app.css')
-    {{-- <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script> --}}
-    @stack('head')
+    <title>{{ $title ?? 'Admin Panel' }}</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
+    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+
+    @stack('styles')   
+    <style>
+        [x-cloak] { display: none !important; }
+
+    </style>
 </head>
-<body>
-    <div class="tw-slot">
-        @include('layouts.navbar')
-    </div>
-    
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-2 bg-secondary">
-                @include('layouts.sidebar')
+    {{-- Navbar --}}
+    @include('layouts.navbar')
+
+    {{-- Notification / Alerts --}}
+    <div class="fixed top-5 right-5 z-50 space-y-2">
+        @if(session('success'))
+            <div class="px-4 py-2 bg-green-500 text-white rounded shadow-md">
+                <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
             </div>
-
-            <!-- Main Content -->
-            <div class="col-10">
-                <div class="tw-slot tw-p-6 tw-bg-gray-100">
-                    {{ $slot }}
-                </div>
+        @endif
+        @if(session('error'))
+            <div class="px-4 py-2 bg-red-500 text-white rounded shadow-md">
+                <i class="fas fa-times-circle mr-2"></i> {{ session('error') }}
             </div>
-
-
-        </div>
+        @endif
+        @if(session('warning'))
+            <div class="px-4 py-2 bg-yellow-500 text-white rounded shadow-md">
+                <i class="fas fa-exclamation-triangle mr-2"></i> {{ session('warning') }}
+            </div>
+        @endif
+        @if(session('info'))
+            <div class="px-4 py-2 bg-blue-500 text-white rounded shadow-md">
+                <i class="fas fa-info-circle mr-2"></i> {{ session('info') }}
+            </div>
+        @endif
     </div>
 
+    {{-- Main content wrapper --}}
+    <div class="flex flex-1">
+        {{ $slot }}
+    </div>
+
+    {{-- @stack('scripts') --}}
     @include('layouts.footer')
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    @stack('scripts')
 </body>
 </html>

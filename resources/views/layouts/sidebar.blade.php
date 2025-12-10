@@ -1,167 +1,94 @@
-<header>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-</header>
+{{-- resources/views/layouts/sidebar.blade.php --}}
+<aside class="w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white min-h-screen flex flex-col p-4 shadow-xl" x-data="{ openMenu: null }">
 
-<style>
-    .sidebar {
-        width: 250px !important;
-        background-color: #343a40;
-        color: #fff;
-        position: fixed;
-        height: 100%;
-        top: 0;
-        left: 0;
-        padding-top: 20px;
-        transition: transform 0.3s ease;
-    }
+    {{-- Logo / Brand --}}
+    <div class="flex items-center justify-center mb-6">
+        <img src="{{ asset('img/Logo Latest 1.png') }}" alt="Logo" class="w-2 h-2 rounded-full shadow-md">
+    </div>
 
-    .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-    }
+    {{-- Dashboard --}}
+    <a href="/dashboard" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 hover:shadow-md transition-all duration-300">
+        <i class="fas fa-tachometer-alt w-5 text-purple-400"></i>
+        <span class="font-semibold text-white">Dashboard</span>
+    </a>
 
-    .sidebar ul li {
-        padding: 10px 15px;
-    }
+    {{-- Content Management --}}
+    <div class="mt-4">
+        <button 
+            @click="openMenu === 1 ? openMenu = null : openMenu = 1" 
+            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-700 hover:shadow-md transition-all duration-300"
+        >
+            <span class="flex items-center gap-3 text-white font-semibold">
+                <i class="fa fa-file-text w-5 text-blue-400"></i>
+                Content Management
+            </span>
+            <i :class="openMenu === 1 ? 'rotate-180' : ''" class="fas fa-chevron-down text-gray-300 transition-transform duration-300"></i>
+        </button>
+        <div x-show="openMenu === 1" x-transition class="pl-8 mt-2 space-y-2">
+            <a href="/adminmanagepage" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Pages</a>
+            <a href="/article" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Articles</a>
+        </div>
+    </div>
 
-    .sidebar ul li a {
-        color: #000;
-        text-decoration: none;
-        display: block;
-    }
+    {{-- User & Role Management --}}
+    <div class="mt-3">
+        <button 
+            @click="openMenu === 2 ? openMenu = null : openMenu = 2" 
+            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-700 hover:shadow-md transition-all duration-300"
+        >
+            <span class="flex items-center gap-3 text-white font-semibold">
+                <i class="fas fa-users-cog w-5 text-green-400"></i>
+                User & Role Management
+            </span>
+            <i :class="openMenu === 2 ? 'rotate-180' : ''" class="fas fa-chevron-down text-gray-300 transition-transform duration-300"></i>
+        </button>
+        <div x-show="openMenu === 2" x-transition class="pl-8 mt-2 space-y-2">
+            <a href="/manageadmin" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Admins</a>
+            <a href="/manageuser" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Managers</a>
+            <a href="/referee" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Officers</a>
+        </div>
+    </div>
 
-    .sidebar ul li a:hover {
-        background-color: #fff;
-    }
+    {{-- Tournament & Venue Management --}}
+    <div class="mt-3">
+        <button 
+            @click="openMenu === 3 ? openMenu = null : openMenu = 3" 
+            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-700 hover:shadow-md transition-all duration-300"
+        >
+            <span class="flex items-center gap-3 text-white font-semibold">
+                <i class="fas fa-calendar-alt w-5 text-yellow-400"></i>
+                Tournament & Venue
+            </span>
+            <i :class="openMenu === 3 ? 'rotate-180' : ''" class="fas fa-chevron-down text-gray-300 transition-transform duration-300"></i>
+        </button>
+        <div x-show="openMenu === 3" x-transition class="pl-8 mt-2 space-y-2">
+            <a href="/managevenue" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Venues</a>
+            <a href="/managetournament" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Tournaments</a>
+            <a href="/participants" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Competitions</a>
+            <a href="/manage-group" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Groups</a>
+        </div>
+    </div>
 
-    .content {
-    margin-left: 250px; /* Match the sidebar width */
-    padding: 20px;
-    }
+    {{-- Match & Statistic Management --}}
+    <div class="mt-3">
+        <button 
+            @click="openMenu === 4 ? openMenu = null : openMenu = 4" 
+            class="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-700 hover:shadow-md transition-all duration-300"
+        >
+            <span class="flex items-center gap-3 text-white font-semibold">
+                <i class="fas fa-futbol w-5 text-red-400"></i>
+                Matches & Stats
+            </span>
+            <i :class="openMenu === 4 ? 'rotate-180' : ''" class="fas fa-chevron-down text-gray-300 transition-transform duration-300"></i>
+        </button>
+        <div x-show="openMenu === 4" x-transition class="pl-8 mt-2 space-y-2">
+            <a href="/matches/matches" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Match</a>
+            <a href="/scoreboard/tournamentlist" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Scoreboard</a>
+            <a href="/statistics/tournaments" class="block p-2 rounded-lg hover:bg-gray-700 hover:shadow-sm transition-all duration-200">Manage Statistic</a>
+        </div>
+    </div>
 
-    .nav-link {
-        color: #fff;
-    }
+</aside>
 
-    /* Hide sidebar on small screens */
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-        /* Optional: Add a smooth transition */
-    }
-
-    .sidebar.show {
-        transform: translateX(0);
-    }
-}
-
-/* Ensure content area adjusts to sidebar */
-.content {
-    margin-left: 250px;
-    padding: 20px;
-    transition: margin-left 0.3s ease;
-}
-
-/* Adjust content margin on small screens */
-@media (max-width: 768px) {
-    .content {
-        margin-left: 0;
-    }
-}
-
-</style>
-
-<body>
-    <ul class="nav flex-column">
-        <!-- Main Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/dashboard" style="color: #fff;">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
-            </a>
-        </li>
-
-        <!-- Content Management -->
-        <li class="nav-item">
-            <a class="nav-link" href="/adminmanagepage" style="color: #fff;">
-                <i class="fa fa-file-text"></i> Manage Pages
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/article" style="color: #fff;">
-                <i class="fas fa-newspaper"></i> Manage Articles
-            </a>
-        </li>
-        
-
-        <!-- User & Role Management -->
-        <li class="nav-item">
-            <a class="nav-link" href="/manageadmin" style="color: #fff;">
-                <i class="fas fa-users-cog"></i> Manage Admins
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/manageuser" style="color: #fff;">
-                <i class="fas fa-users-cog"></i> Manage Managers
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/referee" style="color: #fff;">
-                <i class="fas fa-users-cog"></i> Manage Officers
-            </a>
-        </li>
-
-        <!-- Tournament & Venue Management -->
-        <li class="nav-item">
-            <a class="nav-link" href="/managevenue" style="color: #fff;">
-                <i class="fa-solid fa-map-location"></i> Manage Venues
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/managetournament" style="color: #fff;">
-                <i class="fas fa-calendar-alt"></i> Manage Tournaments
-            </a>
-        </li>
-
-        {{-- <li class="nav-item">
-            <a class="nav-link" href="/managecategory" style="color: #fff;">
-                <i class="fa-solid fa-tags"></i> Manage Categories
-            </a>
-        </li> --}}
-
-        <li class="nav-item">
-            <a class="nav-link" href="/participants" style="color: #fff;">
-                <i class="fa-solid fa-users"></i> Manage Competitions
-            </a>
-        </li>
-        
-        <li class="nav-item">
-            <a class="nav-link" href="/manage-group" style="color: #fff;">
-                <i class="fa-solid fa-map-location"></i> Manage Groups
-            </a>
-        </li>
-
-        <!-- Match & Statistic Management -->
-        <li class="nav-item">
-            <a class="nav-link" href="/matches/matches" style="color: #fff;">
-                <i class="fas fa-futbol"></i> Manage Match
-            </a>
-        </li>
-        <!-- Scoreboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="/scoreboard/tournamentlist" style="color: #fff;">
-                <i class="fas fa-list-ol"></i> Manage Scoreboard
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/statistics/tournaments" style="color: #fff;">
-                <i class="fas fa-chart-bar"></i> Manage Statistic
-            </a>
-        </li>
-
-        
-    </ul>
-</body>
-
-
+{{-- Alpine.js --}}
+<script src="//unpkg.com/alpinejs" defer></script>

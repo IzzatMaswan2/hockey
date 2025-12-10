@@ -52,7 +52,9 @@ class TournamentlistController extends Controller
     public function show($id)
     {
         $tournament = Tournament::findOrFail($id);
-    
+
+        // dd($tournament->image);
+        
         $selectedCategoryId = request('category_id');
 
         // dd($selectedCategoryId);
@@ -162,7 +164,58 @@ class TournamentlistController extends Controller
                 default => $groupteam->count(),
             };
         
-            $sortedTeams = $groupteam->sortByDesc('points')->take($maxTeams)->values()->map(function($team, $index) {
+            $sortedTeams = $groupteam->sort(function ($a, $b) use ($tournament, $group) {
+
+                // 1. Points DESC
+                if ($a->points != $b->points) {
+                    return $b->points <=> $a->points;
+                }
+
+                // 2. Goal Difference (gd) DESC
+                if ($a->gd != $b->gd) {
+                    return $b->gd <=> $a->gd;
+                }
+
+                // 3. Goals For (gf) DESC
+                if ($a->gf != $b->gf) {
+                    return $b->gf <=> $a->gf;
+                }
+
+                // 4. Goals Against (ga) ASC
+                if ($a->ga != $b->ga) {
+                    return $a->ga <=> $b->ga;
+                }
+
+                $h2h = MatchGroup::where('TournamentID', $tournament->id)
+                    ->where('GroupID', $group->GroupID)
+                    ->where(function($q) use ($a, $b) {
+                        $q->where(function ($q2) use ($a, $b) {
+                            $q2->where('TeamAID', $a->teamID)
+                            ->where('TeamBID', $b->teamID);
+                        })
+                        ->orWhere(function ($q2) use ($a, $b) {
+                            $q2->where('TeamAID', $b->teamID)
+                            ->where('TeamBID', $a->teamID);
+                        });
+                    })
+                    ->first();
+
+                if (!$h2h) return 0;
+
+                if ($h2h->TeamAID == $a->teamID) {
+                    if ($h2h->ScoreA > $h2h->ScoreB) return -1; 
+                    if ($h2h->ScoreA < $h2h->ScoreB) return 1;  
+                } else {
+                    if ($h2h->ScoreB > $h2h->ScoreA) return -1; 
+                    if ($h2h->ScoreB < $h2h->ScoreA) return 1; 
+                }
+
+                return 0;
+
+            })
+            ->take($maxTeams)
+            ->values()
+            ->map(function ($team, $index) {
                 $team->rank = $index + 1;
                 return $team;
             });

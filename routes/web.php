@@ -32,6 +32,8 @@ use App\Http\Controllers\KnockoutStageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\exportTeamPdf;
+use App\Http\Controllers\ManualController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/fixtures', [FixtureController::class, 'index'])->name('fixture.index');
 Route::get('/matches', function () {
@@ -295,11 +297,11 @@ Route::get('/fixture', function () {
     return view('fixture');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 // admin manage page fo user 
 Route::get('/adminmanagepage', [PageController::class, 'showpage'])->name('show.page');
@@ -317,9 +319,9 @@ Route::post('footer/update', [PageController::class, 'footerupdate'])->name('foo
 /* User Route */
 
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
 Route::get('/playerstatmatch', [PlayerStatMatchInsertController::class, 'create'])->name('playerstatmatch.create');
 Route::post('/playerstatmatch', [PlayerStatMatchInsertController::class, 'store'])->name('playerstatmatch.store');
@@ -386,6 +388,14 @@ Route::put('participants/{id}/unarchive', [ParticipantController::class, 'unarch
 Route::get('/export/team/{id}', [exportTeamPdf::class, 'exportTeamPdf'])
      ->name('pdf.teamlineup');
 
+Route::get('/matches/create-manual', [ManualController::class, 'createManual'])->name('matches.manual');
+Route::post('/matches/store-manual', [ManualController::class, 'storeManual'])->name('matches.manual.store');
+Route::get('/ajax/categories/{tournament_id}', [ManualController::class, 'getCategories']);
+Route::get('/ajax/groups/{category_id}', [ManualController::class, 'getGroups']);
+Route::get('/ajax/teams/{group_id}', [ManualController::class, 'getTeams']);
+
+Route::get('/scoreboard/get-matches', [ScoreboardController::class, 'getMatches']);
+
 
 // referee
 Route::get('/referee', [RefereeController::class, 'index'])->name('referee.index');
@@ -398,7 +408,7 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/scoreboard/{tournamentId}/matches', [ScoreboardController::class, 'filterMatches'])->name('scoreboard.filterMatches');
+// Route::get('/scoreboard/{tournamentId}/matches', [ScoreboardController::class, 'filterMatches'])->name('scoreboard.filterMatches');
 Route::get('/scoreboard', [ScoreboardController::class, 'index'])->name('scoreboard.index');
 Route::post('/scoreboard/updateScores', [ScoreboardController::class, 'updateScores'])->name('scoreboard.updateScores');
 
@@ -409,13 +419,13 @@ Route::get('/get-match-details', [ScoreboardController::class, 'getMatchDetails'
 Route::post('/scoreboard/updateMatch', [ScoreboardController::class, 'updateMatch'])->name('scoreboard.updateMatch');
 Route::post('/update-match/{Match_groupID}', [ScoreboardController::class, 'updateMatch'])->name('update.match');
 
-Route::middleware(['role:Manager'])->group(function () {
+// Route::middleware(['role:Manager'])->group(function () {
     
-});
+// });
 
-Route::middleware(['role:Admin'])->group(function () {
+// Route::middleware(['role:Admin'])->group(function () {
     
-});
+// });
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 

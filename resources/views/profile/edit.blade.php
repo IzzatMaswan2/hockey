@@ -1,318 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-admin-layout :title="'Edit Profile'">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile!</title>
+    <!-- Header with background image -->
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
-        }
+    <!-- Main content container -->
+    <div class="max-w-4xl mx-auto my-12 px-4 w-full">
 
-        .bg-image {
-            background-image: url('/img/nyaa.png'); /* Replace with your image URL */
-            background-size: cover;
-            background-position: center;
-            padding: 60px 0; /* Increase padding for a more dramatic effect */
-            color: white;
-            text-align: center;
-            width: 100%;
-        }
-
-        .bg-image h1,
-        .bg-image h4 {
-            color: white;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Adding text shadow for better readability */
-        }
-
-        .narrow-container {
-            max-width: 800px; /* Adjust width as needed */
-            margin: -30px auto 0 auto; /* Negative margin to overlap the card with the background */
-            border-radius: 20px;
-            background-color: white;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            position: relative;
-            z-index: 2;
-        }
-
-        h1 {
-            font-size: 50px;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        h4 {
-            font-size: 30px;
-            font-weight: 600;
-        }
-
-        .tab-container {
-            display: flex;
-            cursor: pointer;
-            
-            margin-bottom: 20px;
-        }
-
-        .tab-button {
-            flex: 1;
-            padding: 5px;
-            background: #e9ecef;
-            border: 1px solid #dee2e6;
-            border-radius: 5px 5px 0 0;
-            text-align: center;
-            transition: background 0.3s ease;
-            font-weight: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin:3px;
-        }
-
-        .tab-button i {
-            margin-right: 8px;
-        }
-
-        .tab-button.active {
-            background: #4B006E;
-            border-bottom: 1px solid transparent;
-            color: white;
-            font-weight: bold;
-        }
-
-        .tab-button:hover {
-            background-color: #dcdcdc;
-        }
-
-        .tab-content {
-            border: 1px solid #dee2e6;
-            border-radius: 0 0 5px 5px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-        }
-
-        .tab-pane {
-            display: none;
-        }
-
-        .tab-pane.active {
-            display: block;
-        }
-
-        .card {
-            
-            border: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border-radius: 10px;
-            min-height: 150px; /* Set a minimum height for cards */
-            margin-bottom: 20px; /* Margin between cards */
-        }
-
-        .card-title {
-            font-size: 1.75rem;
-            color: #4B006E;
-            font-weight: 600;
-        }
-
-        .card-text {
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background-color: #4B006E;
-            border-color: #4B006E;
-        }
-
-        .btn-primary:hover {
-            background-color: #3a004d;
-            border-color: #3a004d;
-        }
-        
-    </style>
-
-</head>
-
-<body style="background-color:#eeeeee">
-
-    <!-- Include Navbar -->
-     
-    @include('layouts.navbar')
-
-    <!-- Full Width Background Image -->
-    <div class="bg-image">
-        <h1 class="font-weight-bold"> Your Profile!</h1>
-        <br>
-        <h4 class="font-weight-bold">Hello, {{ Auth::user()->fullName }}!</h4>
+    <div class="w-full bg-cover bg-center py-20 text-center rounded-md text-white " style="background-image: url('{{ asset('img/nyaa.png') }}');">
+        {{-- <h1 class="text-5xl font-bold">Your Profile!</h1> --}}
+        <h4 class="text-3xl font-semibold mt-2">Hello, {{ Auth::user()->fullName }}!</h4>
     </div>
-
-    <!-- Main Content -->
-    <div class="container narrow-container py-5" style="width:700px; margin-bottom:20px; background-image: url('{{ asset('img/logreg.jpg') }}'); background-repeat: repeat; background-position: center;">
-        <!-- Custom Tabs -->
-        <div class="tab-container" >
-            <div class="tab-button active" data-target="#account-info">
-                <i class="bi bi-person"></i> Account Information
-            </div>
-            <div class="tab-button" data-target="#update-password">
-                <i class="bi bi-key"></i> Change Password
-            </div>
-            <div class="tab-button" data-target="#notifications">
-                <i class="bi bi-bell"></i> Notifications
-            </div>
-            <div class="tab-button" data-target="#settings">
-                <i class="bi bi-gear"></i> Settings
-            </div>
-            <div class="tab-button" data-target="#activity">
-                <i class="bi bi-activity"></i> Activity
-            </div>
+        <!-- Tabs -->
+        <div class="flex justify-center space-x-2 mb-6 border-b border-gray-300 w-full">
+            <button class="tab-btn px-4 py-2 font-semibold text-gray-700 hover:text-purple-700 border-b-2 border-transparent focus:outline-none" data-target="#account-info">
+                <i class="bi bi-person mr-1"></i> Account Info
+            </button>
+            <button class="tab-btn px-4 py-2 font-semibold text-gray-700 hover:text-purple-700 border-b-2 border-transparent focus:outline-none" data-target="#update-password">
+                <i class="bi bi-key mr-1"></i> Change Password
+            </button>
+            <button class="tab-btn px-4 py-2 font-semibold text-gray-700 hover:text-purple-700 border-b-2 border-transparent focus:outline-none" data-target="#notifications">
+                <i class="bi bi-bell mr-1"></i> Notifications
+            </button>
+            <button class="tab-btn px-4 py-2 font-semibold text-gray-700 hover:text-purple-700 border-b-2 border-transparent focus:outline-none" data-target="#settings">
+                <i class="bi bi-gear mr-1"></i> Settings
+            </button>
+            <button class="tab-btn px-4 py-2 font-semibold text-gray-700 hover:text-purple-700 border-b-2 border-transparent focus:outline-none" data-target="#activity">
+                <i class="bi bi-activity mr-1"></i> Activity
+            </button>
         </div>
 
-        <!-- Account Information Tab -->
-        <div class="tab-pane active" id="account-info">
-            <div class="card mt-3"style="background-color: rgba(255, 255, 255, 0.84);">
-                <div class="card-body">
-                    <h1 class="card-title text-center">Account Information</h1><br>
-                    <p class="card-text"><i class="bi bi-person-circle"></i> Name: <b>{{ Auth::user()->fullName }}</b></p>
-                    <p class="card-text"><i class="bi bi-envelope"></i> Email: <b>{{ Auth::user()->email }}</b></p>
-                    <p class="card-text"><i class="bi bi-people"></i> Role: <b>{{ Auth::user()->role }}</b></p>
+        <!-- Tab Panes -->
+        <div class="space-y-6">
 
-                    @if (Auth::user()->role === 'Manager')
-                        <p class="card-text"><i class="bi bi-briefcase"></i> Occupation: <b>{{ Auth::user()->occupation }}</b></p>
-                        <p class="card-text"><i class="bi bi-flag"></i> Team Name: <b>{{ $user->team ? $user->team->name : 'N/A' }}</b></p>
-                        <!-- Display Team Logo -->
-                            @if($user->team && $user->team->LogoURL)
-                                <div class="mb-2">
-                                <i class="fa-solid fa-square"></i> Team Logo: <img src="{{ asset('storage/' . $user->team->LogoURL) }}" alt="{{ $user->team->name }} Logo" style="width: 100px; height: 100px; border-radius: 10px;">
-                                </div>
-                            @else
-                                <p class="card-text"><i class="bi bi-image"></i> Team Logo: <b>No logo available</b></p>
-                            @endif
-                        <p class="card-text"><i class="bi bi-geo-alt"></i> Address: <b>{{ Auth::user()->address }}</b></p>
-                        <p class="card-text"><i class="bi bi-globe"></i> Country: <b>{{ Auth::user()->country }}</b></p>
-                        <p class="card-text"><i class="bi bi-trophy"></i> Tournaments:</b></p>
-                <ul>
-                    @if(Auth::user()->team && Auth::user()->team->tournaments->isNotEmpty())
-                        @foreach(Auth::user()->team->tournaments as $tournament)
-                            <li><b>{{ $tournament->name }}</b></li>
-                        @endforeach
-                    @else
-                        <li><b>No tournaments joined</b></li>
-                    @endif
-                </ul>
+            <!-- Account Info Tab -->
+            <div id="account-info" class="tab-pane hidden">
+                <div class="bg-white bg-opacity-90 rounded-2xl shadow p-6" style="background-image: url('{{ asset('img/logreg.jpg') }}'); background-repeat: repeat;">
+                    <h2 class="text-2xl font-bold text-gray-100 text-center mb-4">Account Information</h2>
 
-                    @elseif (Auth::user()->role === 'Player')
-                        <p class="card-text"><i class="bi bi-calendar"></i> Date of Birth: <b>{{ Auth::user()->dob }}</b></p>
-                        <p class="card-text"><i class="bi bi-display"></i> Display Name: <b>{{ Auth::user()->displayName }}</b></p>
-                        <p class="card-text"><i class="bi bi-shirt"></i> Jersey Number: <b>{{ Auth::user()->jerseyNumber }}</b></p>
-                        <p class="card-text"><i class="bi bi-flag"></i> Team Name: <b>{{ $user->team ? $user->team->name : 'N/A' }}</b></p>
-                                                <!-- Display Team Logo -->
-                                                @if($user->team && $user->team->LogoURL)
-                                <div class="mb-2">
-                                <i class="fa-solid fa-square"></i> Team Logo: <img src="{{ asset('storage/' . $user->team->LogoURL) }}" alt="{{ $user->team->name }} Logo" style="width: 100px; height: 100px; border-radius: 10px;">
-                                </div>
-                            @else
-                                <p class="card-text"><i class="bi bi-image"></i> Team Logo: <b>No logo available</b></p>
-                            @endif
-                        <p class="card-text"><i class="bi bi-telephone"></i> Contact: <b>{{ Auth::user()->contact }}</b></p>
-                        <p class="card-text"><i class="bi bi-gear"></i> Position: <b>{{ Auth::user()->position }}</b></p>
-                        <p class="card-text"><i class="bi bi-trophy"></i> Tournaments:</b></p>
-                <ul>
-                    @if(Auth::user()->team && Auth::user()->team->tournaments->isNotEmpty())
-                        @foreach(Auth::user()->team->tournaments as $tournament)
-                            <li><b>{{ $tournament->name }}</b></li>
-                        @endforeach
-                    @else
-                        <li><b>No tournaments joined</b></li>
-                    @endif
-                </ul>
+                    <section class="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-lg space-y-4">
 
-                    @elseif (Auth::user()->role === 'Admin')
-                        <p class="card-text"><i class="bi bi-shield-lock"></i> Role: <b>{{ Auth::user()->role }}</b></p>
-                    @endif
+                        <div class="space-y-2 text-gray-700">
+                            <p class="flex items-center gap-2"><i class="bi bi-person-circle text-purple-700"></i> Name: <b>{{ Auth::user()->fullName }}</b></p>
+                            <p class="flex items-center gap-2"><i class="bi bi-envelope text-purple-700"></i> Email: <b>{{ Auth::user()->email }}</b></p>
+                            <p class="flex items-center gap-2"><i class="bi bi-people text-purple-700"></i> Role: <b>{{ Auth::user()->role }}</b></p>
+                        </div>
+
+                        @if(Auth::user()->role === 'Manager')
+                            <div class="space-y-2 text-gray-700">
+                                <p class="flex items-center gap-2"><i class="bi bi-briefcase text-purple-700"></i> Occupation: <b>{{ Auth::user()->occupation }}</b></p>
+                                <p class="flex items-center gap-2"><i class="bi bi-flag text-purple-700"></i> Team Name: <b>{{ $user->team ? $user->team->name : 'N/A' }}</b></p>
+
+                                @if($user->team && $user->team->LogoURL)
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-purple-700">Team Logo:</span>
+                                        <img src="{{ asset('storage/' . $user->team->LogoURL) }}" alt="{{ $user->team->name }} Logo" class="w-24 h-24 rounded-lg border shadow-sm">
+                                    </div>
+                                @endif
+
+                                <p class="flex items-center gap-2"><i class="bi bi-geo-alt text-purple-700"></i> Address: <b>{{ Auth::user()->address }}</b></p>
+                                <p class="flex items-center gap-2"><i class="bi bi-globe text-purple-700"></i> Country: <b>{{ Auth::user()->country }}</b></p>
+
+                                <p class="mt-2 font-semibold text-gray-800">Tournaments:</p>
+                                <ul class="list-disc list-inside ml-6">
+                                    @if(Auth::user()->team && Auth::user()->team->tournaments->isNotEmpty())
+                                        @foreach(Auth::user()->team->tournaments as $tournament)
+                                            <li>{{ $tournament->name }}</li>
+                                        @endforeach
+                                    @else
+                                        <li>No tournaments joined</li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @elseif(Auth::user()->role === 'Player')
+                            <div class="space-y-2 text-gray-700">
+                                <p class="flex items-center gap-2"><i class="bi bi-calendar text-purple-700"></i> Date of Birth: <b>{{ Auth::user()->dob }}</b></p>
+                                <p class="flex items-center gap-2"><i class="bi bi-display text-purple-700"></i> Display Name: <b>{{ Auth::user()->displayName }}</b></p>
+                                <p class="flex items-center gap-2"><i class="bi bi-shirt text-purple-700"></i> Jersey Number: <b>{{ Auth::user()->jerseyNumber }}</b></p>
+                                <p class="flex items-center gap-2"><i class="bi bi-flag text-purple-700"></i> Team Name: <b>{{ $user->team ? $user->team->name : 'N/A' }}</b></p>
+
+                                @if($user->team && $user->team->LogoURL)
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-purple-700">Team Logo:</span>
+                                        <img src="{{ asset('storage/' . $user->team->LogoURL) }}" alt="{{ $user->team->name }} Logo" class="w-24 h-24 rounded-lg border shadow-sm">
+                                    </div>
+                                @endif
+
+                                <p class="flex items-center gap-2"><i class="bi bi-telephone text-purple-700"></i> Contact: <b>{{ Auth::user()->contact }}</b></p>
+                                <p class="flex items-center gap-2"><i class="bi bi-gear text-purple-700"></i> Position: <b>{{ Auth::user()->position }}</b></p>
+
+                                <p class="mt-2 font-semibold text-gray-800">Tournaments:</p>
+                                <ul class="list-disc list-inside ml-6">
+                                    @if(Auth::user()->team && Auth::user()->team->tournaments->isNotEmpty())
+                                        @foreach(Auth::user()->team->tournaments as $tournament)
+                                            <li>{{ $tournament->name }}</li>
+                                        @endforeach
+                                    @else
+                                        <li>No tournaments joined</li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
+                    </section>
+
+
+                    <!-- Forms -->
+                    <div class="mt-4">@include('profile.partials.update-profile-information-form')</div>
+                    <div class="mt-4">@include('profile.partials.delete-user-form')</div>
                 </div>
             </div>
-            <!-- Update Profile Content -->
-            <div class="card mt-3"style="background-color: rgba(255, 255, 255, 0.84);">
-                <div class="card-body">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
-            <!-- Delete Profile Content -->
-            <div class="card mt-3"style="background-color: rgba(255, 255, 255, 0.84);">
-                <div class="card-body">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
 
-
-        <!-- Update Password Tab -->
-        <div class="tab-pane" id="update-password" >
-            <div class="card mt-3 mb-4" style="background-color: rgba(255, 255, 255, 0.84);">
-                <div class="card-body">
+            <!-- Change Password Tab -->
+            <div id="update-password" class="tab-pane hidden">
+                <div class="bg-purple bg-opacity-90 rounded-2xl shadow p-6" style="background-image: url('{{ asset('img/logreg.jpg') }}'); background-repeat: repeat;">
                     @include('profile.partials.update-password-form')
                 </div>
             </div>
-        </div>
 
-        <!-- Notifications Tab -->
-        <div class="tab-pane" id="notifications">
-            <div class="card mt-3 mb-4" style="background-color: rgba(255, 255, 255, 0.84);">
-                <div class="card-body">
-                    <h3 class="text-center fw-bold">Notifications</h3>
+            <!-- Notifications Tab -->
+            <div id="notifications" class="tab-pane hidden">
+                <div class="bg-white bg-opacity-90 rounded-2xl shadow p-6 text-center" style="background-image: url('{{ asset('img/logreg.jpg') }}'); background-repeat: repeat;">
+                    <h3 class="text-xl font-bold">Notifications</h3>
                 </div>
             </div>
-        </div>
 
-        <!-- Settings Tab -->
-        <div class="tab-pane" id="settings">
-            <div class="card mt-3 mb-4" style="background-color: rgba(255, 255, 255, 0.84);">
-                <div class="card-body">
-                    <h3 class="text-center fw-bold">Settings</h3>
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-pane hidden">
+                <div class="bg-white bg-opacity-90 rounded-2xl shadow p-6 text-center" style="background-image: url('{{ asset('img/logreg.jpg') }}'); background-repeat: repeat;">
+                    <h3 class="text-xl font-bold">Settings</h3>
                 </div>
             </div>
-        </div>
 
-        <!-- Activity Tab -->
-        <div class="tab-pane" id="activity">
-            <div class="card mt-3 mb-4" style="background-color: rgba(255, 255, 255, 0.84);">
-                <div class="card-body">
-                    <h3 class="text-center fw-bold">Activity</h3>
+            <!-- Activity Tab -->
+            <div id="activity" class="tab-pane hidden">
+                <div class="bg-white bg-opacity-90 rounded-2xl shadow p-6 text-center" style="background-image: url('{{ asset('img/logreg.jpg') }}'); background-repeat: repeat;">
+                    <h3 class="text-xl font-bold">Activity</h3>
                 </div>
             </div>
+
         </div>
     </div>
 
-    <!-- Include Footer -->
-    @include('layouts.footer')
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <!-- Tabs JS -->
     <script>
-        document.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-                // Hide all tab panes
-                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panes = document.querySelectorAll('.tab-pane');
 
-                // Add active class to clicked button
-                button.classList.add('active');
-                // Show the corresponding tab pane
-                document.querySelector(button.getAttribute('data-target')).classList.add('active');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('text-purple-700', 'border-b-2', 'border-purple-700'));
+                tabs.forEach(t => t.classList.add('text-gray-700', 'border-transparent'));
+                panes.forEach(p => p.classList.add('hidden'));
+
+                tab.classList.add('text-purple-700', 'border-b-2', 'border-purple-700');
+                tab.classList.remove('text-gray-700', 'border-transparent');
+
+                const target = document.querySelector(tab.getAttribute('data-target'));
+                target.classList.remove('hidden');
             });
         });
+
+        // Activate first tab on page load
+        tabs[0].click();
     </script>
 
-</body>
-
-</html>
+</x-admin-layout>

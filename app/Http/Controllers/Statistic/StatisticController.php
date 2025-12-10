@@ -285,9 +285,9 @@ class StatisticController extends Controller
 
         // Step 2: Fetch all valid matches for the given tournament (match_status = 2, both_approved = 1, error = 0)
         $matches = MatchGroup::where('TournamentID', $tournamentID)
-            ->where('match_status', 2)
-            ->where('both_approved', 1)
-            ->where('error', NULL)
+            ->where('match_status', 1)
+            // ->where('both_approved', 1)
+            // ->where('error', NULL)
             ->get();
 
             // dd($matches);

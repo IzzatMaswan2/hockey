@@ -1,100 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Article</title>
-    <!-- Include Navbar -->
-    @include('layouts.navbar')
-    <style>
-        body {
-            background-color: #f5f5f5; 
-        }
-        .mb-4 {
-            border-radius: 20px;
-            background-color: white;
-            padding: 20px 20px 0 20px;
-            margin: 0;
-        }
+<x-admin-layout>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        @include('layouts.sidebar')
 
-        .card {
-            border-radius: 20px;
-        }
+        <!-- Main Content -->
+        <div class="flex-1 p-6 min-w-0 bg-gray-100">
+            <div class="space-y-6">
+                <!-- Header -->
+                <div class="bg-white rounded-2xl p-6">
+                    <h4 class="text-xl font-semibold">Write Some News</h4>
+                    <p class="text-gray-500">Write some news for users to see</p>
+                </div>
 
-        .sidebar {
-            background-color: #929292;
-            padding: 20px;
-        }
-
-        .content {
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 sidebar">
-                @include('layouts.sidebar')
-            </div>
-
-            <!-- Main Content -->
-            <div class="col-md-9 content">
-                <div class="container-fluid">
-                    <div class="row" style="margin-top:0;">
-                        <!-- First Part -->
-                        <div id="main-content" class="container-fluid" style="margin-top:0;">
-                            <div class="row">
-                                <!-- Header -->
-                                <div class="mb-4" style="margin-top:0;">
-                                    <h4>Write Some News</h4>
-                                    <p class="text-muted">Write some news for users to see</p>
-                                </div>
-
-                                <!-- Post Form -->
-                                <div class="card">
-                                    <div class="card-header" style="background-color:transparent;padding-top:20px;">
-                                        <h5 style="">Write a Post</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <form method="POST" action="">
-                                            <div class="mb-3">
-                                                <label for="postTitle" class="form-label">News Title:</label>
-                                                <input type="text" class="form-control" id="postTitle" name="postTitle" style="background-color:#f5f5f5">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="postImage" class="form-label">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                                                        <path d="m9 13 3-4 3 4.5V12h4V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-4H5l3-4 1 2z"></path>
-                                                        <path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
-                                                    </svg>
-                                                </label>
-                                                <input type="file" class="form-control" id="postImage" name="postImage">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="postContent" class="form-label">Content:</label>
-                                                <textarea class="form-control" id="postContent" rows="10" style="background-color:#f5f5f5"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary" style="background-color:#5D3CB8">Save</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Post Form -->
+                <div class="bg-white rounded-2xl shadow p-6 space-y-4">
+                    <div class="text-lg font-semibold">Write a Post</div>
+                    <form method="POST" action="" class="space-y-4">
+                        @csrf
+                        <div>
+                            <label for="postTitle" class="block font-medium mb-1">News Title:</label>
+                            <input type="text" id="postTitle" name="postTitle" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
-                    </div>
+
+                        <div>
+                            <label for="postImage" class="block font-medium mb-1 flex items-center space-x-2 cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 30" class="fill-current text-gray-700">
+                                    <path d="m9 13 3-4 3 4.5V12h4V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-4H5l3-4 1 2z"></path>
+                                    <path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
+                                </svg>
+                                <span>Upload Image</span>
+                            </label>
+                            <input type="file" id="postImage" name="postImage" class="hidden">
+                        </div>
+
+                        <div>
+                            <label for="postContent" class="block font-medium mb-1">Content:</label>
+                            <textarea id="postContent" name="postContent" rows="10" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="bg-indigo-700 text-white px-4 py-2 rounded hover:bg-indigo-800">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Include Footer -->
-    @include('layouts.footer')
-</body>
-</html>
+</x-admin-layout>

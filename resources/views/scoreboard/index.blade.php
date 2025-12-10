@@ -3,195 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/scoreboard.css') }}">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Scoreboard - {{ $tournament->name }}</title>
-    <style>
-        body {
-            background-color: #f5f5f5;
-        }
-        .status {
-            font-weight: bold;
-        }
-    </style>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    @stack('styles')
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
     @include('layouts.navbar')
 
-    <div class="container-fluid" style="height: 90%;">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-3" style="background-color: #929292; ">
-                @include('layouts.sidebar')
+    {{-- Notifications --}}
+    <div class="fixed top-5 right-5 z-50 space-y-2">
+        @if(session('success'))
+            <div class="px-4 py-2 bg-green-500 text-white rounded shadow-md">
+                <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="px-4 py-2 bg-red-500 text-white rounded shadow-md">
+                <i class="fas fa-times-circle mr-2"></i> {{ session('error') }}
+            </div>
+        @endif
+        @if(session('warning'))
+            <div class="px-4 py-2 bg-yellow-500 text-white rounded shadow-md">
+                <i class="fas fa-exclamation-triangle mr-2"></i> {{ session('warning') }}
+            </div>
+        @endif
+        @if(session('info'))
+            <div class="px-4 py-2 bg-blue-500 text-white rounded shadow-md">
+                <i class="fas fa-info-circle mr-2"></i> {{ session('info') }}
+            </div>
+        @endif
+    </div>
+
+    <div class="flex flex-1">
+        @include('layouts.sidebar')
+
+        <div class="flex-1 p-6">
+            <h3 class="text-2xl font-bold mb-6 text-purple-700">SCOREBOARD - {{ $tournament->name }}</h3>
+
+            <!-- Match Selection -->
+            <div class="bg-white shadow-md rounded-xl p-6 mb-6">
+                <form id="scoreboard-form">
+                    @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div>
+                            <label for="category-dropdown" class="block font-semibold mb-1">CATEGORY</label>
+                            <select id="category-dropdown" class="w-full border border-gray-300 rounded-md p-2">
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="match-dropdown" class="block font-semibold mb-1">MATCH</label>
+                            <select id="match-dropdown" class="w-full border border-gray-300 rounded-md p-2">
+                                <option value="">Select Match</option>
+                                @foreach($matches as $match)
+                                    <option value="{{ $match->Match_groupID }}">
+                                        {{ $teams[$match->TeamAID]->name }} vs {{ $teams[$match->TeamBID]->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="text-center">
+                            <div id="match-status" class="font-bold text-gray-700">Status</div>
+                        </div>
+                    </div>
+                </form>
             </div>
 
-            <!-- Main Content -->
-            <div class="col-8">
-                <h3 class="mt-4 mb-3" style="color: #5D3CB8;">
-                    <strong>SCOREBOARD - {{ $tournament->name }}</strong>
-                </h3>
+            <!-- Score Update -->
+            <div class="bg-white shadow-md rounded-xl p-5 mb-6 border border-gray-200">
+                <form id="score-update-form" method="POST">
+                    @csrf
 
-                <!-- Match Selection Form -->
-                <section class="score-section">
-                    <form action="{{ route('scoreboard.updateMatch') }}" method="POST">
-                        @csrf
-                        <div class="row mb-3 align-items-center">
-                            <div class="col-md-4">
-                                @if($categories->isNotEmpty())
-                                <label for="category-dropdown" class="form-label">CATEGORY:</label>
-                                <select class="form-select" name="category_id" id="category-dropdown">
-                                    @foreach($categories as $cat)
-                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                    @endforeach
-                                </select>
-                                @endif
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- TEAM A -->
+                        <div>
+                            <div id="team1-box"
+                                class="text-lg font-semibold text-white text-center
+                                        bg-gradient-to-r from-blue-500 to-purple-600
+                                        py-2 rounded-md shadow-md mb-2">
+                                TEAM A
                             </div>
-                            <div class="col-md-4">
-                                <label for="match-dropdown" class="form-label">MATCH:</label>
-                                <select class="form-select" name="match_id" id="match-dropdown">
-                                    <option value="">Select Match</option>
-                                    @foreach($matches as $match)
-                                        <option value="{{ $match->Match_groupID }}">
-                                            {{ $teams[$match->TeamAID]->name }} vs {{ $teams[$match->TeamBID]->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2 mt-4">
-                                <button type="button" class="btn btn-primary w-100" id="status-button">STATUS</button>
-                            </div>
-                            <div class="col-md-1 mt-4">
-                                <div class="status" id="match-status">Status</div>
+
+                            <input type="hidden" id="match-id" name="match_ID">
+
+                            <input type="number" id="team1-score" name="ScoreA"
+                                class="w-full text-xl font-bold text-center p-2
+                                        border rounded-md bg-gray-50 focus:ring focus:ring-blue-300"
+                                value="0">
+                        </div>
+
+                        <!-- TEAM B -->
+                        <div>
+                            <input type="number" id="team2-score" name="ScoreB"
+                                class="w-full text-xl font-bold text-center p-2
+                                        border rounded-md bg-gray-50 focus:ring focus:ring-red-300"
+                                value="0">
+
+                            <div id="team2-box"
+                                class="text-lg font-semibold text-white text-center
+                                        bg-gradient-to-r from-red-500 to-pink-600
+                                        py-2 rounded-md shadow-md mt-2">
+                                TEAM B
                             </div>
                         </div>
 
-                    </form>
-
-                    <!-- Score Update Form -->
-                    {{-- @if(count($matches) > 0) --}}
-                        {{-- @foreach($matches as $match) --}}
-                            <form action="{{ route('update.match', $match->Match_groupID) }}" method="POST">
-                                @csrf
-                                <div class="score-container">
-                                    <div class="score-title">SCORE</div>
-                                    <div class="team-score-wrapper">
-                                        <div class="team-score">
-                                            <div class="team-box" id="team1-box">TEAM A</div>
-                                            <input type="number" name="match_ID" id="match-id" class="score-box" value="{{ old('matchID', $match->Match_groupID) }}" hidden>
-                                            <input type="number" name="ScoreA" id="team1-score" class="score-box" value="{{ old('ScoreA', $match->team1_score) }}">
-                                        </div>
-                                        <div class="team-score">
-                                            <input type="number" name="ScoreB" id="team2-score" class="score-box" value="{{ old('ScoreB', $match->team2_score) }}">
-                                            <div class="team-box" id="team2-box">TEAM B</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="update-btn">Save Scores</button>
-                            </form>
-                        {{-- @endforeach
-                    @endif --}}x    
-
-                    <!-- Player Score Section -->
-                    <div class="player-title">PLAYER SCORE</div>
-                    <div class="team-player-wrapper">
-                        <div class="team-player">
-                            <div class="player-box" id="team1-player-box">Player-Score</div>
-                        </div>
-                        <div class="team-player">
-                            <div class="player-box" id="team2-player-box">Player-Score</div>
-                        </div>
                     </div>
-                </section>
 
-                <!-- Update Knockout Board Section -->
-                <!-- <div class="container mt-5">
-                    <h3 class="text-center" style="color: #5D3CB8;">
-                        <strong>UPDATE KNOCKOUT BOARD - {{ $tournament->name }}</strong>
-                    </h3>
-                    <div class="tournament-container">
-                        <div class="tournament-groups">
-                            
-                        </div>
+                    <!-- Save button -->
+                    <div class="mt-5 text-center">
+                        <button type="submit"
+                                class="px-6 py-2 font-semibold text-white rounded-md
+                                    bg-green-600 hover:bg-green-700 shadow-sm transition">
+                            Save Scores
+                        </button>
                     </div>
-                </div> -->
+
+                </form>
+            </div>
+
+
+
+            <!-- Player Scores -->
+            <div class="bg-white shadow-md rounded-xl p-6">
+                <h5 class="text-lg font-bold mb-4">PLAYER SCORE</h5>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div id="team1-player-box" class="bg-gray-100 rounded-md p-4">Player-Score</div>
+                    <div id="team2-player-box" class="bg-gray-100 rounded-md p-4">Player-Score</div>
+                </div>
             </div>
         </div>
     </div>
 
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        
-        <script>
-            $(document).ready(function() {
-                $('#match-dropdown').on('change', function() {
-                    var matchId = $(this).val();
-                    $('#match-id').val(matchId);
+<script>
+$(document).ready(function() {
+    $(document).on('change', '#category-dropdown', function() {
+        var categoryId = $(this).val();
+        var tournamentId = "{{ $tournament->id }}";
 
-                    if (matchId) {
-                        $.ajax({
-                            url: '/get-match-details',
-                            type: 'GET',
-                            data: { id: matchId },
-                            success: function(response) {
-                                // Update team names and scores
-                                $('#team1-box').text(response.team1_name);
-                                $('#team2-box').text(response.team2_name);
-                                $('#team1-score').val(response.team1_score);
-                                $('#team2-score').val(response.team2_score);
-                                $('#match-id').val(response.match_id);
+        $('#match-dropdown').html('<option>Loading...</option>');
 
-                                // Determine match status
-                                var today = new Date();
-                                var matchDate = new Date(response.date);
-                                var todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-                                var matchDateOnly = new Date(matchDate.getFullYear(), matchDate.getMonth(), matchDate.getDate());
-
-                                if (todayDateOnly > matchDateOnly) {
-                                    $('#match-status').html('<td style="color: green;">Completed</td>');
-                                } else if (todayDateOnly < matchDateOnly) {
-                                    $('#match-status').html('<td style="color: blue;">Upcoming</td>');
-                                } else {
-                                    $('#match-status').html('<td style="color: orange;">On-going</td>');
-                                }
-
-                                // Update player scores
-                                var team1Players = '';
-                                var team2Players = '';
-
-                                $.each(response.players, function(index, player) {
-                                    if (player.team_name === response.team1_name) {
-                                        team1Players += '<div>' + player.name + ' - ' + player.Score + '</div>';
-                                    } else {
-                                        team2Players += '<div>' + player.name + ' - ' + player.Score + '</div>';
-                                    }
-                                });
-
-                                $('#team1-player-box').html(team1Players);
-                                $('#team2-player-box').html(team2Players);
-                            },
-                            error: function() {
-                                $('#match-status').text('Error fetching match details');
-                            }
-                        });
-                    } else {
-                        // Reset fields if no match is selected
-                        $('#team1-box').text('TEAM A');
-                        $('#team2-box').text('TEAM B');
-                        $('#team1-score').val(0);
-                        $('#team2-score').val(0);
-                        $('#match-status').text('Please select a match');
-                    }
-                });
+        $.get('/scoreboard/get-matches', { tournament_id: tournamentId, category_id: categoryId }, function(data) {
+            $('#match-dropdown').html('<option value="">Select Match</option>');
+            $.each(data, function(i, m){
+                $('#match-dropdown').append(`<option value="${m.Match_groupID}">${m.teamA_name} vs ${m.teamB_name}</option>`);
             });
-        </script>
+            // Reset display
+            $('#team1-box').text('TEAM A');
+            $('#team2-box').text('TEAM B');
+            $('#team1-score').val(0);
+            $('#team2-score').val(0);
+            $('#match-status').text('Please select a match');
+            $('#team1-player-box').html('Player-Score');
+            $('#team2-player-box').html('Player-Score');
+        });
+    });
 
-    @include('layouts.footer')
+    $(document).on('change', '#match-dropdown', function() {
+        var matchId = $(this).val();
+        $('#match-id').val(matchId);
+
+        if(matchId){
+            $.get('/get-match-details', { id: matchId }, function(res){
+                $('#team1-box').text(res.team1_name);
+                $('#team2-box').text(res.team2_name);
+                $('#team1-score').val(res.team1_score);
+                $('#team2-score').val(res.team2_score);
+
+                var today = new Date();
+                var matchDate = new Date(res.date);
+                var todayOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                var matchOnly = new Date(matchDate.getFullYear(), matchDate.getMonth(), matchDate.getDate());
+
+                if(todayOnly > matchOnly) $('#match-status').text('Completed').removeClass().addClass('font-bold text-green-600');
+                else if(todayOnly < matchOnly) $('#match-status').text('Upcoming').removeClass().addClass('font-bold text-blue-600');
+                else $('#match-status').text('On-going').removeClass().addClass('font-bold text-orange-500');
+
+                var t1Players = '', t2Players = '';
+                $.each(res.players, function(i, p){
+                    if(p.team_name === res.team1_name) t1Players += `<div>${p.name} - ${p.Score}</div>`;
+                    else t2Players += `<div>${p.name} - ${p.Score}</div>`;
+                });
+                $('#team1-player-box').html(t1Players);
+                $('#team2-player-box').html(t2Players);
+            });
+        } else {
+            $('#team1-box').text('TEAM A');
+            $('#team2-box').text('TEAM B');
+            $('#team1-score').val(0);
+            $('#team2-score').val(0);
+            $('#match-status').text('Please select a match');
+            $('#team1-player-box').html('Player-Score');
+            $('#team2-player-box').html('Player-Score');
+        }
+    });
+
+    $('#score-update-form').submit(function(e){
+        e.preventDefault();
+        var matchId = $('#match-id').val();
+        var scoreA = $('#team1-score').val();
+        var scoreB = $('#team2-score').val();
+
+        $.post('/update-match/' + matchId, {
+            _token: '{{ csrf_token() }}',
+            ScoreA: scoreA,
+            ScoreB: scoreB,
+            match_ID: matchId
+        }, function(res){
+            alert('Scores updated successfully!');
+        });
+    });
+});
+</script>
+
+@include('layouts.footer')
 </body>
 </html>

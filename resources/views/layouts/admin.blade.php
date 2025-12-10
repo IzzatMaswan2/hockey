@@ -1,48 +1,54 @@
-<!DOCTYPE html>
+{{-- x-layout-admin --}}
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') | Admin Panel</title>
+    <title>{{ $title ?? 'Admin Panel' }}</title>
 
-    @vite('resources/css/app.css')
-
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
+    <script src="//unpkg.com/alpinejs" defer></script> --}}
 
-    <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {{-- @stack('styles') --}}
+{{-- </head>
+<body class="bg-gray-100 w-full "> --}}
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- Navbar --}}
+    {{-- @include('layouts.navbar') --}}
 
-    @yield('styles')
-</head>
-<body style="background-color: #f4f7f6;">
-
-    <!-- Navbar -->
-    @include('layouts.navbartailwind')
-
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 p-0" style="background-color: #929292;">
-                @include('layouts.sidebar')
+    {{-- Notification / Alerts --}}
+    {{-- <div class="fixed top-5 right-5 z-50 space-y-2">
+        @if(session('success'))
+            <div class="px-4 py-2 bg-green-500 text-white rounded shadow-md">
+                <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
             </div>
-
-            <!-- Main Content -->
-            <div class="col-md-10 py-4">
-                @yield('content')
+        @endif
+        @if(session('error'))
+            <div class="px-4 py-2 bg-red-500 text-white rounded shadow-md">
+                <i class="fas fa-times-circle mr-2"></i> {{ session('error') }}
             </div>
-        </div>
-    </div>
+        @endif
+        @if(session('warning'))
+            <div class="px-4 py-2 bg-yellow-500 text-white rounded shadow-md">
+                <i class="fas fa-exclamation-triangle mr-2"></i> {{ session('warning') }}
+            </div>
+        @endif
+        @if(session('info'))
+            <div class="px-4 py-2 bg-blue-500 text-white rounded shadow-md">
+                <i class="fas fa-info-circle mr-2"></i> {{ session('info') }}
+            </div>
+        @endif
+    </div> --}}
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- Main content wrapper --}}
+    {{-- <div class="flex flex-1"> --}}
+        {{-- Sidebar included separately in pages --}}
+        {{-- {{ $slot }}
+    </div> --}}
 
-    @yield('scripts')
-</body>
-</html>
+    {{-- @stack('scripts') --}}
+{{-- </body>
+</html> --}}

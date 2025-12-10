@@ -13,15 +13,15 @@ class ProfileController extends Controller
 {
 
     public function rules()
-{
-    return [
-        'occupation' => 'required|string|max:255',
-        'teamName' => 'nullable|string|max:255',
-        'address' => 'required|string|max:255',
-        'country' => 'required|string|max:255',
-        'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Logo validation
-    ];
-}
+    {
+        return [
+            'occupation' => 'required|string|max:255',
+            'teamName' => 'nullable|string|max:255',
+            'address' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Logo validation
+        ];
+    }
     /**
      * Display the user's profile form.
      */

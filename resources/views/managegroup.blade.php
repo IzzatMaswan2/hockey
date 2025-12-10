@@ -1,214 +1,168 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAGE GROUP</title>
-    <style>
-        .btn-primary {
-            margin-top: 20px;
-            margin-bottom: 40px;
-        }
+<x-admin-layout>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        @include('layouts.sidebar')
 
-        /* Styles for input fields */
-        input.form-control,
-        select.form-control {
-            border: 2px solid #000 !important;
-            border-radius: 5px !important;
-        }
+        <!-- Main Content -->
+        <div class="flex-1 p-6 space-y-6 min-w-0">
+            <h3 class="text-2xl font-bold text-purple-800">MANAGE GROUPS</h3>
 
-        input.form-control:focus,
-        select.form-control:focus {
-            border-color: #81deef!important;
-            box-shadow: 0 0 5px rgba(0, 255, 135, 0.5) !important;
-        }
-
-        .form-control-plaintext {
-            border: 2px solid #000 !important;
-            border-radius: 5px;
-            font-weight: bold;
-            padding-left: 10px !important;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    @include('layouts.navbar')
-
-    <div class="container-fluid" style="height: 90%;">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-3" style="background-color: #929292; width: 20%;">
-                @include('layouts.sidebar')
-            </div>
-
-            <div class="col-9">
-                <h3 style="color: #5D3CB8;"><strong>MANAGE GROUPS</strong></h3>
-
-                <form method="POST" action="{{ route('managegroup.store') }}">
-                    @csrf
-                    <div class="row align-items-center">
-                        <!-- Tournament Selection -->
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="tournament">Tournament</label>
-                                <select class="form-control" id="tournament" name="tournament" required>
-                                    <option value="" disabled selected>Select a tournament</option>
-                                    @foreach($tournaments as $tournament)
-                                        <option value="{{ $tournament->id }}">{{ $tournament->name ?? 'N/A' }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Category Selection -->
-                        <div class="col-md-4" id="categoryDiv" style="display:none;">
-                            <div class="form-group">
-                                <label for="category">Category</label>
-                                <select class="form-control" id="category" name="category">
-                                    <option value="" disabled selected>Select a category</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Number of Teams (Read-only Input) -->
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="numTeams">Number of Teams</label>
-                                <p class="form-control-plaintext" id="numTeams">0</p>
-                            </div>
-                        </div>
-
-                        <!-- Number of Groups -->
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="numGroups">Number of Groups</label>
-                                <input type="number" name="numGroups" id="numGroups" class="form-control" required min="1">
-                            </div>
-                        </div>
+            <!-- Create Group Form -->
+            <form method="POST" action="{{ route('managegroup.store') }}" class="space-y-4">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                    <!-- Tournament Selection -->
+                    <div class="md:col-span-4">
+                        <label for="tournament" class="font-semibold block mb-1">Tournament</label>
+                        <select id="tournament" name="tournament" required
+                            class="w-full border-2 border-black rounded p-2 focus:border-blue-400 focus:ring focus:ring-blue-200">
+                            <option value="" disabled selected>Select a tournament</option>
+                            @foreach($tournaments as $tournament)
+                                <option value="{{ $tournament->id }}">{{ $tournament->name ?? 'N/A' }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary">CREATE GROUP</button>
+                    <!-- Category Selection -->
+                    <div class="md:col-span-4 hidden" id="categoryDiv">
+                        <label for="category" class="font-semibold block mb-1">Category</label>
+                        <select id="category" name="category"
+                            class="w-full border-2 border-black rounded p-2 focus:border-blue-400 focus:ring focus:ring-blue-200">
+                            <option value="" disabled selected>Select a category</option>
+                        </select>
                     </div>
-                </form>
 
-                <hr>
+                    <!-- Number of Teams (read-only) -->
+                    <div class="md:col-span-2">
+                        <label class="font-semibold block mb-1">Number of Teams</label>
+                        <p id="numTeams"
+                           class="border-2 border-black rounded p-2 font-bold">0</p>
+                    </div>
 
-                <!-- Event Selection for Table Filtering -->
-                <div class="mb-3">
-                    <label for="eventSelect" class="form-label">Select Tournament</label>
-                    <select id="eventSelect" class="form-select">
-                        <option value="all">All Tournaments</option>
-                        @foreach($tournaments as $tournament)
-                            <option value="{{ $tournament->id }}">{{ $tournament->name ?? 'N/A' }}</option>
-                        @endforeach
-                    </select>
+                    <!-- Number of Groups -->
+                    <div class="md:col-span-2">
+                        <label for="numGroups" class="font-semibold block mb-1">Number of Groups</label>
+                        <input type="number" id="numGroups" name="numGroups" min="1" required
+                            class="w-full border-2 border-black rounded p-2 focus:border-blue-400 focus:ring focus:ring-blue-200">
+                    </div>
                 </div>
 
-                <!-- Groups Table -->
-                @php
-                    // Determine if any group has a category
-                    $hasCategory = $groups->contains(function($g) {
-                        return !empty($g->category_id);
-                    });
-                @endphp
+                <div class="md:col-span-4">
+                    <button type="submit"
+                        class="mt-4 mb-10 bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">CREATE GROUP</button>
+                </div>
+            </form>
 
-                <table class="table table-striped" id="groupTable">
-                    <thead>
+            <hr class="my-6">
+
+            <!-- Event Filter -->
+            <div>
+                <label for="eventSelect" class="font-semibold block mb-2">Select Tournament</label>
+                <select id="eventSelect" class="w-full border-2 border-black rounded p-2 focus:border-blue-400 focus:ring focus:ring-blue-200">
+                    <option value="all">All Tournaments</option>
+                    @foreach($tournaments as $tournament)
+                        <option value="{{ $tournament->id }}">{{ $tournament->name ?? 'N/A' }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Groups Table -->
+            @php
+                $hasCategory = $groups->contains(fn($g) => !empty($g->category_id));
+            @endphp
+
+            <div class="overflow-x-auto mt-4">
+                <table class="table-auto w-full border-collapse border border-gray-300" id="groupTable">
+                    <thead class="bg-gray-200">
                         <tr>
-                            <th>TEAM</th>
-                            <th>GROUP</th>
-
+                            <th class="border border-gray-300 px-4 py-2 text-left">TEAM</th>
+                            <th class="border border-gray-300 px-4 py-2 text-left">GROUP</th>
                             @if($hasCategory)
-                                <th>CATEGORY</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">CATEGORY</th>
                             @endif
                         </tr>
                     </thead>
-
-                    <tbody id="groupTableBody">
+                    <tbody>
                         @foreach($groups as $group)
-                            <tr data-event="{{ $group->tournament_id }}">
-                                <td>{{ $group->team->name ?? '' }}</td>
-                                <td>{{ $group->groupcreate->Name ?? '' }}</td>
-
+                            <tr data-event="{{ $group->tournament_id }}" class="border border-gray-300">
+                                <td class="px-4 py-2">{{ $group->team->name ?? '' }}</td>
+                                <td class="px-4 py-2">{{ $group->groupcreate->Name ?? '' }}</td>
                                 @if($hasCategory)
-                                    <td>{{ $group->category->name ?? '' }}</td>
+                                    <td class="px-4 py-2">{{ $group->category->name ?? '' }}</td>
                                 @endif
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script>
-        // When tournament is selected
-        $('#tournament').change(function() {
-            var tournamentId = $(this).val();
+        document.addEventListener('DOMContentLoaded', function () {
+            const tournamentSelect = document.getElementById('tournament');
+            const categoryDiv = document.getElementById('categoryDiv');
+            const categorySelect = document.getElementById('category');
+            const numTeams = document.getElementById('numTeams');
+            const numGroupsInput = document.getElementById('numGroups');
 
-            if (!tournamentId) return;
+            // Tournament change
+            tournamentSelect.addEventListener('change', function() {
+                const tournamentId = this.value;
+                if (!tournamentId) return;
 
-            // Fetch number of teams
-            fetch(`/getTournamentTeams/${tournamentId}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('numTeams').textContent = data.numTeams;
-                    updateTeamsPerGroup(data.numTeams);
+                // Fetch number of teams
+                fetch(`/getTournamentTeams/${tournamentId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        numTeams.textContent = data.numTeams;
+                        updateTeamsPerGroup(data.numTeams);
+                    });
+
+                // Fetch categories
+                fetch(`/getTournamentCategories/${tournamentId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        categorySelect.innerHTML = '<option value="" disabled selected>Select a category</option>';
+                        if (data.categories.length > 0) {
+                            data.categories.forEach(cat => {
+                                const option = document.createElement('option');
+                                option.value = cat.id;
+                                option.textContent = cat.name;
+                                categorySelect.appendChild(option);
+                            });
+                            categoryDiv.classList.remove('hidden');
+                        } else {
+                            categoryDiv.classList.add('hidden');
+                        }
+                    })
+                    .catch(err => console.error(err));
+            });
+
+            // Number of groups input
+            numGroupsInput.addEventListener('input', function() {
+                const nTeams = parseInt(numTeams.textContent);
+                const nGroups = this.value;
+                updateTeamsPerGroup(nTeams, nGroups);
+            });
+
+            function updateTeamsPerGroup(nTeams, nGroups = numGroupsInput.value) {
+                // Optional: can display teams per group somewhere
+                const perGroup = (nTeams > 0 && nGroups > 0) ? Math.floor(nTeams / nGroups) : 'N/A';
+                // console.log('Teams per group:', perGroup);
+            }
+
+            // Event filter
+            const eventSelect = document.getElementById('eventSelect');
+            const tableRows = document.querySelectorAll('#groupTable tbody tr');
+
+            eventSelect.addEventListener('change', function() {
+                const selectedEvent = this.value;
+                tableRows.forEach(row => {
+                    row.style.display = (selectedEvent === 'all' || row.dataset.event === selectedEvent) ? '' : 'none';
                 });
-
-            // Fetch categories for the selected tournament
-            fetch(`/getTournamentCategories/${tournamentId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const categorySelect = document.getElementById('category');
-                    categorySelect.innerHTML = '<option value="" disabled selected>Select a category</option>';
-
-                    if (data.categories.length > 0) {
-                        data.categories.forEach(cat => {
-                            const option = document.createElement('option');
-                            option.value = cat.id;
-                            option.textContent = cat.name;
-                            categorySelect.appendChild(option);
-                        });
-                        document.getElementById('categoryDiv').style.display = 'block';
-                    } else {
-                        document.getElementById('categoryDiv').style.display = 'none';
-                    }
-                })
-                .catch(error => console.error('Error fetching categories:', error));
-        });
-
-        // Filter table by tournament selection
-        document.getElementById('eventSelect').addEventListener('change', function() {
-            var selectedEvent = this.value;
-            var rows = document.querySelectorAll('#groupTable tbody tr');
-
-            rows.forEach(function(row) {
-                if (selectedEvent === 'all') {
-                    row.style.display = '';
-                } else {
-                    row.style.display = row.getAttribute('data-event') === selectedEvent ? '' : 'none';
-                }
             });
         });
-
-        // Update teams per group dynamically
-        document.getElementById('numGroups').addEventListener('input', function() {
-            const numTeams = parseInt(document.getElementById('numTeams').textContent);
-            const numGroups = this.value;
-            updateTeamsPerGroup(numTeams, numGroups);
-        });
-
-        function updateTeamsPerGroup(numTeams, numGroups = document.getElementById('numGroups').value) {
-            const teamsPerGroup = numTeams > 0 && numGroups > 0 ? Math.floor(numTeams / numGroups) : 'N/A';
-            // Optionally display teams per group somewhere if needed
-            // document.getElementById('teamsPerGroup').textContent = teamsPerGroup > 0 ? teamsPerGroup : 'N/A';
-        }
     </script>
-
-    @include('layouts.footer')
-</body>
-</html>
+</x-admin-layout>

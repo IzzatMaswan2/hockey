@@ -1,325 +1,192 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+<x-admin-layout>
+    <div class="flex min-h-screen bg-gray-100 w-full">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- Sidebar -->
+        @include('layouts.sidebar')
 
-    <title>Match Selection</title>
-    <style>
-        body {
-            background-color: #f5f5f5; 
-        }
-        .mb-4 {
-            border-radius: 20px;
-            background-color: white;
-            padding: 20px 20px 0 20px;
-            margin: 0;
-        }
-        .card {
-            border-radius: 20px;
-            padding: 10px;
-        }
-        .sidebar {
-            background-color: #929292;
-            padding: 20px;
-        }
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
 
-        .styled-button {
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #007bff; /* Bootstrap primary color */
-        color: white;
-        text-decoration: none;
-        border: none;
-        border-radius: 5px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .input-styled-button  {
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #15d02e; /* Bootstrap primary color */
-        color: white;
-        text-decoration: none;
-        border: none;
-        border-radius: 5px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .error-styled-button  {
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #ff0000; /* Bootstrap primary color */
-        color: white;
-        text-decoration: none;
-        border: none;
-        border-radius: 5px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .styled-button:hover {
-        background-color: #0056b3; /* Darker shade on hover */
-    }
-
-    /* Optional: Make the button look more like a link */
-    .styled-button:focus {
-        outline: none;
-    }
-    </style>
-</head>
-@include('layouts.navbar')
-<body style="background-color: #f4f7f6;">
-
-    
-    <div class="container-fluid" style="width: 100%; height: 90%; min-height:100vh;">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-3" style="background-color: #929292; min-height:100vh; width:20%;">
-                @include('layouts.sidebar')
+            <!-- Header -->
+            <div class="bg-white rounded-2xl shadow p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Select Matches</h2>
+                <p class="text-gray-500 mt-1">Choose a match and manage statistics</p>
             </div>
-    
-            <div class="col-9" style="padding: 10px; margin:10px;">
-                <div class="container-fluid">
-                    <div class="row" style="margin-top:0;">
-                        <!-- Header -->
-                        <div class="mb-4" style="margin-top:0;">
-                            <h4>Select a Matches</h4>
-                            <p class="text-muted">Choose a matches and manage statistic</p>
-                        </div>
-    
-                        <!-- Tournament List -->
-                        <div class="card" >
-                            <div class="row" style="margin-bottom: 50px;">
-                                @foreach($Groups as $group)
-                                    <div class="col-3 mb-3 border p-3 rounded">
-                                        <h5>{{ $group->Name }}</h5> 
-                                        <p>Ended Matches: 
-                                            {{ $groupCounts[$group->GroupID]['ended'] ?? 0 }}/{{ $groupCounts[$group->GroupID]['total'] ?? 0 }}
-                                        </p>
-                                        <p>Number of Error: {{ $groupCounts[$group->GroupID]['error'] ?? 0 }} </p>
-                                    </div>
-                                @endforeach
-                                {{-- <span>{{$tournamentId}}</span> --}}
-                                <div class="row" style="display: flex">
-                                    <form action="{{ route('tournament.updateStats') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="tournament_id" value="{{ $tournamentId }}">
-                                        <button type="submit" class="btn btn-primary">Update Tournament Stats</button>
-                                    </form>
-                                    @php
-                                        $allMatchesEnded = collect($groupCounts)->every(fn($counts) => $counts['ended'] === $counts['total']);
-                                        $noErrors = collect($groupCounts)->every(fn($counts) => $counts['error'] === 0);
-                                    @endphp
-    
-                                    @if($allMatchesEnded && $noErrors)
-                                        @if(!$knockout)
-                                        <a href="{{ route('knockout.advance', ['id' => $tournamentId]) }}" class="btn btn-success mt-3 ml-2" style="width: 20%;">
-                                            Advance to Knockout Stage
-                                        </a>
-                                        @endif
-                                    @endif
-                                </div>
 
-                                @if(session('success'))
-                                    <div class="alert alert-success mt-3">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="card-header d-flex align-items-center justify-content-between" style="background-color:transparent; padding-top:20px;">
-                                <h4 class="mt-4">Matches</h4>
-                                <i class="bi bi-caret-down-fill" type="button" onclick="toggleMatchList()" style="cursor: pointer;"></i>
-                            </div>
-                            <div class="form-group mt-3">
-                                <input type="text" id="matchSearch" class="form-control" placeholder="Search by team or group name" onkeyup="searchMatches()">
-                            </div>
-                            <div class="container">
-                                <div id="matchList" style="display: none;">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Group</th>
-                                                <th>VS</th>
-                                                <th>Venue</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="matchTableBody">
-                                            @php
-                                                // Separate live matches from the rest
-                                                $liveMatches = $matches->filter(function ($match) {
-                                                    return $match->match_status == 1; // Live matches
-                                                });
-                                            
-                                                // Group remaining matches by GroupID (excluding live matches)
-                                                $groupedMatches = $matches->filter(function ($match) {
-                                                    return $match->match_status != 1; // Non-live matches
-                                                })->groupBy('GroupID');
-                                            @endphp
-                                            
-                                            <!-- Display Live Matches First -->
-                                            @if($liveMatches->isNotEmpty())
-                                                <tr>
-                                                    <th colspan="5" class="text-center bg-warning">Live Matches</th>
-                                                </tr>
-                                                @foreach($liveMatches as $match)
-                                                    <tr>
-                                                        <td>{{ $Groups[$match->GroupID]->Name }}</td>
-                                                        <td>{{ $Teams[$match->TeamAID]->name }} vs {{ $Teams[$match->TeamBID]->name }}</td>
-                                                        <td>{{ $match->Venue }}</td>
-                                                        <td style="color: green;">Live</td>
-                                                        <td>
-                                                            <a href="{{ route('statistics.index', $match->Match_groupID) }}" class="input-styled-button">Input Score</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                            
-                                            <!-- Display Matches Grouped by GroupID -->
-                                            @foreach($groupedMatches as $groupID => $groupMatches)
-                                                <tr>
-                                                    <th colspan="5" class="text-center bg-secondary">{{ $Groups[$groupID]->Name }}</th>
-                                                </tr>
-                                                @foreach($groupMatches as $match)
-                                                    <tr>
-                                                        <td>{{ $Groups[$match->GroupID]->Name }}</td>
-                                                        <td>{{ $Teams[$match->TeamAID]->name }} vs {{ $Teams[$match->TeamBID]->name }}</td>
-                                                        <td>{{ $match->Venue }}</td>
-                                                        <td style="color: 
-                                                            @switch($match->match_status)
-                                                                @case(0) blue @break
-                                                                @case(2) red @break
-                                                            @endswitch">
-                                                            @switch($match->match_status)
-                                                                @case(0) Upcoming @break
-                                                                @case(2) Ended @break
-                                                            @endswitch
-                                                        </td>
-                                                        <td>
-                                                            @switch($match->match_status)
-                                                                @case(0)
-                                                                    <form action="{{ route('matches.start', $match->Match_groupID) }}" method="POST" style="display:inline;">
-                                                                        @csrf
-                                                                        <button type="submit" class="styled-button">Start Match</button>
-                                                                    </form>
-                                                                @break
-                                                                @case(2)
-                                                                    @if($match->error) 
-                                                                        <span class="error-styled-button">Error In Approval Process</span>
-                                                                    @else 
-                                                                        <button type="button" class="styled-button" data-toggle="modal" data-target="#matchModal" onclick="showMatchDetails({{ $match->Match_groupID }})">
-                                                                            View Match Details
-                                                                        </button>
-                                                                    @endif
-                                                                @break
-                                                            @endswitch
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
+            <!-- Groups Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                @foreach($Groups as $group)
+                    <div class="p-4 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl shadow hover:scale-105 transform transition cursor-pointer">
+                        <h5 class="font-semibold text-gray-800">{{ $group->Name }}</h5>
+                        <p class="text-gray-700 text-sm mt-1">Ended Matches: {{ $groupCounts[$group->GroupID]['ended'] ?? 0 }}/{{ $groupCounts[$group->GroupID]['total'] ?? 0 }}</p>
+                        <p class="text-gray-700 text-sm">Errors: {{ $groupCounts[$group->GroupID]['error'] ?? 0 }}</p>
                     </div>
-                </div>
-                
+                @endforeach
             </div>
-        </div>
-    </div>
-    <div class="modal fade" id="matchModal" tabindex="-1" role="dialog" aria-labelledby="matchModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="matchModalLabel">Match Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+
+            <!-- Actions -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <form action="{{ route('tournament.updateStats') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="tournament_id" value="{{ $tournamentId }}">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition">
+                        Update Tournament Stats
+                    </button>
+                </form>
+
+                @php
+                    $allMatchesEnded = collect($groupCounts)->every(fn($counts) => $counts['ended'] === $counts['total']);
+                    $noErrors = collect($groupCounts)->every(fn($counts) => $counts['error'] === 0);
+                @endphp
+
+                @if($allMatchesEnded && $noErrors && !$knockout)
+                    <a href="{{ route('knockout.advance', ['id' => $tournamentId]) }}"
+                       class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow transition">
+                       Advance to Knockout Stage
+                    </a>
+                @endif
+            </div>
+
+            <!-- Search Matches -->
+            <div class="bg-white rounded-2xl shadow p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Matches</h3>
+                    <button onclick="toggleMatchList()" id="toggleButton" 
+                            class="text-gray-500 hover:text-gray-800 transition flex items-center space-x-1">
+                        <span>Show/Hide</span>
+                        <i class="bi bi-caret-down-fill text-lg"></i>
                     </button>
                 </div>
-                <div class="modal-body" id="matchDetails">
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                <input type="text" id="matchSearch" placeholder="Search by team or group name"
+                       class="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                       onkeyup="searchMatches()">
+
+                <!-- Matches List -->
+                <div id="matchList" class="grid grid-cols-1 gap-4 hidden">
+                    @php
+                        $liveMatches = $matches->filter(fn($match) => $match->match_status == 1);
+                        $groupedMatches = $matches->filter(fn($match) => $match->match_status != 1)->groupBy('GroupID');
+                    @endphp
+
+                    <!-- Live Matches -->
+                    @if($liveMatches->isNotEmpty())
+                        <div class="bg-yellow-100 p-3 rounded-lg text-center font-semibold text-yellow-800">Live Matches</div>
+                        @foreach($liveMatches as $match)
+                            <div class="bg-white rounded-xl shadow p-4 flex flex-col sm:flex-row items-center justify-between hover:shadow-lg transition">
+                                <div class="flex flex-col sm:flex-row sm:space-x-4 text-gray-700 mb-2 sm:mb-0">
+                                    <span class="font-semibold">{{ $Groups[$match->GroupID]->Name }}</span>
+                                    <span>{{ $Teams[$match->TeamAID]->name }} vs {{ $Teams[$match->TeamBID]->name }}</span>
+                                    <span>{{ $match->Venue }}</span>
+                                    <span>{{ $match->Date }} ({{ $match->start_time }} - {{ $match->end_time }})</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-green-500 text-white px-2 py-1 rounded-full text-sm font-semibold">Live</span>
+                                    <a href="{{ route('statistics.index', $match->Match_groupID) }}"
+                                       class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg text-sm shadow transition">
+                                       Input Score
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+
+                    <!-- Other Matches by Group -->
+                    @foreach($groupedMatches as $groupID => $groupMatches)
+                        <div class="bg-purple-100 p-2 rounded-lg font-semibold text-purple-800 text-center">{{ $Groups[$groupID]->Name }}</div>
+                        @foreach($groupMatches as $match)
+                            <div class="bg-white rounded-xl shadow p-4 flex flex-col sm:flex-row items-center justify-between hover:shadow-lg transition">
+                                <div class="flex flex-col sm:flex-row sm:space-x-4 text-gray-700 mb-2 sm:mb-0">
+                                    <span class="font-semibold">{{ $Groups[$match->GroupID]->Name }}</span>
+                                    <span>{{ $Teams[$match->TeamAID]->name }} vs {{ $Teams[$match->TeamBID]->name }}</span>
+                                    <span>{{ $match->Venue }}</span>
+                                    <span>{{ $match->Date }} ({{ $match->start_time }} - {{ $match->end_time }})</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    @switch($match->match_status)
+                                        @case(0)
+                                            <form action="{{ route('matches.start', $match->Match_groupID) }}" method="POST">
+                                                @csrf
+                                                <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-sm font-semibold">Upcoming</span>
+                                                <button type="submit"
+                                                        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm shadow transition">
+                                                    Start Match
+                                                </button>
+                                            </form>
+                                            @break
+                                        @case(2)
+                                            @if($match->error)
+                                                <span class="bg-red-600 text-white px-3 py-1 rounded-lg text-sm">Error</span>
+                                            @else
+                                                <span class="bg-gray-800 text-white px-2 py-1 rounded-full text-sm font-semibold">Ended</span>
+                                                <button type="button"
+                                                        class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded-lg text-sm shadow transition"
+                                                        onclick="showMatchDetails({{ $match->Match_groupID }})">
+                                                    View Details
+                                                </button>
+                                            @endif
+                                            @break
+                                    @endswitch
+                                </div>
+                            </div>
+                        @endforeach
+                    @endforeach
                 </div>
             </div>
-        </div>
+
+            <!-- Modal -->
+            <div id="matchModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+                <div class="bg-white rounded-2xl shadow-lg w-11/12 md:w-1/2 p-6 relative">
+                    <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800" onclick="closeMatchModal()">&times;</button>
+                    <h5 class="text-lg font-semibold mb-4">Match Details</h5>
+                    <div id="matchDetails" class="space-y-2 text-gray-700"></div>
+                    <div class="mt-4 text-right">
+                        <button class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg" onclick="closeMatchModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
-</body>
-<script>
-    function showMatchDetails(matchId) {
-        $.ajax({
-            url: '/statistics/matches/' + matchId + '/details',
-            method: 'GET',
-            success: function(data) {
-                $('#matchDetails').html(`
-                    <p><strong>Tournament:</strong> ${data.TournamentID}</p>
-                    <p><strong>Teams:</strong> ${data.TeamAName} vs ${data.TeamBName}</p>
-                    <p><strong>Status:</strong> ${data.match_status}</p>
-                    <p><strong>Date:</strong> ${data.Date}</p>
-                    <p><strong>Start Time:</strong> ${data.start_time}</p>
-                    <p><strong>End Time:</strong> ${data.end_time}</p>
-                    <p><strong>Venue:</strong> ${data.Venue}</p>
-                    <p><strong>Score:</strong> ${data.ScoreA} - ${data.ScoreB}</p>
-                `);
-            },
-            error: function() {
-                $('#matchDetails').html('<p>Error loading match details.</p>');
-            }
-        });
-    }
 
-    </script>
     <script>
-        // Function to show or hide the match list
         function toggleMatchList() {
-            var matchList = document.getElementById('matchList');
-            if (matchList.style.display === 'none' || matchList.style.display === '') {
-                matchList.style.display = 'block';
-            } else {
-                matchList.style.display = 'none';
-            }
+            document.getElementById('matchList').classList.toggle('hidden');
         }
-    
-        // Function to search matches
+
         function searchMatches() {
-            var input, filter, tableBody, rows, td, i, txtValue;
-            input = document.getElementById("matchSearch");
-            filter = input.value.toLowerCase();
-            tableBody = document.getElementById("matchTableBody");
-            rows = tableBody.getElementsByTagName("tr");
-    
-            for (i = 0; i < rows.length; i++) {
-                let rowText = rows[i].innerText.toLowerCase();
-                if (rowText.includes(filter)) {
-                    rows[i].style.display = "";
-                } else {
-                    rows[i].style.display = "none";
-                }
-            }
+            const filter = document.getElementById('matchSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#matchList > div');
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(filter) ? '' : 'none';
+            });
+        }
+
+        function showMatchDetails(matchId) {
+            fetch(`/statistics/matches/${matchId}/details`)
+                .then(res => res.json())
+                .then(data => {
+                    const details = document.getElementById('matchDetails');
+                    details.innerHTML = `
+                        <p><strong>Tournament:</strong> ${data.TournamentID}</p>
+                        <p><strong>Teams:</strong> ${data.TeamAName} vs ${data.TeamBName}</p>
+                        <p><strong>Status:</strong> ${data.match_status}</p>
+                        <p><strong>Date:</strong> ${data.Date}</p>
+                        <p><strong>Start Time:</strong> ${data.start_time}</p>
+                        <p><strong>End Time:</strong> ${data.end_time}</p>
+                        <p><strong>Venue:</strong> ${data.Venue}</p>
+                        <p><strong>Score:</strong> ${data.ScoreA} - ${data.ScoreB}</p>
+                    `;
+                    document.getElementById('matchModal').classList.remove('hidden');
+                })
+                .catch(() => {
+                    document.getElementById('matchDetails').innerHTML = '<p>Error loading match details.</p>';
+                    document.getElementById('matchModal').classList.remove('hidden');
+                });
+        }
+
+        function closeMatchModal() {
+            document.getElementById('matchModal').classList.add('hidden');
         }
     </script>
-@include('layouts.footer')
-</html>
-
-
+</x-admin-layout>

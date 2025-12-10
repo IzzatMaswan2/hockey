@@ -1,76 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <title>Tournament Selection</title>
-    <style>
-        body {
-            background-color: #f5f5f5; 
-        }
-        .mb-4 {
-            border-radius: 20px;
-            background-color: white;
-            padding: 20px 20px 0 20px;
-            margin: 0;
-        }
-        .card {
-            border-radius: 20px;
-        }
-        .sidebar {
-            background-color: #929292;
-            padding: 20px;
-        }
-    </style>
-</head>
-@include('layouts.navbar')
-<body style="background-color: #f4f7f6;">
+<x-admin-layout>
+    <div class="flex min-h-screen w-full">
+        <!-- Sidebar -->
+        {{-- <aside class="w-1/4 bg-gray-400 p-6"> --}}
+            @include('layouts.sidebar')
+        {{-- </aside> --}}
 
-    
-    <div class="container-fluid" style="width: 100%; height: 90%; min-height:100vh;">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-3" style="background-color: #929292; min-height:100vh; width:20%;">
-                @include('layouts.sidebar')
+        <!-- Main Content -->
+        <main class="flex-1 p-6 bg-gray-100">
+            <!-- Header -->
+            <div class="mb-6 bg-white rounded-2xl p-6 shadow">
+                <h4 class="text-2xl font-bold mb-2">Select a Tournament</h4>
+                <p class="text-gray-500">Choose a tournament to view matches and scoreboard</p>
             </div>
-    
-            <div class="col-9" style="padding: 10px; margin:10px;">
-                <div class="container-fluid">
-                    <div class="row" style="margin-top:0;">
-                        <!-- Header -->
-                        <div class="mb-4" style="margin-top:0;">
-                            <h4>Select a Tournament</h4>
-                            <p class="text-muted">Choose a tournament to view matches and scoreboard</p>
-                        </div>
-    
-                        <!-- Tournament List -->
-                        <div class="card">
-                            <div class="card-header" style="background-color:transparent;padding-top:20px;">
-                                <h5>Tournaments</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    @foreach($tournaments as $tournament)
-                                        <li class="list-group-item">
-                                            <a href="{{ route('scoreboard.filterMatches', $tournament->id) }}" class="text-decoration-none">
-                                                {{ $tournament->name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+            <!-- Tournament List -->
+            <div class="bg-white rounded-2xl shadow p-6">
+                <h5 class="text-xl font-semibold mb-4">Tournaments</h5>
+                <ul class="space-y-2">
+                    @foreach($tournaments as $tournament)
+                        <li class="border border-gray-200 rounded-lg hover:bg-purple-50 transition">
+                            <a href="{{ route('scoreboard.filterMatches', $tournament->id) }}" class="block px-4 py-3 text-gray-700 font-medium hover:text-purple-700">
+                                {{ $tournament->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
-        </div>
+        </main>
     </div>
-</body>
-@include('layouts.footer')
-</html>
-
-
+</x-admin-layout>

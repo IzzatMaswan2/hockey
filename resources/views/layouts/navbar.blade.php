@@ -1,140 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Use only one version of Bootstrap (5.3.3 in this case) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-6S3kS8Z2v3dHhe04cF0xtbB7t8Z6ZtQbCOkOqgRIse0dY+6BfVtA8tTu1Q8l10m4" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-DbfNwCApThcJe4fP5z5LfXz0cI0zTXh83Ge9pu6vxZyL2W1p7FSm5lZZjBX92W48" crossorigin="anonymous"></script>
-    
-    
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <link rel="icon" href="img/Logo.png" type="image/icon type">
+{{-- resources/views/layouts/navbartailwind.blade.php --}}
+<header class="bg-purple-900 shadow py-2">
+    <div class="container mx-auto flex items-center justify-between px-4">
 
-    <title>Dashboard</title>
-
-    <style>
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        nav ul.navbar-nav > li {
-            display: inline-block;
-            margin-right: -180px; 
-            margin-left: 280px;
-            text-align: center;
-        }
-
-        nav ul li:last-child {
-            margin-right: 0; /* Removes the margin after the last link */
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #000;
-        }
-
-        .nav li .dropdown-menu a {
-            width: 80px;
-        }
-
-        .dropdown-menu {
-            width: 80px; /* Adjust the dropdown width */
-        }
-
-        .dropdown-menu a {
-            padding: 10px; /* Optional: Adjust padding inside the dropdown items */
-            margin: 0px;
-        }
-
-    
-
-        /* Optional: Add custom width for smaller screens */
-        @media (max-width: 768px) {
-            .dropdown-menu {
-                width: 150px; /* Make it smaller for mobile */
-            }
-        }
-
-    </style>
-</head>
-
-<body>
-    <header class="py-2 shadow-sm" style="background-color: #280137; width: 100%;">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #280137;">
-            <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="/">
-                    <!-- Add your logo here -->
-                    <img src="{{ asset('img/Logo Latest 1.png') }}" alt="logo" style="width: 60px; height: 60px;">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="/tournamentlist">Tournament</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="/forum">Forum</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="/about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="/contact">Contact</a>
-                        </li>
-                        <li class="nav-item me">
-                            <a href=" /fixture/tournamentlist" class="btn btn-light">Fixture</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ strtok(Auth::user()->fullName, ' ') }}
+        {{-- Logo --}}
+        <a href="/" class="flex items-center gap-2">
+            <img src="{{ asset('img/Logo Latest 1.png') }}" alt="Logo" class="w-16 h-16">
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <!-- Profile link -->
-            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
 
-            <!-- Conditional Dashboard Links based on User Role -->
-            @if(Auth::user()->role === 'Manager')
-                <li><a class="dropdown-item" href="{{ route('manager-dashboard') }}">Manager Dashboard</a></li>
-            @endif
-            
-            @if(Auth::user()->role === 'Player')
-                <li><a class="dropdown-item" href="{{ route('player-dashboard') }}">Player Dashboard</a></li>
-            @endif
-            @if(Auth::user()->role === 'Admin')
-                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Admin Dashboard</a></li>
-            @endif
-            
-            <li><hr class="dropdown-divider"></li>
+        {{-- Navigation Links --}}
+        <nav class="hidden md:flex items-center gap-20">
+            <a href="/tournamentlist" class="text-white hover:text-gray-300 no-underline">Tournament</a>
+            <a href="/forum" class="text-white hover:text-gray-300 no-underline">Forum</a>
+            <a href="/about" class="text-white hover:text-gray-300 no-underline">About</a>
+            <a href="/contact" class="text-white hover:text-gray-300 no-underline">Contact</a>
+            <a href="/fixture/tournamentlist" class="bg-white text-purple-900 px-3 py-1 rounded hover:bg-gray-200 no-underline">Fixture</a>
+        </nav>
 
-            <!-- Logout link -->
-            <li>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="dropdown-item">Logout</button>
-                </form>
-            </li>
-        </ul>
-    </li>
-</ul>
+        {{-- User Dropdown --}}
+        <div class="relative" x-data="{ open: false }">
+            <!-- Trigger -->
+            <button @click="open = !open" class="flex items-center gap-2 text-white font-medium px-3 py-2 rounded hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                {{ strtok(Auth::user()->fullName, ' ') }}
+                <i :class="open ? 'rotate-180' : ''" class="fas fa-chevron-down transition-transform duration-200"></i>
+            </button>
 
+            <!-- Dropdown -->
+            <div x-show="open" @click.away="open = false" x-cloak
+                class="absolute right-0 mt-2 w-56 bg-white text-gray-900 rounded-lg shadow-lg z-50 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100">
+                
+                <!-- Profile -->
+                <div class="py-1">
+                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                        <i class="fas fa-user"></i> Profile
+                    </a>
+                </div>
+
+                <!-- Dashboard Links -->
+                <div class="py-1">
+                    @if(Auth::user()->role === 'Manager')
+                        <a href="{{ route('manager-dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-tachometer-alt"></i> Manager Dashboard
+                        </a>
+                    @endif
+                    @if(Auth::user()->role === 'Player')
+                        <a href="{{ route('player-dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-gamepad"></i> Player Dashboard
+                        </a>
+                    @endif
+                    @if(Auth::user()->role === 'Admin')
+                        <a href="{{ route('dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-cog"></i> Admin Dashboard
+                        </a>
+                    @endif
+                </div>
+
+                <!-- Logout -->
+                <div class="py-1">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
 
-    <!-- Your main content would go here -->
 
-</body>
-</html>
+
+
+        {{-- Mobile Hamburger --}}
+        <div class="md:hidden" x-data="{ open: false }">
+            <button @click="open = !open" class="text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <div x-show="open" @click.away="open = false"  x-cloak
+                 class="absolute top-full right-0 mt-2 w-48 bg-purple-900 text-white rounded shadow-lg z-50 flex flex-col">
+                <a href="/tournamentlist" class="px-4 py-2 hover:bg-purple-800">Tournament</a>
+                <a href="/forum" class="px-4 py-2 hover:bg-purple-800">Forum</a>
+                <a href="/about" class="px-4 py-2 hover:bg-purple-800">About</a>
+                <a href="/contact" class="px-4 py-2 hover:bg-purple-800">Contact</a>
+                <a href="/fixture/tournamentlist" class="px-4 py-2 hover:bg-purple-800 bg-white text-purple-900 rounded m-2 text-center">Fixture</a>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+{{-- Alpine.js --}}
+{{-- <script src="//unpkg.com/alpinejs" defer></script> --}}

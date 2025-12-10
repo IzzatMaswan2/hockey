@@ -1,4 +1,4 @@
-<header class="tw-w-full tw-bg-[#280137] tw-shadow-sm">
+{{-- <header class="tw-w-full tw-bg-[#280137] tw-shadow-sm">
     <nav class="tw-max-w-[1400px] tw-mx-auto tw-flex tw-items-center tw-justify-between tw-py-2 tw-px-6">
 
         <!-- Logo -->
@@ -84,4 +84,4 @@
 document.getElementById('mobileMenuBtn').addEventListener('click', () => {
     document.getElementById('mobileMenu').classList.toggle('tw-hidden');
 });
-</script>
+</script> --}}

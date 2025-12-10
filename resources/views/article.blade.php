@@ -1,284 +1,195 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Manage Article</title>
-    <style>
-        body {
-            background-color: #f5f5f5; 
-        }
-        .mb-4 {
-            border-radius: 20px;
-            background-color: white;
-            padding: 20px 20px 0 20px;
-            margin: 0;
-        }
+<x-admin-layout>
+    <div class="flex w-full min-h-screen">
+        <!-- Sidebar -->
+        @include('layouts.sidebar')
 
-        .card {
-            border-radius: 20px;
-        }
-
-        .sidebar {
-            background-color: #929292;
-            padding: 20px;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .section{
-            padding:30px;
-        }
-
-        .article-card {
-            display: flex;
-            padding: 10px;
-        }
-
-
-        .card-body {
-            flex: 1;
-        }
-    </style>
-</head>
-<body style="background-color: #f4f7f6;">
-
-    <!-- Navbar -->
-    @include('layouts.navbar')
-
-    <!-- Main Content -->
-    <div class="container-fluid" style="width: 100%; height: 90%;">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-2" style="background-color: #929292; width: 20%;">
-                @include('layouts.sidebar')
+        <!-- Main Content -->
+        <div class="flex-1 p-6 min-w-0 bg-gray-100 space-y-6">
+            
+            <!-- Header -->
+            <div>
+                <h2 class="text-2xl font-bold text-purple-700">ARTICLE MANAGEMENT</h2>
             </div>
 
-            <!-- Center Content -->
-            <div class="col-8" style="width: 60%;">
-                <div class="container-fluid">
-                    <br>
-                        <h2 style="color:#7A5DCA;font-weight:bold;">ADD NEW VENUE</h2>
-                        <br>
-                            <!-- Success Message -->
-                            @if(session('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                            @endif
-                            
-                            <!-- First Part -->
-                            <div id="main-content" class="container-fluid" style="margin-top:0;">
-                                <div class="row">
+            <!-- Success Message -->
+            @if(session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded relative">
+                    {{ session('success') }}
+                    <span class="absolute top-1 right-2 cursor-pointer" onclick="this.parentElement.remove();">&times;</span>
+                </div>
+            @endif
 
+            <!-- Post Form -->
+            <div class="bg-white rounded-2xl shadow p-6 space-y-4">
+                <div class="text-lg font-semibold">Write a Post</div>
+                <form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
 
-                                    <!-- Post Form -->
-                                    <div class="card">
-                                        <div class="card-header" style="background-color:transparent;padding-top:20px;">
-                                            <h5>Write a Post</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="mb-3">
-                                                    <label for="title" class="form-label">Article Title:</label>
-                                                    <input type="text" class="form-control" id="title" name="title" style="background-color:#f5f5f5">
-                                                </div>
-                                                
-                                                <div class="mb-3">
-                                                    <label for="image" class="form-label">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                                                            <path d="m9 13 3-4 3 4.5V12h4V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-4H5l3-4 1 2z"></path>
-                                                            <path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
-                                                        </svg>
-                                                    </label>Image:
-                                                    <input type="file" class="form-control" id="image" name="image">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="place" class="form-label">Location:</label>
-                                                    <input type="text" class="form-control" id="place" name="place" style="background-color:#f5f5f5">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="summary" class="form-label">Summary:</label>
-                                                    <textarea class="form-control" id="summary" name="summary" rows="5" style="background-color:#f5f5f5;"></textarea>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="content" class="form-label">Content:</label>
-                                                    <textarea class="form-control" id="content" name="content" rows="10" style="background-color:#f5f5f5"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary" style="background-color:#5D3CB8">Save</button>
-                                            </form>
-                                        </div>
+                    <div>
+                        <label for="title" class="block font-medium mb-1">Article Title:</label>
+                        <input type="text" id="title" name="title" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div>
+                        <label for="image" class="block font-medium mb-1 flex items-center space-x-2 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 30" class="fill-current text-gray-700">
+                                <path d="m9 13 3-4 3 4.5V12h4V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-4H5l3-4 1 2z"></path>
+                                <path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
+                            </svg>
+                            <span>Upload Image</span>
+                        </label>
+                        <input type="file" id="image" name="image" class="hidden">
+                    </div>
+
+                    <div>
+                        <label for="place" class="block font-medium mb-1">Location:</label>
+                        <input type="text" id="place" name="place" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div>
+                        <label for="summary" class="block font-medium mb-1">Summary:</label>
+                        <textarea id="summary" name="summary" rows="5" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="content" class="block font-medium mb-1">Content:</label>
+                        <textarea id="content" name="content" rows="10" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">Save</button>
+                </form>
+            </div>
+
+            <!-- Articles List Tabs -->
+            <div class="space-y-4">
+                <h2 class="text-2xl font-bold text-purple-700">ARTICLES LIST</h2>
+
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-300">
+                    <button class="tablink px-4 py-2 -mb-px font-medium text-purple-700 border-b-2 border-purple-700" onclick="openArticleTab('Unarchived', this)" id="defaultArticleOpen">Unarchived Articles</button>
+                    <button class="tablink px-4 py-2 font-medium text-gray-600 hover:text-purple-700" onclick="openArticleTab('Archived', this)">Archived Articles</button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="Unarchived" class="tabcontent space-y-4 hidden">
+                    @foreach($recentArticles as $article)
+                        @if ($article->archived === 1)
+                            <div class="bg-white rounded-xl shadow p-4 flex space-x-4">
+                                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }} Image" class="w-48 h-48 object-cover rounded-lg">
+                                <div class="flex-1 space-y-2">
+                                    <h5 class="text-lg font-semibold"><i class="fas fa-newspaper"></i> {{ \Illuminate\Support\Str::limit($article->title, 30) }}</h5>
+                                    <p><b>Location:</b> {{ $article->place }}</p>
+                                    <p><b>Summary:</b> {{ \Illuminate\Support\Str::limit($article->summary, 30) }}</p>
+                                    <div class="space-x-2">
+                                        <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="openModal('articleModal{{ $article->id }}')">Read More</button>
+                                        <button class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600" onclick="openModal('editArticleModal{{ $article->id }}')">Edit</button>
+                                        <form method="POST" action="{{ route('article.archive', $article->id) }}" class="inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Archive</button>
+                                        </form>
                                     </div>
-<!-- ARTICLES LIST TABS -->
-<div class="section">
-    <h2 style="color:#7A5DCA;font-weight:bold;">ARTICLES LIST</h2>
-
-    <!-- Tabs for Unarchived and Archived Articles -->
-    <ul class="nav nav-tabs" id="articleTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="unarchived-article-tab" data-bs-toggle="tab" data-bs-target="#unarchived-article" type="button" role="tab" aria-controls="unarchived-article" aria-selected="true">Unarchived Articles</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="archived-article-tab" data-bs-toggle="tab" data-bs-target="#archived-article" type="button" role="tab" aria-controls="archived-article" aria-selected="false">Archived Articles</button>
-        </li>
-    </ul>
-
-    <div class="tab-content" id="articleTabsContent">
-        <!-- Unarchived Articles -->
-        <div class="tab-pane fade show active" id="unarchived-article" role="tabpanel" aria-labelledby="unarchived-article-tab">
-            <div class="row">
-                @foreach($recentArticles as $article)
-                    @if ($article->archived === 1) <!-- Unarchived articles -->
-                        <div class="col-md-12 mb-3" >
-                            <div class="card article-card d-flex flex-row">
-                                <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="{{ $article->title }} Image" style="width:200px;height:200px;">
-                                <div class="card-body">
-                                    <h5 class="card-title mt-3"><i class="fas fa-newspaper"></i>{{ \Illuminate\Support\Str::limit($article->title, 30) }}</h5>
-                                    <p><b>LOCATION:</b> {{ $article->place }}</p>
-                                    <p><b>SUMMARY:</b> {{ \Illuminate\Support\Str::limit($article->summary, 30) }}</p>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#articleModal{{ $article->id }}">
-    Read More
-</button>
-<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editArticleModal{{ $article->id }}">
-    Edit
-</button>
-                                    <form method="POST" action="{{ route('article.archive', $article->id) }}" style="display:inline;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-danger">Archive</button>
-                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-        </div>
+                        @endif
+                    @endforeach
+                </div>
 
-        <!-- Archived Articles -->
-        <div class="tab-pane fade" id="archived-article" role="tabpanel" aria-labelledby="archived-article-tab">
-            <div class="row">
-                @foreach($recentArticles as $article)
-                    @if ($article->archived === 0) <!-- Archived articles -->
-                        <div class="col-md-12 mb-3">
-                            <div class="card article-card d-flex flex-row">
-                                <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="{{ $article->title }} Image" style="width:200px;height:200px;">
-                                <div class="card-body">
-                                    <h5 class="card-title mt-3"><i class="fas fa-newspaper"></i> {{ $article->title }}</h5>
-                                    <p><b>LOCATION:</b> {{ $article->place }}</p>
-                                    <p><b>SUMMARY:</b> {{ \Illuminate\Support\Str::limit($article->summary, 30) }}</p>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#articleModal{{ $article->id }}">
-                                        Read More
-                                    </button>
-                                    <form method="POST" action="{{ route('article.unarchive', $article->id) }}" style="display:inline;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-success">Unarchive</button>
-                                    </form>
+                <div id="Archived" class="tabcontent space-y-4 hidden">
+                    @foreach($recentArticles as $article)
+                        @if ($article->archived === 0)
+                            <div class="bg-white rounded-xl shadow p-4 flex space-x-4">
+                                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }} Image" class="w-48 h-48 object-cover rounded-lg">
+                                <div class="flex-1 space-y-2">
+                                    <h5 class="text-lg font-semibold"><i class="fas fa-newspaper"></i> {{ $article->title }}</h5>
+                                    <p><b>Location:</b> {{ $article->place }}</p>
+                                    <p><b>Summary:</b> {{ \Illuminate\Support\Str::limit($article->summary, 30) }}</p>
+                                    <div class="space-x-2">
+                                        <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="openModal('articleModal{{ $article->id }}')">Read More</button>
+                                        <form method="POST" action="{{ route('article.unarchive', $article->id) }}" class="inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Unarchive</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-
+                        @endif
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modals -->
+    @foreach($recentArticles as $article)
+        <!-- View Article Modal -->
+        <div id="articleModal{{ $article->id }}" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-xl shadow-xl w-full max-w-3xl p-6 relative">
+                <button class="absolute top-2 right-2 text-gray-600 text-2xl" onclick="closeModal('articleModal{{ $article->id }}')">&times;</button>
+                <h3 class="text-xl font-semibold mb-4">{{ $article->title }}</h3>
+                <img src="{{ asset('storage/' . $article->image) }}" class="w-48 h-48 object-cover rounded-lg mb-4">
+                <p><b>Location:</b> {{ $article->place }}</p>
+                <p><b>Summary:</b> {{ $article->summary }}</p>
+                <p><b>Content:</b> {{ $article->content }}</p>
+            </div>
+        </div>
 
-                                </div>
-                            </div>
-                        </div>
+        <!-- Edit Article Modal -->
+        <div id="editArticleModal{{ $article->id }}" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-xl shadow-xl w-full max-w-3xl p-6 relative">
+                <button class="absolute top-2 right-2 text-gray-600 text-2xl" onclick="closeModal('editArticleModal{{ $article->id }}')">&times;</button>
+                <h3 class="text-xl font-semibold mb-4">Edit {{ $article->title }}</h3>
+                <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label class="block font-medium mb-1">Title:</label>
+                        <input type="text" name="title" value="{{ $article->title }}" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
-                </div>
-
-               
-
-    <!-- View Article Modal (Read More) -->
-@foreach($recentArticles as $article)
-    <div class="modal fade" id="articleModal{{ $article->id }}" tabindex="-1" aria-labelledby="articleModalLabel{{ $article->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="articleModalLabel{{ $article->id }}">{{ $article->title }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="{{ $article->title }} Image" style="width:200px;height:200px;">
-                    <p><b>Location:</b> {{ $article->place }}</p>
-                    <p><b>Summary:</b> {{ $article->summary }}</p>
-                    <p><b>Content:</b> {{ $article->content }}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                    <div>
+                        <label class="block font-medium mb-1">Image:</label>
+                        <input type="file" name="image" class="w-full border rounded p-2">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Location:</label>
+                        <input type="text" name="place" value="{{ $article->place }}" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Summary:</label>
+                        <textarea name="summary" rows="5" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ $article->summary }}</textarea>
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Content:</label>
+                        <textarea name="content" rows="10" class="w-full border rounded p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ $article->content }}</textarea>
+                    </div>
+                    <button type="submit" class="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">Save Changes</button>
+                </form>
             </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
 
-<!-- Edit Article Modal -->
-@foreach($recentArticles as $article)
-    <div class="modal fade" id="editArticleModal{{ $article->id }}" tabindex="-1" aria-labelledby="editArticleModalLabel{{ $article->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editArticleModalLabel{{ $article->id }}">Edit {{ $article->title }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+    <!-- Scripts -->
+    <script>
+        function openArticleTab(tabName, elmnt) {
+            document.querySelectorAll('.tabcontent').forEach(tc => tc.classList.add('hidden'));
+            document.querySelectorAll('.tablink').forEach(tl => {
+                tl.classList.remove('border-purple-700', 'text-purple-700', '-mb-px');
+                tl.classList.add('text-gray-600');
+            });
+            document.getElementById(tabName).classList.remove('hidden');
+            elmnt.classList.add('border-purple-700', 'text-purple-700', '-mb-px');
+            elmnt.classList.remove('text-gray-600');
+        }
 
-                        <div class="mb-3">
-                            <label for="title{{ $article->id }}" class="form-label">Article Title:</label>
-                            <input type="text" class="form-control" id="title{{ $article->id }}" name="title" value="{{ $article->title }}" style="background-color:#f5f5f5">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="image{{ $article->id }}" class="form-label">Image:</label>
-                            <input type="file" class="form-control" id="image{{ $article->id }}" name="image">
-                        </div>
+        document.getElementById("defaultArticleOpen").click();
 
-                        <div class="mb-3">
-                            <label for="place{{ $article->id }}" class="form-label">Location:</label>
-                            <input type="text" class="form-control" id="place{{ $article->id }}" name="place" value="{{ $article->place }}" style="background-color:#f5f5f5">
-                        </div>
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
 
-                        <div class="mb-3">
-                            <label for="summary{{ $article->id }}" class="form-label">Summary:</label>
-                            <textarea class="form-control" id="summary{{ $article->id }}" name="summary" rows="5" style="background-color:#f5f5f5">{{ $article->summary }}</textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="content{{ $article->id }}" class="form-label">Content:</label>
-                            <textarea class="form-control" id="content{{ $article->id }}" name="content" rows="10" style="background-color:#f5f5f5">{{ $article->content }}</textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary" style="background-color:#5D3CB8">Save Changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-@endforeach
-
-
-
-    <!-- Include Footer -->
-  
-</body>
-@include('layouts.footer')
-</html>
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+    </script>
+</x-admin-layout>

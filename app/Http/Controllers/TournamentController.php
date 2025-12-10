@@ -27,7 +27,6 @@ class TournamentController extends Controller
     {
 //        dd($request);
 
-
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');

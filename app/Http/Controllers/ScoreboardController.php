@@ -61,6 +61,26 @@ class ScoreboardController extends Controller
         return view('scoreboard.index', compact('matches', 'tournament', 'teams', 'categories'));
     }
 
+    public function getMatches(Request $request)
+    {
+        $matches = MatchGroup::where('TournamentID', $request->tournament_id)
+                            ->where('category_id', $request->category_id)
+                            ->get();
+
+        $teams = Team::all()->keyBy('teamID');
+
+        $formatted = $matches->map(function ($m) use ($teams) {
+            return [
+                'Match_groupID' => $m->Match_groupID,
+                'teamA_name' => $teams[$m->TeamAID]->name ?? 'Unknown',
+                'teamB_name' => $teams[$m->TeamBID]->name ?? 'Unknown',
+            ];
+        });
+
+        return response()->json($formatted);
+    }
+
+
 
     // Get match details for AJAX
     public function getMatchDetails(Request $request)
@@ -103,12 +123,13 @@ class ScoreboardController extends Controller
         {
             // Retrieve the match using the provided ID
             $match = MatchGroup::findOrFail($request->match_ID);
-           
+
             // Update the scores correctly
             $match->update([
                 'ScoreA' => $request->ScoreA,
                 'ScoreB' => $request->ScoreB,
-                'error' => 0 // Set error to 0 after saving the score
+                'error' => 0,
+                'match_status' => 2 // Set match status to completed
             ]);
 
             // Return a success message
