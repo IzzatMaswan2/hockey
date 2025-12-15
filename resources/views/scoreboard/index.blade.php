@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scoreboard - {{ $tournament->name }}</title>
+<x-admin-layout :footer="$footer">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <div class="bg-gray-100 min-h-screen w-full flex flex-col">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    @stack('styles')
-</head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
-
-    @include('layouts.navbar')
+        {{-- @include('layouts.navbar') --}}
 
     {{-- Notifications --}}
     <div class="fixed top-5 right-5 z-50 space-y-2">
@@ -53,6 +42,7 @@
                         <div>
                             <label for="category-dropdown" class="block font-semibold mb-1">CATEGORY</label>
                             <select id="category-dropdown" class="w-full border border-gray-300 rounded-md p-2">
+                                <option value="">Select Category</option>
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                 @endforeach
@@ -143,7 +133,7 @@
             </div>
         </div>
     </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
     $(document).on('change', '#category-dropdown', function() {
@@ -225,6 +215,9 @@ $(document).ready(function() {
 });
 </script>
 
-@include('layouts.footer')
-</body>
-</html>
+{{-- @include('layouts.footer') --}}
+    </div>
+
+    
+
+</x-admin-layout>

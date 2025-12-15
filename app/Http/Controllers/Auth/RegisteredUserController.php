@@ -170,6 +170,8 @@ class RegisteredUserController extends Controller
         $users = User::where('role', 'Manager')->get();
         $tournaments = Tournament::all();
 
+        // dd($users, $tournaments);
+
         return view('admin.manageuser', compact('users', 'tournaments'))
             ->with('success', 'Manager added successfully.');
     }
@@ -178,8 +180,9 @@ class RegisteredUserController extends Controller
     public function index()
     {
         $tournaments = Tournament::all(); // Fetch tournaments
-        $users = User::where('role', 'Manager')->get();
+        $users = User::where('role', 'Manager')->paginate(10);
         
+        // dd($users, $tournaments);
         
         return view('admin.manageuser', compact('users', 'tournaments'));
     }

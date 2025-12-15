@@ -94,6 +94,8 @@ class StatisticController extends Controller
         $TeamA = Team::find($teamAID);
         $TeamB = Team::find($teamBID);
 
+        // dd($TeamA, $TeamB);
+
         $Teams = Team::all();
         // dd($Teams);
 

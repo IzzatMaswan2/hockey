@@ -1,12 +1,12 @@
-<x-admin-layout :title="'Manage Manager'">
+<x-admin-layout :title="'Manage Manager'"> 
 
     <!-- Sidebar -->
     @include('layouts.sidebar')
 
-    <main class="flex-1 p-6 space-y-6 bg-gray-100 min-h-screen">
+    <main class="flex-1 p-4 sm:p-6 md:p-6 space-y-6 bg-gray-100 min-h-screen">
 
         <!-- Page Header -->
-        <h2 class="text-3xl font-bold text-purple-700">REGISTER MANAGER</h2>
+        <h2 class="text-2xl sm:text-3xl font-bold text-purple-700">REGISTER MANAGER</h2>
 
         <!-- Add Manager Button -->
         <button class="bg-purple-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-800" 
@@ -15,16 +15,16 @@
         </button>
 
         <!-- Manager List Header -->
-        <h2 class="text-3xl font-bold text-purple-700 mt-8">MANAGER LIST</h2>
+        <h2 class="text-2xl sm:text-3xl font-bold text-purple-700 mt-8">MANAGER LIST</h2>
 
         <!-- Search -->
         <div class="my-4">
             <input type="text" id="managerSearchInput" placeholder="Search managers..."
-                class="w-full md:w-1/3 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                class="w-full sm:w-1/2 md:w-1/3 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
         </div>
 
         <!-- Tabs -->
-        <ul class="nav nav-tabs" id="managerTabs" role="tablist">
+        <ul class="nav nav-tabs flex flex-wrap gap-2" id="managerTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="unarchived-tab" data-bs-toggle="tab" data-bs-target="#unarchived" type="button" role="tab" aria-controls="unarchived" aria-selected="true">
                     Registered Managers
@@ -37,30 +37,30 @@
             </li>
         </ul>
 
-        <div class="tab-content mt-4" id="managerTabsContent">
+        <div class="tab-content mt-4">
             <!-- Registered Managers -->
             <div class="tab-pane fade show active" id="unarchived" role="tabpanel" aria-labelledby="unarchived-tab">
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                         <thead class="bg-purple-700 text-white">
                             <tr>
-                                <th class="py-2 px-4">Manager Name</th>
-                                <th class="py-2 px-4">Email</th>
-                                <th class="py-2 px-4">Team</th>
-                                <th class="py-2 px-4">Country</th>
-                                <th class="py-2 px-4">Actions</th>
+                                <th class="py-2 px-2 sm:px-4">Manager Name</th>
+                                {{-- <th class="py-2 px-2 sm:px-4">Email</th> --}}
+                                <th class="py-2 px-2 sm:px-4">Team</th>
+                                {{-- <th class="py-2 px-2 sm:px-4">Country</th> --}}
+                                <th class="py-2 px-2 sm:px-4">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="unarchivedManagerTableBody" class="text-center">
                             @foreach ($users as $user)
                                 @if ($user->role === 'Manager' && $user->archived === 1)
                                     <tr class="border-b">
-                                        <td class="py-2 px-4">{{ $user->fullName }}</td>
-                                        <td class="py-2 px-4">{{ $user->email }}</td>
-                                        <td class="py-2 px-4">{{ $user->team ? $user->team->name : 'N/A' }}</td>
-                                        <td class="py-2 px-4">{{ $user->country }}</td>
-                                        <td class="py-2 px-4 space-x-2">
-                                            <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 btn-view" 
+                                        <td class="py-2 px-2 sm:px-4">{{ $user->fullName }}</td>
+                                        {{-- <td class="py-2 px-2 sm:px-4 break-words sm:max-w-[150px]">{{ $user->email }}</td> --}}
+                                        <td class="py-2 px-2 sm:px-4">{{ $user->team ? $user->team->name : 'N/A' }}</td>
+                                        {{-- <td class="py-2 px-2 sm:px-4">{{ $user->country }}</td> --}}
+                                        <td class="py-2 px-2 sm:px-4 flex flex-wrap justify-center gap-2">
+                                            <button class="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-blue-700 btn-view" 
                                                 data-manager-name="{{ $user->fullName }}" 
                                                 data-manager-email="{{ $user->email }}" 
                                                 data-manager-team-name="{{ $user->team ? $user->team->name : 'N/A' }}" 
@@ -71,7 +71,7 @@
                                                 View
                                             </button>
 
-                                            <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 btn-edit" 
+                                            <button class="bg-yellow-500 text-white px-2 sm:px-3 py-1 rounded hover:bg-yellow-600 btn-edit" 
                                                 data-manager-id="{{ $user->id }}" 
                                                 data-manager-name="{{ $user->fullName }}" 
                                                 data-manager-email="{{ $user->email }}" 
@@ -86,7 +86,7 @@
                                             <form method="POST" action="{{ route('manageuser.archive', $user->id) }}" class="inline">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Archive</button>
+                                                <button type="submit" class="bg-red-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-red-700">Archive</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -94,6 +94,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mt-4 justify-center flex">
+                        {{ $users->links() }}
+                    </div>
                 </div>
             </div>
 
@@ -103,23 +106,23 @@
                     <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                         <thead class="bg-purple-700 text-white">
                             <tr>
-                                <th class="py-2 px-4">Manager Name</th>
-                                <th class="py-2 px-4">Email</th>
-                                <th class="py-2 px-4">Team</th>
-                                <th class="py-2 px-4">Country</th>
-                                <th class="py-2 px-4">Actions</th>
+                                <th class="py-2 px-2 sm:px-4">Manager Name</th>
+                                {{-- <th class="py-2 px-2 sm:px-4">Email</th> --}}
+                                <th class="py-2 px-2 sm:px-4">Team</th>
+                                {{-- <th class="py-2 px-2 sm:px-4">Country</th> --}}
+                                <th class="py-2 px-2 sm:px-4">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="archivedManagerTableBody" class="text-center">
                             @foreach ($users as $user)
                                 @if ($user->role === 'Manager' && $user->archived === 0)
                                     <tr class="border-b">
-                                        <td class="py-2 px-4">{{ $user->fullName }}</td>
-                                        <td class="py-2 px-4">{{ $user->email }}</td>
-                                        <td class="py-2 px-4">{{ $user->team ? $user->team->name : 'N/A' }}</td>
-                                        <td class="py-2 px-4">{{ $user->country }}</td>
-                                        <td class="py-2 px-4 space-x-2">
-                                            <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 btn-view" 
+                                        <td class="py-2 px-2 sm:px-4">{{ $user->fullName }}</td>
+                                        {{-- <td class="py-2 px-2 sm:px-4">{{ $user->email }}</td> --}}
+                                        <td class="py-2 px-2 sm:px-4">{{ $user->team ? $user->team->name : 'N/A' }}</td>
+                                        {{-- <td class="py-2 px-2 sm:px-4">{{ $user->country }}</td> --}}
+                                        <td class="py-2 px-2 sm:px-4 flex flex-wrap justify-center gap-2">
+                                            <button class="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-blue-700 btn-view" 
                                                 data-manager-name="{{ $user->fullName }}" 
                                                 data-manager-email="{{ $user->email }}" 
                                                 data-manager-team-name="{{ $user->team ? $user->team->name : 'N/A' }}" 
@@ -133,7 +136,7 @@
                                             <form method="POST" action="{{ route('manageuser.unarchive', $user->id) }}" class="inline">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Unarchive</button>
+                                                <button type="submit" class="bg-green-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-green-700">Unarchive</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -193,9 +196,9 @@
             });
         });
 
-        $(document).ready(function() {
-            $('#tournament_id').select2({ placeholder: "Select Tournament", allowClear: true });
-        });
+        // $(document).ready(function() {
+        //     $('#tournament_id').select2({ placeholder: "Select Tournament", allowClear: true });
+        // });
     </script>
 
 </x-admin-layout>

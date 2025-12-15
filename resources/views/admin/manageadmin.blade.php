@@ -37,7 +37,7 @@
             <!-- Registered Admins -->
             <div class="tab-pane fade show active" id="unarchived-admin" role="tabpanel" aria-labelledby="unarchived-admin-tab">
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden table-fixed">
                         <thead class="bg-purple-700 text-white">
                             <tr>
                                 <th class="py-2 px-4">Admin Name</th>
@@ -50,9 +50,11 @@
                                 @if ($user->role === 'Admin' && $user->archived === 1)
                                     <tr class="border-b">
                                         <td class="py-2 px-4">{{ $user->fullName }}</td>
-                                        <td class="py-2 px-4">{{ $user->email }}</td>
-                                        <td class="py-2 px-4 space-x-2">
-                                            <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 btn-view" 
+                                        <td class="py-2 px-4 break-all max-w-[150px] justify-start" title="{{ $user->email }}">
+                                            {{ $user->email }}
+                                        </td>
+                                        <td class="py-2 px-4 space-x-2 max-w-[150px] justify-start">
+                                            <button class="bg-blue-600 text-white px-1 py-1 rounded hover:bg-blue-700 btn-view text-sm w-16" 
                                                 data-admin-name="{{ $user->fullName }}" 
                                                 data-admin-email="{{ $user->email }}" 
                                                 data-bs-toggle="modal" data-bs-target="#adminModal">
@@ -62,7 +64,7 @@
                                             <form method="POST" action="{{ route('manageadmin.archive', $user->id) }}" class="inline">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Archive</button>
+                                                <button type="submit" class="bg-red-600 text-white px-1 py-1 rounded hover:bg-red-700 text-sm w-16">Archive</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -89,7 +91,7 @@
                                 @if ($user->role === 'Admin' && $user->archived === 0)
                                     <tr class="border-b">
                                         <td class="py-2 px-4">{{ $user->fullName }}</td>
-                                        <td class="py-2 px-4">{{ $user->email }}</td>
+                                        <td class="py-2 px-4 break-words max-w-xs">{{ $user->email }}</td>
                                         <td class="py-2 px-4 space-x-2">
                                             <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 btn-view" 
                                                 data-admin-name="{{ $user->fullName }}" 

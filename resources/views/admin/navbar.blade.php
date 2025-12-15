@@ -75,7 +75,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
+                    {{-- <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link text-white" href="/tournament">Tournament</a>
                         </li>
@@ -91,7 +91,7 @@
                         <li class="nav-item me">
                             <a href="/fixtures" class="btn btn-light">Fixture</a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

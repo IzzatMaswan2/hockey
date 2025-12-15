@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Admin Panel' }}</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    {{-- <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
+    {{-- <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script> --}}
+    {{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
-
-    @stack('styles')   
+    {{-- @stack('styles')    --}}
     <style>
         [x-cloak] { display: none !important; }
 
     </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
@@ -53,6 +58,18 @@
     </div>
 
     {{-- @stack('scripts') --}}
-    @include('layouts.footer')
+    @include('layouts.footer', ['footer' => $footer])
+
+    <script>
+        function copyToClipboard(text) {
+            const tempInput = document.createElement('input');
+            document.body.appendChild(tempInput);
+            tempInput.value = text;
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert(text + " copied to clipboard!");
+        }
+    </script>
 </body>
 </html>

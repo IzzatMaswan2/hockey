@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use Illuminate\Console\View\Components\Secret;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LiveMatchController;
 use App\Http\Controllers\TeamController;
@@ -32,8 +33,14 @@ use App\Http\Controllers\KnockoutStageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\exportTeamPdf;
-use App\Http\Controllers\ManualController;
+use App\Http\Controllers\Admin\ManualController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\CheckSession;
+
+Route::get('/session-expired', function () {
+    return view('session-expired');
+})->name('session.expired');
+
 
 Route::get('/fixtures', [FixtureController::class, 'index'])->name('fixture.index');
 Route::get('/matches', function () {
@@ -151,52 +158,6 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::post('/tournament-details', [RegisteredUserController::class, 'storeManagerTournament'])->name('tournament-details');
 
-//ADD MANAGER (MANAGEMANAGERS)
-// Route::get('/manageuser', function () {return view('manageuser');});
-// Route::get('/manageuser', [RegisteredUserController::class, 'createManager'])->name('admin.manageuser');
-Route::post('/manageuser', [RegisteredUserController::class, 'storeManager'])->name('manageuser.store');
-// Route::get('/manageuser', [RegisteredUserController::class, 'listUsers'])->name('admin.manageuser');
-Route::get('/managenew', function () {return view('admin.manageuser');});
-Route::put('/manageuser/{id}/archive', [RegisteredUserController::class, 'archive'])->name('manageuser.archive');
-Route::get('/manageuser', [RegisteredUserController::class, 'index'])->name('admin.manageuser');
-Route::put('/manageuser/{id}/update', [RegisteredUserController::class, 'update'])->name('manageuser.update');
-Route::put('/manageuser/unarchive/{id}', [RegisteredUserController::class, 'unarchive'])->name('manageuser.unarchive');
-
-//ADD ADMIN
-Route::post('/manageadmin', [RegisteredUserController::class, 'storeAdmin']);
-Route::get('/manageadmin', [RegisteredUserController::class, 'listAdmin'])->name('admin.manageadmin');
-Route::get('/managenew2', function () {return view('admin.manageadmin');});
-Route::put('/manageadmin/{id}/archive', [RegisteredUserController::class, 'archiveadmin'])->name('manageadmin.archive');
-Route::get('/manageadmin', [RegisteredUserController::class, 'indexadmin'])->name('admin.manageadmin');
-Route::put('/manageadmin/unarchive/{id}', [RegisteredUserController::class, 'unarchiveAdmin'])->name('manageadmin.unarchive');
-
-//MANAGE PLAYERS
-Route::post('/manageplayer', [RegisteredUserController::class, 'storePlayer']);
-Route::get('/manageplayer', [RegisteredUserController::class, 'listPlayer'])->name('manageplayer');
-Route::get('/managenew3', function () {return view('manageplayer');});
-Route::put('/manageplayer/{id}/archive', [RegisteredUserController::class, 'archivePlayer'])->name('manageplayer.archive');
-Route::get('/manageplayer', [RegisteredUserController::class, 'indexPlayer'])->name('manageplayer');
-Route::put('/manageplayer/{id}/update', [RegisteredUserController::class, 'updatePlayer'])->name('manageplayer.update');
-
-//MANAGE TOURNAMENT
-// Route::get('/managetournament', function () {return view('managetournament');});
-// Route::get('/managetournament', [TournamentController::class, 'create'])->name('managetournament');
-Route::post('/managetournament', [TournamentController::class, 'store'])->name('managetournament.store');
-Route::get('/managetournament/{id}', [TournamentController::class, 'show'])->name('managetournament.show');
-Route::post('/managetournament/{id}', [TournamentController::class, 'update'])->name('managetournament.update');
-Route::put('/managetournament/{id}/archive', [TournamentController::class, 'archive'])->name('managetournament.archive');
-Route::get('/managetournament', [TournamentController::class, 'index'])->name('managetournament');
-Route::put('/managetournament/unarchive/{id}', [TournamentController::class, 'unarchiveTournament'])->name('managetournament.unarchive');
-
-//MANAGE VENUE
-Route::get('/managevenue', function () {return view('managevenue');});
-Route::get('/managevenue', [VenueController::class, 'create'])->name('managevenue');
-Route::post('/managevenue', [VenueController::class, 'store'])->name('managevenue.store');
-Route::get('/managevenue/{id}', [VenueController::class, 'show'])->name('managevenue.show');
-Route::post('/managevenue/{id}', [VenueController::class, 'update'])->name('managevenue.update');
-Route::put('/managevenue/{id}/archive', [VenueController::class, 'archiveVenue'])->name('managevenue.archive');
-Route::get('/managevenue', [VenueController::class, 'index'])->name('managevenue');
-Route::post('/managevenue/unarchive/{id}', [VenueController::class, 'unarchiveVenue'])->name('managevenue.unarchive');
 
 //Formation (Manager)
 Route::post('/formation/store', [PlayerController::class, 'store'])->name('player.store');
@@ -303,18 +264,7 @@ Route::get('/fixture', function () {
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-// admin manage page fo user 
-Route::get('/adminmanagepage', [PageController::class, 'showpage'])->name('show.page');
-Route::get('about/edit', [PageController::class, 'editAbout'])->name('about.edit');
-Route::post('faqs', [PageController::class, 'FAQstore'])->name('faqs.store');
-Route::post('home/update', [PageController::class, 'updateHome'])->name('home.update');
-Route::post('achievement/update', [PageController::class, 'updateAchivement'])->name('achievements.update');
-Route::post('meet/update', [PageController::class, 'updateMeetTeam'])->name('meetTeams.update');
-Route::post('about/update', [PageController::class, 'updateAbout'])->name('about.update');
-Route::post('/admin/contact/update', [PageController::class, 'updateContactInfo'])->name('contact.update');
-Route::post('faqs/update', [PageController::class, 'FAQupdate'])->name('faq.update');
-Route::delete('/faqs/{id}', [PageController::class, 'FAQdestroy'])->name('faqs.destroy');
-Route::post('footer/update', [PageController::class, 'footerupdate'])->name('footer.update');
+
 
 /* User Route */
 
@@ -370,74 +320,154 @@ Route::get('/fixture', function () {
 
 Route::get('/footer', [LayoutController::class, 'footer'])->name('profile.partials.footer');
 
-//MANAGE MATCHES
-Route::get('/matches/matches', [MatchesController::class, 'index'])->name('matches.index');
-Route::post('/matches', [MatchesController::class, 'store']) ->name('matches.store');
-Route::get('/matches', [MatchesController::class, 'create'])->name('matches.create');
-Route::put('/matches/{id}/update', [MatchesController::class, 'update'])->name('matches.update');
-Route::get('/matches/{matches}/edit', [MatchesController::class, 'edit'])->name('matches.edit');
-Route::get('/groups/{tournamentId}', [MatchesController::class, 'getGroupsByTournament']);
-Route::post('/matches/auto-create', [MatchesController::class, 'autoCreateMatches'])->name('matches.auto-create');
-Route::get('/get-groups-by-tournament/{tournamentId}', [MatchesController::class, 'getGroupsByTournament']);
-Route::get('/get-groups-by-tournament-and-category/{tournament}/{category}', [MatchesController::class, 'getGroupsByTournamentAndCategory']);
 
-Route::resource('participants', ParticipantController::class);
-Route::get('participants/{id}/view', [ParticipantController::class, 'view'])->name('participants.view');
-Route::put('participants/{id}/archive', [ParticipantController::class, 'archive'])->name('participants.archive');
-Route::put('participants/{id}/unarchive', [ParticipantController::class, 'unarchive'])->name('participants.unarchive');
-Route::get('/export/team/{id}', [exportTeamPdf::class, 'exportTeamPdf'])
-     ->name('pdf.teamlineup');
 
-Route::get('/matches/create-manual', [ManualController::class, 'createManual'])->name('matches.manual');
-Route::post('/matches/store-manual', [ManualController::class, 'storeManual'])->name('matches.manual.store');
-Route::get('/ajax/categories/{tournament_id}', [ManualController::class, 'getCategories']);
-Route::get('/ajax/groups/{category_id}', [ManualController::class, 'getGroups']);
-Route::get('/ajax/teams/{group_id}', [ManualController::class, 'getTeams']);
 
 Route::get('/scoreboard/get-matches', [ScoreboardController::class, 'getMatches']);
 
-
-// referee
-Route::get('/referee', [RefereeController::class, 'index'])->name('referee.index');
-Route::post('/referee', [RefereeController::class, 'store'])->name('referee.store');;
-Route::put('/referee/{id}/update', [RefereeController::class, 'update'])->name('referee.update');
-Route::post('/referee/{id}/delete', [RefereeController::class, 'destroy'])->name('referee.destroy');
-Route::get('/referee/{referee}/edit', [MatchesController::class, 'edit'])->name('referee.edit');
-
-require __DIR__.'/auth.php';
-
-
-
-// Route::get('/scoreboard/{tournamentId}/matches', [ScoreboardController::class, 'filterMatches'])->name('scoreboard.filterMatches');
-Route::get('/scoreboard', [ScoreboardController::class, 'index'])->name('scoreboard.index');
-Route::post('/scoreboard/updateScores', [ScoreboardController::class, 'updateScores'])->name('scoreboard.updateScores');
-
-Route::get('/scoreboard/tournamentlist', [ScoreboardController::class, 'tournamentList'])->name('tournament.list');
-Route::get('/scoreboard/{tournamentId}/matches', [ScoreboardController::class, 'filterMatches'])->name('scoreboard.filterMatches');
-Route::get('/scoreboard/{tournamentID}', [ScoreboardController::class, 'index'])->name('scoreboard.index');
-Route::get('/get-match-details', [ScoreboardController::class, 'getMatchDetails'])->name('scoreboard.getMatchDetails');
-Route::post('/scoreboard/updateMatch', [ScoreboardController::class, 'updateMatch'])->name('scoreboard.updateMatch');
-Route::post('/update-match/{Match_groupID}', [ScoreboardController::class, 'updateMatch'])->name('update.match');
 
 // Route::middleware(['role:Manager'])->group(function () {
     
 // });
 
+
+
+// Dashboard All Roles
+
+
+
+// Admin Section
+
 // Route::middleware(['role:Admin'])->group(function () {
     
 // });
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::middleware(CheckSession::class)->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // admin manage page fo user 
+    Route::get('/adminmanagepage', [PageController::class, 'showpage'])->name('show.page');
+    Route::get('about/edit', [PageController::class, 'editAbout'])->name('about.edit');
+    Route::post('faqs', [PageController::class, 'FAQstore'])->name('faqs.store');
+    Route::post('home/update', [PageController::class, 'updateHome'])->name('home.update');
+    Route::post('achievement/update', [PageController::class, 'updateAchivement'])->name('achievements.update');
+    Route::post('meet/update', [PageController::class, 'updateMeetTeam'])->name('meetTeams.update');
+    Route::post('about/update', [PageController::class, 'updateAbout'])->name('about.update');
+    Route::post('/admin/contact/update', [PageController::class, 'updateContactInfo'])->name('contact.update');
+    Route::post('faqs/update', [PageController::class, 'FAQupdate'])->name('faq.update');
+    Route::delete('/faqs/{id}', [PageController::class, 'FAQdestroy'])->name('faqs.destroy');
+    Route::post('footer/update', [PageController::class, 'footerupdate'])->name('footer.update');
+
+    //ADD MANAGER (MANAGEMANAGERS)
+    // Route::get('/manageuser', function () {return view('manageuser');});
+    // Route::get('/manageuser', [RegisteredUserController::class, 'createManager'])->name('admin.manageuser');
+    Route::post('/manageuser', action: [RegisteredUserController::class, 'storeManager'])->name('manageuser.store');
+    // Route::get('/manageuser', [RegisteredUserController::class, 'listUsers'])->name('admin.manageuser');
+    Route::get('/managenew', function () {return view('admin.manageuser');});
+    Route::put('/manageuser/{id}/archive', [RegisteredUserController::class, 'archive'])->name('manageuser.archive');
+    Route::get('/manageuser', [RegisteredUserController::class, 'index'])->name('admin.manageuser');
+    Route::put('/manageuser/{id}/update', [RegisteredUserController::class, 'update'])->name('manageuser.update');
+    Route::put('/manageuser/unarchive/{id}', [RegisteredUserController::class, 'unarchive'])->name('manageuser.unarchive');
+
+    //ADD ADMIN
+    Route::post('/manageadmin', [RegisteredUserController::class, 'storeAdmin']);
+    Route::get('/manageadmin', [RegisteredUserController::class, 'listAdmin'])->name('admin.manageadmin');
+    Route::get('/managenew2', function () {return view('admin.manageadmin');});
+    Route::put('/manageadmin/{id}/archive', [RegisteredUserController::class, 'archiveadmin'])->name('manageadmin.archive');
+    Route::get('/manageadmin', [RegisteredUserController::class, 'indexadmin'])->name('admin.manageadmin');
+    Route::put('/manageadmin/unarchive/{id}', [RegisteredUserController::class, 'unarchiveAdmin'])->name('manageadmin.unarchive');
+
+    //MANAGE PLAYERS
+    Route::post('/manageplayer', [RegisteredUserController::class, 'storePlayer']);
+    Route::get('/manageplayer', [RegisteredUserController::class, 'listPlayer'])->name('manageplayer');
+    Route::get('/managenew3', function () {return view('manageplayer');});
+    Route::put('/manageplayer/{id}/archive', [RegisteredUserController::class, 'archivePlayer'])->name('manageplayer.archive');
+    Route::get('/manageplayer', [RegisteredUserController::class, 'indexPlayer'])->name('manageplayer');
+    Route::put('/manageplayer/{id}/update', [RegisteredUserController::class, 'updatePlayer'])->name('manageplayer.update');
+
+    //MANAGE TOURNAMENT
+    // Route::get('/managetournament', function () {return view('managetournament');});
+    // Route::get('/managetournament', [TournamentController::class, 'create'])->name('managetournament');
+    Route::post('/managetournament', [TournamentController::class, 'store'])->name('managetournament.store');
+    Route::get('/managetournament/{id}', [TournamentController::class, 'show'])->name('managetournament.show');
+    Route::post('/managetournament/{id}', [TournamentController::class, 'update'])->name('managetournament.update');
+    Route::put('/managetournament/{id}/archive', [TournamentController::class, 'archive'])->name('managetournament.archive');
+    Route::get('/managetournament', [TournamentController::class, 'index'])->name('managetournament');
+    Route::put('/managetournament/unarchive/{id}', [TournamentController::class, 'unarchiveTournament'])->name('managetournament.unarchive');
+
+    //MANAGE VENUE
+    Route::get('/managevenue', function () {return view('managevenue');});
+    Route::get('/managevenue', [VenueController::class, 'create'])->name('managevenue');
+    Route::post('/managevenue', [VenueController::class, 'store'])->name('managevenue.store');
+    Route::get('/managevenue/{id}', [VenueController::class, 'show'])->name('managevenue.show');
+    Route::post('/managevenue/{id}', [VenueController::class, 'update'])->name('managevenue.update');
+    Route::put('/managevenue/{id}/archive', [VenueController::class, 'archiveVenue'])->name('managevenue.archive');
+    Route::get('/managevenue', [VenueController::class, 'index'])->name('managevenue');
+    Route::post('/managevenue/unarchive/{id}', [VenueController::class, 'unarchiveVenue'])->name('managevenue.unarchive');
+
+    // referee
+    Route::get('/officer', [RefereeController::class, 'index'])->name('referee.index');
+    Route::post('/officer', [RefereeController::class, 'store'])->name('referee.store');;
+    Route::put('/officer/{id}/update', [RefereeController::class, 'update'])->name('referee.update');
+    Route::post('/officer/{id}/delete', [RefereeController::class, 'destroy'])->name('referee.destroy');
+    Route::get('/officer/{referee}/edit', [MatchesController::class, 'edit'])->name('referee.edit');
+
+    //MANAGE GROUP
+    Route::get('/manage-group', [GroupsController::class, 'index'])->name('managegroup.index');
+    Route::post('/managegroup', [GroupsController::class, 'store']) ->name('managegroup.store');
+    Route::get('/managegroup', [GroupsController::class, 'create'])->name('managegroup.create');
+    Route::get('/get-teams-and-groups-by-tournament', [GroupsController::class,'getTeamsAndGroupsByTournament'])->name('managegroup.getTeamsAndGroupsByTournament');
+    Route::get('/getTournamentTeams/{id}', [GroupsController::class, 'getTournamentTeams']);
+
+    // Participant Management
+    Route::resource('participants', ParticipantController::class);
+    Route::get('participants/{id}/view', [ParticipantController::class, 'view'])->name('participants.view');
+    Route::put('participants/{id}/archive', [ParticipantController::class, 'archive'])->name('participants.archive');
+    Route::put('participants/{id}/unarchive', [ParticipantController::class, 'unarchive'])->name('participants.unarchive');
+    Route::get('/export/team/{id}', [exportTeamPdf::class, 'exportTeamPdf'])
+        ->name('pdf.teamlineup');
+
+    //MANAGE MATCHES
+    Route::get('/matches/matches', [MatchesController::class, 'index'])->name('matches.index');
+    Route::post('/matches', [MatchesController::class, 'store']) ->name('matches.store');
+    Route::get('/matches', [MatchesController::class, 'create'])->name('matches.create');
+    Route::put('/matches/{id}/update', [MatchesController::class, 'update'])->name('matches.update');
+    Route::get('/matches/{matches}/edit', [MatchesController::class, 'edit'])->name('matches.edit');
+    Route::get('/groups/{tournamentId}', [MatchesController::class, 'getGroupsByTournament']);
+    Route::post('/matches/auto-create', [MatchesController::class, 'autoCreateMatches'])->name('matches.auto-create');
+    Route::get('/get-groups-by-tournament/{tournamentId}', [MatchesController::class, 'getGroupsByTournament']);
+    Route::get('/get-groups-by-tournament-and-category/{tournament}/{category}', [MatchesController::class, 'getGroupsByTournamentAndCategory']);
 
 
-//MANAGE GROUP
-Route::get('/manage-group', [GroupsController::class, 'index'])->name('managegroup.index');
-Route::post('/managegroup', [GroupsController::class, 'store']) ->name('managegroup.store');
-Route::get('/managegroup', [GroupsController::class, 'create'])->name('managegroup.create');
-Route::get('/get-teams-and-groups-by-tournament', [GroupsController::class,'getTeamsAndGroupsByTournament'])->name('managegroup.getTeamsAndGroupsByTournament');
-Route::get('/getTournamentTeams/{id}', [GroupsController::class, 'getTournamentTeams']);
+    // Manual Match Creation
+    Route::get('/matches/create-manual', [ManualController::class, 'createManual'])->name('matches.manual');
+    Route::post('/matches/store-manual', [ManualController::class, 'storeManual'])->name('matches.manual.store');
+    Route::get('/ajax/categories/{tournament_id}', [ManualController::class, 'getCategories']);
+    Route::get('/ajax/groups/{category_id}', [ManualController::class, 'getGroups']);
+    Route::get('/ajax/teams/{group_id}', [ManualController::class, 'getTeams']);
+
+    // Scoreboard Management
+    Route::get('/scoreboard', [ScoreboardController::class, 'index'])->name('scoreboard.index');
+    Route::post('/scoreboard/updateScores', [ScoreboardController::class, 'updateScores'])->name('scoreboard.updateScores');
+    Route::get('/scoreboard/tournamentlist', [ScoreboardController::class, 'tournamentList'])->name('tournament.list');
+    Route::get('/scoreboard/{tournamentId}/matches', [ScoreboardController::class, 'filterMatches'])->name('scoreboard.filterMatches');
+    Route::get('/scoreboard/{tournamentID}', [ScoreboardController::class, 'index'])->name('scoreboard.index');
+    Route::get('/get-match-details', [ScoreboardController::class, 'getMatchDetails'])->name('scoreboard.getMatchDetails');
+    Route::post('/scoreboard/updateMatch', [ScoreboardController::class, 'updateMatch'])->name('scoreboard.updateMatch');
+    Route::post('/update-match/{Match_groupID}', [ScoreboardController::class, 'updateMatch'])->name('update.match');
+
+    // Knockout Stage Management
+    Route::get('/tournament/{id}/knockout', [KnockoutStageController::class, 'getTopTeams'])->name('knockout.advance');
+    Route::post('/select-knockout-teams', [KnockoutStageController::class, 'createKnockoutMatches'])->name('knockout.create');
+    Route::get('/tournament/knockoutmatch/{tournament_id}', [KnockoutStageController::class, 'showKnockoutMatches'])->name('knockout.match');
+    Route::put('/knockout/{id}', [KnockoutStageController::class, 'update'])->name('update.knockout');
+
+});
 
 
-Route::get('/tournament/{id}/knockout', [KnockoutStageController::class, 'getTopTeams'])->name('knockout.advance');
-Route::post('/select-knockout-teams', [KnockoutStageController::class, 'createKnockoutMatches'])->name('knockout.create');
-Route::get('/tournament/knockoutmatch/{tournament_id}', [KnockoutStageController::class, 'showKnockoutMatches'])->name('knockout.match');
-Route::put('/knockout/{id}', [KnockoutStageController::class, 'update'])->name('update.knockout');
+
+
+
+
+require __DIR__.'/auth.php';

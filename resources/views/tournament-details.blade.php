@@ -388,7 +388,7 @@ button[type="submit"]:hover {
                     class="tabcontent group-table"
                     style="width:100%; {{ $index === 0 ? 'display:block;' : 'display:none;' }}">
 
-                    <table>
+                    <table style="width: 100%">
                         <thead>
                             <tr>
                                 <th style="width:5%">Rank</th>
