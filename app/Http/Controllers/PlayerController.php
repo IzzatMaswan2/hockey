@@ -74,39 +74,111 @@ public function view()
     }
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
+    public function dashboardPlayer()
+    {
+        // Get the authenticated player
+        $user = Auth::user();
+        $team = $user->team; // Assuming there's a `team` relationship in User model
 
-public function dashboardPlayer()
-{
-    // Get the authenticated player
-    $user = Auth::user();
-    $team = $user->team; // Assuming there's a `team` relationship in User model
+        // Check if the team exists
+        if ($team) {
+            $teamTournaments = $team->tournaments; // Assuming the `tournaments` relationship is defined in the Team model
 
-    // Check if the team exists
-    if ($team) {
-        $teamTournaments = $team->tournaments; // Assuming the `tournaments` relationship is defined in the Team model
+            // Get the team details
+            $teamDetails = [
+                'name' => $team->name,
+                'logo' => $team->LogoURL ? asset('storage/' . $team->LogoURL) : null, 
+                'manager_name' => optional($team->manager)->name, 
+            ];
+        } else {
+            // Handle case when team does not exist
+            $teamDetails = [
+                'name' => 'N/A',
+                'logo' => null,
+                'manager_name' => 'N/A',
+            ];
+            $teamTournaments = collect(); // Empty collection if no team
+        }
 
-        // Get the team details
-        $teamDetails = [
-            'name' => $team->name,
-            'logo' => $team->LogoURL ? asset('storage/' . $team->LogoURL) : null, // Generate full logo URL
-            'manager_name' => optional($team->manager)->name, // Assuming there's a relationship to get manager's name
+        // Dummy KPIs
+        $kpis = [
+            ['title'=>'Matches Played','value'=>18,'color'=>'purple'],
+            ['title'=>'Goals','value'=>7,'color'=>'purple'],
+            ['title'=>'Assists','value'=>5,'color'=>'purple'],
+            ['title'=>'Training Sessions','value'=>42,'color'=>'purple'],
         ];
-    } else {
-        // Handle case when team does not exist
-        $teamDetails = [
-            'name' => 'N/A',
-            'logo' => null,
-            'manager_name' => 'N/A',
+
+        // Dummy Activities
+        $activities = [
+            ['title'=>'Running Distance','value'=>5.2,'unit'=>'km','color'=>'green'],
+            ['title'=>'Push-ups','value'=>60,'unit'=>'','color'=>'blue'],
+            ['title'=>'Squats','value'=>80,'unit'=>'','color'=>'blue'],
+            ['title'=>'Training Duration','value'=>75,'unit'=>'min','color'=>'purple'],
+            ['title'=>'Intensity','value'=>'High','unit'=>'','color'=>'red'],
+            ['title'=>'Energy Level','value'=>'4 / 5','unit'=>'','color'=>'yellow'],
         ];
-        $teamTournaments = collect(); // Empty collection if no team
+
+        // Dummy Status
+        $statuses = [
+            ['label'=>'Field Status','value'=>'Active'],
+            ['label'=>'Muscle Soreness','value'=>'Low'],
+            ['label'=>'Last Match','value'=>'3 days ago'],
+            ['label'=>'Attendance Rate','value'=>'95%'],
+            ['label'=>'Recovery','value'=>'Completed'],
+        ];
+
+        // Dummy Activity Log
+        $activityLog = [
+            ['emoji'=>'🏃','activity'=>'Ran 5 km (Morning Training)','time'=>'Today'],
+            ['emoji'=>'💪','activity'=>'Completed 60 push-ups','time'=>'Today'],
+            ['emoji'=>'⚽','activity'=>'Attended Team Training','time'=>'Yesterday'],
+            ['emoji'=>'🧘','activity'=>'Stretching & Recovery Session','time'=>'2 days ago'],
+        ];
+
+        // Tournaments
+        $tournaments = $teamTournaments->pluck('tournament_name')->toArray();
+
+        return view('player-dashboard', compact(
+            'user', 'teamDetails', 'kpis', 'activities', 'statuses', 'activityLog', 'tournaments'
+        ));
     }
 
-    // Return view with all necessary data
-    return view('player-dashboard', [
-        'teamTournaments' => $teamTournaments,
-        'teamDetails' => $teamDetails, // Pass team details to the view
-    ]);
-}
+    // Anctivity and Status
+
+    public function storeDailyActivity(Request $request)
+    {
+        $request->validate([
+            'running_distance' => 'required|numeric|min:0',
+            'pushups' => 'required|integer|min:0',
+            'squats' => 'required|integer|min:0',
+            'duration' => 'required|integer|min:0',
+            'intensity' => 'required|string',
+            'energy_level' => 'required|integer|min:1|max:5',
+            'notes' => 'nullable|string|max:255',
+        ]);
+
+        Auth::user()->dailyActivities()->create($request->all());
+
+        return back()->with('success', 'Daily activity saved successfully!');
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $request->validate([
+            'field_status' => 'required|string',
+            'muscle_soreness' => 'required|string',
+            'recovery' => 'required|string',
+            'attendance_rate' => 'required|integer|min:0|max:100',
+            'last_match' => 'required|date',
+        ]);
+
+        Auth::user()->status()->updateOrCreate([], $request->all());
+
+        return back()->with('success', 'Player status updated successfully!');
+    }
+
+
+
 
     
     //---------------------------------------------------------------------------------------formation

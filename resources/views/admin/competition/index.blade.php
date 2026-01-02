@@ -66,10 +66,10 @@
                     <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                         <thead class="bg-purple-700 text-white">
                             <tr>
-                                <th class="py-2 px-4">Team</th>
-                                <th class="py-2 px-4">Tournament</th>
-                                <th class="py-2 px-4">Category</th>
-                                <th class="py-2 px-4">Actions</th>
+                                <th class="py-2 px-4 text-center">Team</th>
+                                <th class="py-2 px-4 text-center">Tournament</th>
+                                <th class="py-2 px-4 text-center">Category</th>
+                                <th class="py-2 px-4 text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="activeParticipantTable" class="text-center">
@@ -145,6 +145,9 @@
         @include('admin.competition.modals')
 
     </main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
 
     <script>
         // Tournament filter reload
@@ -198,7 +201,10 @@
             let id = $(this).data('id');
             let team = $(this).data('team');
             $("#deleteParticipantName").text(team);
-            $("#deleteParticipantForm").attr('action', '/participants/' + id);
+            $("#deleteParticipantForm").attr(
+                'action',
+                "{{ route('participants.destroy', '') }}/" + id
+            );
         });
 
     </script>

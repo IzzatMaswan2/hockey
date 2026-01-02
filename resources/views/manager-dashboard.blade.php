@@ -1,139 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-admin-layout title="Manager Dashboard">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <title>Manager Dashboard</title>
-</head>
-
-<body style="background-color: #f4f7f6;">
-    <!-- Navbar -->
-    @include('layouts.navbar')
-
-    <!-- Main Layout -->
-    <div class="container-fluid" style="width: 100%; height: 100%;">
+    <div class="container-fluid min-vh-100 bg-light">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-2" style="background-color: #929292; height: 100vh;">
-                @include('layouts.sidebar-manager')
-            </div>
 
-            <!-- Main Content -->
-            <div class="col-10">
-                <div class="container mt-4">
-                <h1 class="" style="color:#5D3CB8;font-weight:bold;">Hello! welcome Manager {{ Auth::user()->fullName }}!</h1>
-                    <!-- Display total players for the manager and team -->
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5>Total Players Registered by You:</h5>
-                                    <p class="card-text">{{ count($managerPlayers) }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5>Total Players Under Your Team:</h5>
-                                    <p class="card-text">{{ count($teamPlayers) }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5>Tournaments Your Team Has Joined:</h5>
-                                    <ul>
-                                        @foreach($teamTournaments as $tournament)
-                                        <li>{{ $tournament->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            {{-- SIDEBAR --}}
+            @include('layouts.sidebar-manager')
 
-                    <!-- Tabs for players -->
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="manager-players-tab" data-bs-toggle="tab" data-bs-target="#manager-players" type="button" role="tab" aria-controls="manager-players" aria-selected="true">My Registered Players</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="team-players-tab" data-bs-toggle="tab" data-bs-target="#team-players" type="button" role="tab" aria-controls="team-players" aria-selected="false">Players Under My Team</button>
-                        </li>
-                    </ul>
+            {{-- MAIN CONTENT --}}
+            <main class="col-md-10 ms-sm-auto px-4 py-4">
 
-                    <div class="tab-content mt-3" id="myTabContent">
-                        <!-- Tab 1: Manager's Registered Players -->
-                        <div class="tab-pane fade show active" id="manager-players" role="tabpanel" aria-labelledby="manager-players-tab">
-                            <h4>My Registered Players</h4>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Player Name</th>
-                                        <th>Jersey Number</th>
-                                        <th>Position</th>
-                                        <th>Date of Birth</th>
-                                        <th>Contact</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($managerPlayers as $player)
-                                    <tr>
-                                        <td>{{ $player->fullName }}</td>
-                                        <td>{{ $player->jerseyNumber }}</td>
-                                        <td>{{ $player->position }}</td>
-                                        <td>{{ $player->dob }}</td>
-                                        <td>{{ $player->contact }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Tab 2: All Players Under the Same Team -->
-                        <div class="tab-pane fade" id="team-players" role="tabpanel" aria-labelledby="team-players-tab">
-                            <h4>Players Under My Team</h4>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Player Name</th>
-                                        <th>Jersey Number</th>
-                                        <th>Position</th>
-                                        <th>Date of Birth</th>
-                                        <th>Contact</th>
-                                        <th>Registered By</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($teamPlayers as $player)
-                                    <tr>
-                                        <td>{{ $player->fullName }}</td>
-                                        <td>{{ $player->jerseyNumber }}</td>
-                                        <td>{{ $player->position }}</td>
-                                        <td>{{ $player->dob }}</td>
-                                        <td>{{ $player->contact }}</td>
-                                        <td>{{ $player->manager->fullName ?? 'huh' }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                {{-- PAGE HEADER --}}
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div>
+                        <h2 class="fw-bold mb-1" style="color:#5D3CB8;">
+                            Welcome back, {{ Auth::user()->fullName }}
+                        </h2>
+                        <p class="text-muted mb-0">
+                            Here’s what’s happening with your team today
+                        </p>
                     </div>
                 </div>
-            </div>
+
+                {{-- STATS CARDS --}}
+                <div class="row g-4 mb-4">
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body d-flex align-items-center gap-3">
+                                <div class="rounded-circle bg-primary bg-opacity-10 p-3">
+                                    <i class="fas fa-user text-primary fs-4"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted mb-1">Players Registered by You</p>
+                                    <h3 class="fw-bold mb-0">
+                                        {{ count($managerPlayers) }}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body d-flex align-items-center gap-3">
+                                <div class="rounded-circle bg-success bg-opacity-10 p-3">
+                                    <i class="fas fa-users text-success fs-4"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted mb-1">Players in Your Team</p>
+                                    <h3 class="fw-bold mb-0">
+                                        {{ count($teamPlayers) }}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {{-- TOURNAMENTS --}}
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-trophy text-warning me-2"></i>
+                            Tournaments Joined
+                        </h5>
+
+                        @if($teamTournaments->count())
+                            <ul class="list-group list-group-flush">
+                                @foreach($teamTournaments as $tournament)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{ $tournament->name }}
+                                        <span class="badge bg-success-subtle text-success">
+                                            Active
+                                        </span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p class="text-muted mb-0">
+                                Your team has not joined any tournaments yet.
+                            </p>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- PLAYERS SECTION --}}
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+
+                        <ul class="nav nav-pills mb-3" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#manager-players">
+                                    My Registered Players
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#team-players">
+                                    Team Players
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+
+                            {{-- MANAGER PLAYERS --}}
+                            <div class="tab-pane fade show active" id="manager-players">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Jersey</th>
+                                                <th>Position</th>
+                                                <th>DOB</th>
+                                                <th>Contact</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($managerPlayers as $player)
+                                                <tr>
+                                                    <td class="fw-semibold">{{ $player->fullName }}</td>
+                                                    <td>{{ $player->jerseyNumber }}</td>
+                                                    <td>{{ $player->position }}</td>
+                                                    <td>{{ $player->dob }}</td>
+                                                    <td>{{ $player->contact }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            {{-- TEAM PLAYERS --}}
+                            <div class="tab-pane fade" id="team-players">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Jersey</th>
+                                                <th>Position</th>
+                                                <th>DOB</th>
+                                                <th>Contact</th>
+                                                <th>Registered By</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($teamPlayers as $player)
+                                                <tr>
+                                                    <td class="fw-semibold">{{ $player->fullName }}</td>
+                                                    <td>{{ $player->jerseyNumber }}</td>
+                                                    <td>{{ $player->position }}</td>
+                                                    <td>{{ $player->dob }}</td>
+                                                    <td>{{ $player->contact }}</td>
+                                                    <td>{{ $player->manager->fullName ?? '-' }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
         </div>
     </div>
 
-  
-</body>
-@include('layouts.footer')
-</html>
+</x-admin-layout>

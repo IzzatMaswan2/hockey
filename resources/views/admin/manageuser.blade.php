@@ -48,16 +48,16 @@
                                 {{-- <th class="py-2 px-2 sm:px-4">Email</th> --}}
                                 <th class="py-2 px-2 sm:px-4">Team</th>
                                 {{-- <th class="py-2 px-2 sm:px-4">Country</th> --}}
-                                <th class="py-2 px-2 sm:px-4">Actions</th>
+                                <th class="py-2 px-2 sm:px-4 text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="unarchivedManagerTableBody" class="text-center">
                             @foreach ($users as $user)
                                 @if ($user->role === 'Manager' && $user->archived === 1)
                                     <tr class="border-b">
-                                        <td class="py-2 px-2 sm:px-4">{{ $user->fullName }}</td>
+                                        <td class="py-2 px-2 sm:px-4 text-start">{{ $user->fullName }}</td>
                                         {{-- <td class="py-2 px-2 sm:px-4 break-words sm:max-w-[150px]">{{ $user->email }}</td> --}}
-                                        <td class="py-2 px-2 sm:px-4">{{ $user->team ? $user->team->name : 'N/A' }}</td>
+                                        <td class="py-2 px-2 sm:px-4 text-start">{{ $user->team ? $user->team->name : 'N/A' }}</td>
                                         {{-- <td class="py-2 px-2 sm:px-4">{{ $user->country }}</td> --}}
                                         <td class="py-2 px-2 sm:px-4 flex flex-wrap justify-center gap-2">
                                             <button class="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-blue-700 btn-view" 

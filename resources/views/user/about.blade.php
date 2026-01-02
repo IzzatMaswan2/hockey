@@ -1,112 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-    <!-- Link to Bootstrap CSS and your custom CSS -->
-    <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('css/about.css') }}"> 
-    
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/faq.js"></script>
-</head>
+<x-guest-layout>
 
-<body>
-    @include('components.side-nav')
-    @include('profile.partials.navbar')
-    <div class="about-container">
-        <section>
-            <div class="about-banner">
-                <h1>About Us</h1>
-                <p>
-                    Welcome to TechSolutions Inc., a leader in innovative technology solutions since 2010. 
-                    Our dedicated team of engineers, designers, and strategists is committed to delivering exceptional service and groundbreaking products. 
-                    We've successfully helped numerous clients achieve their business goals through tailored technology solutions
+    {{-- HERO --}}
+    <section class="relative ">
+        <div class="absolute inset-0">
+            <img src="{{ asset('img/banner.jpeg') }}" alt="About Us Banner"
+                 class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto px-4 py-24 text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white">
+                About Us
+            </h1>
+
+            <p class="mt-6 text-lg text-white max-w-3xl mx-auto font-semibold">
+                Welcome to <span class="font-semibold text-white">Hoki Arena</span>,
+                a premier platform for world-class Hoki tournaments.
+                We unite elite teams, professional organizers,
+                and unforgettable competitive experiences.
+            </p>
+        </div>
+    </section>
+
+    {{-- WHO WE ARE --}}
+    <section class="bg-grey-50 py-16">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+            <div>
+                <h2 class="text-3xl font-bold text-purple-700">
+                    Who We Are
+                </h2>
+                <div class="h-1 w-16 bg-purple-600 my-4 rounded"></div>
+                <p class="text-gray-800 leading-relaxed">
+                    Hoki Arena is a premier venue and competitive platform
+                    dedicated to delivering top-tier Hoki tournaments.
+                    Our mission is to unite athletes, fans, and organizers
+                    under a professional and innovative sports environment.
+                    With experienced staff and world-class facilities,
+                    we ensure flawless events and unforgettable moments.
                 </p>
             </div>
-        </section>
-        <section>
-            <div class="about-row">
-                <div class="about-column">
-                    <div class="about-who">
-                        <h1>
-                            Who We Are?
-                        </h1>
-                        <div class="underline-about"> </div>
-                        <p>
-                        At TechSolutions Inc., we specialize in providing custom software development,
-                        IT consulting, cloud services, cybersecurity, and AI and machine learning solutions. 
-                        From concept to deployment, our bespoke software solutions are designed to meet your specific needs. 
-                        Our expert consultants offer strategic advice to help you leverage technology for business growth.
-                        We enhance efficiency and scalability with our cloud solutions, protect your data with robust cybersecurity measures,
-                        and provide advanced AI and machine learning solutions to keep you ahead of the competition.
-                        </p>
-                    </div>
-                </div>
-                <div class="about-column">
-                    <div class="rec-two">
-                        <img src="img/about-who.png" alt="about-who" class="imgabout-who">
-                    </div>
-                </div>
+
+            <div class="relative">
+                <img src="{{ asset('img/about-who.png') }}" alt="Who We Are"
+                     class="rounded-xl">
             </div>
-        </section>
-        <section>
-            <div class="about-row">
-                <div class="about-column">
-                    <div class="rec-four">
-                        <img src="img/about-who2.png" alt="offer">
-                    </div>
-                </div>
-                <div class="about-column">
-                    <div class="about-offer">
-                        <h1>
-                            What We offer? 
-                        </h1>
-                        <div class="underline-offer"></div>
-                        <p>
-                        TechSolutions Inc. provides cutting-edge technology solutions that drive innovation and efficiency. 
-                        Our team of seasoned professionals brings extensive experience to every project, 
-                        ensuring that our solutions are aligned with your business goals. 
-                        We offer comprehensive support from initial consultation to deployment and have a proven track record of successful projects across various industries. 
-                        Experience the TechSolutions Inc. difference and let us help transform your business with technology.
-                        </p>
-                    </div>
-                </div>
+
+        </div>
+    </section>
+
+    {{-- WHAT WE OFFER --}}
+    <section class="bg-gray-100 py-16">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+            <div>
+                <img src="{{ asset('img/about-who2.png') }}" alt="What We Offer"
+                     class="rounded-xl ">
             </div>
-        </section>
-        <section>
-            <div class="container-about">
-                <img src="img/about-who3.png" alt="Hoki" id="whowe">
-                <div class="textblock-about1">
-                    <h4>Who We Are?</h4>
-                    <p>
-                        Hoki Arena is a premier venue for Hoki tournaments, dedicated to showcasing top teams and players globally. Our mission is to offer a world-class platform for both enthusiasts and professionals, promoting unity, teamwork, and excellence. With state-of-the-art facilities and experienced staff, we ensure flawless execution of events and memorable experiences for all participants.
-                    </p>
-                </div>
+
+            <div>
+                <h2 class="text-3xl font-bold text-purple-700">
+                    What We Offer
+                </h2>
+                <div class="h-1 w-16 bg-purple-600 my-4 rounded"></div>
+                <p class="text-gray-800 leading-relaxed">
+                    We deliver elite-level Hoki tournaments supported by
+                    modern facilities, transparent management,
+                    and a commitment to competitive excellence.
+                    Our events provide a platform for teams to perform,
+                    grow, and compete on an international stage.
+                </p>
             </div>
-        </section>
-        <section>
-            <div class="container-about">
-                <img src="img/about-who4.png" alt="Hoki" id="offer">
-                <div class="textblock-about2">
-                    <h4>What We offer?</h4>
-                    <p>
-                        Hoki Arena offers top-tier Hoki tournaments, featuring world-class facilities and a commitment to delivering exceptional events. We provide a platform for elite teams and players to showcase their skills, foster teamwork, and enjoy a memorable experience in a premier sports environment.
-                    </p>
+
+        </div>
+    </section>
+
+    {{-- FEATURE HIGHLIGHTS --}}
+    <section class="bg-white py-20">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            @foreach([
+                ['title' => 'Elite Competition', 'desc' => 'World-class teams and players'],
+                ['title' => 'Professional Events', 'desc' => 'Organized & reliable tournaments'],
+                ['title' => 'Modern Facilities', 'desc' => 'State-of-the-art arenas'],
+                ['title' => 'Global Community', 'desc' => 'Players & fans worldwide'],
+            ] as $item)
+                <div class="bg-white shadow-lg border-l-4 border-purple-600 rounded-xl p-6 text-center hover:shadow-xl transition">
+                    <h3 class="text-lg font-bold text-purple-700 mb-2">{{ $item['title'] }}</h3>
+                    <p class="text-gray-700 text-sm">{{ $item['desc'] }}</p>
                 </div>
+            @endforeach
+        </div>
+    </section>
+
+    {{-- IMAGE CALLOUT --}}
+    <section class="bg-gray-100 py-20">
+        <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+            <img src="{{ asset('img/about-who3.png') }}" alt="Hoki Arena"
+                 class="rounded-xl shadow-lg">
+
+            <div>
+                <h3 class="text-2xl font-bold text-purple-700">
+                    A Home for Hoki Excellence
+                </h3>
+                <p class="mt-4 text-gray-800 leading-relaxed">
+                    Hoki Arena exists to elevate the sport by creating
+                    a professional, exciting, and inclusive environment
+                    for competition. Every event is crafted to deliver
+                    unforgettable experiences for players and spectators alike.
+                </p>
             </div>
-        </section>
-    </div>
-    @include('profile.partials.footer')
-</body>
+
+        </div>
+    </section>
+
+    {{-- FINAL CALLOUT --}}
+    <section class="bg-purple-600 py-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-extrabold text-white">
+                Experience the Future of Competitive Hoki
+            </h2>
+            <p class="mt-4 text-purple-100">
+                Join us and be part of a growing global sports community.
+            </p>
+        </div>
+    </section>
+
+</x-guest-layout>

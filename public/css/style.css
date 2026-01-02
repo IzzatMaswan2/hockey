@@ -1150,6 +1150,7 @@ footer {
     font-weight: 400;
     line-height: normal;
     background-color: none;
+    margin-right: 15px;
 }
 
 
@@ -1245,12 +1246,12 @@ footer {
     .sociallink a {
         color: #fff;
         font-size: 1rem;
-        margin-right: 15px; /* Space between icons */
+        margin-right: 100px; 
         text-decoration: none;
     }
     
-    .sociallink a:hover {
-        color: #007bff; /* Change color on hover */
+.sociallink a:hover {
+        color: #007bff; 
     }
 }
 

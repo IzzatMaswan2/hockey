@@ -421,6 +421,7 @@ Route::middleware(CheckSession::class)->group(function () {
     Route::get('/getTournamentTeams/{id}', [GroupsController::class, 'getTournamentTeams']);
 
     // Participant Management
+    Route::delete('/participants/{participant}', [ParticipantController::class, 'destroy'])->name('participants.destroy');
     Route::resource('participants', ParticipantController::class);
     Route::get('participants/{id}/view', [ParticipantController::class, 'view'])->name('participants.view');
     Route::put('participants/{id}/archive', [ParticipantController::class, 'archive'])->name('participants.archive');

@@ -40,7 +40,7 @@
                 class="sidenav-userimage"/> 
             <a href="/login" class="login-header">LOGIN</a>
         </div>
-        <a href="/tournament">Tournament</a>
+        <a href="/tournamentlist">Tournament</a>
         <a href="/forum">Forum</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>

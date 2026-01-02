@@ -1,129 +1,118 @@
-<header>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/771de58f02.js" crossorigin="anonymous"></script>
-</header>
+{{-- resources/views/layouts/sidebar-manager.blade.php --}}
 
-<style>
-    .sidebar {
-        width: 250px !important;
-        background-color: pink;
-        color: #fff;
-        position: fixed;
-        height: 100%;
-        top: 0;
-        left: 0;
-        padding-top: 20px;
-        transition: transform 0.3s ease;
-    }
+<aside
+    x-data="{ openMenu: null, mobileOpen: false }"
+    class="bg-gradient-to-b from-gray-900 to-gray-800 text-white shadow-xl
+           w-64 min-h-screen p-4 hidden md:flex flex-col"
+>
 
-    .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-        margin-bottom: 50px;
-    }
+    {{-- LOGO --}}
+    <div class="flex items-center justify-center mb-6">
+        <img src="{{ asset('img/Logo Latest 1.png') }}"
+             class="w-14 h-14 rounded-full shadow-md"
+             alt="Logo">
+    </div>
 
-    .sidebar ul li {
-        padding: 10px 15px;
-        margin-bottom: 50px;
-    }
+    {{-- DASHBOARD --}}
+    <a href="/manager-dashboard"
+       class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition">
+        <i class="fas fa-tachometer-alt text-purple-400 w-5"></i>
+        <span class="font-semibold">Dashboard</span>
+    </a>
 
-    .sidebar ul li a {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        margin-bottom: 50px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .content {
-        margin-left: 250px; /* Match the sidebar width */
-        padding: 20px;
-    }
+    {{-- PLAYER MANAGEMENT --}}
+    <a href="/manageplayer"
+       class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition mt-2">
+        <i class="fas fa-users text-green-400 w-5"></i>
+        <span class="font-semibold">Manage Players</span>
+    </a>
 
-    .nav-link {
-        color: pink;
-    }
+    {{-- MATCH MANAGEMENT --}}
+    <a href="/match-score"
+       class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition mt-2">
+        <i class="fas fa-calendar-alt text-yellow-400 w-5"></i>
+        <span class="font-semibold">Manage Match</span>
+    </a>
 
-    /* Hide sidebar on small screens */
-    @media (max-width: 768px) {
-        .sidebar {
-            transform: translateX(-100%);
-        }
+    {{-- COMMENTED FEATURES (KEPT AS REQUESTED) --}}
+    {{--
+    <a href="/formation"
+       class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition mt-2">
+        <i class="fas fa-project-diagram w-5"></i>
+        Manage Formations
+    </a>
 
-        .sidebar.show {
-            transform: translateX(0);
-        }
-    }
+    <a href="/line-up"
+       class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition mt-2">
+        <i class="fas fa-list w-5"></i>
+        Line-Up
+    </a>
+    --}}
+</aside>
 
-    /* Ensure content area adjusts to sidebar */
-    .content {
-        margin-left: 250px;
-        padding: 20px;
-        transition: margin-left 0.3s ease;
-    }
+{{-- MOBILE BOTTOM NAVIGATION --}}
+<div
+    x-data="{ mobileOpen: false }"
+    class="md:hidden fixed bottom-0 left-0 w-full bg-gray-900 text-white shadow-2xl z-50"
+>
+    <div class="flex justify-around py-3 text-xs">
 
-    /* Adjust content margin on small screens */
-    @media (max-width: 768px) {
-        .content {
-            margin-left: 0;
-        }
-    }
-</style>
-<body>
-<ul class="nav flex-column">
-    <li class="nav-item">
-        <a id="dashboard-link" class="nav-link active" aria-current="page" href="/manager-dashboard" style="color: #fff;">
-            <i class="fas fa-tachometer-alt"></i> Dashboard
+        <a href="/manager-dashboard" class="flex flex-col items-center">
+            <i class="fas fa-home text-lg"></i>
+            <span>Home</span>
         </a>
-    </li>
-    <li class="nav-item">
-        <a id="players-link" class="nav-link" href="/manageplayer" style="color: #fff;">
-            <i class="fas fa-newspaper"></i> Manage Players
+
+        <a href="/manageplayer" class="flex flex-col items-center">
+            <i class="fas fa-users text-lg"></i>
+            <span>Players</span>
         </a>
-    </li>
-    {{-- <li class="nav-item">
-        <a id="formations-link" class="nav-link" href="/formation" style="color: #fff;">
-            <i class="fas fa-calendar-alt"></i> Manage Formations
+
+        <a href="/match-score" class="flex flex-col items-center">
+            <i class="fas fa-calendar-alt text-lg"></i>
+            <span>Matches</span>
         </a>
-    </li> --}}
-    <li class="nav-item">
-        <a id="matchscore-link" class="nav-link" href="/match-score" style="color: #fff;">
-            <i class="fas fa-calendar-alt"></i> Manage Match
-        </a>
-    </li>
-    {{-- <li class="nav-item">
-        <a id="lineup-link" class="nav-link" href="/line-up" style="color: #fff;">
-            <i class="fas fa-calendar-alt"></i> Line - Up
-        </a>
-    </li> --}}
-</ul>
 
-<script>
-       // Function to set active link on page load
-function setActiveLink() {
-    const currentPath = window.location.pathname;
+        <button @click="mobileOpen = !mobileOpen"
+                class="flex flex-col items-center">
+            <i class="fas fa-bars text-lg"></i>
+            <span>More</span>
+        </button>
 
-    // Remove active class from all links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-    });
+    </div>
 
-    // Add active class to the correct link based on the current path
-    if (currentPath.includes('manager-dashboard')) {
-        document.getElementById('dashboard-link').classList.add('active');
-    } else if (currentPath.includes('manageplayer')) {
-        document.getElementById('players-link').classList.add('active');
-    } else if (currentPath.includes('formation')) {
-        document.getElementById('formations-link').classList.add('active');
-    } else if (currentPath.includes('line-up')) {
-        document.getElementById('lineup-link').classList.add('active');
-    } else if (currentPath.includes('line-up')) {
-        document.getElementById('matchscore-link').classList.add('active');
-    }
-}
+    {{-- MOBILE DRAWER --}}
+    <div
+        x-show="mobileOpen"
+        x-transition
+        class="fixed bottom-14 left-0 w-full bg-gray-800 text-white p-4 rounded-t-2xl shadow-2xl"
+    >
+        <button @click="mobileOpen = false"
+                class="w-full text-center text-gray-300 mb-3">
+            <i class="fas fa-times text-xl"></i>
+        </button>
 
-// Call the function on page load
-window.onload = setActiveLink;
-    </script>
-</body>
+        <div class="space-y-2">
+            <a href="/manager-dashboard" class="block p-2 rounded bg-gray-700">
+                Dashboard
+            </a>
+            <a href="/manageplayer" class="block p-2 rounded bg-gray-700">
+                Manage Players
+            </a>
+            <a href="/match-score" class="block p-2 rounded bg-gray-700">
+                Manage Match
+            </a>
 
+            {{-- COMMENTED LINKS --}}
+            {{--
+            <a href="/formation" class="block p-2 rounded bg-gray-700">
+                Manage Formations
+            </a>
+            <a href="/line-up" class="block p-2 rounded bg-gray-700">
+                Line-Up
+            </a>
+            --}}
+        </div>
+    </div>
+</div>
+
+<script src="//unpkg.com/alpinejs" defer></script>
